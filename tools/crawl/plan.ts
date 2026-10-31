@@ -1,0 +1,139 @@
+/**
+ * Step 1c — decide what gets built.
+ *
+ * Annotates reference/discovery.json pages with { inBuild, template, route, note,
+ * bundle } and writes site-map.md (every page found, its source URL, and the route
+ * it becomes, plus everything skipped and why).
+ */
+import fs from "node:fs/promises";
+import path from "node:path";
+import { DEMO_ORIGIN, REFERENCE_DIR, ROOT } from "../lib/site.ts";
+
+interface Page {
+  url: string;
+  slug: string;
+  title: string;
+  status: number;
+  depth: number;
+  linkTexts: string[];
+  inBuild?: boolean;
+  template?: string;
+  route?: string;
+  note?: string;
+  /** Representative page of its template: also gets REA analyze_web_bundle. */
+  bundle?: boolean;
+}
+
+interface Other {
+  url: string;
+  reason: string;
+  texts: string[];
+}
+
+type Rule = [RegExp, (m: RegExpMatchArray) => Partial<Page>];
+
+const PROJECTS_LIST = process.env.PROJECTS_LIST ?? "projects-style";
+
+/** Sections the owner asked to leave out of this site entirely. */
+const OWNER_EXCLUDED = "Excluded at the owner's request (no blog, team or pricing pages)";
+
+const RULES: Rule[] = [
+  [/^(team|teams(__[\w-]+)?)$/, () => ({ inBuild: false, note: OWNER_EXCLUDED })],
+  [/^pricing-plans$/, () => ({ inBuild: false, note: OWNER_EXCLUDED })],
+  [/^blog(__page__\d+)?$/, () => ({ inBuild: false, note: OWNER_EXCLUDED })],
+  [/^home-4$/, () => ({ template: "home", route: "/" })],
+  [/^services-style-01$/, () => ({ template: "services", route: "/services/" })],
+  [/^services(__page__\d+)?$/, () => ({ inBuild: false, note: "Services post-type archive; Services Style 1 is used at /services/" })],
+  [/^services__([\w-]+)$/, (m) => ({ template: "service", route: `/services/${m[1]}/` })],
+  [
+    new RegExp(`^${PROJECTS_LIST}$`),
+    () => ({ template: "projects", route: "/projects/", note: "Project list with category filter" }),
+  ],
+  [
+    /^(portfolios|projects-style)(__page__\d+)?$/,
+    () => ({ inBuild: false, note: "Alternate/paginated project list; all projects are listed (and filterable) at /projects/" }),
+  ],
+  [/^portfolios__([\w-]+)$/, (m) => ({ template: "project", route: `/projects/${m[1]}/` })],
+  [/^portfolio_cat__/, () => ({ inBuild: false, note: "Project category archive; replaced by the category filter on /projects/" })],
+  [/^about-us$/, () => ({ template: "about", route: "/about-us/" })],
+  [/^team$/, () => ({ template: "team", route: "/team/" })],
+  [/^teams(__page__\d+)?$/, () => ({ inBuild: false, note: "Team post-type archive; the Team page is used at /team/" })],
+  [/^teams__([\w-]+)$/, (m) => ({ template: "team-member", route: `/team/${m[1]}/` })],
+  [/^pricing-plans$/, () => ({ template: "pricing", route: "/pricing-plans/" })],
+  [/^testimonials$/, () => ({ template: "testimonials", route: "/testimonials/" })],
+  [/^appointment$/, () => ({ template: "appointment", route: "/appointment/" })],
+  [/^faqs$/, () => ({ template: "faqs", route: "/faqs/" })],
+  [/^contact-us$/, () => ({ template: "contact", route: "/contact-us/" })],
+  [/^404-page$/, () => ({ template: "404", route: "/404.html", note: "Served by Cloudflare for unknown URLs" })],
+  [/^icons$/, () => ({ inBuild: false, note: "Theme icon-font showcase page (demo-only extra)" })],
+  [/^hello-world$/, () => ({ inBuild: false, note: "Default WordPress sample post (demo-only extra)" })],
+  // Remaining root-level pages are blog posts.
+  [/^[\w-]+$/, () => ({ inBuild: false, note: `Blog post — ${OWNER_EXCLUDED}` })],
+];
+
+async function main(): Promise<void> {
+  const file = path.join(REFERENCE_DIR, "discovery.json");
+  const discovery = JSON.parse(await fs.readFile(file, "utf8")) as { pages: Page[]; skipped: Other[]; external: Other[] };
+  const seenTemplates = new Set<string>();
+
+  for (const page of discovery.pages) {
+    const rule = RULES.find(([pattern]) => pattern.test(page.slug));
+    const match = rule ? page.slug.match(rule[0]) : null;
+    const decided = rule && match ? rule[1](match) : { inBuild: false, note: "Unclassified" };
+    // Drop annotations from earlier runs before applying the current rules.
+    delete page.template;
+    delete page.route;
+    delete page.note;
+    Object.assign(page, { inBuild: true, ...decided });
+    page.bundle = Boolean(page.inBuild && page.template && !seenTemplates.has(page.template));
+    if (page.inBuild && page.template) seenTemplates.add(page.template);
+  }
+  await fs.writeFile(file, `${JSON.stringify(discovery, null, 2)}\n`);
+
+  const rel = (url: string) => url.replace(DEMO_ORIGIN, "");
+  const built = discovery.pages.filter((p) => p.inBuild).sort((a, b) => (a.route ?? "").localeCompare(b.route ?? ""));
+  const notBuilt = discovery.pages.filter((p) => !p.inBuild);
+  const lines = [
+    "# Site map",
+    "",
+    "Every page found by crawling the header, footer, off-canvas menu and in-page links of",
+    "[Home 4](https://demo2.pavothemes.com/cetro/home-4/) (and Services Style 1), with the route",
+    "it becomes in this site. Generated by `tools/crawl/plan.ts` from `reference/discovery.json`.",
+    "",
+    `## Built (${built.length} pages)`,
+    "",
+    "| Route | Template | Source page | Title | Notes |",
+    "| --- | --- | --- | --- | --- |",
+    ...built.map(
+      (p) =>
+        `| \`${p.route}\` | ${p.template} | [${rel(p.url)}](${p.url}) | ${p.title.replace(/ – Cetro$/, "").replace(/\|/g, "\\|")} | ${p.note ?? ""} |`,
+    ),
+    "",
+    `## Found but not built as separate pages (${notBuilt.length})`,
+    "",
+    "| Source page | Why |",
+    "| --- | --- |",
+    ...notBuilt.map((p) => `| [${rel(p.url)}](${p.url}) | ${p.note ?? ""} |`),
+    "",
+    `## Skipped by the scope rules (${discovery.skipped.length})`,
+    "",
+    "| Source URL | Reason | Link text |",
+    "| --- | --- | --- |",
+    ...discovery.skipped.map((s) => `| ${rel(s.url)} | ${s.reason} | ${s.texts.slice(0, 2).join(" / ")} |`),
+    "",
+    `## External links (${discovery.external.length})`,
+    "",
+    "Demo vendor links (PavoThemes social profiles, theme store, WordPress credits) are replaced by",
+    "the brand's own links from `src/config/site.ts` or removed.",
+    "",
+    ...discovery.external.map((s) => `- ${s.url} (${s.texts.slice(0, 2).join(" / ")})`),
+    "",
+  ];
+  await fs.writeFile(path.join(ROOT, "site-map.md"), lines.join("\n"));
+  console.log(`built ${built.length}, not built ${notBuilt.length}, templates: ${[...seenTemplates].join(", ")}`);
+}
+
+main().catch((error: unknown) => {
+  console.error(error);
+  process.exit(1);
+});

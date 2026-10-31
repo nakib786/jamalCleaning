@@ -1,0 +1,1226 @@
+{
+ "evidence_id": "ev_74a5391b53cef5ea1393123f6c5be826b5b82d45a7bd45ef0520b4c838403d3c",
+ "target": {
+  "target_id": "64CC42E7DCB53B773B26292F172301F4",
+  "type": "page",
+  "title": "Parking Lot Pressure Washing – Cetro",
+  "url": "https://demo2.pavothemes.com/cetro/portfolios/parking-lot-pressure-washing/",
+  "origin": "https://demo2.pavothemes.com",
+  "attached": null
+ },
+ "completeness": "policy_filtered",
+ "scripts": [
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/themes/cetro/assets/js/frontend/button-hover.min.js?ver=1.1.1",
+   "length": 448,
+   "module": false
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js",
+   "length": 1239,
+   "module": false
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/themes/cetro/assets/js/libs/jquery.waypoints.min.js?ver=1.1.1",
+   "length": 9027,
+   "module": false
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/woo-smart-compare/assets/js/frontend.js?ver=6.5.8",
+   "length": 37326,
+   "module": false
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/woocommerce/assets/js/frontend/cart-fragments.min.js?ver=10.9.1",
+   "length": 2939,
+   "module": false
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/elementor/assets/js/webpack.runtime.min.js?ver=4.1.4",
+   "length": 5819,
+   "module": false
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/themes/cetro/assets/js/frontend/multi-parallax.min.js?ver=1.1.1",
+   "length": 478,
+   "module": false
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/themes/cetro/assets/js/woocommerce/single.min.js?ver=1.1.1",
+   "length": 4161,
+   "module": false
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-includes/js/dist/api-fetch.min.js?ver=6f2a4faeee3c722b1e57",
+   "length": 7510,
+   "module": false
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-includes/js/wp-util.min.js?ver=7.1",
+   "length": 1431,
+   "module": false
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/themes/cetro/assets/js/frontend/login.js?ver=1.1.1",
+   "length": 1479,
+   "module": false
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/themes/cetro/inc/elementor/motion-fx/assets/main.js?ver=1.1.1",
+   "length": 62393,
+   "module": false
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/woo-smart-quick-view/assets/libs/slick/slick.min.js?ver=4.3.3",
+   "length": 42863,
+   "module": false
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/themes/cetro/assets/js/woocommerce/main.min.js?ver=1.1.1",
+   "length": 3065,
+   "module": false
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-includes/js/dist/hooks.min.js?ver=f0f188028580e8dc1255",
+   "length": 5107,
+   "module": false
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/themes/cetro/assets/js/libs/TweenMax.min.js?ver=1.11.1",
+   "length": 93910,
+   "module": false
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/mailchimp-for-wp/assets/js/forms.js?ver=4.13.1",
+   "length": 6543,
+   "module": false
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/woo-smart-compare/assets/libs/perfect-scrollbar/js/perfect-scrollbar.jquery.min.js?ver=6.5.8",
+   "length": 25332,
+   "module": false
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/themes/cetro/assets/js/woocommerce/cart-canvas.min.js?ver=1.1.1",
+   "length": 736,
+   "module": false
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/woocommerce/assets/js/frontend/woocommerce.min.js?ver=10.9.1",
+   "length": 4270,
+   "module": false
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-includes/js/imagesloaded.min.js?ver=5.0.0",
+   "length": 5520,
+   "module": false
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-includes/js/underscore.min.js?ver=1.13.8",
+   "length": 19012,
+   "module": false
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1",
+   "length": 13577,
+   "module": false
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/woo-smart-compare/assets/libs/table-head-fixer/table-head-fixer.js?ver=6.5.8",
+   "length": 13268,
+   "module": false
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/themes/cetro/assets/js/elementor-swiper-tabs-fix.min.js?ver=1.1.1",
+   "length": 689,
+   "module": false
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-includes/js/jquery/ui/core.min.js?ver=1.14.2",
+   "length": 18674,
+   "module": false
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/themes/cetro/assets/js/frontend/scroll-smoother.js?ver=1.1.1",
+   "length": 1264,
+   "module": false
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/woocommerce/assets/js/frontend/add-to-cart.min.js?ver=10.9.1",
+   "length": 4350,
+   "module": false
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-includes/js/dist/url.min.js?ver=7b0de086d4ae11d55704",
+   "length": 10423,
+   "module": false
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/contact-form-7/includes/js/index.js?ver=6.1.6",
+   "length": 13452,
+   "module": false
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-includes/js/jquery/ui/mouse.min.js?ver=1.14.2",
+   "length": 3297,
+   "module": false
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/elementor/assets/js/shared-frontend-handlers.03caa53373b56d3bab67.bundle.min.js",
+   "length": 8481,
+   "module": false
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/themes/cetro/assets/js/woocommerce/quantity.min.js?ver=1.1.1",
+   "length": 1138,
+   "module": false
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/elementor/assets/js/frontend.min.js?ver=4.1.4",
+   "length": 32098,
+   "module": false
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-includes/js/wp-emoji-loader.min.js",
+   "length": 3066,
+   "module": true
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/themes/cetro/assets/js/frontend/nav-mobile.min.js?ver=1.1.1",
+   "length": 1195,
+   "module": false
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/woocommerce/assets/js/jquery-blockui/jquery.blockUI.min.js?ver=2.7.0-wc.10.9.1",
+   "length": 9636,
+   "module": false
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/themes/cetro/assets/js/frontend/search-popup.min.js?ver=1.1.1",
+   "length": 351,
+   "module": false
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-includes/js/dist/private-apis.min.js?ver=eb85f28c4c729bb4f002",
+   "length": 3017,
+   "module": false
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/portfolios/parking-lot-pressure-washing/",
+   "length": 152,
+   "module": false
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/themes/cetro/assets/js/libs/swiper.js?ver=8.4.5",
+   "length": 321243,
+   "module": false
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/woocommerce/assets/js/js-cookie/js.cookie.min.js?ver=2.1.4-wc.10.9.1",
+   "length": 1720,
+   "module": false
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/woo-smart-quick-view/assets/js/frontend.js?ver=4.3.3",
+   "length": 10954,
+   "module": false
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/woo-smart-wishlist/assets/js/frontend.js?ver=6.0.5",
+   "length": 32157,
+   "module": false
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/woo-variation-swatches/assets/js/frontend.min.js?ver=2.3.0",
+   "length": 17358,
+   "module": false
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-includes/js/dist/i18n.min.js?ver=1dfe7db3940c23ea9216",
+   "length": 5791,
+   "module": false
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/themes/cetro/assets/js/elementor-frontend.min.js?ver=1.1.1",
+   "length": 5332,
+   "module": false
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/themes/cetro/assets/js/libs/tooltipster.bundle.min.js?ver=1.1.1",
+   "length": 39900,
+   "module": false
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/themes/cetro/assets/js/woocommerce/product-ajax-search.min.js?ver=1.1.1",
+   "length": 2185,
+   "module": false
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/contact-form-7/includes/swv/js/index.js?ver=6.1.6",
+   "length": 12512,
+   "module": false
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/themes/cetro/assets/js/skip-link-focus-fix.min.js?ver=1.1.1",
+   "length": 442,
+   "module": false
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-includes/js/jquery/jquery.min.js?ver=3.7.1",
+   "length": 87553,
+   "module": false
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/woo-smart-compare/assets/libs/print/jQuery.print.js?ver=6.5.8",
+   "length": 12529,
+   "module": false
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/elementor/assets/js/text-editor.45609661e409413f1cef.bundle.min.js",
+   "length": 1348,
+   "module": false
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/portfolios/parking-lot-pressure-washing/",
+   "length": 922,
+   "module": false
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/portfolios/parking-lot-pressure-washing/",
+   "length": 366,
+   "module": false
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/themes/cetro/assets/js/libs/jquery.magnific-popup.min.js?ver=1.1.1",
+   "length": 20216,
+   "module": false
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/elementor/assets/js/frontend-modules.min.js?ver=4.1.4",
+   "length": 50601,
+   "module": false
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/woocommerce/assets/js/frontend/order-attribution.min.js?ver=10.9.1",
+   "length": 2439,
+   "module": false
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/themes/cetro/inc/megamenu/assets/js/frontend.js?ver=1.1.1",
+   "length": 2158,
+   "module": false
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/woocommerce/assets/js/frontend/add-to-cart-variation.min.js?ver=10.9.1",
+   "length": 16627,
+   "module": false
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/woocommerce/assets/js/sourcebuster/sourcebuster.min.js?ver=10.9.1",
+   "length": 15315,
+   "module": false
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-includes/js/wp-emoji-release.min.js?ver=7.1",
+   "length": 22752,
+   "module": false
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/themes/cetro/assets/js/libs/sticky.js?ver=1.1.1",
+   "length": 7974,
+   "module": false
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-includes/js/dist/vendor/wp-polyfill.min.js?ver=3.15.0",
+   "length": 29867,
+   "module": false
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/themes/cetro/assets/js/woocommerce/header-cart.min.js?ver=1.1.1",
+   "length": 531,
+   "module": false
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/portfolios/parking-lot-pressure-washing/",
+   "length": 215,
+   "module": false
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-includes/js/jquery/ui/sortable.min.js?ver=1.14.2",
+   "length": 25321,
+   "module": false
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/themes/cetro/assets/js/libs/jarallax.js?ver=7.1",
+   "length": 30920,
+   "module": false
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/themes/cetro/assets/js/frontend/main.min.js?ver=1.1.1",
+   "length": 1506,
+   "module": false
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/themes/cetro/assets/js/elementor/animated-headline.min.js?ver=1.1.1",
+   "length": 7575,
+   "module": false
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/themes/cetro/assets/js/frontend/jquery-sticky.js?ver=1.1.1",
+   "length": 12496,
+   "module": false
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-includes/js/api-request.min.js?ver=7.1",
+   "length": 1023,
+   "module": false
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/themes/cetro/assets/js/libs/jquery.sticky-kit.min.js?ver=1.1.1",
+   "length": 3303,
+   "module": false
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/themes/cetro/assets/js/libs/lenis.min.js?ver=1.1.1",
+   "length": 12548,
+   "module": false
+  }
+ ],
+ "resources": [
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/elementor/assets/lib/font-awesome/webfonts/fa-solid-900.woff2",
+   "type": "Font",
+   "mime": "application/octet-stream",
+   "size": 78196
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/woo-smart-quick-view/assets/libs/slick/slick.min.js?ver=4.3.3",
+   "type": "Script",
+   "mime": "application/javascript",
+   "size": 42863
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/woo-smart-compare/assets/images/curve.svg",
+   "type": "Image",
+   "mime": "image/svg+xml",
+   "size": 804
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/themes/cetro/assets/css/elementor.css?ver=1.1.1",
+   "type": "Stylesheet",
+   "mime": "text/css",
+   "size": 193514
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/themes/demo-child/style.css?ver=1.0.0",
+   "type": "Stylesheet",
+   "mime": "text/css",
+   "size": 154
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-includes/js/jquery/jquery.min.js?ver=3.7.1",
+   "type": "Script",
+   "mime": "application/javascript",
+   "size": 87553
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/themes/cetro/assets/images/language-switcher/it.jpg",
+   "type": "Image",
+   "mime": "image/jpeg",
+   "size": 1544
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/themes/cetro/assets/js/frontend/login.js?ver=1.1.1",
+   "type": "Script",
+   "mime": "application/javascript",
+   "size": 1479
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/woocommerce/assets/js/jquery-blockui/jquery.blockUI.min.js?ver=2.7.0-wc.10.9.1",
+   "type": "Script",
+   "mime": "application/javascript",
+   "size": 9636
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-includes/js/imagesloaded.min.js?ver=5.0.0",
+   "type": "Script",
+   "mime": "application/javascript",
+   "size": 5520
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/themes/cetro/assets/js/elementor/animated-headline.min.js?ver=1.1.1",
+   "type": "Script",
+   "mime": "application/javascript",
+   "size": 7575
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/elementor/css/post-110.css?ver=1787189428",
+   "type": "Stylesheet",
+   "mime": "text/css",
+   "size": 18946
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/themes/cetro/assets/images/language-switcher/en.jpg",
+   "type": "Image",
+   "mime": "image/jpeg",
+   "size": 2289
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/woo-variation-swatches/assets/css/frontend.min.css?ver=2.3.0",
+   "type": "Stylesheet",
+   "mime": "text/css",
+   "size": 35770
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/themes/cetro/assets/js/woocommerce/single.min.js?ver=1.1.1",
+   "type": "Script",
+   "mime": "application/javascript",
+   "size": 4161
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/mailchimp-for-wp/assets/js/forms.js?ver=4.13.1",
+   "type": "Script",
+   "mime": "application/javascript",
+   "size": 6543
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/themes/cetro/style.css?ver=1.1.1",
+   "type": "Stylesheet",
+   "mime": "text/css",
+   "size": 237114
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/elementor/assets/js/webpack.runtime.min.js?ver=4.1.4",
+   "type": "Script",
+   "mime": "application/javascript",
+   "size": 5819
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/elementor/assets/css/conditionals/e-swiper.min.css?ver=4.1.4",
+   "type": "Stylesheet",
+   "mime": "text/css",
+   "size": 5486
+  },
+  {
+   "url": "https://fonts.googleapis.com/css2?family=Boldonse&family=Roboto+Flex:opsz,wght@8..144,100..1000&subset=latin%2Clatin-ext&display=swap",
+   "type": "Stylesheet",
+   "mime": "text/css",
+   "size": 4378
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/themes/cetro/assets/fonts/icons/cetro-icon-1.1.1.woff2",
+   "type": "Font",
+   "mime": "application/octet-stream",
+   "size": 26712
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/project-10.jpg",
+   "type": "Image",
+   "mime": "image/jpeg",
+   "size": 802383
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/elementor/css/custom-widget-icon-box.min.css?ver=1787189425",
+   "type": "Stylesheet",
+   "mime": "text/css",
+   "size": 4760
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/themes/cetro/assets/js/libs/jquery.sticky-kit.min.js?ver=1.1.1",
+   "type": "Script",
+   "mime": "application/javascript",
+   "size": 3303
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/megamenu-4.jpg",
+   "type": "Image",
+   "mime": "image/jpeg",
+   "size": 132758
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-includes/js/jquery/ui/mouse.min.js?ver=1.14.2",
+   "type": "Script",
+   "mime": "application/javascript",
+   "size": 3297
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/woocommerce/assets/js/frontend/add-to-cart.min.js?ver=10.9.1",
+   "type": "Script",
+   "mime": "application/javascript",
+   "size": 4350
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/woo-smart-wishlist/assets/css/frontend.css?ver=6.0.5",
+   "type": "Stylesheet",
+   "mime": "text/css",
+   "size": 20910
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/themes/cetro/assets/js/frontend/scroll-smoother.js?ver=1.1.1",
+   "type": "Script",
+   "mime": "application/javascript",
+   "size": 1264
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/themes/cetro/assets/js/frontend/button-hover.min.js?ver=1.1.1",
+   "type": "Script",
+   "mime": "application/javascript",
+   "size": 448
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-includes/js/dist/hooks.min.js?ver=f0f188028580e8dc1255",
+   "type": "Script",
+   "mime": "application/javascript",
+   "size": 5107
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/woo-smart-compare/assets/images/add.svg",
+   "type": "Image",
+   "mime": "image/svg+xml",
+   "size": 545
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/woocommerce/assets/js/js-cookie/js.cookie.min.js?ver=2.1.4-wc.10.9.1",
+   "type": "Script",
+   "mime": "application/javascript",
+   "size": 1720
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-includes/js/wp-emoji-release.min.js?ver=7.1",
+   "type": "Script",
+   "mime": "application/javascript",
+   "size": 22752
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-includes/js/jquery/ui/sortable.min.js?ver=1.14.2",
+   "type": "Script",
+   "mime": "application/javascript",
+   "size": 25321
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-includes/js/dist/private-apis.min.js?ver=eb85f28c4c729bb4f002",
+   "type": "Script",
+   "mime": "application/javascript",
+   "size": 3017
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/woo-smart-wishlist/assets/js/frontend.js?ver=6.0.5",
+   "type": "Script",
+   "mime": "application/javascript",
+   "size": 32157
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/themes/cetro/assets/js/woocommerce/main.min.js?ver=1.1.1",
+   "type": "Script",
+   "mime": "application/javascript",
+   "size": 3065
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/elementor/css/custom-frontend.min.css?ver=1787189425",
+   "type": "Stylesheet",
+   "mime": "text/css",
+   "size": 54896
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-includes/js/jquery/ui/core.min.js?ver=1.14.2",
+   "type": "Script",
+   "mime": "application/javascript",
+   "size": 18674
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/themes/cetro/assets/css/libs/swiper.css?ver=8.4.5",
+   "type": "Stylesheet",
+   "mime": "text/css",
+   "size": 19301
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/logo.png",
+   "type": "Image",
+   "mime": "image/png",
+   "size": 2023
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/themes/cetro/assets/js/skip-link-focus-fix.min.js?ver=1.1.1",
+   "type": "Script",
+   "mime": "application/javascript",
+   "size": 442
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/themes/cetro/assets/js/libs/jquery.waypoints.min.js?ver=1.1.1",
+   "type": "Script",
+   "mime": "application/javascript",
+   "size": 9028
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/woocommerce/assets/js/frontend/order-attribution.min.js?ver=10.9.1",
+   "type": "Script",
+   "mime": "application/javascript",
+   "size": 2439
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-includes/js/dist/i18n.min.js?ver=1dfe7db3940c23ea9216",
+   "type": "Script",
+   "mime": "application/javascript",
+   "size": 5791
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/elementor/css/post-2228.css?ver=1787189428",
+   "type": "Stylesheet",
+   "mime": "text/css",
+   "size": 6389
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-includes/js/underscore.min.js?ver=1.13.8",
+   "type": "Script",
+   "mime": "application/javascript",
+   "size": 19012
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/woo-smart-quick-view/assets/css/frontend.css?ver=4.3.3",
+   "type": "Stylesheet",
+   "mime": "text/css",
+   "size": 24055
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/themes/cetro/assets/js/frontend/search-popup.min.js?ver=1.1.1",
+   "type": "Script",
+   "mime": "application/javascript",
+   "size": 351
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/themes/cetro/assets/images/language-switcher/hi.jpg",
+   "type": "Image",
+   "mime": "image/jpeg",
+   "size": 2571
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/themes/cetro/assets/js/frontend/nav-mobile.min.js?ver=1.1.1",
+   "type": "Script",
+   "mime": "application/javascript",
+   "size": 1195
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-includes/js/api-request.min.js?ver=7.1",
+   "type": "Script",
+   "mime": "application/javascript",
+   "size": 1023
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/themes/cetro/inc/megamenu/assets/js/frontend.js?ver=1.1.1",
+   "type": "Script",
+   "mime": "application/javascript",
+   "size": 2158
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/themes/cetro/assets/js/libs/TweenMax.min.js?ver=1.11.1",
+   "type": "Script",
+   "mime": "application/javascript",
+   "size": 93910
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-includes/js/dist/url.min.js?ver=7b0de086d4ae11d55704",
+   "type": "Script",
+   "mime": "application/javascript",
+   "size": 10423
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/woo-smart-wishlist/assets/css/icons.css?ver=6.0.5",
+   "type": "Stylesheet",
+   "mime": "text/css",
+   "size": 3089
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/woo-smart-compare/assets/libs/perfect-scrollbar/css/custom-theme.css?ver=6.5.8",
+   "type": "Stylesheet",
+   "mime": "text/css",
+   "size": 4000
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/themes/cetro/assets/css/gutenberg-blocks.css?ver=1.1.1",
+   "type": "Stylesheet",
+   "mime": "text/css",
+   "size": 69177
+  },
+  {
+   "url": "https://fonts.gstatic.com/s/robotoflex/v30/NaNNepOXO_NexZs0b5QrzlOHb8wCikXpYqmZsWI-__OGbt8jZktqc2V3Zs0KvDLdBP8SBZtOs2IifRuUZQMsPJtUsR4DEK6cULNeUx9XgTnH37Ha_FIAp4Fm0PP1hw45DntW2x0wZGzhPmr1YNMYKYn9_1IQXGwJAiUJVUMdN5YUW4O8HtSoXjC79QRyaLshNDUf3e0O-gn5rrZCu20YNau4OPE.woff2",
+   "type": "Font",
+   "mime": "font/woff2",
+   "size": 84304
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/woo-smart-compare/assets/libs/perfect-scrollbar/js/perfect-scrollbar.jquery.min.js?ver=6.5.8",
+   "type": "Script",
+   "mime": "application/javascript",
+   "size": 25332
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/pavo-demo/style.css?ver=7.1",
+   "type": "Stylesheet",
+   "mime": "text/css",
+   "size": 646
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/woo-smart-quick-view/assets/js/frontend.js?ver=4.3.3",
+   "type": "Script",
+   "mime": "application/javascript",
+   "size": 10954
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/woocommerce/assets/js/frontend/woocommerce.min.js?ver=10.9.1",
+   "type": "Script",
+   "mime": "application/javascript",
+   "size": 4270
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/elementor/assets/js/shared-frontend-handlers.03caa53373b56d3bab67.bundle.min.js",
+   "type": "Script",
+   "mime": "application/javascript",
+   "size": 8481
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/woocommerce/assets/js/frontend/cart-fragments.min.js?ver=10.9.1",
+   "type": "Script",
+   "mime": "application/javascript",
+   "size": 2939
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/themes/cetro/assets/css/icons.css?ver=1.1.1",
+   "type": "Stylesheet",
+   "mime": "text/css",
+   "size": 14274
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/elementor/assets/lib/eicons/css/elementor-icons.min.css?ver=5.50.0",
+   "type": "Stylesheet",
+   "mime": "text/css",
+   "size": 21976
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/portfolio-single-2.jpg",
+   "type": "Image",
+   "mime": "image/jpeg",
+   "size": 162376
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/megamenu-3.jpg",
+   "type": "Image",
+   "mime": "image/jpeg",
+   "size": 150616
+  },
+  {
+   "url": "https://fonts.gstatic.com/s/boldonse/v1/ZgNQjPxGPbbJUZemjB37jGA.woff2",
+   "type": "Font",
+   "mime": "font/woff2",
+   "size": 23496
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/themes/cetro/assets/images/language-switcher/de.jpg",
+   "type": "Image",
+   "mime": "image/jpeg",
+   "size": 1765
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/themes/cetro/inc/elementor/motion-fx/assets/main.js?ver=1.1.1",
+   "type": "Script",
+   "mime": "application/javascript",
+   "size": 62393
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-includes/js/dist/api-fetch.min.js?ver=6f2a4faeee3c722b1e57",
+   "type": "Script",
+   "mime": "application/javascript",
+   "size": 7510
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/themes/cetro/assets/js/libs/tooltipster.bundle.min.js?ver=1.1.1",
+   "type": "Script",
+   "mime": "application/javascript",
+   "size": 39900
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/themes/cetro/assets/css/libs/magnific-popup.css?ver=1.1.1",
+   "type": "Stylesheet",
+   "mime": "text/css",
+   "size": 10567
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/woo-smart-compare/assets/js/frontend.js?ver=6.5.8",
+   "type": "Script",
+   "mime": "application/javascript",
+   "size": 37326
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/themes/cetro/assets/js/libs/swiper.js?ver=8.4.5",
+   "type": "Script",
+   "mime": "application/javascript",
+   "size": 321251
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/woo-smart-compare/assets/images/share.svg",
+   "type": "Image",
+   "mime": "image/svg+xml",
+   "size": 728
+  },
+  {
+   "url": "https://fonts.googleapis.com/css?family=Roboto+Flex:100,100italic,200,200italic,300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic&display=swap",
+   "type": "Stylesheet",
+   "mime": "text/css",
+   "size": 3710
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/woo-smart-compare/assets/libs/table-head-fixer/table-head-fixer.js?ver=6.5.8",
+   "type": "Script",
+   "mime": "application/javascript",
+   "size": 13268
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/woo-smart-quick-view/assets/libs/slick/slick.css?ver=4.3.3",
+   "type": "Stylesheet",
+   "mime": "text/css",
+   "size": 1750
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js",
+   "type": "Script",
+   "mime": "application/javascript",
+   "size": 1239
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/breadcrumb-single.jpg",
+   "type": "Image",
+   "mime": "image/jpeg",
+   "size": 1086805
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/elementor/assets/lib/swiper/v8/css/swiper.min.css?ver=8.4.5",
+   "type": "Stylesheet",
+   "mime": "text/css",
+   "size": 16471
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/woo-smart-compare/assets/images/close.svg",
+   "type": "Image",
+   "mime": "image/svg+xml",
+   "size": 563
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/elementor/assets/js/frontend.min.js?ver=4.1.4",
+   "type": "Script",
+   "mime": "application/javascript",
+   "size": 32098
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/themes/cetro/assets/js/libs/sticky.js?ver=1.1.1",
+   "type": "Script",
+   "mime": "application/javascript",
+   "size": 7974
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/megamenu-2.jpg",
+   "type": "Image",
+   "mime": "image/jpeg",
+   "size": 139401
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/themes/cetro/assets/js/elementor-swiper-tabs-fix.min.js?ver=1.1.1",
+   "type": "Script",
+   "mime": "application/javascript",
+   "size": 689
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/elementor/assets/css/widget-image.min.css?ver=4.1.4",
+   "type": "Stylesheet",
+   "mime": "text/css",
+   "size": 214
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/themes/cetro/assets/js/libs/lenis.min.js?ver=1.1.1",
+   "type": "Script",
+   "mime": "application/javascript",
+   "size": 12548
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/themes/cetro/assets/js/libs/jarallax.js?ver=7.1",
+   "type": "Script",
+   "mime": "application/javascript",
+   "size": 30920
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/elementor/assets/lib/font-awesome/css/solid.min.css?ver=5.15.3",
+   "type": "Stylesheet",
+   "mime": "text/css",
+   "size": 669
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/themes/cetro/assets/js/elementor-frontend.min.js?ver=1.1.1",
+   "type": "Script",
+   "mime": "application/javascript",
+   "size": 5332
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/elementor/css/post-108.css?ver=1787189427",
+   "type": "Stylesheet",
+   "mime": "text/css",
+   "size": 12033
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/woo-variation-swatches/assets/js/frontend.min.js?ver=2.3.0",
+   "type": "Script",
+   "mime": "application/javascript",
+   "size": 17358
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=6.1.6",
+   "type": "Stylesheet",
+   "mime": "text/css",
+   "size": 2979
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/elementor/css/post-6.css?ver=1787189426",
+   "type": "Stylesheet",
+   "mime": "text/css",
+   "size": 1330
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/themes/cetro/assets/js/woocommerce/header-cart.min.js?ver=1.1.1",
+   "type": "Script",
+   "mime": "application/javascript",
+   "size": 531
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/portfolio-single-1.jpg",
+   "type": "Image",
+   "mime": "image/jpeg",
+   "size": 206956
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/themes/cetro/assets/js/libs/jquery.magnific-popup.min.js?ver=1.1.1",
+   "type": "Script",
+   "mime": "application/javascript",
+   "size": 20216
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/woo-smart-compare/assets/css/frontend.css?ver=6.5.8",
+   "type": "Stylesheet",
+   "mime": "text/css",
+   "size": 39707
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/woocommerce/assets/js/sourcebuster/sourcebuster.min.js?ver=10.9.1",
+   "type": "Script",
+   "mime": "application/javascript",
+   "size": 15315
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-includes/js/dist/vendor/wp-polyfill.min.js?ver=3.15.0",
+   "type": "Script",
+   "mime": "application/javascript",
+   "size": 29874
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-includes/js/wp-util.min.js?ver=7.1",
+   "type": "Script",
+   "mime": "application/javascript",
+   "size": 1431
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/elementor/assets/js/frontend-modules.min.js?ver=4.1.4",
+   "type": "Script",
+   "mime": "application/javascript",
+   "size": 50602
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/woo-smart-compare/assets/libs/print/jQuery.print.js?ver=6.5.8",
+   "type": "Script",
+   "mime": "application/javascript",
+   "size": 12529
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/themes/cetro/assets/js/frontend/multi-parallax.min.js?ver=1.1.1",
+   "type": "Script",
+   "mime": "application/javascript",
+   "size": 478
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/elementor/css/post-1846.css?ver=1787189428",
+   "type": "Stylesheet",
+   "mime": "text/css",
+   "size": 5914
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/woocommerce/assets/client/blocks/wc-blocks.css?ver=wc-10.9.1",
+   "type": "Stylesheet",
+   "mime": "text/css",
+   "size": 14006
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/themes/cetro/assets/js/frontend/main.min.js?ver=1.1.1",
+   "type": "Script",
+   "mime": "application/javascript",
+   "size": 1506
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/contact-form-7/includes/js/index.js?ver=6.1.6",
+   "type": "Script",
+   "mime": "application/javascript",
+   "size": 13452
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/themes/cetro/assets/js/woocommerce/cart-canvas.min.js?ver=1.1.1",
+   "type": "Script",
+   "mime": "application/javascript",
+   "size": 736
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1",
+   "type": "Script",
+   "mime": "application/javascript",
+   "size": 13577
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/themes/cetro/assets/js/frontend/jquery-sticky.js?ver=1.1.1",
+   "type": "Script",
+   "mime": "application/javascript",
+   "size": 12496
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/woo-smart-compare/assets/images/remove-dark.svg",
+   "type": "Image",
+   "mime": "image/svg+xml",
+   "size": 563
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/elementor/css/custom-widget-icon-list.min.css?ver=1787189425",
+   "type": "Stylesheet",
+   "mime": "text/css",
+   "size": 10289
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/themes/cetro/assets/js/woocommerce/quantity.min.js?ver=1.1.1",
+   "type": "Script",
+   "mime": "application/javascript",
+   "size": 1138
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/themes/cetro/assets/js/woocommerce/product-ajax-search.min.js?ver=1.1.1",
+   "type": "Script",
+   "mime": "application/javascript",
+   "size": 2185
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/footer-background.jpg",
+   "type": "Image",
+   "mime": "image/jpeg",
+   "size": 1283067
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/woo-smart-quick-view/assets/libs/feather/feather.css?ver=4.3.3",
+   "type": "Stylesheet",
+   "mime": "text/css",
+   "size": 342
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/contact-form-7/includes/swv/js/index.js?ver=6.1.6",
+   "type": "Script",
+   "mime": "application/javascript",
+   "size": 12512
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/elementor/css/post-100.css?ver=1787218543",
+   "type": "Stylesheet",
+   "mime": "text/css",
+   "size": 2717
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/woo-smart-compare/assets/libs/hint/hint.min.css?ver=6.5.8",
+   "type": "Stylesheet",
+   "mime": "text/css",
+   "size": 9627
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/elementor/assets/js/text-editor.45609661e409413f1cef.bundle.min.js",
+   "type": "Script",
+   "mime": "application/javascript",
+   "size": 1348
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/themes/cetro/assets/css/woocommerce.css?ver=1.1.1",
+   "type": "Stylesheet",
+   "mime": "text/css",
+   "size": 311950
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/elementor/assets/css/widget-heading.min.css?ver=4.1.4",
+   "type": "Stylesheet",
+   "mime": "text/css",
+   "size": 560
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/elementor/css/post-76.css?ver=1787236853",
+   "type": "Stylesheet",
+   "mime": "text/css",
+   "size": 18289
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/woo-smart-compare/assets/libs/perfect-scrollbar/css/perfect-scrollbar.min.css?ver=6.5.8",
+   "type": "Stylesheet",
+   "mime": "text/css",
+   "size": 4629
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/woocommerce/assets/js/frontend/add-to-cart-variation.min.js?ver=10.9.1",
+   "type": "Script",
+   "mime": "application/javascript",
+   "size": 16627
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/elementor/assets/lib/font-awesome/css/fontawesome.min.css?ver=5.15.3",
+   "type": "Stylesheet",
+   "mime": "text/css",
+   "size": 58071
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/elementor/assets/lib/animations/styles/e-animation-float.min.css?ver=4.1.4",
+   "type": "Stylesheet",
+   "mime": "text/css",
+   "size": 244
+  },
+  {
+   "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/megamenu-1.jpg",
+   "type": "Image",
+   "mime": "image/jpeg",
+   "size": 144517
+  }
+ ],
+ "console": [
+  {
+   "type": "log",
+   "timestamp": 1793420861378.652,
+   "argument_types": [
+    "string"
+   ],
+   "url": "https://demo2.pavothemes.com/cetro/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1",
+   "line": 1,
+   "column": 980,
+   "text_capture": {
+    "status": "included",
+    "values": [
+     {
+      "argument_index": 0,
+      "type": "string",
+      "text": "JQMIGRATE: Migrate is installed, version 3.4.1"
+     }
+    ],
+    "retained_bytes": 46
+   }
+  }
+ ],
+ "limitations": [
+  "Observation starts when REA attaches; prior network and console activity is unavailable.",
+  "Worker targets are a final inventory snapshot, not worker-session observation. Their attached flag describes any debugging client; this page-session collector does not observe worker network, console, or script events, and short-lived workers may be absent from the snapshot.",
+  "Raw network headers, bodies, cookies, storage values, console objects, and WebSocket payloads are never retained; explicitly requested primitive console text is retained verbatim, while payload captures retain value-free shapes.",
+  "Source maps are reported only as declarative URLs and are not fetched.",
+  "URL-less scripts and console events without an allowed source URL are excluded because their origin cannot be proven.",
+  "CDP discovery omitted the target attachment state; attached is reported as unknown."
+ ]
+}

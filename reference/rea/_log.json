@@ -1,0 +1,322 @@
+[
+ {
+  "slug": "services-style-01",
+  "tool": "inspect_web_page",
+  "ok": true
+ },
+ {
+  "slug": "services-style-01",
+  "tool": "analyze_web_bundle",
+  "ok": true
+ },
+ {
+  "slug": "services__residential-services",
+  "tool": "inspect_web_page",
+  "ok": true
+ },
+ {
+  "slug": "services__residential-services",
+  "tool": "analyze_web_bundle",
+  "ok": true
+ },
+ {
+  "slug": "portfolios__swimming-pool-cleaning-and-maintenance",
+  "tool": "inspect_web_page",
+  "ok": true
+ },
+ {
+  "slug": "portfolios__swimming-pool-cleaning-and-maintenance",
+  "tool": "analyze_web_bundle",
+  "ok": true
+ },
+ {
+  "slug": "about-us",
+  "tool": "inspect_web_page",
+  "ok": true
+ },
+ {
+  "slug": "about-us",
+  "tool": "analyze_web_bundle",
+  "ok": true
+ },
+ {
+  "slug": "team",
+  "tool": "inspect_web_page",
+  "ok": true
+ },
+ {
+  "slug": "team",
+  "tool": "analyze_web_bundle",
+  "ok": true
+ },
+ {
+  "slug": "teams__mark-jackson",
+  "tool": "inspect_web_page",
+  "ok": true
+ },
+ {
+  "slug": "teams__mark-jackson",
+  "tool": "analyze_web_bundle",
+  "ok": true
+ },
+ {
+  "slug": "pricing-plans",
+  "tool": "inspect_web_page",
+  "ok": true
+ },
+ {
+  "slug": "pricing-plans",
+  "tool": "analyze_web_bundle",
+  "ok": true
+ },
+ {
+  "slug": "testimonials",
+  "tool": "inspect_web_page",
+  "ok": true
+ },
+ {
+  "slug": "testimonials",
+  "tool": "analyze_web_bundle",
+  "ok": true
+ },
+ {
+  "slug": "appointment",
+  "tool": "inspect_web_page",
+  "ok": true
+ },
+ {
+  "slug": "appointment",
+  "tool": "analyze_web_bundle",
+  "ok": true
+ },
+ {
+  "slug": "faqs",
+  "tool": "inspect_web_page",
+  "ok": true
+ },
+ {
+  "slug": "faqs",
+  "tool": "analyze_web_bundle",
+  "ok": true
+ },
+ {
+  "slug": "404-page",
+  "tool": "inspect_web_page",
+  "ok": true
+ },
+ {
+  "slug": "404-page",
+  "tool": "analyze_web_bundle",
+  "ok": true
+ },
+ {
+  "slug": "contact-us",
+  "tool": "inspect_web_page",
+  "ok": true
+ },
+ {
+  "slug": "contact-us",
+  "tool": "analyze_web_bundle",
+  "ok": true
+ },
+ {
+  "slug": "blog",
+  "tool": "inspect_web_page",
+  "ok": true
+ },
+ {
+  "slug": "blog",
+  "tool": "analyze_web_bundle",
+  "ok": true
+ },
+ {
+  "slug": "how-often-should-you-really-clean-these-7-overlooked-areas",
+  "tool": "inspect_web_page",
+  "ok": true
+ },
+ {
+  "slug": "how-often-should-you-really-clean-these-7-overlooked-areas",
+  "tool": "analyze_web_bundle",
+  "ok": true
+ },
+ {
+  "slug": "services__construction-cleaning",
+  "tool": "inspect_web_page",
+  "ok": true
+ },
+ {
+  "slug": "services__move-in-out-cleaning",
+  "tool": "inspect_web_page",
+  "ok": true
+ },
+ {
+  "slug": "services__regular-home-cleaning",
+  "tool": "inspect_web_page",
+  "ok": true
+ },
+ {
+  "slug": "services__skilled-cleaning",
+  "tool": "inspect_web_page",
+  "ok": true
+ },
+ {
+  "slug": "services__specialized-cleaning",
+  "tool": "inspect_web_page",
+  "ok": true
+ },
+ {
+  "slug": "portfolios__solar-panel-cleaning",
+  "tool": "inspect_web_page",
+  "ok": true
+ },
+ {
+  "slug": "portfolios__parking-lot-pressure-washing",
+  "tool": "inspect_web_page",
+  "ok": true
+ },
+ {
+  "slug": "portfolios__sofa-mattress-deep-cleaning",
+  "tool": "inspect_web_page",
+  "ok": true
+ },
+ {
+  "slug": "portfolios__kitchen-hood-exhaust-cleaning",
+  "tool": "inspect_web_page",
+  "ok": true
+ },
+ {
+  "slug": "portfolios__disinfection-and-sanitization-service",
+  "tool": "inspect_web_page",
+  "ok": true
+ },
+ {
+  "slug": "myths-about-professional-cleaning-services-debunked",
+  "tool": "inspect_web_page",
+  "ok": true
+ },
+ {
+  "slug": "the-ultimate-deep-cleaning-checklist-for-your-home",
+  "tool": "inspect_web_page",
+  "ok": true
+ },
+ {
+  "slug": "the-germiest-spots-in-your-home-and-how-pros-handle-them",
+  "tool": "inspect_web_page",
+  "ok": true
+ },
+ {
+  "slug": "spring-cleaning-vs-deep-cleaning-whats-the-difference",
+  "tool": "inspect_web_page",
+  "ok": true
+ },
+ {
+  "slug": "portfolios__glass-and-facade-cleaning",
+  "tool": "inspect_web_page",
+  "ok": true
+ },
+ {
+  "slug": "portfolios__carpet-and-upholstery-cleaning",
+  "tool": "inspect_web_page",
+  "ok": true
+ },
+ {
+  "slug": "portfolios__industrial-equipment-cleaning",
+  "tool": "inspect_web_page",
+  "ok": true
+ },
+ {
+  "slug": "teams__lucia-petrova",
+  "tool": "inspect_web_page",
+  "ok": true
+ },
+ {
+  "slug": "teams__helen-reeves",
+  "tool": "inspect_web_page",
+  "ok": true
+ },
+ {
+  "slug": "teams__sofia-martinez",
+  "tool": "inspect_web_page",
+  "ok": true
+ },
+ {
+  "slug": "teams__alex-podzemsky",
+  "tool": "inspect_web_page",
+  "ok": true
+ },
+ {
+  "slug": "teams__noah-bennett",
+  "tool": "inspect_web_page",
+  "ok": true
+ },
+ {
+  "slug": "portfolios__office-deep-cleaning",
+  "tool": "inspect_web_page",
+  "ok": true
+ },
+ {
+  "slug": "how-to-choose-the-right-cleaning-service-for-your-home",
+  "tool": "inspect_web_page",
+  "ok": true
+ },
+ {
+  "slug": "moving-out-heres-why-you-need-a-move-out-cleaning-service",
+  "tool": "inspect_web_page",
+  "ok": true
+ },
+ {
+  "slug": "blog__page__2",
+  "tool": "inspect_web_page",
+  "ok": true
+ },
+ {
+  "slug": "blog__page__5",
+  "tool": "inspect_web_page",
+  "ok": true
+ },
+ {
+  "slug": "is-a-weekly-or-biweekly-cleaning-service-right-for-you",
+  "tool": "inspect_web_page",
+  "ok": true
+ },
+ {
+  "slug": "5-ways-a-cleaning-service-saves-you-time-and-money",
+  "tool": "inspect_web_page",
+  "ok": true
+ },
+ {
+  "slug": "portfolios__residential-move-in-move-out-cleaning",
+  "tool": "inspect_web_page",
+  "ok": true
+ },
+ {
+  "slug": "10-hidden-benefits-of-hiring-a-professional-cleaning-service",
+  "tool": "inspect_web_page",
+  "ok": true
+ },
+ {
+  "slug": "7-signs-you-need-a-professional-cleaner-right-now",
+  "tool": "inspect_web_page",
+  "ok": true
+ },
+ {
+  "slug": "eco-friendly-cleaning-services-why-it-matters",
+  "tool": "inspect_web_page",
+  "ok": true
+ },
+ {
+  "slug": "portfolios__post-construction-cleanup",
+  "tool": "inspect_web_page",
+  "ok": true
+ },
+ {
+  "slug": "blog__page__3",
+  "tool": "inspect_web_page",
+  "ok": true
+ },
+ {
+  "slug": "blog__page__4",
+  "tool": "inspect_web_page",
+  "ok": true
+ }
+]
