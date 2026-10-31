@@ -1,0 +1,334 @@
+@import "tailwindcss";
+
+/*
+ * Design tokens, ported from the Cetro theme's Elementor kit and the computed
+ * styles of the reference pages. Breakpoints mirror Elementor's max-width
+ * breakpoints as min-width ones:
+ *   mobile ≤767 · mobile-extra ≤880 · tablet ≤1024 · tablet-extra ≤1200 · laptop ≤1440
+ */
+@theme {
+  --breakpoint-sm: 768px; /* above Elementor "mobile" */
+  --breakpoint-md: 881px; /* above "mobile extra" */
+  --breakpoint-lg: 1025px; /* above "tablet" */
+  --breakpoint-xl: 1201px; /* above "tablet extra" */
+  --breakpoint-2xl: 1441px; /* above "laptop" */
+
+  --color-primary: #00a650;
+  --color-secondary: #212e3b;
+  --color-body: #5c5e5e;
+  --color-lighter: #9fa2a4;
+  --color-line: #5c5e5e2e;
+  --color-dark: #1a1a1a;
+  --color-highlight: #96fe81;
+  --color-teal: #044340;
+  --color-topbar: #0d190a;
+  --color-surface: #f5f5f5;
+  --color-cream: #fbfaf2;
+
+  --font-heading: var(--font-boldonse), "Arial Black", sans-serif;
+  --font-sans: var(--font-roboto-flex), Arial, sans-serif;
+
+  --container-site: 1410px;
+  --radius-card: 24px;
+
+  --animate-marquee: marquee var(--marquee-duration, 40s) linear infinite;
+
+  @keyframes pavo-move-up {
+    from {
+      opacity: 0;
+      transform: translateY(100px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes pavo-move-right {
+    from {
+      opacity: 0;
+      transform: translateX(-100px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  @keyframes pavo-move-left {
+    from {
+      opacity: 0;
+      transform: translateX(100px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  @keyframes pavo-scale-up {
+    from {
+      opacity: 0;
+      transform: scale(0.7);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+}
+
+@layer base {
+  html {
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+
+  body {
+    overflow-x: clip;
+    background-color: #fff;
+    color: var(--color-body);
+    font-family: var(--font-sans);
+    font-size: 18px;
+    line-height: 1.33334;
+    overflow-wrap: break-word;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+  ::-webkit-scrollbar-track {
+    background-color: #ccc;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--color-primary);
+  }
+  ::selection {
+    color: #fff;
+    background: var(--color-primary);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: var(--color-secondary);
+    font-family: var(--font-heading);
+    font-weight: 400;
+    line-height: 1.6;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 3px;
+  }
+
+  input:where([type="text"], [type="email"], [type="tel"], [type="date"], [type="time"], [type="search"]),
+  select,
+  textarea {
+    width: 100%;
+    padding: 12px 24px;
+    border: 1px solid var(--color-line);
+    border-radius: 100px;
+    background-color: #fff;
+    color: #000;
+    font-size: 16px;
+    outline: 0;
+    appearance: none;
+    transition: all 0.3s ease-in-out;
+  }
+  textarea {
+    border-radius: 24px;
+    resize: vertical;
+  }
+  select {
+    padding-right: 48px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 13.171l4.95-4.95 1.415 1.415L12 16 5.637 9.636 7.05 8.222l4.95 4.95z' fill='%23555555'/%3E%3C/svg%3E");
+    background-position: calc(100% - 22px) center;
+    background-repeat: no-repeat;
+    background-size: 20px;
+  }
+  ::placeholder {
+    color: #000;
+    opacity: 1;
+  }
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible {
+    outline: none;
+    border-color: var(--color-primary);
+  }
+}
+
+@layer components {
+  /* Elementor boxed container: 1410px content, 30px gutters (15px on mobile). */
+  .site-container {
+    width: 100%;
+    max-width: var(--container-site);
+    margin-inline: auto;
+  }
+  .section-gutter {
+    padding-inline: 15px;
+    @media (width >= theme(--breakpoint-sm)) {
+      padding-inline: 30px;
+    }
+  }
+
+  /* Pill button with a 30px icon circle (Elementor button, "effects" variant). */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 13px 13px 13px 30px;
+    border-radius: 100px;
+    background-color: var(--color-primary);
+    color: #fff;
+    font-family: var(--font-sans);
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.5;
+    text-transform: capitalize;
+    transition: all 0.3s ease;
+    &:hover,
+    &:focus-visible {
+      background-color: var(--btn-hover-bg, var(--color-secondary));
+      color: var(--btn-hover-color, #fff);
+    }
+  }
+  .btn-lg {
+    padding: 17px 17px 17px 30px;
+  }
+  .btn-md {
+    padding: 15px 15px 15px 30px;
+  }
+  .btn-icon {
+    display: flex;
+    width: 30px;
+    height: 30px;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: var(--btn-icon-bg, #fff);
+    color: var(--btn-icon-color, var(--color-primary));
+    transition: all 0.5s ease-in-out;
+    .btn:hover &,
+    .btn:focus-visible & {
+      background-color: var(--btn-icon-hover-bg, var(--color-primary));
+      color: var(--btn-icon-hover-color, #fff);
+    }
+  }
+  /* Dark variant ("Book a Service"). */
+  .btn-dark {
+    --btn-hover-bg: var(--color-primary);
+    --btn-icon-bg: var(--color-primary);
+    --btn-icon-color: #fff;
+    --btn-icon-hover-bg: #fff;
+    --btn-icon-hover-color: var(--color-primary);
+    background-color: var(--color-secondary);
+  }
+  /* White hover variant used on dark/photo backgrounds. */
+  .btn-on-dark {
+    --btn-hover-bg: #fff;
+    --btn-hover-color: var(--color-secondary);
+  }
+
+  /* Underlined text link with a small arrow circle ("Read more", "Our solutions"). */
+  .link-arrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 14px;
+    text-transform: capitalize;
+    > span:first-child {
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 2px;
+    }
+    &:hover {
+      color: var(--color-primary);
+    }
+  }
+
+  /* "WHO WE ARE"-style eyebrow label with the broom icon. */
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 14px;
+    text-transform: uppercase;
+  }
+
+  /* Two-tone display headline (cetro-animated-headline): plain + accent parts. */
+  .display-heading {
+    font-family: var(--font-heading);
+    font-size: 30px;
+    line-height: 50px;
+    text-transform: capitalize;
+    color: var(--color-secondary);
+    @media (width >= theme(--breakpoint-sm)) {
+      font-size: 50px;
+      line-height: 80px;
+    }
+    .accent {
+      color: var(--color-primary);
+    }
+  }
+
+  /* Scroll-triggered entrance animations (Elementor "pavo-*" motion effects).
+     Hidden only when JS runs (html.js), so content never stays invisible. */
+  html.js [data-reveal]:not(.is-revealed) {
+    opacity: 0;
+  }
+  html.js [data-reveal].is-revealed {
+    animation-duration: 1.25s;
+    animation-fill-mode: both;
+    animation-delay: var(--reveal-delay, 0ms);
+  }
+  html.js [data-reveal="up"].is-revealed {
+    animation-name: pavo-move-up;
+  }
+  html.js [data-reveal="right"].is-revealed {
+    animation-name: pavo-move-right;
+  }
+  html.js [data-reveal="left"].is-revealed {
+    animation-name: pavo-move-left;
+  }
+  html.js [data-reveal="scale"].is-revealed {
+    animation-name: pavo-scale-up;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html.js [data-reveal]:not(.is-revealed) {
+      opacity: 1;
+    }
+    html.js [data-reveal].is-revealed {
+      animation: none;
+    }
+  }
+}

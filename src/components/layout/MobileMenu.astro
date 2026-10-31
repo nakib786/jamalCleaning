@@ -1,0 +1,148 @@
+---
+/** Off-canvas navigation for ≤1200px (theme's `.cetro-mobile-nav`): 330px panel from the left. */
+import { site } from "../../config/site";
+import Icon from "../ui/Icon.astro";
+import Logo from "./Logo.astro";
+
+const path = Astro.url.pathname;
+---
+
+<div class="mobile-overlay fixed inset-0 z-[997] bg-black/70" data-menu-close hidden></div>
+<aside
+  id="mobile-menu"
+  class="mobile-menu fixed inset-y-0 left-0 z-[9999] flex w-[330px] max-w-[88vw] -translate-x-full flex-col justify-between overflow-y-auto bg-white transition-transform duration-[250ms] ease-out"
+  aria-label="Menu"
+  inert
+>
+  <div>
+    <div class="flex items-center justify-between px-[30px] pt-[22px] pb-4">
+      <Logo variant="default" height={52} loading="lazy" />
+      <button type="button" class="text-secondary hover:text-primary" aria-label="Close menu" data-menu-close>
+        <svg width="20" height="20" viewBox="0 0 23.691 22.723" aria-hidden="true">
+          <g transform="translate(-126.154 -143.139)" fill="none" stroke="currentColor" stroke-width="1.4">
+            <line x2="23" y2="22" transform="translate(126.5 143.5)"></line>
+            <path d="M0,22,23,0" transform="translate(126.5 143.5)"></path>
+          </g>
+        </svg>
+      </button>
+    </div>
+    <nav aria-label="Mobile">
+      <ul class="px-[30px]">
+        {
+          site.nav.map((item) => (
+            <li class="border-b border-line">
+              <div class="flex items-center justify-between">
+                <a
+                  href={item.href}
+                  class:list={[
+                    "block flex-1 py-3 text-base font-bold transition-colors hover:text-primary",
+                    path === item.href ? "text-primary" : "text-secondary",
+                  ]}
+                  aria-current={path === item.href ? "page" : undefined}
+                >
+                  {item.label}
+                </a>
+                {item.children && (
+                  <button
+                    type="button"
+                    class="flex size-9 items-center justify-center text-secondary transition-transform aria-expanded:rotate-180"
+                    aria-expanded="false"
+                    aria-label={`Show ${item.label} submenu`}
+                    data-submenu-toggle
+                  >
+                    <Icon name="angle-down" class="text-xs" />
+                  </button>
+                )}
+              </div>
+              {item.children && (
+                <ul class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-300" data-submenu>
+                  <div class="overflow-hidden">
+                    {item.children.map((child) => (
+                      <li>
+                        <a
+                          href={child.href}
+                          class:list={[
+                            "block py-2 pl-4 text-[15px] font-semibold transition-colors hover:text-primary",
+                            path === child.href ? "text-primary" : "text-body",
+                          ]}
+                        >
+                          {child.label}
+                        </a>
+                      </li>
+                    ))}
+                  </div>
+                </ul>
+              )}
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+  <div class="space-y-3 px-[30px] py-8 text-secondary">
+    <a href={site.contact.phone.href} class="flex items-center gap-3 font-heading text-[15px] hover:text-primary">
+      <Icon name="phone" class="text-primary" />
+      {site.contact.phone.display}
+    </a>
+    <a href={`mailto:${site.contact.email}`} class="flex items-center gap-3 text-base font-semibold hover:text-primary">
+      <Icon name="mail" class="text-primary" />
+      {site.contact.email}
+    </a>
+    <a href={site.quote.href} class="btn mt-3">
+      <span>{site.quote.label}</span>
+      <span class="btn-icon"><Icon name="right-arrow" /></span>
+    </a>
+  </div>
+</aside>
+
+<style>
+  :global(html.mobile-nav-active) {
+    overflow: hidden;
+  }
+  :global(html.mobile-nav-active) .mobile-menu {
+    transform: translate3d(0, 0, 0);
+  }
+  [data-submenu].is-open {
+    grid-template-rows: 1fr;
+  }
+</style>
+
+<script>
+  const html = document.documentElement;
+  const panel = document.getElementById("mobile-menu");
+  const overlay = document.querySelector<HTMLElement>(".mobile-overlay");
+  let opener: HTMLElement | null = null;
+
+  function setOpen(open: boolean): void {
+    if (!panel || !overlay) return;
+    html.classList.toggle("mobile-nav-active", open);
+    overlay.hidden = !open;
+    panel.inert = !open;
+    document.querySelectorAll("[data-menu-open]").forEach((b) => b.setAttribute("aria-expanded", String(open)));
+    if (open) panel.querySelector<HTMLElement>("a, button")?.focus();
+    else opener?.focus();
+  }
+
+  document.querySelectorAll<HTMLElement>("[data-menu-open]").forEach((button) =>
+    button.addEventListener("click", () => {
+      opener = button;
+      setOpen(true);
+    }),
+  );
+  document.querySelectorAll("[data-menu-close]").forEach((el) => el.addEventListener("click", () => setOpen(false)));
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && html.classList.contains("mobile-nav-active")) setOpen(false);
+  });
+  window.matchMedia("(min-width: 1201px)").addEventListener("change", (event) => {
+    if (event.matches) setOpen(false);
+  });
+
+  document.querySelectorAll<HTMLButtonElement>("[data-submenu-toggle]").forEach((toggle) =>
+    toggle.addEventListener("click", () => {
+      const submenu = toggle.closest("li")?.querySelector("[data-submenu]");
+      const open = toggle.getAttribute("aria-expanded") !== "true";
+      toggle.setAttribute("aria-expanded", String(open));
+      submenu?.classList.toggle("is-open", open);
+    }),
+  );
+</script>

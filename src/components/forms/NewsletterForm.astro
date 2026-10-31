@@ -1,0 +1,31 @@
+---
+/** Newsletter signup (footer). Posts to the Worker at /api/subscribe with a Turnstile token. */
+import Icon from "../ui/Icon.astro";
+---
+
+<form
+  class="api-form relative w-full"
+  action="/api/subscribe"
+  method="post"
+  data-api-form
+  data-success="Thanks for subscribing! We'll be in touch."
+>
+  <div class="flex flex-col gap-3 sm:flex-row sm:gap-[10px]">
+    <label for="newsletter-email" class="sr-only">Email address</label>
+    <input
+      id="newsletter-email"
+      type="email"
+      name="email"
+      required
+      autocomplete="email"
+      placeholder="Email address..."
+      class="h-[60px] flex-1 border-0 px-[25px] text-base text-secondary placeholder:text-body"
+    />
+    <button type="submit" class="btn btn-on-dark h-[60px] justify-center whitespace-nowrap">
+      <span>Subscribe Now</span>
+      <span class="btn-icon"><Icon name="long-arrow-right-up" class="text-sm" /></span>
+    </button>
+  </div>
+  <div class="turnstile-slot" data-turnstile></div>
+  <p class="form-status mt-3 text-center text-sm text-white" role="status" aria-live="polite"></p>
+</form>

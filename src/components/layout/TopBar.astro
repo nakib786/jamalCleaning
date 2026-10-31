@@ -1,0 +1,43 @@
+---
+import { site, socialLinks } from "../../config/site";
+import Icon from "../ui/Icon.astro";
+
+const { contact } = site;
+---
+
+<div class="flex items-center justify-between gap-5 bg-topbar px-[30px] py-[10px] text-sm leading-[23.33px] font-medium text-white">
+  <ul class="hidden items-center gap-[13px] sm:flex">
+    <li>
+      <a href={`mailto:${contact.email}`} class="flex items-center gap-2 hover:text-primary">
+        <Icon name="mail" class="text-base" />
+        <span>{contact.email}</span>
+      </a>
+    </li>
+    <li class="hidden items-center gap-[5px] lg:flex">
+      <Icon name="time-line" class="mb-[3px] text-[15px]" />
+      <span>{contact.hours.short}</span>
+    </li>
+    <li>
+      <a href={contact.address.mapUrl} target="_blank" rel="noopener" class="flex items-center gap-[5px] hover:text-primary">
+        <Icon name="map" class="mb-[3px] text-[15px]" />
+        <span>{contact.address.short}</span>
+      </a>
+    </li>
+  </ul>
+  <div class="flex items-center gap-[21px] max-sm:mx-auto sm:ml-auto">
+    {
+      socialLinks.length > 0 ? (
+        socialLinks.map((s) => (
+          <a href={s.href} target="_blank" rel="noopener" aria-label={s.label} class="leading-none hover:text-primary">
+            <Icon name={s.icon} class="text-base" />
+          </a>
+        ))
+      ) : (
+        <a href={site.contact.phone.href} class="flex items-center gap-2 hover:text-primary">
+          <Icon name="phone" class="text-[15px]" />
+          <span>{site.contact.phone.display}</span>
+        </a>
+      )
+    }
+  </div>
+</div>

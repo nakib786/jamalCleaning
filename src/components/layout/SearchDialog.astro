@@ -1,0 +1,93 @@
+---
+/**
+ * Site search (replaces the theme's WooCommerce product search popup).
+ * A static index of every page is filtered in the browser — no server needed.
+ */
+import { getSearchIndex } from "../../lib/search-index";
+import Icon from "../ui/Icon.astro";
+
+const index = await getSearchIndex();
+---
+
+<dialog
+  id="site-search"
+  class="search-dialog m-0 h-dvh max-h-none w-full max-w-none bg-secondary/95 p-0 text-white backdrop:bg-transparent"
+  aria-label="Search the site"
+>
+  <div class="site-container flex h-full flex-col px-[15px] pt-[12vh] sm:px-[30px]">
+    <form method="dialog" class="ml-auto">
+      <button class="text-white hover:text-primary" aria-label="Close search">
+        <Icon name="times" class="text-2xl" />
+      </button>
+    </form>
+    <label for="site-search-input" class="mb-4 font-heading text-3xl sm:text-5xl">Search</label>
+    <div class="relative">
+      <input
+        id="site-search-input"
+        type="search"
+        autocomplete="off"
+        placeholder="Search services, projects and pages…"
+        class="h-16 border-white/20 bg-white/10 pr-14 pl-7 text-lg text-white placeholder:text-white/70"
+      />
+      <Icon name="search-lg" class="pointer-events-none absolute top-1/2 right-6 -translate-y-1/2 text-xl" />
+    </div>
+    <ul class="search-results mt-6 max-h-[55vh] space-y-2 overflow-y-auto" role="list"></ul>
+  </div>
+  <script type="application/json" id="search-index" set:html={JSON.stringify(index)} />
+</dialog>
+
+<script>
+  interface Entry {
+    title: string;
+    url: string;
+    type: string;
+    text: string;
+  }
+  const dialog = document.getElementById("site-search") as HTMLDialogElement | null;
+  const input = document.getElementById("site-search-input") as HTMLInputElement | null;
+  const list = dialog?.querySelector<HTMLUListElement>(".search-results");
+  const entries = JSON.parse(document.getElementById("search-index")?.textContent ?? "[]") as Entry[];
+
+  function render(query: string): void {
+    if (!list) return;
+    const q = query.trim().toLowerCase();
+    list.replaceChildren();
+    if (!q) return;
+    const hits = entries
+      .filter((e) => `${e.title} ${e.text}`.toLowerCase().includes(q))
+      .slice(0, 12);
+    if (hits.length === 0) {
+      const li = document.createElement("li");
+      li.className = "text-white/80";
+      li.textContent = "No results — try another word, or call us.";
+      list.append(li);
+      return;
+    }
+    for (const hit of hits) {
+      const li = document.createElement("li");
+      const a = document.createElement("a");
+      a.href = hit.url;
+      a.className = "block rounded-2xl bg-white/5 px-6 py-4 hover:bg-white/10";
+      const type = document.createElement("span");
+      type.className = "block text-xs font-bold tracking-wider text-highlight uppercase";
+      type.textContent = hit.type;
+      const title = document.createElement("span");
+      title.className = "font-heading text-lg";
+      title.textContent = hit.title;
+      a.append(type, title);
+      li.append(a);
+      list.append(li);
+    }
+  }
+
+  document.querySelectorAll("[data-search-open]").forEach((button) =>
+    button.addEventListener("click", () => {
+      dialog?.showModal();
+      input?.focus();
+    }),
+  );
+  input?.addEventListener("input", () => render(input.value));
+  dialog?.addEventListener("click", (event) => {
+    if (event.target === dialog) dialog.close();
+  });
+</script>

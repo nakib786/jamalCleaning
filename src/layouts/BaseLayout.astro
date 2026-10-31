@@ -1,0 +1,68 @@
+---
+import { Font } from "astro:assets";
+import Footer from "../components/layout/Footer.astro";
+import Header from "../components/layout/Header.astro";
+import MobileBar from "../components/layout/MobileBar.astro";
+import MobileMenu from "../components/layout/MobileMenu.astro";
+import SearchDialog from "../components/layout/SearchDialog.astro";
+import Seo, { type SeoProps } from "../components/seo/Seo.astro";
+import Icon from "../components/ui/Icon.astro";
+import "../styles/global.css";
+
+interface Props extends SeoProps {
+  /** Home page header shows the contact top bar. */
+  topBar?: boolean;
+}
+
+const { topBar = false, ...seo } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en-CA" class="no-js">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script is:inline>
+      document.documentElement.classList.replace("no-js", "js");
+    </script>
+    <Font cssVariable="--font-boldonse" preload />
+    <Font cssVariable="--font-roboto-flex" />
+    <Seo {...seo} />
+    <slot name="head" />
+  </head>
+  <body>
+    <a
+      href="#main"
+      class="sr-only z-[10000] rounded-full bg-primary px-5 py-3 font-bold text-white focus:not-sr-only focus:fixed focus:top-3 focus:left-3"
+      >Skip to content</a
+    >
+    <Header topBar={topBar} />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+    <MobileBar />
+    <MobileMenu />
+    <SearchDialog />
+    <button
+      type="button"
+      class="scroll-top invisible fixed right-[30px] bottom-[30px] z-[999] flex size-12 translate-y-3 items-center justify-center rounded-[20px] bg-primary text-white opacity-0 transition-all duration-500 hover:bg-secondary max-xl:bottom-[90px]"
+      aria-label="Back to top"
+      data-scroll-top
+    >
+      <Icon name="arrow-up" class="text-xs" />
+    </button>
+    <script>
+      import "../scripts/site";
+      import "../scripts/forms";
+    </script>
+  </body>
+</html>
+
+<style>
+  .scroll-top:global(.is-visible) {
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+  }
+</style>

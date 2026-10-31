@@ -1,0 +1,58 @@
+---
+/**
+ * Eyebrow label + two-tone display headline (theme `cetro-icon-box` + `cetro-animated-headline`).
+ *
+ * `parts` alternates plain and accent text: ["Why will", { accent: "you choose our" }, "services?"].
+ */
+import Broom from "../../assets/icons/broom.svg";
+
+type Part = string | { accent: string };
+
+interface Props {
+  label?: string;
+  parts: Part[];
+  /** Heading element; most section headings are h2. */
+  as?: "h1" | "h2" | "h3";
+  align?: "left" | "center";
+  /** On dark backgrounds the label and plain text are white. */
+  dark?: boolean;
+  /** Overrides for the headline size, e.g. "sm:text-[60px] sm:leading-[90px]". */
+  headingClass?: string;
+  class?: string;
+  /** Entrance animation of the headline. */
+  reveal?: "up" | "right" | "left" | "scale";
+}
+
+const { label, parts, as: Tag = "h2", align = "left", dark = false, headingClass, class: className, reveal } = Astro.props;
+---
+
+<div class:list={["flex flex-col", align === "center" ? "items-center text-center" : "items-start", className]}>
+  {
+    label && (
+      <p class:list={["section-label gap-0.5 pb-2.5 sm:pb-[30px]", dark ? "text-white" : "text-body"]}>
+        <Broom class="h-[22px] w-[21px] text-primary" aria-hidden="true" />
+        <span>{label}</span>
+      </p>
+    )
+  }
+  <Tag
+    class:list={["display-heading", dark && "text-white", headingClass]}
+    data-reveal={reveal}
+  >
+    {
+      parts.map((part, i) =>
+        typeof part === "string" ? (
+          <Fragment>
+            {i > 0 && " "}
+            {part}
+          </Fragment>
+        ) : (
+          <Fragment>
+            {i > 0 && " "}
+            <span class="accent">{part.accent}</span>
+          </Fragment>
+        ),
+      )
+    }
+  </Tag>
+</div>

@@ -1,0 +1,30 @@
+---
+import { Image } from "astro:assets";
+import { site } from "../../config/site";
+
+interface Props {
+  /** "onDark" for dark/photo backgrounds, "default" for light ones. */
+  variant?: "onDark" | "default";
+  /** Rendered height in px; width follows the logo's aspect ratio. */
+  height?: number;
+  class?: string;
+  loading?: "eager" | "lazy";
+}
+
+const { variant = "onDark", height = 64, class: className, loading = "eager" } = Astro.props;
+const src = variant === "onDark" ? site.logo.onDark : site.logo.src;
+const width = Math.round((src.width / src.height) * height);
+---
+
+<a href="/" class:list={["inline-flex shrink-0 items-center", className]} aria-label={`${site.name} — home`}>
+  <Image
+    src={src}
+    alt={site.logo.alt}
+    width={width}
+    height={height}
+    layout="fixed"
+    loading={loading}
+    fetchpriority={loading === "eager" ? "high" : "auto"}
+    class="h-auto max-w-full"
+  />
+</a>

@@ -1,0 +1,46 @@
+---
+/** Home hero: full-bleed photo with dark overlay and curved bottom edge (theme mask.png as SVG). */
+import { Image } from "astro:assets";
+import hero from "../../../assets/images/home/hero.jpg";
+import Icon from "../../ui/Icon.astro";
+
+// The theme masks the hero with a 1920×1000 image whose bottom edge is an elliptical
+// arc (centre 960,649, radii 1200×350). Same shape as an inline SVG, centred like the original.
+const mask = `url("data:image/svg+xml,${encodeURIComponent(
+  '<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1000" viewBox="0 0 1920 1000"><path d="M0 0H1920V859A1200 350 0 0 1 0 859Z"/></svg>',
+)}")`;
+---
+
+<section class="relative flex min-h-[700px] flex-col justify-center px-[15px] sm:min-h-[1000px] sm:px-[30px]">
+  <div
+    class="absolute inset-x-0 top-0 h-[700px] overflow-hidden sm:h-[1000px]"
+    style={`mask-image:${mask};-webkit-mask-image:${mask};mask-repeat:no-repeat;-webkit-mask-repeat:no-repeat;mask-position:center;-webkit-mask-position:center`}
+    aria-hidden="true"
+  >
+    <Image
+      src={hero}
+      alt=""
+      widths={[480, 768, 1024, 1440, 1920]}
+      sizes="100vw"
+      loading="eager"
+      fetchpriority="high"
+      class="h-[700px] w-full object-cover sm:h-[1000px]"
+    />
+    <div class="absolute inset-0 bg-[#070b0375]"></div>
+  </div>
+
+  <div class="site-container relative z-[1] mb-20 sm:mb-[150px] lg:mt-[60px] lg:mb-0">
+    <div class="animate-[pavo-move-right_1.25s_both] motion-reduce:animate-none sm:w-[650px]">
+      <h1 class="mb-6 font-heading text-[30px] leading-[1.5] tracking-[-0.8px] text-white capitalize sm:text-[70px] lg:text-[80px]">
+        Clean space starts here
+      </h1>
+      <p class="leading-6 text-white sm:w-[85%]">
+        Professional cleaning services for offices, homes, and commercial spaces – done right, every time.
+      </p>
+      <a href="/services/" class="btn btn-lg btn-on-dark mt-[30px] sm:mt-14">
+        <span>Explore Services</span>
+        <span class="btn-icon"><Icon name="right-arrow" class="text-base" /></span>
+      </a>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,100 @@
+---
+/** Per-page <head> metadata: title, description, canonical, Open Graph, Twitter, favicons, JSON-LD. */
+import type { ImageMetadata } from "astro";
+import { getImage } from "astro:assets";
+import { isSet, site, socialLinks } from "../../config/site";
+
+export interface SeoProps {
+  /** Page title; the site name is appended via `site.seo.titleTemplate` (omit on the home page). */
+  title?: string;
+  description?: string;
+  image?: ImageMetadata;
+  imageAlt?: string;
+  type?: "website" | "article";
+  noindex?: boolean;
+  /** Extra JSON-LD objects for this page (e.g. Service, BreadcrumbList, FAQPage). */
+  jsonLd?: Record<string, unknown>[];
+}
+
+const {
+  title,
+  description = site.description,
+  image = site.seo.ogImage,
+  imageAlt = site.seo.ogImageAlt,
+  type = "website",
+  noindex = false,
+  jsonLd = [],
+} = Astro.props as SeoProps;
+
+const fullTitle = title ? site.seo.titleTemplate.replace("%s", title) : site.seo.defaultTitle;
+const canonical = new URL(Astro.url.pathname, site.url).href;
+const og = await getImage({ src: image, width: 1200, height: 630, format: "jpg", fit: "cover" });
+const ogUrl = new URL(og.src, site.url).href;
+
+const business = {
+  "@context": "https://schema.org",
+  "@type": "HomeAndConstructionBusiness",
+  "@id": `${site.url}/#business`,
+  name: site.name,
+  url: site.url,
+  logo: `${site.url}/logo.png`,
+  image: ogUrl,
+  description: site.description,
+  telephone: site.contact.phone.e164,
+  email: site.contact.email,
+  priceRange: "$$",
+  address: {
+    "@type": "PostalAddress",
+    ...(isSet(site.contact.address.street) ? { streetAddress: site.contact.address.street } : {}),
+    addressLocality: site.contact.address.locality,
+    addressRegion: site.contact.address.region,
+    ...(isSet(site.contact.address.postalCode) ? { postalCode: site.contact.address.postalCode } : {}),
+    addressCountry: site.contact.address.country,
+  },
+  geo: { "@type": "GeoCoordinates", ...site.contact.address.geo },
+  areaServed: { "@type": "City", name: site.contact.address.locality },
+  openingHoursSpecification: [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: site.contact.hours.schema.days,
+      opens: site.contact.hours.schema.opens,
+      closes: site.contact.hours.schema.closes,
+    },
+  ],
+  ...(socialLinks.length ? { sameAs: socialLinks.map((s) => s.href) } : {}),
+};
+const schemas = [business, ...jsonLd];
+---
+
+<title>{fullTitle}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+{noindex && <meta name="robots" content="noindex, follow" />}
+<meta name="keywords" content={site.seo.keywords.join(", ")} />
+<meta name="geo.region" content={`${site.contact.address.country}-${site.contact.address.region}`} />
+<meta name="geo.placename" content={site.contact.address.locality} />
+
+<meta property="og:type" content={type} />
+<meta property="og:site_name" content={site.name} />
+<meta property="og:locale" content={site.seo.locale} />
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={ogUrl} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content={imageAlt} />
+<meta name="twitter:card" content="summary_large_image" />
+{isSet(site.seo.twitterHandle) && <meta name="twitter:site" content={site.seo.twitterHandle} />}
+<meta name="twitter:title" content={fullTitle} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogUrl} />
+
+<link rel="icon" href="/favicon.ico" sizes="48x48" />
+<link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<link rel="manifest" href="/site.webmanifest" />
+<meta name="theme-color" content="#044340" />
+<link rel="sitemap" href="/sitemap-index.xml" />
+
+{schemas.map((schema) => <script type="application/ld+json" set:html={JSON.stringify(schema)} />)}

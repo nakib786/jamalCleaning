@@ -1,0 +1,122 @@
+---
+/**
+ * Site header (Cetro "header 4"): optional top bar + transparent bar positioned over
+ * the hero / page title. Desktop nav ≥1201px; the menu toggle opens MobileMenu below that.
+ */
+import PhoneHelp from "../../assets/icons/phone-help.svg";
+import { site, type NavItem } from "../../config/site";
+import Icon from "../ui/Icon.astro";
+import Logo from "./Logo.astro";
+import TopBar from "./TopBar.astro";
+
+interface Props {
+  topBar?: boolean;
+}
+
+const { topBar = false } = Astro.props;
+const path = Astro.url.pathname;
+const isActive = (item: NavItem): boolean =>
+  path === item.href ||
+  (item.href !== "/" && path.startsWith(item.href)) ||
+  Boolean(item.children?.some((c) => isActive(c)));
+---
+
+<header id="masthead" class="absolute inset-x-0 top-0 z-40">
+  {topBar && <TopBar />}
+  <div class="flex items-center justify-between gap-5 px-[15px] py-[15px] sm:px-[30px] sm:py-[18px]">
+    <div class="w-[100px] sm:w-[123px]">
+      <Logo height={56} />
+    </div>
+
+    <button
+      type="button"
+      class="menu-toggle group flex w-[50px] justify-end max-sm:order-last sm:order-first sm:w-1/4 sm:justify-start md:w-[30%] xl:hidden"
+      aria-label="Open menu"
+      aria-controls="mobile-menu"
+      aria-expanded="false"
+      data-menu-open
+    >
+      <span class="flex flex-col gap-1 sm:gap-1.5" aria-hidden="true">
+        {
+          [0, 1, 2].map(() => (
+            <span class="block h-0.5 w-5 bg-white transition-colors duration-300 group-hover:bg-primary sm:w-6" />
+          ))
+        }
+      </span>
+    </button>
+
+    <nav aria-label="Main" class="hidden w-1/2 xl:block">
+      <ul class="main-menu flex items-center justify-center">
+        {
+          site.nav.map((item) => (
+            <li class:list={["menu-item group/item relative px-[15px] py-[13px] first:pl-0 last:pr-0", { "has-children": item.children }]}>
+              <a
+                href={item.href}
+                class:list={[
+                  "flex items-center gap-1 text-base leading-6 font-bold capitalize transition-colors duration-300 hover:text-primary group-focus-within/item:text-primary",
+                  isActive(item) ? "text-primary" : "text-white",
+                ]}
+                aria-current={path === item.href ? "page" : undefined}
+                aria-haspopup={item.children ? "true" : undefined}
+              >
+                <span
+                  class:list={[
+                    "relative after:absolute after:bottom-0 after:h-0.5 after:bg-primary after:transition-all after:duration-500",
+                    isActive(item)
+                      ? "after:left-0 after:w-full"
+                      : "after:right-0 after:w-0 group-hover/item:after:right-auto group-hover/item:after:left-0 group-hover/item:after:w-full",
+                  ]}
+                >
+                  {item.label}
+                </span>
+                {item.children && <Icon name="angle-down" class="text-[10px]" />}
+              </a>
+              {item.children && (
+                <ul class="sub-menu pointer-events-none invisible absolute top-[calc(100%+21px)] left-0 w-[260px] translate-y-5 scale-[0.97] rounded-[24px] bg-white pt-8 pb-[34px] opacity-0 shadow-[0_3px_30px_#00000014] transition-[opacity,transform,visibility] duration-500 before:absolute before:-top-[21px] before:h-[21px] before:w-full group-focus-within/item:pointer-events-auto group-focus-within/item:visible group-focus-within/item:translate-y-0 group-focus-within/item:scale-100 group-focus-within/item:opacity-100 group-hover/item:pointer-events-auto group-hover/item:visible group-hover/item:translate-y-0 group-hover/item:scale-100 group-hover/item:opacity-100">
+                  {item.children.map((child) => (
+                    <li class="px-[30px]">
+                      <a
+                        href={child.href}
+                        class:list={[
+                          "block py-[7px] text-base leading-6 font-semibold transition-colors duration-300 hover:text-primary",
+                          path === child.href ? "text-primary" : "text-secondary",
+                        ]}
+                        aria-current={path === child.href ? "page" : undefined}
+                      >
+                        {child.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="hidden w-[30%] items-center justify-end gap-[15px] sm:flex 2xl:w-[40%]">
+      <a href={site.contact.phone.href} class="mr-2 hidden items-center gap-[15px] text-white 2xl:flex">
+        <PhoneHelp class="h-[26px] w-6 text-white" aria-hidden="true" />
+        <span class="flex flex-col">
+          <span class="text-sm leading-[18px] font-semibold">Need Help?</span>
+          <span class="font-heading text-[13px] leading-[20px]">{site.contact.phone.display}</span>
+        </span>
+      </a>
+      <button
+        type="button"
+        class="hidden size-14 items-center justify-center rounded-full border border-white/[0.09] bg-[#d8dadf21] text-white backdrop-blur-[60px] transition-colors duration-300 hover:text-primary md:flex"
+        aria-label="Search"
+        aria-haspopup="dialog"
+        aria-controls="site-search"
+        data-search-open
+      >
+        <Icon name="search-lg" class="text-xl" />
+      </button>
+      <a href={site.quote.href} class="btn btn-on-dark py-[13px] text-[15px] leading-[22.5px]">
+        <span>{site.quote.label}</span>
+        <span class="btn-icon"><Icon name="right-arrow" class="text-base" /></span>
+      </a>
+    </div>
+  </div>
+</header>

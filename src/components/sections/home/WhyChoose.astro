@@ -1,0 +1,121 @@
+---
+/** "Why will you choose our services?" intro, three feature cards and the counters. */
+import { Image } from "astro:assets";
+import cardBenefits from "../../../assets/images/home/card-benefits.jpg";
+import cardProfessionalism from "../../../assets/images/home/card-professionalism.jpg";
+import satisfactionCleaner from "../../../assets/images/home/satisfaction-cleaner.png";
+import worldMap from "../../../assets/images/home/world-map.png";
+import Icon from "../../ui/Icon.astro";
+import SectionHeading from "../../ui/SectionHeading.astro";
+
+const photoCards = [
+  {
+    number: "01",
+    title: "Our Benefits",
+    text: "Our team delivers thorough, high-quality cleaning, leaving every space spotless and welcoming.",
+    link: { label: "Our Solutions", href: "/services/" },
+    image: cardBenefits,
+  },
+  {
+    number: "03",
+    title: "Professionalism",
+    text: "Conducting all cleaning tasks with professionalism, including arriving on time, adhering to safety standards.",
+    link: { label: "Discover more", href: "/about-us/" },
+    image: cardProfessionalism,
+  },
+];
+
+const counters = [
+  { value: 246, suffix: "+", title: "Cleaning Experts", text: "Improving homes with expert craftsmanship for years" },
+  { value: 299, suffix: "K", title: "Satisfaction Rate", text: "Over 250 successful projects delivered with quality and care" },
+  { value: 364, suffix: "+", title: "Skilled Tradespeople", text: "Our team of 30 experts ensures top-quality results" },
+  { value: 199, suffix: "+", title: "Happy Clients", text: "All of our clients are satisfied with our work and service" },
+];
+---
+
+<section class="section-gutter">
+  <div class="site-container">
+    <div class="pt-[60px] sm:pt-20 lg:w-[667px] lg:pt-[159px]" data-reveal="up">
+      <SectionHeading label="Who we are" parts={["Why will", { accent: "you choose our" }, "services?"]} />
+      <p class="mt-0 leading-6 sm:max-w-[600px]">
+        We are committed to delivering exceptional cleaning services that leave your spaces sparkling clean and hygienic. Our
+        professional team uses eco-friendly products to ensure a safe and healthy environment for you.
+      </p>
+    </div>
+
+    <div class="grid gap-[30px] pt-[30px] pb-[30px] sm:pt-5 lg:grid-cols-3 lg:items-start lg:pt-[54px] lg:pb-[130px]">
+      {
+        [photoCards[0], "guarantee", photoCards[1]].map((card, i) =>
+          card === "guarantee" ? (
+            <div
+              class="relative min-h-[350px] overflow-hidden rounded-[24px] bg-primary px-[30px] pt-[30px] pb-[60px] text-white lg:h-[520px] lg:pt-[44px] lg:pr-[51px] lg:pb-[283px] lg:pl-10"
+              data-reveal="up"
+              data-reveal-delay={String(i * 100)}
+            >
+              <p class="border-b border-white/[0.18] pb-[17px] font-heading text-xs leading-[14px] text-white">02</p>
+              <h3 class="relative z-[1] max-w-[300px] pt-[30px] pb-[15px] font-heading text-2xl leading-10 text-white">
+                100% Satisfaction Guarantee
+              </h3>
+              <a href="/contact-us/" class="link-arrow relative z-[1] text-white hover:text-white">
+                <span>Contact Us</span>
+                <span class="flex size-[22px] items-center justify-center rounded-full bg-white text-primary">
+                  <Icon name="right-arrow" class="text-xs" />
+                </span>
+              </a>
+              <Image
+                src={satisfactionCleaner}
+                alt="Smiling cleaner giving a thumbs up and holding a bucket of cleaning supplies"
+                width={341}
+                class="absolute right-[-15px] bottom-0 w-[260px] sm:right-[26px] sm:w-[341px]"
+              />
+            </div>
+          ) : (
+            <div
+              class="relative isolate overflow-hidden rounded-[24px] bg-teal text-white lg:h-[400px]"
+              data-reveal="up"
+              data-reveal-delay={String(i * 100)}
+            >
+              <Image src={card.image} alt="" widths={[440, 880]} sizes="(min-width: 1025px) 440px, 100vw" class="absolute inset-0 -z-10 size-full object-cover opacity-[0.64]" />
+              <div class="absolute inset-0 -z-10 bg-black/[0.46]" aria-hidden="true" />
+              <div class="flex h-full flex-col px-5 py-10 sm:px-[30px] sm:pt-[30px] sm:pb-10 xl:pt-[43px] xl:pr-[30px] xl:pb-[53px] xl:pl-10">
+                <p class="border-b border-white/[0.18] pb-[17px] font-heading text-xs leading-[14px] text-white">{card.number}</p>
+                <h3 class="pt-[30px] pb-[15px] font-heading text-2xl leading-10 text-white sm:pt-[93px]">{card.title}</h3>
+                <p class="pb-7 leading-6 text-white sm:max-w-[323px]">{card.text}</p>
+                <a href={card.link.href} class="link-arrow text-white hover:text-white">
+                  <span>{card.link.label}</span>
+                  <span class="flex size-[22px] items-center justify-center rounded-full bg-primary text-white">
+                    <Icon name="right-arrow" class="text-xs" />
+                  </span>
+                </a>
+              </div>
+            </div>
+          ),
+        )
+      }
+    </div>
+
+    <div class="relative grid gap-[30px] pb-[60px] sm:grid-cols-2 sm:pb-[100px] lg:grid-cols-4 lg:pb-[130px]">
+      <Image
+        src={worldMap}
+        alt=""
+        width={1016}
+        class="pointer-events-none absolute -top-[359px] right-0 hidden w-[1016px] max-w-none lg:block"
+        aria-hidden="true"
+      />
+      {
+        counters.map((c, i) => (
+          <div class="relative z-[1] text-center sm:text-left" data-reveal="up" data-reveal-delay={String(i * 100)}>
+            <p class="mb-2 font-heading text-[50px] leading-[80px] text-primary">
+              <span data-counter={c.value}>{c.value}</span>
+              {c.suffix}
+            </p>
+            <h3 class="mb-5 border-b border-[#5b5d5d2e] pb-[18px] font-heading text-base leading-[34.29px] text-secondary capitalize">
+              {c.title}
+            </h3>
+            <p class="leading-6 text-secondary">{c.text}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

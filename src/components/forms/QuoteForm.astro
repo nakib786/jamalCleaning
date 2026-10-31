@@ -1,0 +1,90 @@
+---
+/**
+ * "Request a Quote" form (Contact Form 7 in the theme). Posts JSON to the Worker at
+ * /api/quote with a Turnstile token; works as a plain POST without JavaScript.
+ */
+import { getCollection } from "astro:content";
+import { site } from "../../config/site";
+import Icon from "../ui/Icon.astro";
+
+interface Props {
+  /** "dark" = translucent fields on a dark card (home hero). */
+  tone?: "dark" | "light";
+  idPrefix?: string;
+  buttonLabel?: string;
+}
+
+const { tone = "dark", idPrefix = "quote", buttonLabel = "Request a Service" } = Astro.props;
+const services = (await getCollection("services")).sort((a, b) => a.data.order - b.data.order).map((s) => s.data.title);
+const serviceOptions =
+  services.length > 0
+    ? services
+    : (site.nav.find((n) => n.href === "/services/")?.children ?? []).filter((c) => c.href !== "/services/").map((c) => c.label);
+
+const field = tone === "dark" ? "quote-field quote-field--dark" : "quote-field";
+---
+
+<form class="api-form flex flex-col gap-5" action="/api/quote" method="post" data-api-form>
+  <div>
+    <label class="sr-only" for={`${idPrefix}-name`}>Your name</label>
+    <input id={`${idPrefix}-name`} class={field} type="text" name="name" autocomplete="name" placeholder="Your Name *" required maxlength="120" />
+  </div>
+  <div>
+    <label class="sr-only" for={`${idPrefix}-email`}>Your email</label>
+    <input id={`${idPrefix}-email`} class={field} type="email" name="email" autocomplete="email" placeholder="Your Email *" required maxlength="160" />
+  </div>
+  <div>
+    <label class="sr-only" for={`${idPrefix}-phone`}>Your phone</label>
+    <input id={`${idPrefix}-phone`} class={field} type="tel" name="phone" autocomplete="tel" placeholder="Your Phone *" required maxlength="40" />
+  </div>
+  <div>
+    <label class="sr-only" for={`${idPrefix}-service`}>Service</label>
+    <select id={`${idPrefix}-service`} class={field} name="service" required>
+      <option value="">Select Service *</option>
+      {serviceOptions.map((s) => <option value={s}>{s}</option>)}
+    </select>
+  </div>
+  <div>
+    <label class="sr-only" for={`${idPrefix}-message`}>Message</label>
+    <textarea id={`${idPrefix}-message`} class={`${field} h-[126px]`} name="message" placeholder="Message..." maxlength="3000"></textarea>
+  </div>
+  <div class="hidden" aria-hidden="true">
+    <label for={`${idPrefix}-company`}>Company</label>
+    <input id={`${idPrefix}-company`} type="text" name="company" tabindex="-1" autocomplete="off" />
+  </div>
+  <div data-turnstile></div>
+  <div>
+    <button type="submit" class="btn btn-lg btn-on-dark mt-1">
+      <span>{buttonLabel}</span>
+      <span class="btn-icon"><Icon name="right-arrow" class="text-base" /></span>
+    </button>
+  </div>
+  <p class:list={["form-status text-sm", tone === "dark" ? "text-white" : "text-secondary"]} role="status" aria-live="polite"></p>
+</form>
+
+<style>
+  .quote-field {
+    height: 60px;
+    padding: 0 24px;
+    font-size: 16px;
+    font-weight: 500;
+  }
+  textarea.quote-field {
+    padding-top: 18px;
+  }
+  .quote-field--dark {
+    border: 0;
+    background-color: #ffffff1c;
+    color: #fff;
+  }
+  .quote-field--dark::placeholder {
+    color: #ffffffd9;
+  }
+  select.quote-field--dark {
+    color: #ffffffd9;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 13.171l4.95-4.95 1.415 1.415L12 16 5.637 9.636 7.05 8.222l4.95 4.95z' fill='%23ffffff'/%3E%3C/svg%3E");
+  }
+  select.quote-field--dark option {
+    color: #000;
+  }
+</style>

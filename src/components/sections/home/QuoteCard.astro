@@ -1,0 +1,17 @@
+---
+/** "Request a Quote" glass card that overlaps the hero and the next section (desktop). */
+import QuoteForm from "../../forms/QuoteForm.astro";
+---
+
+<div class="section-gutter relative z-[2] -mt-[170px] sm:-mt-[280px] lg:-mt-[400px] lg:-mb-[500px]">
+  <div class="site-container flex lg:justify-end">
+    <div
+      class="relative isolate flex w-full flex-col gap-[50px] overflow-hidden rounded-[24px] px-5 py-[30px] backdrop-blur-[58px] sm:px-[50px] sm:py-[60px] lg:w-[570px] lg:p-[30px] xl:pt-[60px] xl:pr-[55px] xl:pb-[66px] xl:pl-[55px]"
+      data-reveal="up"
+    >
+      <div class="absolute inset-0 -z-10 bg-[#061107] opacity-75" aria-hidden="true"></div>
+      <h2 class="font-heading text-[26px] leading-[41.6px] text-white capitalize sm:text-[30px] sm:leading-[48px]">Request a Quote</h2>
+      <QuoteForm tone="dark" idPrefix="hero-quote" />
+    </div>
+  </div>
+</div>

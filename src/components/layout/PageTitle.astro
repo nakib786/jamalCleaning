@@ -1,0 +1,70 @@
+---
+/** Inner-page title banner with breadcrumb (theme `cetro-breadcrumb`), plus BreadcrumbList JSON-LD. */
+import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
+import defaultBg from "../../assets/images/page-title/breadcrumb-about.jpg";
+import { site } from "../../config/site";
+import Icon from "../ui/Icon.astro";
+
+interface Crumb {
+  label: string;
+  href?: string;
+}
+
+interface Props {
+  title: string;
+  /** Trail after "Home"; the last item is the current page. Defaults to [title]. */
+  crumbs?: Crumb[];
+  image?: ImageMetadata;
+}
+
+const { title, crumbs = [{ label: title }], image = defaultBg } = Astro.props;
+const trail: Crumb[] = [{ label: "Home", href: "/" }, ...crumbs];
+const breadcrumbLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: trail.map((c, i) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    name: c.label,
+    ...(c.href || i === trail.length - 1 ? { item: new URL(c.href ?? Astro.url.pathname, site.url).href } : {}),
+  })),
+};
+---
+
+<section
+  class="relative isolate flex min-h-[300px] items-center justify-center overflow-hidden px-[15px] pt-10 text-white sm:min-h-[400px] sm:px-[30px] lg:min-h-[460px]"
+>
+  <Image
+    src={image}
+    alt=""
+    widths={[640, 1024, 1440, 1920]}
+    sizes="100vw"
+    loading="eager"
+    fetchpriority="high"
+    class="absolute inset-0 -z-10 size-full object-cover"
+  />
+  <div class="absolute inset-0 -z-10 bg-[#070b03a3]" aria-hidden="true"></div>
+  <div class="text-center">
+    <h1 class="mb-6 font-heading text-[40px] leading-[1.6] tracking-[-3px] text-white sm:text-[60px]">{title}</h1>
+    <nav aria-label="Breadcrumb">
+      <ol class="flex flex-wrap items-center justify-center gap-2 text-base leading-[21.33px] font-semibold capitalize">
+        {
+          trail.map((crumb, i) => (
+            <li class="flex items-center gap-2">
+              {i > 0 && <Icon name="angle-right" class="text-sm" />}
+              {crumb.href && i < trail.length - 1 ? (
+                <a href={crumb.href} class="hover:text-primary">
+                  {crumb.label}
+                </a>
+              ) : (
+                <span aria-current="page">{crumb.label}</span>
+              )}
+            </li>
+          ))
+        }
+      </ol>
+    </nav>
+  </div>
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbLd)} />
+</section>
