@@ -46,7 +46,7 @@ async function ensureWidget(form: HTMLFormElement): Promise<string | undefined> 
   if (!slot.dataset.widgetId && window.turnstile) {
     slot.dataset.widgetId = window.turnstile.render(slot, {
       sitekey: SITE_KEY,
-      size: "compact",
+      size: "normal",
       // Always visible so visitors see the spam check on every form; dark style on dark sections.
       appearance: "always",
       theme: slot.dataset.theme === "dark" ? "dark" : "light",
