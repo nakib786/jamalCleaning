@@ -65,6 +65,8 @@ Left to do, in order:
 - **Form email left unchanged** (still the test address `n@aurorabusiness.ca`) at the owner's request; it must change before launch.
 - **AEO:** `Service` + `FAQPage` JSON-LD per service page, `WebSite` on Home, `AboutPage`/`ContactPage`, offer catalog on the business entity (invented `priceRange` removed), visible "Quick answer" box (`quickAnswer` field in the services collection), generated `/llms.txt` (`src/pages/llms.txt.ts`), explicit AI-crawler rules in `public/robots.txt`. `verify:links` now also fails on JSON-LD that does not parse. The off-site checklist (Google Business Profile, reviews, Bing Places, Cloudflare AI-bot setting, etc.) is in `FINAL-REPORT.md`.
 
+- **Google Maps (owner-supplied):** the Contact page map is now the business's own listing ("Jamal Cleaning Services Ltd.", embed code in `site.contact.address.mapEmbedUrl`), "Get directions" uses the owner's short link (`mapUrl`), the coordinates in `site.contact.address.geo` come from the embed's map centre (approximate, not a street-level pin), and `legalName` is in the business JSON-LD. Still missing: **street address and postal code** (the embed does not contain them). The listing name has "Ltd." while the site says "Jamal Cleaning Services": keep name, address and phone identical everywhere (Google Business Profile, Bing, Facebook) for local search.
+
 ### Verification tools (all need the production build served: `npm run preview`)
 
 | Script                      | Checks                                                                                                    |

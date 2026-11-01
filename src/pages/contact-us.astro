@@ -145,10 +145,10 @@ const cards: { icon: IconName; title: string; lines: Line[] }[] = [
   <section aria-label="Map" data-reveal="up">
     <iframe
       src={contact.address.mapEmbedUrl}
-      title={`Map of ${contact.address.short}`}
+      title={`Map showing ${site.legalName} in ${contact.address.short}`}
       class="block h-[300px] w-full border-0 sm:h-[400px] lg:h-[602px]"
       loading="lazy"
-      referrerpolicy="no-referrer-when-downgrade"
+      referrerpolicy="strict-origin-when-cross-origin"
       allowfullscreen
     ></iframe>
   </section>

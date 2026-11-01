@@ -19,6 +19,8 @@ export interface NavItem {
 
 export const site = {
   name: "Jamal Cleaning Services",
+  /** Registered name, as it appears on the Google Business listing; used in structured data. */
+  legalName: "Jamal Cleaning Services Ltd.",
   shortName: "Jamal Cleaning",
   /** Canonical origin, no trailing slash. Keep in sync with `site` in astro.config.mjs. */
   url: "https://jmcleaningservice.ca",
@@ -54,10 +56,12 @@ export const site = {
       country: "CA",
       /** One-line address for the top bar and footer. */
       short: "Prince George, BC, Canada",
-      geo: { latitude: 53.9171, longitude: -122.7497 },
+      /** Centre of the Google Maps listing for the business (from its embed code), not a street-level pin. */
+      geo: { latitude: 53.92689845, longitude: -122.7524185 },
       /** Link for "get directions" and the map embed on the contact page. */
       mapUrl: "https://maps.app.goo.gl/D7ibhfUKgzgssFM79",
-      mapEmbedUrl: "https://www.google.com/maps?q=Prince%20George%2C%20BC&output=embed",
+      mapEmbedUrl:
+        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d178348.94930258516!2d-122.7524185!3d53.92689845!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4dcf780bb922733b%3A0xfdade72db216d3ee!2sJamal%20Cleaning%20Services%20Ltd.!5e1!3m2!1sen!2sca!4v1793506937301!5m2!1sen!2sca",
     },
     hours: {
       /** Top bar line. */
