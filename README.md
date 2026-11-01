@@ -55,7 +55,7 @@ src/
   components/
     cards/           ServiceCard, ProjectCard
     forms/           QuoteForm, ContactForm, NewsletterForm
-    layout/          Header, TopBar, MobileMenu, MobileBar, SearchDialog, Footer, PageTitle, Logo
+    layout/          Header, TopBar, MobileMenu, SearchDialog, Footer, PageTitle, Logo
     sections/        home/*, testimonials/* (page sections)
     seo/             Seo (meta, Open Graph, JSON-LD)
     ui/              Icon, SectionHeading, Accordion, Marquee

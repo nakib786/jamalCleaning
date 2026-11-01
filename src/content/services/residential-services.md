@@ -5,6 +5,7 @@ excerpt: "Whole-home cleaning for houses, apartments and condos, as a one-time c
 image: ../../assets/images/services/residential-services.jpg
 imageAlt: "Smiling cleaner in yellow gloves wiping the floor while a colleague mops behind her"
 seoDescription: "Residential cleaning services in Prince George, BC for houses, apartments and condos, one-time or recurring. Request a quote from Jamal Cleaning Services."
+quickAnswer: "Residential cleaning is whole-home cleaning for houses, apartments and condos, as a one-time clean or on a regular schedule. Jamal Cleaning Services provides it in Prince George, BC."
 about:
   heading: "About the service"
   paragraphs:

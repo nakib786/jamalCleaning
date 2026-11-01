@@ -25,6 +25,14 @@ import SectionHeading from "../components/ui/SectionHeading.astro";
 import { site } from "../config/site";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
+const aboutLd = {
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  name: "About Us",
+  url: new URL(Astro.url.pathname, site.url).href,
+  mainEntity: { "@id": `${site.url}/#business` },
+};
+
 const highlights = [
   {
     icon: HouseCleaning,
@@ -95,6 +103,7 @@ const counters = [
 <BaseLayout
   title="About Us"
   description="About Jamal Cleaning Services: trusted house, office and store cleaning in Prince George, BC — trained cleaners, eco-friendly products, open 7 days a week."
+  jsonLd={[aboutLd]}
 >
   <PageTitle title="About Us" image={bannerImage} />
 

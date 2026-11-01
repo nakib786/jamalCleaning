@@ -1,5 +1,28 @@
+# Search engines and AI answer engines are welcome: the more places the business is described
+# accurately, the more often it is recommended. Only the form endpoints are off limits.
 User-agent: *
 Allow: /
 Disallow: /api/
+
+# AI search and answer-engine crawlers, allowed explicitly (a group of its own replaces the rules
+# above, so the form endpoints are repeated).
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: Googlebot
+User-agent: Bingbot
+User-agent: Applebot
+Allow: /
+Disallow: /api/
+
+# To keep content out of AI model training while staying in AI search results, add groups such as
+#   User-agent: GPTBot
+#   User-agent: ClaudeBot
+#   User-agent: Google-Extended
+#   User-agent: CCBot
+#   Disallow: /
 
 Sitemap: https://jmcleaningservice.ca/sitemap-index.xml

@@ -104,12 +104,12 @@ export const site = {
     },
     { label: "Projects", href: "/projects/" },
     {
-      label: "Pages",
+      label: "Company",
       href: "/about-us/",
       children: [
         { label: "About Us", href: "/about-us/" },
         { label: "Testimonials", href: "/testimonials/" },
-        { label: "F.A.Q.", href: "/faqs/" },
+        { label: "FAQs", href: "/faqs/" },
       ],
     },
     { label: "Contact Us", href: "/contact-us/" },
@@ -119,7 +119,7 @@ export const site = {
     { label: "About Us", href: "/about-us/" },
     { label: "Services", href: "/services/" },
     { label: "Projects", href: "/projects/" },
-    { label: "F.A.Q.", href: "/faqs/" },
+    { label: "FAQs", href: "/faqs/" },
     { label: "Contact Us", href: "/contact-us/" },
   ] satisfies NavItem[],
 

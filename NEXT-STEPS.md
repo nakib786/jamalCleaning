@@ -1,6 +1,6 @@
 # Next steps — how to continue this build
 
-Status as of the end of session 4 (2026-11-01). **Start with "Resume here" below.** Prompt.md is the spec; `site-map.md` lists every page and route.
+Status as of the end of session 5 (2026-11-01). **Start with "Resume here" below.** Prompt.md is the spec; `site-map.md` lists every page and route.
 
 ## Scope (owner decisions)
 
@@ -56,6 +56,14 @@ Left to do, in order:
 4. **Deploy** when the owner gives the go-ahead (see DEPLOY.md). **First change the form recipient:** `EMAIL_TO` and the
    `send_email` `destination_address` in `wrangler.jsonc` are still the test address `n@aurorabusiness.ca`; the new address must be
    verified in Cloudflare Email Routing. Also needed: `TURNSTILE_SECRET_KEY` secret, custom-domain routes, www redirect.
+
+### Session 5 changes (2026-11-01)
+
+- **Nav:** "Pages" is now **"Company"** (About Us, Testimonials, FAQs; "F.A.Q." became "FAQs"). Chosen over "Resources" because About Us is not a resource.
+- **Mobile bottom bar removed** (`MobileBar.astro` deleted; the scroll-to-top button and footer padding that made room for it were reset). Phone stays in the top bar and the mobile menu. Side effect: the search icon was only in that bar, so search is no longer reachable on phones (still in the header from 881 px up).
+- **Testimonials:** the owner asked to keep the demo ones for now and add more. 7 were added with varied names and an **initials badge** (`src/components/ui/Avatar.astro`) instead of a photo. Every testimonial has `placeholder: true`; `verify:links` lists them as launch warnings and fails if Review/AggregateRating markup ever appears while they are on the site. Never add rating markup for placeholders.
+- **Form email left unchanged** (still the test address `n@aurorabusiness.ca`) at the owner's request; it must change before launch.
+- **AEO:** `Service` + `FAQPage` JSON-LD per service page, `WebSite` on Home, `AboutPage`/`ContactPage`, offer catalog on the business entity (invented `priceRange` removed), visible "Quick answer" box (`quickAnswer` field in the services collection), generated `/llms.txt` (`src/pages/llms.txt.ts`), explicit AI-crawler rules in `public/robots.txt`. `verify:links` now also fails on JSON-LD that does not parse. The off-site checklist (Google Business Profile, reviews, Bing Places, Cloudflare AI-bot setting, etc.) is in `FINAL-REPORT.md`.
 
 ### Verification tools (all need the production build served: `npm run preview`)
 

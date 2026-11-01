@@ -16,8 +16,11 @@
  *
  * Usage: tsx tools/verify/links.ts [--base=http://127.0.0.1:8787] [--only=/about-us/,/faqs/]
  */
+import fs from "node:fs/promises";
+import path from "node:path";
 import { chromium, type APIRequestContext } from "playwright";
 import { builtRoutes, NOT_FOUND_ROUTE } from "../lib/built-routes.ts";
+import { ROOT } from "../lib/site.ts";
 
 function arg(name: string): string | undefined {
   return process.argv.find((a) => a.startsWith(`--${name}=`))?.slice(name.length + 3);
@@ -32,6 +35,20 @@ const DEMO_TEXT =
  */
 const PLACEHOLDER_TEXT =
   /dishes cleaning|Ariana Green|Fresh Design|586k Clients|Ratings 4\.5|team of 30 experts|Over 250 successful projects|All of our clients are satisfied|Skilled Tradespeople|Cleaning Experts|Satisfaction Rate|Successful Projects|Happy Clients/i;
+
+/** Regex source for PLACEHOLDER_TEXT plus the name of every testimonial flagged `placeholder` in the content. */
+async function placeholderSource(): Promise<string> {
+  const file = path.join(ROOT, "src", "content", "testimonials.json");
+  const testimonials = JSON.parse(await fs.readFile(file, "utf8")) as {
+    name: string;
+    placeholder?: boolean;
+  }[];
+  const names = testimonials
+    .filter((t) => t.placeholder)
+    .map((t) => t.name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
+  return [PLACEHOLDER_TEXT.source, ...names].join("|");
+}
+
 /** Third-party hosts the page legitimately loads; they are not reachable from every network. */
 const IGNORED_REQUEST_HOSTS = /challenges\.cloudflare\.com/;
 
@@ -44,10 +61,12 @@ interface PageScan {
   emptyLinks: number;
   visibleDemoText: string[];
   visiblePlaceholders: string[];
+  jsonLdInvalid: number;
+  reviewMarkup: boolean;
   hrefs: string[];
 }
 
-async function scanPage(page: import("playwright").Page): Promise<PageScan> {
+async function scanPage(page: import("playwright").Page, placeholder: string): Promise<PageScan> {
   return page.evaluate(
     ({ demo, placeholder }) => {
       const abs = (v: string) => new URL(v, document.baseURI).href;
@@ -77,6 +96,18 @@ async function scanPage(page: import("playwright").Page): Promise<PageScan> {
         .map((l) => l.trim())
         .filter((l) => l && demoText.test(l))
         .slice(0, 10);
+      const ld = [...document.querySelectorAll('script[type="application/ld+json"]')].map(
+        (el) => el.textContent ?? "",
+      );
+      let jsonLdInvalid = 0;
+      for (const text of ld) {
+        try {
+          JSON.parse(text);
+        } catch {
+          jsonLdInvalid++;
+        }
+      }
+      const reviewMarkup = ld.some((text) => /"AggregateRating"|"@type":\s*"Review"/.test(text));
       const visiblePlaceholders = [
         ...new Set(
           text
@@ -94,10 +125,12 @@ async function scanPage(page: import("playwright").Page): Promise<PageScan> {
         emptyLinks: hrefs.filter((h) => h === "#" || h === "").length,
         visibleDemoText,
         visiblePlaceholders,
+        jsonLdInvalid,
+        reviewMarkup,
         hrefs,
       };
     },
-    { demo: DEMO_TEXT.source, placeholder: PLACEHOLDER_TEXT.source },
+    { demo: DEMO_TEXT.source, placeholder },
   );
 }
 
@@ -117,6 +150,7 @@ async function status(request: APIRequestContext, url: string, cache: Map<string
 async function main(): Promise<void> {
   const base = (arg("base") ?? "http://127.0.0.1:8787").replace(/\/$/, "");
   const origin = new URL(base).origin;
+  const placeholder = await placeholderSource();
   const only = arg("only")?.split(",");
   const routes = (await builtRoutes()).filter((r) => !only || only.includes(r));
 
@@ -155,7 +189,7 @@ async function main(): Promise<void> {
     const response = await page.goto(`${base}${route}`, { waitUntil: "load" });
     await page.waitForLoadState("networkidle", { timeout: 10_000 }).catch(() => undefined);
     if (response?.status() !== 200) report(route, "page-status", String(response?.status()));
-    const scan = await scanPage(page);
+    const scan = await scanPage(page, placeholder);
 
     for (const href of scan.hrefs) {
       if (DEMO_HOSTS.test(href) && !href.startsWith("/")) report(route, "demo-host", href);
@@ -165,6 +199,15 @@ async function main(): Promise<void> {
       const where = placeholders.get(line.slice(0, 100)) ?? new Set<string>();
       where.add(route);
       placeholders.set(line.slice(0, 100), where);
+    }
+    if (scan.jsonLdInvalid > 0)
+      report(route, "invalid-json-ld", `${scan.jsonLdInvalid} block(s) do not parse`);
+    if (scan.reviewMarkup && scan.visiblePlaceholders.length > 0) {
+      report(
+        route,
+        "fake-review-markup",
+        "Review/AggregateRating markup on a page that still shows placeholder reviews",
+      );
     }
     for (const src of scan.missingAlt) report(route, "img-without-alt", src);
     if (scan.emptyLinks > 0) report(route, "empty-href", `${scan.emptyLinks} link(s) with href="#" or ""`);

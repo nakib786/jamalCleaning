@@ -10,6 +10,7 @@ import PageTitle from "../components/layout/PageTitle.astro";
 import Testimonials from "../components/sections/home/Testimonials.astro";
 import TestimonialCards from "../components/sections/testimonials/TestimonialCards.astro";
 import TestimonialPanel from "../components/sections/testimonials/TestimonialPanel.astro";
+import Avatar from "../components/ui/Avatar.astro";
 import Icon from "../components/ui/Icon.astro";
 import SectionHeading from "../components/ui/SectionHeading.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
@@ -72,15 +73,7 @@ const slides = (await getCollection("testimonials"))
                       <p>"{t.data.quote}"</p>
                     </blockquote>
                     <figcaption class="flex items-center max-sm:justify-center">
-                      {t.data.avatar && (
-                        <Image
-                          src={t.data.avatar}
-                          alt=""
-                          width={62}
-                          height={62}
-                          class="mr-[15px] size-[62px] rounded-full object-cover"
-                        />
-                      )}
+                      <Avatar name={t.data.name} avatar={t.data.avatar} size={62} class="mr-[18px]" />
                       <span class="flex flex-col text-left">
                         <span class="mb-1.5 font-heading text-base leading-[30px] text-secondary capitalize">
                           {t.data.name}

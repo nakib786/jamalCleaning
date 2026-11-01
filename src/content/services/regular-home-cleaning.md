@@ -5,6 +5,7 @@ excerpt: "Recurring cleaning that keeps your home tidy and healthy, from dusting
 image: ../../assets/images/services/regular-home-cleaning.jpg
 imageAlt: "Cleaner in green gloves vacuuming a light grey sofa"
 seoDescription: "Regular home cleaning in Prince George, BC: weekly, bi-weekly or monthly visits that keep every room fresh. Request a quote from Jamal Cleaning Services."
+quickAnswer: "Regular home cleaning is a recurring visit, weekly, bi-weekly or monthly, that keeps a home fresh with dusting, vacuuming, mopping and kitchen and bathroom cleaning. Jamal Cleaning Services provides it in Prince George, BC."
 about:
   heading: "About the service"
   paragraphs:

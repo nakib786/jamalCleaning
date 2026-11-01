@@ -41,6 +41,12 @@ const services = defineCollection({
       imageAlt: z.string(),
       /** Meta description override for the detail page. */
       seoDescription: z.string().optional(),
+      /**
+       * One or two plain sentences that answer "what is this service, and who provides it?" on their own.
+       * Shown at the top of the detail page and used as the Service description in structured data, so
+       * search and AI answer engines can quote it.
+       */
+      quickAnswer: z.string().optional(),
 
       /** Detail page: intro text under the main photo. */
       about: textBlock.optional(),
@@ -112,6 +118,12 @@ const testimonials = defineCollection({
       placements: z.array(z.enum(["list", "slider", "cards"])).default([]),
       /** Display order. */
       order: z.number().default(0),
+      /**
+       * True for stand-in testimonials that are not from real customers. `npm run verify:links` warns
+       * about every one that is still on the site: replace them before launch, and never add review
+       * structured data (AggregateRating / Review) while any placeholder remains.
+       */
+      placeholder: z.boolean().default(false),
     }),
 });
 

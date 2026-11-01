@@ -5,6 +5,7 @@ excerpt: "Specialist cleaning for upholstery, sanitizing, pressure washing and o
 image: ../../assets/images/services/specialized-cleaning.jpg
 imageAlt: "Team of three cleaners with a duster, mop and supply cart in a living room"
 seoDescription: "Specialized cleaning in Prince George, BC: upholstery and mattress cleaning, disinfection and pressure washing. Request a quote from Jamal Cleaning Services."
+quickAnswer: "Specialized cleaning covers jobs that standard cleaning does not, including upholstery and mattress cleaning, disinfection and sanitizing, and pressure washing. Jamal Cleaning Services provides it in Prince George, BC."
 about:
   heading: "About the service"
   paragraphs:

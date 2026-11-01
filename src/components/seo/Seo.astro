@@ -2,6 +2,7 @@
 /** Per-page <head> metadata: title, description, canonical, Open Graph, Twitter, favicons, JSON-LD. */
 import type { ImageMetadata } from "astro";
 import { getImage } from "astro:assets";
+import { getCollection } from "astro:content";
 import { isSet, site, socialLinks } from "../../config/site";
 
 export interface SeoProps {
@@ -31,6 +32,8 @@ const canonical = new URL(Astro.url.pathname, site.url).href;
 const og = await getImage({ src: image, width: 1200, height: 630, format: "jpg", fit: "cover" });
 const ogUrl = new URL(og.src, site.url).href;
 
+const services = (await getCollection("services")).sort((a, b) => a.data.order - b.data.order);
+
 const business = {
   "@context": "https://schema.org",
   "@type": "HomeAndConstructionBusiness",
@@ -42,7 +45,7 @@ const business = {
   description: site.description,
   telephone: site.contact.phone.e164,
   email: site.contact.email,
-  priceRange: "$$",
+  slogan: site.tagline,
   address: {
     "@type": "PostalAddress",
     ...(isSet(site.contact.address.street) ? { streetAddress: site.contact.address.street } : {}),
@@ -53,6 +56,19 @@ const business = {
   },
   geo: { "@type": "GeoCoordinates", ...site.contact.address.geo },
   areaServed: { "@type": "City", name: site.contact.address.locality },
+  // The services listed on the site, so answer engines connect the business to what it offers.
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: `${site.name} services`,
+    itemListElement: services.map((service) => ({
+      "@type": "Offer",
+      itemOffered: {
+        "@type": "Service",
+        name: service.data.title,
+        url: new URL(`/services/${service.id}/`, site.url).href,
+      },
+    })),
+  },
   openingHoursSpecification: [
     {
       "@type": "OpeningHoursSpecification",
@@ -63,7 +79,17 @@ const business = {
   ],
   ...(socialLinks.length ? { sameAs: socialLinks.map((s) => s.href) } : {}),
 };
-const schemas = [business, ...jsonLd];
+// The home page also declares the website itself and links it to the business.
+const website = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": `${site.url}/#website`,
+  url: site.url,
+  name: site.name,
+  inLanguage: "en-CA",
+  publisher: { "@id": `${site.url}/#business` },
+};
+const schemas = [business, ...(Astro.url.pathname === "/" ? [website] : []), ...jsonLd];
 ---
 
 <title>{fullTitle}</title>

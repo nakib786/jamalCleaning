@@ -5,6 +5,7 @@ excerpt: "A deep, detailed clean for the times when your space needs more than a
 image: ../../assets/images/services/skilled-cleaning.jpg
 imageAlt: "Smiling cleaner in a green apron wiping a desk in a bright office"
 seoDescription: "Deep cleaning in Prince George, BC for homes and workspaces that need more than a surface clean. Request a quote from Jamal Cleaning Services."
+quickAnswer: "Deep cleaning is a detailed, top-to-bottom clean that goes beyond routine upkeep to reach built-up grime and detail areas such as baseboards, grout, appliances and fixtures. Jamal Cleaning Services provides it in Prince George, BC."
 about:
   heading: "About the service"
   paragraphs:

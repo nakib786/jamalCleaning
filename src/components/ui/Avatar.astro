@@ -1,0 +1,46 @@
+---
+/**
+ * Round person image for testimonials. Without a photo it shows the person's initials,
+ * so testimonials never need a stock portrait (or a repeated one) to look finished.
+ */
+import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
+
+interface Props {
+  name: string;
+  avatar?: ImageMetadata;
+  /** Diameter in px. */
+  size: number;
+  class?: string;
+}
+
+const { name, avatar, size, class: className } = Astro.props;
+const initials = name
+  .split(/\s+/)
+  .filter(Boolean)
+  .slice(0, 2)
+  .map((part) => part[0]?.toUpperCase() ?? "")
+  .join("");
+---
+
+{avatar ? (
+  <Image
+    src={avatar}
+    alt=""
+    width={size}
+    height={size}
+    class:list={["rounded-full object-cover", className]}
+    style={`width:${size}px;height:${size}px`}
+  />
+) : (
+  <span
+    class:list={[
+      "flex shrink-0 items-center justify-center rounded-full bg-highlight font-heading text-secondary",
+      className,
+    ]}
+    style={`width:${size}px;height:${size}px;font-size:${Math.round(size * 0.32)}px`}
+    aria-hidden="true"
+  >
+    {initials}
+  </span>
+)}

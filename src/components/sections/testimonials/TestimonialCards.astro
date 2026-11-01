@@ -8,6 +8,7 @@ import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 import worldMap from "../../../assets/images/home/world-map.png";
 import SectionHeading from "../../ui/SectionHeading.astro";
+import Avatar from "../../ui/Avatar.astro";
 
 interface Props {
   class?: string;
@@ -45,15 +46,12 @@ const testimonials = (await getCollection("testimonials"))
         {testimonials.map((t) => (
           <li class="card-slide min-w-0 shrink-0">
             <figure class="relative flex h-full flex-col rounded-[24px] bg-white px-10 pt-[78px] pb-8 text-center sm:px-[50px] md:px-10 lg:px-[60px] min-[1441px]:px-[72px]">
-              {t.data.avatar && (
-                <Image
-                  src={t.data.avatar}
-                  alt=""
-                  width={89}
-                  height={89}
-                  class="absolute top-0 left-1/2 size-[89px] -translate-1/2 rounded-full border-4 border-white object-cover"
-                />
-              )}
+              <Avatar
+                name={t.data.name}
+                avatar={t.data.avatar}
+                size={89}
+                class="absolute top-0 left-1/2 -translate-1/2 border-4 border-white"
+              />
               <blockquote class="mb-[30px] border-b border-line pb-[30px] text-lg leading-6 font-medium text-secondary">
                 <p>“{t.data.quote}”</p>
               </blockquote>

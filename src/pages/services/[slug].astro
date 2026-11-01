@@ -35,12 +35,25 @@ const serviceLd = {
   "@context": "https://schema.org",
   "@type": "Service",
   name: data.title,
-  description: data.seoDescription ?? data.excerpt,
+  description: data.quickAnswer ?? data.seoDescription ?? data.excerpt,
   serviceType: data.title,
   url: new URL(Astro.url.pathname, site.url).href,
   provider: { "@id": `${site.url}/#business` },
   areaServed: { "@type": "City", name: site.contact.address.locality },
 };
+// The accordion at the bottom of the page is visible, so the same questions are marked up as FAQPage.
+const faqLd =
+  data.faqs.length > 0
+    ? {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: data.faqs.map((f) => ({
+          "@type": "Question",
+          name: f.question,
+          acceptedAnswer: { "@type": "Answer", text: f.answer },
+        })),
+      }
+    : null;
 const h2 = "font-heading text-[30px] leading-[50px] text-secondary capitalize";
 /** Checklists fill column by column (two lists side by side), like the theme. */
 const halves = (items: string[]) => {
@@ -54,7 +67,7 @@ const halves = (items: string[]) => {
   description={data.seoDescription ?? data.excerpt}
   image={data.image}
   imageAlt={data.imageAlt}
-  jsonLd={[serviceLd]}
+  jsonLd={faqLd ? [serviceLd, faqLd] : [serviceLd]}
 >
   <PageTitle
     title={data.title}
@@ -122,6 +135,29 @@ const halves = (items: string[]) => {
           loading="eager"
           class="mb-[31px] h-[450px] w-full rounded-[24px] object-cover min-[1025px]:h-[520px]"
         />
+
+        {data.quickAnswer && (
+          <div class="mb-8 rounded-[24px] border border-line bg-surface p-6 sm:p-[30px]" data-quick-answer>
+            <p class="pb-2 font-heading text-base leading-[30px] text-secondary">Quick answer</p>
+            <p class="leading-6">
+              {data.quickAnswer} To book,{" "}
+              <a
+                href={site.quote.href}
+                class="font-semibold text-secondary underline underline-offset-2 hover:text-primary-strong"
+              >
+                request a quote
+              </a>{" "}
+              or call{" "}
+              <a
+                href={site.contact.phone.href}
+                class="font-semibold text-secondary underline underline-offset-2 hover:text-primary-strong"
+              >
+                {site.contact.phone.display}
+              </a>
+              .
+            </p>
+          </div>
+        )}
 
         {about && (
           <>

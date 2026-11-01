@@ -5,6 +5,7 @@ excerpt: "A top-to-bottom clean of empty homes for tenants, owners and landlords
 image: ../../assets/images/services/move-in-out-cleaning.jpg
 imageAlt: "Cleaner in a green apron mopping an apartment floor beside a bucket of supplies"
 seoDescription: "Move-in and move-out cleaning in Prince George, BC for tenants, owners and landlords. Request a quote from Jamal Cleaning Services."
+quickAnswer: "Move-in and move-out cleaning is a top-to-bottom clean of an empty home, including inside cabinets and appliances, so it is ready for the next occupants or for you to move in. Jamal Cleaning Services provides it in Prince George, BC."
 about:
   heading: "About the service"
   paragraphs:

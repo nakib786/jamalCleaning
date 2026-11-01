@@ -5,6 +5,7 @@ excerpt: "Post-construction and renovation clean-up, from debris removal to the 
 image: ../../assets/images/services/construction-cleaning.jpg
 imageAlt: "Cleaning crew in protective suits sweeping a city street"
 seoDescription: "Post-construction and renovation cleaning in Prince George, BC: debris removal, dust removal and a final detail clean. Request a quote from Jamal Cleaning Services."
+quickAnswer: "Construction cleaning, also called post-construction or post-renovation cleaning, removes debris, dust and residue after building work so a space is ready to use. Jamal Cleaning Services provides it in Prince George, BC, from rough clean-ups to a final detail clean."
 about:
   heading: "About the service"
   paragraphs:

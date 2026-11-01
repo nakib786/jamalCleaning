@@ -2,7 +2,6 @@
 import { Font } from "astro:assets";
 import Footer from "../components/layout/Footer.astro";
 import Header from "../components/layout/Header.astro";
-import MobileBar from "../components/layout/MobileBar.astro";
 import MobileMenu from "../components/layout/MobileMenu.astro";
 import SearchDialog from "../components/layout/SearchDialog.astro";
 import Seo, { type SeoProps } from "../components/seo/Seo.astro";
@@ -44,12 +43,11 @@ const { topBar = false, solidHeader = false, ...seo } = Astro.props;
       <slot />
     </main>
     <Footer />
-    <MobileBar />
     <MobileMenu />
     <SearchDialog />
     <button
       type="button"
-      class="scroll-top invisible fixed right-[30px] bottom-[30px] z-[999] flex size-12 translate-y-3 items-center justify-center rounded-[20px] bg-primary text-white opacity-0 transition-all duration-500 hover:bg-secondary max-xl:bottom-[90px]"
+      class="scroll-top invisible fixed right-[30px] bottom-[30px] z-[999] flex size-12 translate-y-3 items-center justify-center rounded-[20px] bg-primary text-white opacity-0 transition-all duration-500 hover:bg-secondary"
       aria-label="Back to top"
       data-scroll-top
     >
