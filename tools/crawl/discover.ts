@@ -150,7 +150,9 @@ async function main(): Promise<void> {
   };
   const file = path.join(REFERENCE_DIR, "discovery.json");
   await fs.writeFile(file, `${JSON.stringify(out, null, 2)}\n`);
-  console.log(`\n${out.pages.length} in-scope pages, ${out.skipped.length} skipped, ${out.external.length} external -> ${file}`);
+  console.log(
+    `\n${out.pages.length} in-scope pages, ${out.skipped.length} skipped, ${out.external.length} external -> ${file}`,
+  );
 }
 
 // Exit explicitly: the CDP connection would otherwise keep the process alive,

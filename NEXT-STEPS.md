@@ -1,6 +1,6 @@
 # Next steps — how to continue this build
 
-Status as of the end of session 1. Prompt.md is the spec; `site-map.md` lists every page and route.
+Status as of session 2 (2026-10-31). Prompt.md is the spec; `site-map.md` lists every page and route.
 
 ## Scope (owner decisions)
 
@@ -12,13 +12,13 @@ Status as of the end of session 1. Prompt.md is the spec; `site-map.md` lists ev
 
 ## Done
 
-| Prompt.md step | State |
-| --- | --- |
-| Scaffold | Astro 7 + React + Tailwind v4 + strict TS, ESLint 9, Prettier, Wrangler, Playwright installed |
-| 1. Crawl & inspect | **Done.** `reference/discovery.json`, `site-map.md`; per page HTML, full-page screenshots (1440/768/390), computed-style outlines, REA `inspect_web_page` + `analyze_web_bundle` evidence (`reference/rea/`). HTML/CSS/JS/fonts in `captured/` (manifest `captured/manifest.json`). Bulky reference files are on disk but git-ignored. |
-| 2. Download assets | **Partly done.** Images for Home 4 fetched (`captured/manifest.originals.json`). `npm run crawl:capture` (full Playwright capture at 1440/390 with interactions) **not run yet**. |
-| 3. Build | **In progress.** Shared shell done: `BaseLayout`, `Seo` (OG, JSON-LD), `Header` (top bar, nav + dropdowns, search, quote button), `MobileMenu`, `MobileBar`, `SearchDialog`, `Footer` (+ newsletter), `PageTitle` (banner + breadcrumbs), `SectionHeading`, `Icon` (248 theme icons as inline SVG), global tokens/animations (`src/styles/global.css`), scripts (reveal, counters, Lenis, scroll-top, Turnstile forms). Home: `Hero`, `QuoteCard` (+ `QuoteForm`), `WhyChoose` done. Every route exists as a stub, so nav works. |
-| 4–8, Cloudflare | Not started (see below). |
+| Prompt.md step     | State                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Scaffold           | Astro 7 + React + Tailwind v4 + strict TS, ESLint 9, Prettier, Wrangler, Playwright installed                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| 1. Crawl & inspect | **Done.** `reference/discovery.json`, `site-map.md`; per page HTML, full-page screenshots (1440/768/390), computed-style outlines, REA `inspect_web_page` + `analyze_web_bundle` evidence (`reference/rea/`). HTML/CSS/JS/fonts in `captured/` (manifest `captured/manifest.json`). Bulky reference files are on disk but git-ignored.                                                                                                                                                                                 |
+| 2. Download assets | **Partly done.** Images for Home 4 fetched (`captured/manifest.originals.json`). `npm run crawl:capture` (full Playwright capture at 1440/390 with interactions) **not run yet**.                                                                                                                                                                                                                                                                                                                                      |
+| 3. Build           | **In progress.** Shared shell done (layout, SEO, header, menus, search, footer, page title, icons, reveal/counter/Lenis scripts). **Home page complete** (hero, quote card, why-choose, service stack, experience, 2 marquees, portfolio carousel, steps, testimonials) and checked against the reference at 1440/768/390 (section heights within a few px). **Content collections filled**: 6 services, 12 projects (structured frontmatter for the detail layouts), testimonials, FAQs. Inner pages are still stubs. |
+| 4–8, Cloudflare    | Not started (see below).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 
 Brand config lives in **`src/config/site.ts`** (name, logos, phone, WhatsApp, email, address, hours, socials, nav, SEO). Placeholders look like `[STREET ADDRESS]` and are hidden on the site until filled in. Logo variants/favicons/share image are generated by `npx tsx tools/assets/brand.ts` from `src/assets/brand/logo.png`.
 
@@ -34,20 +34,11 @@ For the reference/verification tools you also need Chrome on port 9222 (see `too
 
 ## Continue in this order
 
-1. **Home page — remaining sections** (`src/components/sections/home/`, then add to `src/pages/index.astro`):
-   `ServiceStack` (dark teal, sticky stacked cards, scale 1→0.88 + fade as the next card covers it, >880px only),
-   `Experience` (heading + "Book a Service" + 2×2 features with `src/assets/icons/feature-*.svg` in 80px #96FE81 circles),
-   `Marquee` ×2 (VACUUM ✦ CLEANING ✦ SWEEPING, Boldonse 70px, `#9FA2A43D`, `sparkle.svg` 52px, 80px margins, 50s linear RTL loop),
-   `Portfolio` (heading block right-aligned; Embla carousel, 3/2/1 per view, 30px gap, autoplay + loop, middle slide raised; projects: swimming-pool, solar-panel, parking-lot, sofa-mattress, kitchen-hood, disinfection),
-   `Steps` ("Get cleaner space in four steps": full-width bg images `src/assets/images/home/step-1..4.jpg`, hover/click a step to cross-fade its image 0.6s, active caption green),
-   `Testimonials` (left photo + "Ratings 4.5" card; right list where items go from 0.2 to 1 opacity once the viewport centre passes them).
-   Specs: `npx tsx tools/analyze/outline-summary.ts home-4 1440 --from=<y> --to=<y> --visible` and
-   `npx tsx tools/analyze/element-css.ts home-4 "<text>"` (y-ranges: stack 2431–6236, experience 6236–7014, marquee 7014–7234,
-   portfolio 7234–8202, steps 8202–9135, marquee 9135–9488, testimonials 9488–10618). The Home blog section is dropped.
-2. **Content collections** (`src/content/`, schemas in `src/content.config.ts`): 6 services (`*.md`, ids = slugs above,
-   images `service-1..6.jpg`: residential=1, specialized=2, skilled=3, regular-home=4, move-in-out=5, construction=6),
-   12 projects (`*.md`, categories from each project's breadcrumb), `testimonials.json`, `faqs.json`. Run
-   `npx tsx tools/crawl/fetch-originals.ts --only=<slugs>` to download their full-size images, then copy into `src/assets/images/<area>/`.
+1. **Home page:** done. Known small gaps for step 8: at 768px the why-choose photo cards are ~10px taller than the reference;
+   at 390px the why-choose intro text wraps to 5 lines instead of 6.
+2. **Content collections:** done (`src/content/`). Service and project detail content is structured frontmatter (see
+   `src/content.config.ts`); the demo's shared detail text was copied into every file. Testimonials name "Jamal Cleaning"
+   where the demo named other brands.
 3. **Inner pages** (replace the stubs in `src/pages/`): about-us, services (Style 1 grid), service detail, projects (with category
    filter), project detail, testimonials, appointment (form → `/api/quote`), faqs (`<details>` accordions + FAQPage JSON-LD),
    contact-us (form → `/api/contact`, lazy map iframe), 404. Match `reference/screenshots/<slug>/{1440,768,390}.jpg`.
@@ -75,4 +66,10 @@ For the reference/verification tools you also need Chrome on port 9222 (see `too
   `taskkill /PID 3492 /T /F` if it is (it only crawls excluded blog pages).
 - Logo: the supplied PNG's wordmark is dark navy; `tools/assets/brand.ts` generates a white-wordmark version for dark
   backgrounds. Replace `src/assets/brand/logo.png` and re-run it to change the logo everywhere.
+- Screenshots: `--hide-scrollbars` in the capture Chrome widens the layout by 5px versus the reference (1435px), which can change
+  line wraps; launch it without that flag for verification. Scroll with wheel events (not rapid `scrollTo`) before full-page
+  captures, otherwise Lenis fights the scripted scroll and some reveals never fire.
+- **Placeholder content to replace before launch** (copied from the demo): testimonial names/quotes, "Ratings 4.5" and
+  "586k Clients globally", the home counters, project fact sheets ("Themeforest, Evanto", "Main Address, USA") and the
+  lorem-ipsum project text, and the service detail text (it mentions interior design).
 - Social links are placeholders in `src/config/site.ts`, so the top bar shows the phone number instead until they are set.

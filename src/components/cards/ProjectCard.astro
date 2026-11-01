@@ -1,0 +1,89 @@
+---
+/**
+ * Project card (theme portfolio style 1): photo with a frosted caption bar — title,
+ * category and an arrow button. With `hoverCaption` the caption only appears on hover
+ * from 1024px up, like the home page carousel.
+ */
+import type { CollectionEntry } from "astro:content";
+import { Image } from "astro:assets";
+import Icon from "../ui/Icon.astro";
+
+interface Props {
+  project: CollectionEntry<"projects">;
+  hoverCaption?: boolean;
+  /** Photo aspect (height / width, %). The theme uses 115.558% for style 1. */
+  ratio?: number;
+  sizes?: string;
+  class?: string;
+}
+
+const {
+  project,
+  hoverCaption = false,
+  ratio = 115.558,
+  sizes = "(min-width: 1201px) 440px, (min-width: 768px) 50vw, 100vw",
+  class: className,
+} = Astro.props;
+const href = `/projects/${project.id}/`;
+---
+
+<article
+  class:list={[
+    "project-card group relative overflow-hidden rounded-[24px]",
+    hoverCaption && "hover-caption",
+    className,
+  ]}
+>
+  <a href={href} class="block">
+    <div class="relative bg-[#d9d9d9]" style={`padding-top:${ratio}%`}>
+      <Image
+        src={project.data.image}
+        alt={project.data.imageAlt}
+        widths={[360, 480, 720, 960]}
+        sizes={sizes}
+        class="absolute inset-0 size-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+      />
+    </div>
+    <div class="caption absolute inset-x-0 bottom-0 z-[1] flex items-end justify-between gap-4 px-[15px] py-[30px] text-white sm:px-[30px] sm:py-10 lg:px-10 lg:pt-[100px] lg:pb-10">
+      <div class="flex-1">
+        <h3 class="font-heading text-xl leading-10 text-white capitalize">{project.data.title}</h3>
+        <p class="pt-2.5 pb-1 text-base leading-6 font-medium">{project.data.category}</p>
+      </div>
+      <span
+        class="flex size-[50px] shrink-0 items-center justify-center rounded-full bg-primary text-white transition-colors duration-300 hover:bg-white hover:text-primary"
+        aria-hidden="true"
+      >
+        <Icon name="right-arrow" class="text-base" />
+      </span>
+    </div>
+  </a>
+</article>
+
+<style>
+  .caption {
+    background: #000000a3;
+    backdrop-filter: blur(58px);
+    -webkit-backdrop-filter: blur(58px);
+    mask-image: linear-gradient(
+      180deg,
+      rgba(185, 183, 174, 0) 0%,
+      rgba(134, 132, 126, 0.54) 10.59%,
+      rgba(109, 107, 102, 0.77) 21.61%,
+      rgba(96, 95, 90, 0.88) 31.36%,
+      rgba(93, 92, 87, 0.909469) 40.25%,
+      #53524e 62.71%
+    );
+    transition: all 0.3s ease;
+  }
+  @media (width >= 1024px) {
+    .hover-caption .caption {
+      opacity: 0;
+      visibility: hidden;
+    }
+    .hover-caption:hover .caption,
+    .hover-caption:focus-within .caption {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+</style>

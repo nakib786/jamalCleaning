@@ -26,7 +26,8 @@ export const site = {
   description:
     "Professional residential, commercial, office, window and deep cleaning services across Prince George, BC. Open 7 days a week — get a free quote today.",
   /** Short "about" blurb used in the footer. */
-  about: "Professional cleaning for homes, offices and commercial spaces across Prince George — done right, every time.",
+  about:
+    "Professional cleaning for homes, offices and commercial spaces across Prince George — done right, every time.",
 
   /**
    * Logos are generated from src/assets/brand/logo.png by `npx tsx tools/assets/brand.ts`
@@ -68,7 +69,11 @@ export const site = {
         { label: "Sunday", value: "24 hours" },
       ],
       /** schema.org openingHours (all week, overnight included). */
-      schema: { days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], opens: "00:00", closes: "23:59" },
+      schema: {
+        days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+        opens: "00:00",
+        closes: "23:59",
+      },
     },
   },
 

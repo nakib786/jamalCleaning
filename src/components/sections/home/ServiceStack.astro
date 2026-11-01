@@ -1,0 +1,175 @@
+---
+/**
+ * "Featured service" stack (theme `cetro-service`, style 3): one sticky card per service.
+ * Above 880px each card shrinks to 0.88 and fades out as the next card slides over it.
+ */
+import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
+import Icon from "../../ui/Icon.astro";
+import SectionHeading from "../../ui/SectionHeading.astro";
+
+const services = (await getCollection("services")).sort((a, b) => a.data.order - b.data.order);
+
+// Card outline with a rounded notch in the bottom-right corner for the arrow button
+// (the theme's 1900×1969 mask, drawn at natural size and anchored bottom right).
+const notch = `url("data:image/svg+xml,${encodeURIComponent(
+  '<svg xmlns="http://www.w3.org/2000/svg" width="1900" height="1969" viewBox="0 0 1900 1969"><path d="M24 .5h1852c12.98 0 23.5 10.52 23.5 23.5v1861c0 12.98-10.52 23.5-23.5 23.5h-1c-19.61 0-35.5 15.89-35.5 35.5v1c0 12.98-10.52 23.5-23.5 23.5H24C11.02 1968.5.5 1957.98.5 1945V24C.5 11.02 11.02.5 24 .5Z"/></svg>',
+)}")`;
+---
+
+<section class="section-gutter bg-teal py-[60px] sm:py-20 md:py-[100px] lg:pt-[120px] lg:pb-[138px] 2xl:pb-32">
+  <div class="site-container flex flex-col">
+    <SectionHeading
+      label="Featured service"
+      parts={["Our company", { accent: "provides the best" }, "cleaning services."]}
+      align="center"
+      dark
+      class="mx-auto w-full max-w-[820px] pb-[30px] md:pb-[60px]"
+    />
+
+    <div class="grid gap-[30px]" data-reveal="up" style={`--notch:${notch}`}>
+      {services.map((service) => (
+        <div class="stack-item group" data-stack-item>
+          <div class="stack-card" data-stack-card>
+            <div class="relative z-[1] w-full min-[569px]:w-[48.921%]">
+              <div class="relative overflow-hidden rounded-[18px] bg-[#d9d9d9] pt-[73.53%]">
+                <Image
+                  src={service.data.image}
+                  alt={service.data.imageAlt}
+                  widths={[360, 680, 1000]}
+                  sizes="(min-width: 1441px) 663px, (min-width: 569px) 48vw, 100vw"
+                  class="absolute inset-0 size-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                />
+              </div>
+            </div>
+            <div class="relative z-[1] flex-1 py-5 pr-[60px] pl-5 min-[569px]:pl-[30px] min-[1367px]:pl-[70px]">
+              <h3 class="font-heading text-xl leading-[30px] text-secondary capitalize min-[1367px]:mr-[100px] min-[1367px]:text-[40px] min-[1367px]:leading-[60px]">
+                <a href={`/services/${service.id}/`} class="hover:text-primary">
+                  {service.data.title}
+                </a>
+              </h3>
+              <p class="mt-5 line-clamp-4 border-t border-line pt-5 leading-6 min-[569px]:mt-[30px] min-[569px]:pt-[30px] min-[1367px]:pr-[95px]">
+                {service.data.excerpt}
+              </p>
+            </div>
+            <a
+              href={`/services/${service.id}/`}
+              class="stack-button absolute right-0 bottom-0 z-[4] flex size-[50px] items-center justify-center rounded-full bg-white text-secondary transition-colors duration-300 hover:bg-primary hover:text-white"
+              aria-label={`${service.data.title}: read more`}
+            >
+              <Icon name="right-arrow" class="text-lg" />
+            </a>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .stack-item {
+    position: sticky;
+    top: 50px;
+    border-radius: 24px;
+    overflow: hidden;
+    @media (width <= 568px) {
+      position: relative;
+      top: 0;
+    }
+  }
+
+  .stack-card {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-radius: 24px;
+    @media (width <= 568px) {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    /* 1px light border (::before) under a white fill (::after), both cut by the notch mask. */
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      border-radius: 24px;
+      mask: var(--notch) right bottom / auto no-repeat;
+    }
+    &::before {
+      inset: 0;
+      background-color: #e7e9f1;
+    }
+    &::after {
+      inset: 1px;
+      background-color: #fff;
+    }
+  }
+
+  /* Even cards mirror: photo on the right, notch and button bottom-left. */
+  @media (width >= 1024px) {
+    .stack-item:nth-child(2n) .stack-card {
+      flex-direction: row-reverse;
+      &::before,
+      &::after {
+        transform: scaleX(-1);
+      }
+    }
+    .stack-item:nth-child(2n) .stack-button {
+      right: auto;
+      left: 0;
+    }
+  }
+</style>
+
+<script>
+  // Port of the theme's service.js: shrink/fade each card as the next one covers it (> 880px).
+  const items = [...document.querySelectorAll<HTMLElement>("[data-stack-item]")];
+  const cards = items.map((item) => item.querySelector<HTMLElement>("[data-stack-card]") ?? item);
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function style(card: HTMLElement, scale: number, opacity: number, transition: string): void {
+    card.style.transform = `scale(${scale})`;
+    card.style.opacity = String(opacity);
+    card.style.transition = transition;
+  }
+
+  function update(): void {
+    if (window.innerWidth <= 880) {
+      cards.forEach((card) => card.removeAttribute("style"));
+      return;
+    }
+    items.forEach((item, i) => {
+      const next = items[i + 1];
+      if (!next) return;
+      const box = item.getBoundingClientRect();
+      const nextTop = next.getBoundingClientRect().top;
+      const top = box.top;
+      const middle = top + box.height * 0.5;
+      if (nextTop <= middle && nextTop >= top) {
+        const progress = 1 - (nextTop - top) / (middle - top);
+        style(cards[i], 1 - 0.12 * progress, 1 - progress, "transform 0.1s linear, opacity 0.1s linear");
+      } else if (nextTop < top) {
+        style(cards[i], 0.88, 0, "transform 0.2s ease, opacity 0.2s ease");
+      } else {
+        style(cards[i], 1, 1, "transform 0.2s ease, opacity 0.2s ease");
+      }
+    });
+  }
+
+  if (items.length && !reducedMotion) {
+    let queued = false;
+    const schedule = () => {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(() => {
+        queued = false;
+        update();
+      });
+    };
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule, { passive: true });
+    update();
+  }
+</script>

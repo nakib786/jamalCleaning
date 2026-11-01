@@ -48,7 +48,12 @@ function compactInspect(data: Record<string, unknown>): unknown {
     target: n.target,
     completeness: n.completeness?.status,
     scripts: n.scripts?.items?.map((s) => ({ url: s.url, length: s.length, module: s.is_module })),
-    resources: n.resources?.map((r) => ({ url: r.url, type: r.type, mime: r.mime_type, size: r.content_size })),
+    resources: n.resources?.map((r) => ({
+      url: r.url,
+      type: r.type,
+      mime: r.mime_type,
+      size: r.content_size,
+    })),
     console: n.console?.events,
     limitations: n.limitations,
   };
@@ -122,19 +127,34 @@ async function main(): Promise<void> {
             const targetId = await targetIdOf(page);
             const origins = [
               ...new Set(
-                [...store.entries.values()].filter((e) => e.pages.includes(ref.slug)).map((e) => new URL(e.url).origin),
+                [...store.entries.values()]
+                  .filter((e) => e.pages.includes(ref.slug))
+                  .map((e) => new URL(e.url).origin),
               ),
             ];
             const base = { cdp_endpoint: CDP_ENDPOINT, target_id: targetId, allowed_origins: origins };
-            const inspect = await rea.call("inspect_web_page", { ...base, observation_ms: 1500, include_console_text: true });
-            await writeJson(path.join(REFERENCE_DIR, "rea", "full", `${ref.slug}.inspect.json`), inspect.data);
-            await writeJson(path.join(REFERENCE_DIR, "rea", `${ref.slug}.inspect.json`), compactInspect(inspect.data));
+            const inspect = await rea.call("inspect_web_page", {
+              ...base,
+              observation_ms: 1500,
+              include_console_text: true,
+            });
+            await writeJson(
+              path.join(REFERENCE_DIR, "rea", "full", `${ref.slug}.inspect.json`),
+              inspect.data,
+            );
+            await writeJson(
+              path.join(REFERENCE_DIR, "rea", `${ref.slug}.inspect.json`),
+              compactInspect(inspect.data),
+            );
             reaLog.push({ slug: ref.slug, tool: "inspect_web_page", ok: !inspect.isError });
 
             // Script bundles are shared by every page of a template: analyze one representative each.
             if (ref.bundle) {
               const bundle = await rea.call("analyze_web_bundle", base, 900_000);
-              await writeJson(path.join(REFERENCE_DIR, "rea", "full", `${ref.slug}.bundle.json`), bundle.data);
+              await writeJson(
+                path.join(REFERENCE_DIR, "rea", "full", `${ref.slug}.bundle.json`),
+                bundle.data,
+              );
               reaLog.push({ slug: ref.slug, tool: "analyze_web_bundle", ok: !bundle.isError });
             }
           }

@@ -15,51 +15,106 @@ interface Props {
 }
 
 const { tone = "dark", idPrefix = "quote", buttonLabel = "Request a Service" } = Astro.props;
-const services = (await getCollection("services")).sort((a, b) => a.data.order - b.data.order).map((s) => s.data.title);
+const services = (await getCollection("services"))
+  .sort((a, b) => a.data.order - b.data.order)
+  .map((s) => s.data.title);
 const serviceOptions =
   services.length > 0
     ? services
-    : (site.nav.find((n) => n.href === "/services/")?.children ?? []).filter((c) => c.href !== "/services/").map((c) => c.label);
+    : (site.nav.find((n) => n.href === "/services/")?.children ?? [])
+        .filter((c) => c.href !== "/services/")
+        .map((c) => c.label);
 
 const field = tone === "dark" ? "quote-field quote-field--dark" : "quote-field";
 ---
 
 <form class="api-form flex flex-col gap-5" action="/api/quote" method="post" data-api-form>
   <div>
-    <label class="sr-only" for={`${idPrefix}-name`}>Your name</label>
-    <input id={`${idPrefix}-name`} class={field} type="text" name="name" autocomplete="name" placeholder="Your Name *" required maxlength="120" />
+    <label class="sr-only" for={`${idPrefix}-name`}>
+      Your name
+    </label>
+    <input
+      id={`${idPrefix}-name`}
+      class={field}
+      type="text"
+      name="name"
+      autocomplete="name"
+      placeholder="Your Name *"
+      required
+      maxlength="120"
+    />
   </div>
   <div>
-    <label class="sr-only" for={`${idPrefix}-email`}>Your email</label>
-    <input id={`${idPrefix}-email`} class={field} type="email" name="email" autocomplete="email" placeholder="Your Email *" required maxlength="160" />
+    <label class="sr-only" for={`${idPrefix}-email`}>
+      Your email
+    </label>
+    <input
+      id={`${idPrefix}-email`}
+      class={field}
+      type="email"
+      name="email"
+      autocomplete="email"
+      placeholder="Your Email *"
+      required
+      maxlength="160"
+    />
   </div>
   <div>
-    <label class="sr-only" for={`${idPrefix}-phone`}>Your phone</label>
-    <input id={`${idPrefix}-phone`} class={field} type="tel" name="phone" autocomplete="tel" placeholder="Your Phone *" required maxlength="40" />
+    <label class="sr-only" for={`${idPrefix}-phone`}>
+      Your phone
+    </label>
+    <input
+      id={`${idPrefix}-phone`}
+      class={field}
+      type="tel"
+      name="phone"
+      autocomplete="tel"
+      placeholder="Your Phone *"
+      required
+      maxlength="40"
+    />
   </div>
   <div>
-    <label class="sr-only" for={`${idPrefix}-service`}>Service</label>
+    <label class="sr-only" for={`${idPrefix}-service`}>
+      Service
+    </label>
     <select id={`${idPrefix}-service`} class={field} name="service" required>
       <option value="">Select Service *</option>
-      {serviceOptions.map((s) => <option value={s}>{s}</option>)}
+      {serviceOptions.map((s) => (
+        <option value={s}>{s}</option>
+      ))}
     </select>
   </div>
   <div>
-    <label class="sr-only" for={`${idPrefix}-message`}>Message</label>
-    <textarea id={`${idPrefix}-message`} class={`${field} h-[126px]`} name="message" placeholder="Message..." maxlength="3000"></textarea>
+    <label class="sr-only" for={`${idPrefix}-message`}>
+      Message
+    </label>
+    <textarea
+      id={`${idPrefix}-message`}
+      class={field}
+      name="message"
+      placeholder="Message..."
+      maxlength="3000"
+    ></textarea>
   </div>
   <div class="hidden" aria-hidden="true">
     <label for={`${idPrefix}-company`}>Company</label>
     <input id={`${idPrefix}-company`} type="text" name="company" tabindex="-1" autocomplete="off" />
   </div>
-  <div data-turnstile></div>
+  <div class="empty:hidden" data-turnstile></div>
   <div>
-    <button type="submit" class="btn btn-lg btn-on-dark mt-1">
+    <button type="submit" class="btn btn-md btn-on-dark">
       <span>{buttonLabel}</span>
-      <span class="btn-icon"><Icon name="right-arrow" class="text-base" /></span>
+      <span class="btn-icon">
+        <Icon name="right-arrow" class="text-base" />
+      </span>
     </button>
   </div>
-  <p class:list={["form-status text-sm", tone === "dark" ? "text-white" : "text-secondary"]} role="status" aria-live="polite"></p>
+  <p
+    class:list={["form-status text-sm empty:hidden", tone === "dark" ? "text-white" : "text-secondary"]}
+    role="status"
+    aria-live="polite"
+  ></p>
 </form>
 
 <style>
@@ -70,6 +125,7 @@ const field = tone === "dark" ? "quote-field quote-field--dark" : "quote-field";
     font-weight: 500;
   }
   textarea.quote-field {
+    height: 120px;
     padding-top: 18px;
   }
   .quote-field--dark {

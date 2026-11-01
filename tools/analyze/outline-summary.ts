@@ -42,8 +42,20 @@ const from = Number(opt("from") ?? -1);
 const to = Number(opt("to") ?? Number.POSITIVE_INFINITY);
 const regionFilter = opt("region");
 
-const outline = JSON.parse(fs.readFileSync(path.join(REFERENCE_DIR, "outline", `${slug}.${widthArg}.json`), "utf8")) as {
-  regions: { region: string; block?: Block; parts?: { tag: string; cls: string; rect: Block["rect"]; style: Record<string, string>; leaves: Leaf[] }[] }[];
+const outline = JSON.parse(
+  fs.readFileSync(path.join(REFERENCE_DIR, "outline", `${slug}.${widthArg}.json`), "utf8"),
+) as {
+  regions: {
+    region: string;
+    block?: Block;
+    parts?: {
+      tag: string;
+      cls: string;
+      rect: Block["rect"];
+      style: Record<string, string>;
+      leaves: Leaf[];
+    }[];
+  }[];
 };
 
 const font = (s: Record<string, string> = {}) => {
@@ -54,7 +66,13 @@ const font = (s: Record<string, string> = {}) => {
     s["font-weight"] && s["font-weight"] !== "400" ? `w${s["font-weight"]}` : "",
     s["line-height"] ? `lh${s["line-height"]}` : "",
     s["letter-spacing"] ? `ls${s["letter-spacing"]}` : "",
-    s.color ? s.color.replace(/rgb\((\d+), (\d+), (\d+)\)/, (_m, r: string, g: string, b: string) => `#${[r, g, b].map((n) => Number(n).toString(16).padStart(2, "0")).join("")}`) : "",
+    s.color
+      ? s.color.replace(
+          /rgb\((\d+), (\d+), (\d+)\)/,
+          (_m, r: string, g: string, b: string) =>
+            `#${[r, g, b].map((n) => Number(n).toString(16).padStart(2, "0")).join("")}`,
+        )
+      : "",
     s["text-transform"] ?? "",
     s["text-align"] && s["text-align"] !== "start" ? `align:${s["text-align"]}` : "",
   ];
@@ -62,8 +80,12 @@ const font = (s: Record<string, string> = {}) => {
 };
 
 const box = (s: Record<string, string>) => {
-  const pad = ["padding-top", "padding-right", "padding-bottom", "padding-left"].map((k) => s[k] ?? "0").join(" ");
-  const mar = ["margin-top", "margin-right", "margin-bottom", "margin-left"].map((k) => s[k] ?? "0").join(" ");
+  const pad = ["padding-top", "padding-right", "padding-bottom", "padding-left"]
+    .map((k) => s[k] ?? "0")
+    .join(" ");
+  const mar = ["margin-top", "margin-right", "margin-bottom", "margin-left"]
+    .map((k) => s[k] ?? "0")
+    .join(" ");
   const bits = [
     s["background-color"] ? `bg:${s["background-color"]}` : "",
     s["background-image"] ? `bgimg:${s["background-image"].slice(0, 110)}` : "",
@@ -116,7 +138,18 @@ const print = (b: Block, depth: number): void => {
   if (b.hidden && !zeroSize && process.argv.includes("--visible")) return;
   const pad = "  ".repeat(depth);
   const type = b.type.replace(".default", "");
-  console.log(`${pad}${b.hidden ? "(hidden) " : ""}${type} {${b.cls.split(" ").filter((c) => !/^(e-con|e-flex|e-parent|e-child|elementor-widget|elementor-element|e-con-full|e-con-boxed|e-lazyloaded)$/.test(c)).slice(0, 4).join(" ")}} @${b.rect.x},${b.rect.y} ${b.rect.w}x${b.rect.h} ${box(b.style)}`);
+  console.log(
+    `${pad}${b.hidden ? "(hidden) " : ""}${type} {${b.cls
+      .split(" ")
+      .filter(
+        (c) =>
+          !/^(e-con|e-flex|e-parent|e-child|elementor-widget|elementor-element|e-con-full|e-con-boxed|e-lazyloaded)$/.test(
+            c,
+          ),
+      )
+      .slice(0, 4)
+      .join(" ")}} @${b.rect.x},${b.rect.y} ${b.rect.w}x${b.rect.h} ${box(b.style)}`,
+  );
   if (depth >= maxDepth) return;
   for (const l of b.leaves ?? []) {
     const line = leafLine(l);
@@ -131,7 +164,9 @@ for (const r of outline.regions) {
   if (r.block) print(r.block, 0);
   for (const p of r.parts ?? []) {
     if (p.rect.y + p.rect.h < from || p.rect.y > to) continue;
-    console.log(`${p.tag}.${p.cls.split(" ")[0]} @${p.rect.x},${p.rect.y} ${p.rect.w}x${p.rect.h} ${box(p.style)}`);
+    console.log(
+      `${p.tag}.${p.cls.split(" ")[0]} @${p.rect.x},${p.rect.y} ${p.rect.w}x${p.rect.h} ${box(p.style)}`,
+    );
     for (const l of p.leaves.slice(0, 60)) {
       const line = leafLine(l);
       if (line) console.log(`  · ${line}`);

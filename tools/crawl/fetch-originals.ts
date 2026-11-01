@@ -94,9 +94,11 @@ async function main(): Promise<void> {
 
   const manifestFile = path.join(CAPTURED_DIR, "manifest.originals.json");
   const mainManifest = JSON.parse(
-    await fs.readFile(path.join(CAPTURED_DIR, "manifest.json"), "utf8").catch(() => "{\"entries\":[]}"),
+    await fs.readFile(path.join(CAPTURED_DIR, "manifest.json"), "utf8").catch(() => '{"entries":[]}'),
   ) as { entries: ManifestEntry[] };
-  const manifest = JSON.parse(await fs.readFile(manifestFile, "utf8").catch(() => '{"entries":[],"failures":[]}')) as {
+  const manifest = JSON.parse(
+    await fs.readFile(manifestFile, "utf8").catch(() => '{"entries":[],"failures":[]}'),
+  ) as {
     entries: ManifestEntry[];
     failures: { url: string; type: string; reason: string; pages: string[]; widths: number[] }[];
   };
@@ -109,10 +111,18 @@ async function main(): Promise<void> {
       continue;
     }
     await sleep(1000);
-    const res = await fetch(url, { headers: { "user-agent": "jamal-cleaning-site asset sync (licensed Cetro theme)" } });
+    const res = await fetch(url, {
+      headers: { "user-agent": "jamal-cleaning-site asset sync (licensed Cetro theme)" },
+    });
     if (!res.ok) {
       if (url !== originalOf(url) || res.status !== 404) {
-        manifest.failures.push({ url, type: "image", reason: `HTTP ${res.status}`, pages: [...pages], widths: [] });
+        manifest.failures.push({
+          url,
+          type: "image",
+          reason: `HTTP ${res.status}`,
+          pages: [...pages],
+          widths: [],
+        });
       }
       continue;
     }

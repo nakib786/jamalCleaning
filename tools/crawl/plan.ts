@@ -43,7 +43,10 @@ const RULES: Rule[] = [
   [/^blog(__page__\d+)?$/, () => ({ inBuild: false, note: OWNER_EXCLUDED })],
   [/^home-4$/, () => ({ template: "home", route: "/" })],
   [/^services-style-01$/, () => ({ template: "services", route: "/services/" })],
-  [/^services(__page__\d+)?$/, () => ({ inBuild: false, note: "Services post-type archive; Services Style 1 is used at /services/" })],
+  [
+    /^services(__page__\d+)?$/,
+    () => ({ inBuild: false, note: "Services post-type archive; Services Style 1 is used at /services/" }),
+  ],
   [/^services__([\w-]+)$/, (m) => ({ template: "service", route: `/services/${m[1]}/` })],
   [
     new RegExp(`^${PROJECTS_LIST}$`),
@@ -51,20 +54,35 @@ const RULES: Rule[] = [
   ],
   [
     /^(portfolios|projects-style)(__page__\d+)?$/,
-    () => ({ inBuild: false, note: "Alternate/paginated project list; all projects are listed (and filterable) at /projects/" }),
+    () => ({
+      inBuild: false,
+      note: "Alternate/paginated project list; all projects are listed (and filterable) at /projects/",
+    }),
   ],
   [/^portfolios__([\w-]+)$/, (m) => ({ template: "project", route: `/projects/${m[1]}/` })],
-  [/^portfolio_cat__/, () => ({ inBuild: false, note: "Project category archive; replaced by the category filter on /projects/" })],
+  [
+    /^portfolio_cat__/,
+    () => ({
+      inBuild: false,
+      note: "Project category archive; replaced by the category filter on /projects/",
+    }),
+  ],
   [/^about-us$/, () => ({ template: "about", route: "/about-us/" })],
   [/^team$/, () => ({ template: "team", route: "/team/" })],
-  [/^teams(__page__\d+)?$/, () => ({ inBuild: false, note: "Team post-type archive; the Team page is used at /team/" })],
+  [
+    /^teams(__page__\d+)?$/,
+    () => ({ inBuild: false, note: "Team post-type archive; the Team page is used at /team/" }),
+  ],
   [/^teams__([\w-]+)$/, (m) => ({ template: "team-member", route: `/team/${m[1]}/` })],
   [/^pricing-plans$/, () => ({ template: "pricing", route: "/pricing-plans/" })],
   [/^testimonials$/, () => ({ template: "testimonials", route: "/testimonials/" })],
   [/^appointment$/, () => ({ template: "appointment", route: "/appointment/" })],
   [/^faqs$/, () => ({ template: "faqs", route: "/faqs/" })],
   [/^contact-us$/, () => ({ template: "contact", route: "/contact-us/" })],
-  [/^404-page$/, () => ({ template: "404", route: "/404.html", note: "Served by Cloudflare for unknown URLs" })],
+  [
+    /^404-page$/,
+    () => ({ template: "404", route: "/404.html", note: "Served by Cloudflare for unknown URLs" }),
+  ],
   [/^icons$/, () => ({ inBuild: false, note: "Theme icon-font showcase page (demo-only extra)" })],
   [/^hello-world$/, () => ({ inBuild: false, note: "Default WordPress sample post (demo-only extra)" })],
   // Remaining root-level pages are blog posts.
@@ -73,7 +91,11 @@ const RULES: Rule[] = [
 
 async function main(): Promise<void> {
   const file = path.join(REFERENCE_DIR, "discovery.json");
-  const discovery = JSON.parse(await fs.readFile(file, "utf8")) as { pages: Page[]; skipped: Other[]; external: Other[] };
+  const discovery = JSON.parse(await fs.readFile(file, "utf8")) as {
+    pages: Page[];
+    skipped: Other[];
+    external: Other[];
+  };
   const seenTemplates = new Set<string>();
 
   for (const page of discovery.pages) {
@@ -91,7 +113,9 @@ async function main(): Promise<void> {
   await fs.writeFile(file, `${JSON.stringify(discovery, null, 2)}\n`);
 
   const rel = (url: string) => url.replace(DEMO_ORIGIN, "");
-  const built = discovery.pages.filter((p) => p.inBuild).sort((a, b) => (a.route ?? "").localeCompare(b.route ?? ""));
+  const built = discovery.pages
+    .filter((p) => p.inBuild)
+    .sort((a, b) => (a.route ?? "").localeCompare(b.route ?? ""));
   const notBuilt = discovery.pages.filter((p) => !p.inBuild);
   const lines = [
     "# Site map",
@@ -130,7 +154,9 @@ async function main(): Promise<void> {
     "",
   ];
   await fs.writeFile(path.join(ROOT, "site-map.md"), lines.join("\n"));
-  console.log(`built ${built.length}, not built ${notBuilt.length}, templates: ${[...seenTemplates].join(", ")}`);
+  console.log(
+    `built ${built.length}, not built ${notBuilt.length}, templates: ${[...seenTemplates].join(", ")}`,
+  );
 }
 
 main().catch((error: unknown) => {

@@ -15,7 +15,9 @@ const THEME = path.join(CAPTURED_DIR, "demo2.pavothemes.com/cetro/wp-content/the
 
 async function main(): Promise<void> {
   const css = await fs.readFile(path.join(THEME, "css/icons.css"), "utf8");
-  const font = fontkit.create(await fs.readFile(path.join(THEME, "fonts/icons/cetro-icon-1.1.1.woff2"))) as fontkit.Font;
+  const font = fontkit.create(
+    await fs.readFile(path.join(THEME, "fonts/icons/cetro-icon-1.1.1.woff2")),
+  ) as fontkit.Font;
   const scale = 1000 / font.unitsPerEm;
   const ascent = font.ascent * scale;
 
@@ -23,7 +25,9 @@ async function main(): Promise<void> {
   for (const match of css.matchAll(/\.cetro-icon-([\w-]+):before\s*\{\s*content:\s*"(.+?)";/g)) {
     const [, name, content] = match;
     if (!name || !content) continue;
-    const codePoint = content.startsWith("\\") ? Number.parseInt(content.slice(1), 16) : content.codePointAt(0);
+    const codePoint = content.startsWith("\\")
+      ? Number.parseInt(content.slice(1), 16)
+      : content.codePointAt(0);
     if (codePoint === undefined || Number.isNaN(codePoint)) continue;
     const glyph = font.glyphForCodePoint(codePoint);
     if (!glyph || glyph.id === 0) continue;
@@ -51,7 +55,9 @@ async function main(): Promise<void> {
   const file = path.join(ROOT, "src/components/ui/icons.generated.ts");
   await fs.mkdir(path.dirname(file), { recursive: true });
   await fs.writeFile(file, out);
-  console.log(`${names.length} icons -> ${path.relative(ROOT, file)} (ascent ${ascent.toFixed(0)}, upm ${font.unitsPerEm})`);
+  console.log(
+    `${names.length} icons -> ${path.relative(ROOT, file)} (ascent ${ascent.toFixed(0)}, upm ${font.unitsPerEm})`,
+  );
 }
 
 main().catch((error: unknown) => {

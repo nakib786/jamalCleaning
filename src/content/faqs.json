@@ -1,1 +1,72 @@
-[]
+[
+  {
+    "id": "general-1",
+    "question": "What types of spaces do you clean?",
+    "answer": "We offer cleaning for homes, offices, retail spaces, and even post-renovation sites. Custom packages available based on your needs.",
+    "group": "General",
+    "order": 1
+  },
+  {
+    "id": "general-2",
+    "question": "Are your cleaning products eco-friendly?",
+    "answer": "We offer cleaning for homes, offices, retail spaces, and even post-renovation sites. Custom packages available based on your needs.",
+    "group": "General",
+    "order": 2
+  },
+  {
+    "id": "general-3",
+    "question": "How do I book a cleaning session?",
+    "answer": "We offer cleaning for homes, offices, retail spaces, and even post-renovation sites. Custom packages available based on your needs.",
+    "group": "General",
+    "order": 3
+  },
+  {
+    "id": "general-4",
+    "question": "Do I need to be home during the service?",
+    "answer": "We offer cleaning for homes, offices, retail spaces, and even post-renovation sites. Custom packages available based on your needs.",
+    "group": "General",
+    "order": 4
+  },
+  {
+    "id": "general-5",
+    "question": "What if I’m not satisfied with the service?",
+    "answer": "We offer cleaning for homes, offices, retail spaces, and even post-renovation sites. Custom packages available based on your needs.",
+    "group": "General",
+    "order": 5
+  },
+  {
+    "id": "booking-1",
+    "question": "What types of spaces do you clean?",
+    "answer": "We offer cleaning for homes, offices, retail spaces, and even post-renovation sites. Custom packages available based on your needs.",
+    "group": "Booking & Service",
+    "order": 6
+  },
+  {
+    "id": "booking-2",
+    "question": "Are your cleaning products eco-friendly?",
+    "answer": "We offer cleaning for homes, offices, retail spaces, and even post-renovation sites. Custom packages available based on your needs.",
+    "group": "Booking & Service",
+    "order": 7
+  },
+  {
+    "id": "booking-3",
+    "question": "How do I book a cleaning session?",
+    "answer": "We offer cleaning for homes, offices, retail spaces, and even post-renovation sites. Custom packages available based on your needs.",
+    "group": "Booking & Service",
+    "order": 8
+  },
+  {
+    "id": "booking-4",
+    "question": "Do I need to be home during the service?",
+    "answer": "We offer cleaning for homes, offices, retail spaces, and even post-renovation sites. Custom packages available based on your needs.",
+    "group": "Booking & Service",
+    "order": 9
+  },
+  {
+    "id": "booking-5",
+    "question": "What if I’m not satisfied with the service?",
+    "answer": "We offer cleaning for homes, offices, retail spaces, and even post-renovation sites. Custom packages available based on your needs.",
+    "group": "Booking & Service",
+    "order": 10
+  }
+]

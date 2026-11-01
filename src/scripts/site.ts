@@ -22,6 +22,11 @@ const revealObserver = new IntersectionObserver(
 );
 document.querySelectorAll<HTMLElement>("[data-reveal]").forEach((el) => {
   if (el.dataset.revealDelay) el.style.setProperty("--reveal-delay", `${el.dataset.revealDelay}ms`);
+  // Drop the animation once it has played, so it never replays (e.g. when a responsive
+  // display toggle hides and re-shows the element on rotate/resize).
+  el.addEventListener("animationend", (event) => {
+    if (event.target === el) el.classList.add("reveal-done");
+  });
   revealObserver.observe(el);
 });
 
@@ -62,7 +67,11 @@ let rafId = 0;
 function syncLenis(): void {
   const wanted = !reducedMotion && window.innerWidth > 992;
   if (wanted && !lenis) {
-    lenis = new Lenis({ duration: 1.5, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), touchMultiplier: 2 });
+    lenis = new Lenis({
+      duration: 1.5,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      touchMultiplier: 2,
+    });
     const raf = (time: number) => {
       lenis?.raf(time);
       rafId = requestAnimationFrame(raf);

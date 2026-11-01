@@ -21,38 +21,51 @@ interface Props {
   class?: string;
   /** Entrance animation of the headline. */
   reveal?: "up" | "right" | "left" | "scale";
+  /** Overrides for the eyebrow label spacing, e.g. "pb-[30px]". */
+  labelClass?: string;
 }
 
-const { label, parts, as: Tag = "h2", align = "left", dark = false, headingClass, class: className, reveal } = Astro.props;
+const {
+  label,
+  parts,
+  as: Tag = "h2",
+  align = "left",
+  dark = false,
+  headingClass,
+  class: className,
+  reveal,
+  labelClass,
+} = Astro.props;
 ---
 
-<div class:list={["flex flex-col", align === "center" ? "items-center text-center" : "items-start", className]}>
-  {
-    label && (
-      <p class:list={["section-label gap-0.5 pb-2.5 sm:pb-[30px]", dark ? "text-white" : "text-body"]}>
-        <Broom class="h-[22px] w-[21px] text-primary" aria-hidden="true" />
-        <span>{label}</span>
-      </p>
-    )
-  }
-  <Tag
-    class:list={["display-heading", dark && "text-white", headingClass]}
-    data-reveal={reveal}
-  >
-    {
-      parts.map((part, i) =>
-        typeof part === "string" ? (
-          <Fragment>
-            {i > 0 && " "}
-            {part}
-          </Fragment>
-        ) : (
-          <Fragment>
-            {i > 0 && " "}
-            <span class="accent">{part.accent}</span>
-          </Fragment>
-        ),
-      )
-    }
+<div
+  class:list={["flex flex-col", align === "center" ? "items-center text-center" : "items-start", className]}
+>
+  {label && (
+    <p
+      class:list={[
+        "section-label gap-0.5",
+        labelClass ?? "pb-2.5 sm:pb-[30px]",
+        dark ? "text-white" : "text-body",
+      ]}
+    >
+      <Broom class="h-[22px] w-[21px] text-primary" aria-hidden="true" />
+      <span>{label}</span>
+    </p>
+  )}
+  <Tag class:list={["display-heading", dark && "text-white", headingClass]} data-reveal={reveal}>
+    {parts.map((part, i) =>
+      typeof part === "string" ? (
+        <Fragment>
+          {i > 0 && " "}
+          {part}
+        </Fragment>
+      ) : (
+        <Fragment>
+          {i > 0 && " "}
+          <span class="accent">{part.accent}</span>
+        </Fragment>
+      ),
+    )}
   </Tag>
 </div>

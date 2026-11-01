@@ -1,15 +1,25 @@
 ---
+import Experience from "../components/sections/home/Experience.astro";
 import Hero from "../components/sections/home/Hero.astro";
+import Portfolio from "../components/sections/home/Portfolio.astro";
 import QuoteCard from "../components/sections/home/QuoteCard.astro";
+import ServiceStack from "../components/sections/home/ServiceStack.astro";
+import Steps from "../components/sections/home/Steps.astro";
+import Testimonials from "../components/sections/home/Testimonials.astro";
 import WhyChoose from "../components/sections/home/WhyChoose.astro";
+import Marquee from "../components/ui/Marquee.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
-
-// Remaining Home 4 sections (see NEXT-STEPS.md): ServiceStack, Experience, Marquee,
-// Portfolio, Steps, Marquee, Testimonials.
 ---
 
 <BaseLayout topBar>
   <Hero />
   <QuoteCard />
   <WhyChoose />
+  <ServiceStack />
+  <Experience />
+  <Marquee class="pb-[60px] sm:pb-20 md:pb-[100px] lg:pb-[120px] 2xl:pb-[123px]" />
+  <Portfolio />
+  <Steps />
+  <Marquee class="py-[60px] sm:py-20 md:py-[100px] lg:pt-[130px] lg:pb-[123px]" />
+  <Testimonials />
 </BaseLayout>

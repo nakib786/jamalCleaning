@@ -7,6 +7,7 @@ import { defineConfig, fontProviders } from "astro/config";
 // Must match `site.url` in src/config/site.ts (canonical URLs, sitemap, Open Graph).
 const SITE_URL = "https://jmcleaningservice.ca";
 
+/** @type {[string, ...string[]]} */
 const LATIN_RANGE = [
   "U+0000-00FF",
   "U+0131",

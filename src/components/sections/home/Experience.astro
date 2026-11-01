@@ -1,0 +1,74 @@
+---
+/** "We have experience and we have a team of experts": intro + CTA, and four feature boxes. */
+import FeatureFast from "../../../assets/icons/feature-fast.svg";
+import FeaturePricing from "../../../assets/icons/feature-pricing.svg";
+import FeatureProducts from "../../../assets/icons/feature-products.svg";
+import FeatureStaff from "../../../assets/icons/feature-staff.svg";
+import { site } from "../../../config/site";
+import Icon from "../../ui/Icon.astro";
+import SectionHeading from "../../ui/SectionHeading.astro";
+
+const features = [
+  {
+    icon: FeatureStaff,
+    title: "Experienced Staff",
+    text: "Our trained, insured cleaners ensure professional, trusted service and impeccable results.",
+  },
+  {
+    icon: FeatureProducts,
+    title: "Natural Products",
+    text: "We use non-toxic, eco-friendly products for a safe, healthy, and sparkling environment.",
+  },
+  {
+    icon: FeatureFast,
+    title: "Fast Service",
+    text: "Reliable, punctual service that respects your schedule and exceeds expectations.",
+  },
+  {
+    icon: FeaturePricing,
+    title: "Transparent Pricing",
+    text: "Affordable, upfront rates with no hidden costs — quality cleaning at the right price.",
+  },
+];
+---
+
+<section class="section-gutter py-[60px] sm:py-20 md:py-[100px] lg:pt-[130px] lg:pb-[130px] 2xl:pb-[134px]">
+  <div class="site-container flex flex-col gap-[30px] md:gap-20 lg:flex-row lg:gap-[50px] 2xl:gap-[84px]">
+    <div class="flex shrink-0 grow flex-col max-sm:items-center lg:w-1/2 2xl:w-[636px]" data-reveal="right">
+      <SectionHeading
+        label="Why choose us"
+        parts={["We have", { accent: "experience and we have" }, "a team of experts"]}
+        class="pb-[30px] max-sm:items-center max-sm:text-center xl:max-w-[636px]"
+        labelClass="pb-2.5 sm:pb-[30px]"
+      />
+      <p class="pb-[30px] leading-6 max-sm:text-center sm:max-w-[90%] lg:pb-12">
+        The housekeepers we hired are professionals who take pride in doing excellent work and in exceeding
+        expectations.
+      </p>
+      <div>
+        <a href={site.quote.href} class="btn btn-lg btn-dark gap-2.5">
+          <span>Book a Service</span>
+          <span class="btn-icon">
+            <Icon name="right-arrow" class="text-base" />
+          </span>
+        </a>
+      </div>
+    </div>
+
+    <ul class="grid grid-cols-1 grid-rows-[repeat(2,1fr)] gap-x-10 gap-y-10 sm:grid-cols-2 lg:w-1/2 lg:gap-x-[30px] lg:gap-y-[60px] 2xl:w-auto 2xl:grow">
+      {features.map((feature, i) => (
+        <li
+          class="flex flex-col max-sm:items-center max-sm:text-center sm:max-w-[295px]"
+          data-reveal="up"
+          data-reveal-delay={String(i * 100)}
+        >
+          <span class="mb-[27px] flex size-20 items-center justify-center rounded-full bg-highlight text-secondary">
+            <feature.icon class="size-[42px]" aria-hidden="true" />
+          </span>
+          <h3 class="mb-5 font-heading text-lg leading-[30px] text-secondary capitalize">{feature.title}</h3>
+          <p class="leading-6">{feature.text}</p>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

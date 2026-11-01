@@ -323,6 +323,10 @@
   html.js [data-reveal="scale"].is-revealed {
     animation-name: pavo-scale-up;
   }
+  html.js [data-reveal].reveal-done {
+    animation: none;
+    opacity: 1;
+  }
   @media (prefers-reduced-motion: reduce) {
     html.js [data-reveal]:not(.is-revealed) {
       opacity: 1;

@@ -21,8 +21,8 @@ never close this browser; stop it yourself when you are done.
 
 ## 2. Crawl (polite: one page load every ~4 s with jitter, `PAGE_DELAY_MS` to change)
 
-| Script                   | What it does                                                                                                                                                                                                         |
-| ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Script                   | What it does                                                                                                                                                                                                        |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `npm run crawl:discover` | Breadth-first crawl of Home 4's header, footer, off-canvas and in-page links with the scope rules in `lib/site.ts` → `reference/discovery.json`                                                                     |
 | `npm run crawl:inspect`  | Per page at 1440/768/390 px: HTML/CSS/JS/fonts → `captured/`, full-page screenshots, computed-style outlines; at 1440 px the rendered DOM and REA `inspect_web_page` + `analyze_web_bundle` evidence → `reference/` |
 | `npm run crawl:capture`  | Per page at 1440/390 px: slow scroll, hover menus, click sliders/tabs/accordions, open the mobile menu; saves **every** response → `captured/<host>/<path>` and `captured/manifest.json`                            |
@@ -31,10 +31,10 @@ All accept `--only=slug,slug`; `inspect`/`capture` accept `--widths=…`.
 
 ## 3. Verify the rebuild
 
-| Script                 | What it does                                                                                                                                       |
-| ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Script                 | What it does                                                                                                                                                                                                           |
+| ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `npm run verify`       | Loads each original and rebuilt page at 1440/768/390 px, takes viewport screenshots with REA `capture_web_screenshot` at matching scroll offsets, and diffs them with REA `compare_web_screenshots` → `verify-output/` |
-| `npm run verify:links` | Crawls the built site for broken internal links, missing assets, demo-host references and console errors                                         |
+| `npm run verify:links` | Crawls the built site for broken internal links, missing assets, demo-host references and console errors                                                                                                               |
 
 ## REA
 

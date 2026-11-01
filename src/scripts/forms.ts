@@ -79,7 +79,8 @@ function enhance(form: HTMLFormElement): void {
         body: JSON.stringify({ ...body, turnstileToken: token ?? "" }),
       });
       const result = (await response.json().catch(() => ({}))) as { ok?: boolean; error?: string };
-      if (!response.ok || !result.ok) throw new Error(result.error ?? "Something went wrong. Please call us instead.");
+      if (!response.ok || !result.ok)
+        throw new Error(result.error ?? "Something went wrong. Please call us instead.");
       form.reset();
       setStatus(form, form.dataset.success ?? "Thank you! We'll get back to you shortly.", "ok");
     } catch (error) {

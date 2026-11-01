@@ -12,8 +12,15 @@ const { entry } = Astro.props;
 const { Content } = await render(entry);
 ---
 
-<BaseLayout title={entry.data.title} description={entry.data.seoDescription ?? entry.data.excerpt} image={entry.data.image}>
-  <PageTitle title={entry.data.title} crumbs={[{ label: "Services", href: "/services/" }, { label: entry.data.title }]} />
+<BaseLayout
+  title={entry.data.title}
+  description={entry.data.seoDescription ?? entry.data.excerpt}
+  image={entry.data.image}
+>
+  <PageTitle
+    title={entry.data.title}
+    crumbs={[{ label: "Services", href: "/services/" }, { label: entry.data.title }]}
+  />
   <section class="section-gutter py-[120px]">
     <article class="site-container prose">
       <Content />

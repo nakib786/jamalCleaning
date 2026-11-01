@@ -34,7 +34,9 @@ if (needle.startsWith("#")) {
   const lower = needle.toLowerCase();
   const candidates = root
     .querySelectorAll("[data-id]")
-    .filter((el) => el.getAttribute("data-element_type") === "widget" && el.text.toLowerCase().includes(lower));
+    .filter(
+      (el) => el.getAttribute("data-element_type") === "widget" && el.text.toLowerCase().includes(lower),
+    );
   target = candidates.sort((a, b) => a.text.length - b.text.length)[0] ?? null;
 }
 if (!target) {
@@ -49,7 +51,8 @@ for (let i = 0; i < up; i++) {
 }
 
 const ids = new Set<string>([target.getAttribute("data-id") ?? ""]);
-if (includeDescendants) for (const el of target.querySelectorAll("[data-id]")) ids.add(el.getAttribute("data-id") ?? "");
+if (includeDescendants)
+  for (const el of target.querySelectorAll("[data-id]")) ids.add(el.getAttribute("data-id") ?? "");
 console.log(
   `element ${target.getAttribute("data-id")} type=${target.getAttribute("data-widget_type") ?? target.getAttribute("data-element_type")} class="${target.getAttribute("class")?.slice(0, 160)}"`,
 );
@@ -60,7 +63,9 @@ if (settings) console.log(`settings: ${settings.replace(/&quot;/g, '"').slice(0,
 const manifest = JSON.parse(fs.readFileSync(path.join(CAPTURED_DIR, "manifest.json"), "utf8")) as {
   entries: { url: string; file: string; type: string; pages: string[] }[];
 };
-const sheets = manifest.entries.filter((e) => e.type === "stylesheet" && e.pages.includes(slug) && /elementor\/css\/post-/.test(e.url));
+const sheets = manifest.entries.filter(
+  (e) => e.type === "stylesheet" && e.pages.includes(slug) && /elementor\/css\/post-/.test(e.url),
+);
 
 const byMedia = new Map<string, string[]>();
 for (const sheet of sheets) {

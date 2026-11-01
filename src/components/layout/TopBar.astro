@@ -18,26 +18,35 @@ const { contact } = site;
       <span>{contact.hours.short}</span>
     </li>
     <li>
-      <a href={contact.address.mapUrl} target="_blank" rel="noopener" class="flex items-center gap-[5px] hover:text-primary">
+      <a
+        href={contact.address.mapUrl}
+        target="_blank"
+        rel="noopener"
+        class="flex items-center gap-[5px] hover:text-primary"
+      >
         <Icon name="map" class="mb-[3px] text-[15px]" />
         <span>{contact.address.short}</span>
       </a>
     </li>
   </ul>
   <div class="flex items-center gap-[21px] max-sm:mx-auto sm:ml-auto">
-    {
-      socialLinks.length > 0 ? (
-        socialLinks.map((s) => (
-          <a href={s.href} target="_blank" rel="noopener" aria-label={s.label} class="leading-none hover:text-primary">
-            <Icon name={s.icon} class="text-base" />
-          </a>
-        ))
-      ) : (
-        <a href={site.contact.phone.href} class="flex items-center gap-2 hover:text-primary">
-          <Icon name="phone" class="text-[15px]" />
-          <span>{site.contact.phone.display}</span>
+    {socialLinks.length > 0 ? (
+      socialLinks.map((s) => (
+        <a
+          href={s.href}
+          target="_blank"
+          rel="noopener"
+          aria-label={s.label}
+          class="leading-none hover:text-primary"
+        >
+          <Icon name={s.icon} class="text-base" />
         </a>
-      )
-    }
+      ))
+    ) : (
+      <a href={site.contact.phone.href} class="flex items-center gap-2 hover:text-primary">
+        <Icon name="phone" class="text-[15px]" />
+        <span>{site.contact.phone.display}</span>
+      </a>
+    )}
   </div>
 </div>

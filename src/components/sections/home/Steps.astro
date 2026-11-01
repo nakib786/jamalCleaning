@@ -1,0 +1,167 @@
+---
+/**
+ * "Get cleaner space in four steps" (theme `cetro-banner-service`): full-width photo with four
+ * step captions along the bottom. Hovering or tapping a step cross-fades to its photo (0.6s).
+ * 4 columns on desktop; a swipeable carousel with 2 (≤880px) or 1 (≤767px) per view.
+ */
+import { Image } from "astro:assets";
+import step1 from "../../../assets/images/home/step-1.jpg";
+import step2 from "../../../assets/images/home/step-2.jpg";
+import step3 from "../../../assets/images/home/step-3.jpg";
+import step4 from "../../../assets/images/home/step-4.jpg";
+import SectionHeading from "../../ui/SectionHeading.astro";
+
+const steps = [
+  {
+    title: "Provide the details",
+    text: "Fill out a quick form with details about your space, schedule, and preferences.",
+    image: step1,
+  },
+  {
+    title: "Pick a suitable plan",
+    text: "We’ll send you a personalized estimate, no hidden fees, no upselling.",
+    image: step2,
+  },
+  {
+    title: "We house cleaned",
+    text: "Our team arrives on time, equipped, and ready to clean thoroughly.",
+    image: step3,
+  },
+  {
+    title: "You enjoy & relax",
+    text: "Enjoy a spotless home or workspace that looks, feels, and smells truly clean.",
+    image: step4,
+  },
+];
+---
+
+<section class="steps section-gutter relative overflow-hidden" data-steps>
+  <div class="absolute inset-0" aria-hidden="true">
+    {steps.map((step, i) => (
+      <div class:list={["step-image absolute inset-0", i === 0 && "is-shown"]} data-step-image>
+        <Image
+          src={step.image}
+          alt=""
+          widths={[768, 1280, 1920]}
+          sizes="100vw"
+          class="size-full object-cover"
+        />
+        <div class="absolute inset-0 bg-[#011210a3]" />
+        <div class="step-gradient absolute inset-x-0 bottom-0 h-[688px] max-h-full" />
+      </div>
+    ))}
+  </div>
+
+  <div class="absolute inset-0 z-10 flex flex-col items-center px-[15px] sm:px-[30px]">
+    <div
+      class="mt-[60px] w-full sm:mt-20 md:mt-[120px] md:w-[678px] lg:mt-[100px] xl:mt-[180px] 2xl:mt-[414px]"
+      data-reveal="scale"
+    >
+      <SectionHeading
+        label="How it works"
+        parts={["Get cleaner", { accent: "space in four" }, "steps"]}
+        align="center"
+        dark
+        labelClass="pb-2.5 sm:pb-[30px]"
+      />
+    </div>
+  </div>
+
+  <div class="site-container relative z-[11]">
+    <div class="pt-[100%] sm:pt-[50.93%]" aria-hidden="true"></div>
+    <div class="overflow-hidden" data-steps-carousel>
+      <ol class="steps-track flex touch-pan-y">
+        {steps.map((step, i) => (
+          <li class:list={["step min-w-0 shrink-0", i === 0 && "is-active"]} data-step={i}>
+            <div class="step-caption border-t border-white/[0.18] pt-7 pb-[75px] text-white transition-all duration-500 ease-in-out">
+              <h3 class="flex flex-wrap items-baseline gap-x-1.5 pb-[15px] font-heading">
+                <span class="step-accent text-lg leading-10 text-white transition-colors duration-500">
+                  {String(i + 1).padStart(2, "0")}.
+                </span>
+                <span class="step-accent text-xl leading-10 text-white capitalize transition-colors duration-500">
+                  {step.title}
+                </span>
+              </h3>
+              <p class="leading-6 text-white lg:w-[260px]">{step.text}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </div>
+</section>
+
+<style>
+  .step-image {
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(1.1);
+    transition: all 0.6s ease;
+    &.is-shown {
+      opacity: 1;
+      visibility: visible;
+      transform: scale(1);
+      z-index: 3;
+    }
+  }
+  .step-gradient {
+    display: none;
+    background: linear-gradient(360deg, #100f0b 32.93%, rgba(25, 20, 6, 0) 100%);
+    opacity: 0.5;
+    .is-shown & {
+      display: block;
+    }
+  }
+
+  .steps-track {
+    margin-left: -30px;
+  }
+  .step {
+    flex-basis: 100%;
+    padding-left: 30px;
+    @media (width >= 768px) {
+      flex-basis: 50%;
+    }
+    @media (width >= 881px) {
+      flex-basis: 25%;
+    }
+  }
+  .step.is-active .step-caption,
+  .step:hover .step-caption {
+    border-color: var(--color-primary);
+  }
+  .step.is-active .step-accent,
+  .step:hover .step-accent {
+    color: var(--color-primary);
+  }
+</style>
+
+<script>
+  import EmblaCarousel from "embla-carousel";
+
+  document.querySelectorAll<HTMLElement>("[data-steps]").forEach((section) => {
+    const steps = [...section.querySelectorAll<HTMLElement>("[data-step]")];
+    const images = [...section.querySelectorAll<HTMLElement>("[data-step-image]")];
+
+    const activate = (index: number) => {
+      if (images[index]?.classList.contains("is-shown")) return;
+      steps.forEach((step, i) => step.classList.toggle("is-active", i === index));
+      images.forEach((image, i) => image.classList.toggle("is-shown", i === index));
+    };
+    steps.forEach((step, i) => {
+      step.addEventListener("mouseenter", () => activate(i));
+      step.addEventListener("click", () => activate(i));
+    });
+
+    // Carousel only on small screens; on desktop the four steps sit side by side.
+    const viewport = section.querySelector<HTMLElement>("[data-steps-carousel]");
+    if (viewport) {
+      EmblaCarousel(viewport, {
+        align: "start",
+        containScroll: "trimSnaps",
+        active: false,
+        breakpoints: { "(max-width: 880px)": { active: true } },
+      });
+    }
+  });
+</script>

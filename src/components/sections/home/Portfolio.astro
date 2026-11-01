@@ -1,0 +1,88 @@
+---
+/**
+ * "You can check portfolio to check quality": looping project carousel (theme `cetro-portfolio`,
+ * style 1). 3 / 2 / 1 cards per view, 30px gap, autoplay every 5s (pauses on hover and after
+ * interaction). Above 1366px cards alternate 60px up / down. On desktop the caption shows on hover.
+ */
+import { getCollection } from "astro:content";
+import ProjectCard from "../../cards/ProjectCard.astro";
+import SectionHeading from "../../ui/SectionHeading.astro";
+
+const projects = (await getCollection("projects")).sort((a, b) => a.data.order - b.data.order).slice(0, 6);
+---
+
+<section class="section-gutter pb-[60px] sm:pb-20 md:pb-[100px] lg:pb-[130px]">
+  <div class="site-container">
+    <div class="flex flex-col pb-[30px] xl:items-end">
+      <div class="xl:mr-[120px] xl:w-[810px]" data-reveal="up">
+        <SectionHeading
+          label="Our projects"
+          parts={["You can check", { accent: "portfolio to check" }, "quality."]}
+          class="max-sm:items-center max-sm:text-center"
+          labelClass="pb-2.5 sm:pb-[30px]"
+          headingClass="pb-5 sm:pb-[30px]"
+        />
+      </div>
+    </div>
+
+    <div
+      class="embla overflow-hidden"
+      data-portfolio-carousel
+      data-reveal="up"
+      aria-roledescription="carousel"
+      aria-label="Recent projects"
+    >
+      <div class="embla-container flex touch-pan-y">
+        {projects.map((project, i) => (
+          <div
+            class="embla-slide portfolio-slide flex min-w-0 shrink-0 flex-col justify-end"
+            role="group"
+            aria-roledescription="slide"
+            aria-label={`${i + 1} of ${projects.length}`}
+          >
+            <ProjectCard project={project} hoverCaption />
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .embla-container {
+    margin-left: -30px;
+  }
+  .embla-slide {
+    flex-basis: 100%;
+    padding-left: 30px;
+    @media (width >= 768px) {
+      flex-basis: 50%;
+    }
+    @media (width >= 1201px) {
+      flex-basis: calc(100% / 3);
+    }
+  }
+  /* Staggered cards (theme "portfolio effect"), wide screens only: odd cards sit 60px
+     higher, even cards 60px lower. */
+  @media (width >= 1367px) {
+    .portfolio-slide:nth-child(2n + 1) {
+      padding-bottom: 60px;
+    }
+    .portfolio-slide:nth-child(2n) {
+      padding-top: 60px;
+    }
+  }
+</style>
+
+<script>
+  import EmblaCarousel from "embla-carousel";
+  import Autoplay from "embla-carousel-autoplay";
+
+  document.querySelectorAll<HTMLElement>("[data-portfolio-carousel]").forEach((viewport) => {
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const plugins = reducedMotion
+      ? []
+      : [Autoplay({ delay: 5000, stopOnMouseEnter: true, stopOnInteraction: true })];
+    EmblaCarousel(viewport, { loop: true, align: "start", duration: 25 }, plugins);
+  });
+</script>

@@ -39,7 +39,12 @@ async function safeClick(page: Page, target: Locator): Promise<void> {
   }
 }
 
-async function eachVisible(page: Page, selector: string, max: number, fn: (el: Locator) => Promise<void>): Promise<void> {
+async function eachVisible(
+  page: Page,
+  selector: string,
+  max: number,
+  fn: (el: Locator) => Promise<void>,
+): Promise<void> {
   const all = page.locator(selector);
   const count = Math.min(await all.count(), max);
   for (let i = 0; i < count; i++) {
@@ -62,7 +67,9 @@ async function interact(page: Page, width: number): Promise<void> {
     await el.scrollIntoViewIfNeeded().catch(() => undefined);
     for (let i = 0; i < 4; i++) await safeClick(page, el);
   });
-  await eachVisible(page, ".swiper-pagination-bullet, .slick-dots button, .owl-dot", 40, (el) => safeClick(page, el));
+  await eachVisible(page, ".swiper-pagination-bullet, .slick-dots button, .owl-dot", 40, (el) =>
+    safeClick(page, el),
+  );
 
   // Tabs and accordions.
   const toggles =
@@ -82,8 +89,11 @@ async function interact(page: Page, width: number): Promise<void> {
     if (await burger.isVisible().catch(() => false)) {
       await safeClick(page, burger);
       await sleep(800);
-      await eachVisible(page, '[class*="canvas"] .menu-item-has-children > a, [class*="mobile"] .sub-menu-toggle', 20, (el) =>
-        safeClick(page, el),
+      await eachVisible(
+        page,
+        '[class*="canvas"] .menu-item-has-children > a, [class*="mobile"] .sub-menu-toggle',
+        20,
+        (el) => safeClick(page, el),
       );
       await page.keyboard.press("Escape").catch(() => undefined);
     }
@@ -123,7 +133,9 @@ async function main(): Promise<void> {
         await page.close();
       }
       await store.write(manifestFile);
-      console.log(`${ref.slug} @${width}: manifest ${store.entries.size} files, ${store.failures.size} failures`);
+      console.log(
+        `${ref.slug} @${width}: manifest ${store.entries.size} files, ${store.failures.size} failures`,
+      );
     }
   }
 }

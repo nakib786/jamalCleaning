@@ -20,7 +20,9 @@ const index = await getSearchIndex();
         <Icon name="times" class="text-2xl" />
       </button>
     </form>
-    <label for="site-search-input" class="mb-4 font-heading text-3xl sm:text-5xl">Search</label>
+    <label for="site-search-input" class="mb-4 font-heading text-3xl sm:text-5xl">
+      Search
+    </label>
     <div class="relative">
       <input
         id="site-search-input"
@@ -31,7 +33,7 @@ const index = await getSearchIndex();
       />
       <Icon name="search-lg" class="pointer-events-none absolute top-1/2 right-6 -translate-y-1/2 text-xl" />
     </div>
-    <ul class="search-results mt-6 max-h-[55vh] space-y-2 overflow-y-auto" role="list"></ul>
+    <ul class="search-results mt-6 max-h-[55vh] space-y-2 overflow-y-auto"></ul>
   </div>
   <script type="application/json" id="search-index" set:html={JSON.stringify(index)} />
 </dialog>
@@ -53,9 +55,7 @@ const index = await getSearchIndex();
     const q = query.trim().toLowerCase();
     list.replaceChildren();
     if (!q) return;
-    const hits = entries
-      .filter((e) => `${e.title} ${e.text}`.toLowerCase().includes(q))
-      .slice(0, 12);
+    const hits = entries.filter((e) => `${e.title} ${e.text}`.toLowerCase().includes(q)).slice(0, 12);
     if (hits.length === 0) {
       const li = document.createElement("li");
       li.className = "text-white/80";

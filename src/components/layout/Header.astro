@@ -37,61 +37,62 @@ const isActive = (item: NavItem): boolean =>
       data-menu-open
     >
       <span class="flex flex-col gap-1 sm:gap-1.5" aria-hidden="true">
-        {
-          [0, 1, 2].map(() => (
-            <span class="block h-0.5 w-5 bg-white transition-colors duration-300 group-hover:bg-primary sm:w-6" />
-          ))
-        }
+        {[0, 1, 2].map(() => (
+          <span class="block h-0.5 w-5 bg-white transition-colors duration-300 group-hover:bg-primary sm:w-6" />
+        ))}
       </span>
     </button>
 
     <nav aria-label="Main" class="hidden w-1/2 xl:block">
       <ul class="main-menu flex items-center justify-center">
-        {
-          site.nav.map((item) => (
-            <li class:list={["menu-item group/item relative px-[15px] py-[13px] first:pl-0 last:pr-0", { "has-children": item.children }]}>
-              <a
-                href={item.href}
+        {site.nav.map((item) => (
+          <li
+            class:list={[
+              "menu-item group/item relative px-[15px] py-[13px] first:pl-0 last:pr-0",
+              { "has-children": item.children },
+            ]}
+          >
+            <a
+              href={item.href}
+              class:list={[
+                "flex items-center gap-1 text-base leading-6 font-bold capitalize transition-colors duration-300 hover:text-primary group-focus-within/item:text-primary",
+                isActive(item) ? "text-primary" : "text-white",
+              ]}
+              aria-current={path === item.href ? "page" : undefined}
+              aria-haspopup={item.children ? "true" : undefined}
+            >
+              <span
                 class:list={[
-                  "flex items-center gap-1 text-base leading-6 font-bold capitalize transition-colors duration-300 hover:text-primary group-focus-within/item:text-primary",
-                  isActive(item) ? "text-primary" : "text-white",
+                  "relative after:absolute after:bottom-0 after:h-0.5 after:bg-primary after:transition-all after:duration-500",
+                  isActive(item)
+                    ? "after:left-0 after:w-full"
+                    : "after:right-0 after:w-0 group-hover/item:after:right-auto group-hover/item:after:left-0 group-hover/item:after:w-full",
                 ]}
-                aria-current={path === item.href ? "page" : undefined}
-                aria-haspopup={item.children ? "true" : undefined}
               >
-                <span
-                  class:list={[
-                    "relative after:absolute after:bottom-0 after:h-0.5 after:bg-primary after:transition-all after:duration-500",
-                    isActive(item)
-                      ? "after:left-0 after:w-full"
-                      : "after:right-0 after:w-0 group-hover/item:after:right-auto group-hover/item:after:left-0 group-hover/item:after:w-full",
-                  ]}
-                >
-                  {item.label}
-                </span>
-                {item.children && <Icon name="angle-down" class="text-[10px]" />}
-              </a>
-              {item.children && (
-                <ul class="sub-menu pointer-events-none invisible absolute top-[calc(100%+21px)] left-0 w-[260px] translate-y-5 scale-[0.97] rounded-[24px] bg-white pt-8 pb-[34px] opacity-0 shadow-[0_3px_30px_#00000014] transition-[opacity,transform,visibility] duration-500 before:absolute before:-top-[21px] before:h-[21px] before:w-full group-focus-within/item:pointer-events-auto group-focus-within/item:visible group-focus-within/item:translate-y-0 group-focus-within/item:scale-100 group-focus-within/item:opacity-100 group-hover/item:pointer-events-auto group-hover/item:visible group-hover/item:translate-y-0 group-hover/item:scale-100 group-hover/item:opacity-100">
-                  {item.children.map((child) => (
-                    <li class="px-[30px]">
-                      <a
-                        href={child.href}
-                        class:list={[
-                          "block py-[7px] text-base leading-6 font-semibold transition-colors duration-300 hover:text-primary",
-                          path === child.href ? "text-primary" : "text-secondary",
-                        ]}
-                        aria-current={path === child.href ? "page" : undefined}
-                      >
-                        {child.label}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </li>
-          ))
-        }
+                {item.label}
+              </span>
+              {item.children && <Icon name="angle-down" class="text-[10px]" />}
+            </a>
+            {item.children && (
+              <ul class="sub-menu pointer-events-none invisible absolute top-[calc(100%+21px)] left-0 w-[260px] translate-y-5 scale-[0.97] rounded-[24px] bg-white pt-8 pb-[34px] opacity-0 shadow-[0_3px_30px_#00000014] transition-[opacity,transform,visibility] duration-500 before:absolute before:-top-[21px] before:h-[21px] before:w-full group-focus-within/item:pointer-events-auto group-focus-within/item:visible group-focus-within/item:translate-y-0 group-focus-within/item:scale-100 group-focus-within/item:opacity-100 group-hover/item:pointer-events-auto group-hover/item:visible group-hover/item:translate-y-0 group-hover/item:scale-100 group-hover/item:opacity-100">
+                {item.children.map((child) => (
+                  <li class="px-[30px]">
+                    <a
+                      href={child.href}
+                      class:list={[
+                        "block py-[7px] text-base leading-6 font-semibold transition-colors duration-300 hover:text-primary",
+                        path === child.href ? "text-primary" : "text-secondary",
+                      ]}
+                      aria-current={path === child.href ? "page" : undefined}
+                    >
+                      {child.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </li>
+        ))}
       </ul>
     </nav>
 
@@ -115,7 +116,9 @@ const isActive = (item: NavItem): boolean =>
       </button>
       <a href={site.quote.href} class="btn btn-on-dark py-[13px] text-[15px] leading-[22.5px]">
         <span>{site.quote.label}</span>
-        <span class="btn-icon"><Icon name="right-arrow" class="text-base" /></span>
+        <span class="btn-icon">
+          <Icon name="right-arrow" class="text-base" />
+        </span>
       </a>
     </div>
   </div>

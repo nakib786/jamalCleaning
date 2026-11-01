@@ -27,14 +27,14 @@ const breadcrumbLd = {
     "@type": "ListItem",
     position: i + 1,
     name: c.label,
-    ...(c.href || i === trail.length - 1 ? { item: new URL(c.href ?? Astro.url.pathname, site.url).href } : {}),
+    ...(c.href || i === trail.length - 1
+      ? { item: new URL(c.href ?? Astro.url.pathname, site.url).href }
+      : {}),
   })),
 };
 ---
 
-<section
-  class="relative isolate flex min-h-[300px] items-center justify-center overflow-hidden px-[15px] pt-10 text-white sm:min-h-[400px] sm:px-[30px] lg:min-h-[460px]"
->
+<section class="relative isolate flex min-h-[300px] items-center justify-center overflow-hidden px-[15px] pt-10 text-white sm:min-h-[400px] sm:px-[30px] lg:min-h-[460px]">
   <Image
     src={image}
     alt=""
@@ -46,23 +46,23 @@ const breadcrumbLd = {
   />
   <div class="absolute inset-0 -z-10 bg-[#070b03a3]" aria-hidden="true"></div>
   <div class="text-center">
-    <h1 class="mb-6 font-heading text-[40px] leading-[1.6] tracking-[-3px] text-white sm:text-[60px]">{title}</h1>
+    <h1 class="mb-6 font-heading text-[40px] leading-[1.6] tracking-[-3px] text-white sm:text-[60px]">
+      {title}
+    </h1>
     <nav aria-label="Breadcrumb">
       <ol class="flex flex-wrap items-center justify-center gap-2 text-base leading-[21.33px] font-semibold capitalize">
-        {
-          trail.map((crumb, i) => (
-            <li class="flex items-center gap-2">
-              {i > 0 && <Icon name="angle-right" class="text-sm" />}
-              {crumb.href && i < trail.length - 1 ? (
-                <a href={crumb.href} class="hover:text-primary">
-                  {crumb.label}
-                </a>
-              ) : (
-                <span aria-current="page">{crumb.label}</span>
-              )}
-            </li>
-          ))
-        }
+        {trail.map((crumb, i) => (
+          <li class="flex items-center gap-2">
+            {i > 0 && <Icon name="angle-right" class="text-sm" />}
+            {crumb.href && i < trail.length - 1 ? (
+              <a href={crumb.href} class="hover:text-primary">
+                {crumb.label}
+              </a>
+            ) : (
+              <span aria-current="page">{crumb.label}</span>
+            )}
+          </li>
+        ))}
       </ol>
     </nav>
   </div>

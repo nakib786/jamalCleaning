@@ -32,9 +32,7 @@ const { contact } = site;
         <NewsletterForm />
       </div>
 
-      <div
-        class="flex flex-wrap justify-between gap-x-[70px] gap-y-12 border-t border-white/10 pt-[90px] pb-[122px] max-sm:pt-[60px] max-sm:pb-[60px]"
-      >
+      <div class="flex flex-wrap justify-between gap-x-[70px] gap-y-12 border-t border-white/10 pt-[90px] pb-[122px] max-sm:pt-[60px] max-sm:pb-[60px]">
         <div class="flex w-full flex-col gap-[26px] sm:w-[300px]">
           <Logo height={64} loading="lazy" />
           <p class="leading-6 text-white">{site.about}</p>
@@ -42,39 +40,46 @@ const { contact } = site;
 
         <nav aria-label="Footer" class="hidden lg:block">
           <ul class="flex flex-col gap-[10px]">
-            {
-              site.footerNav.map((item) => (
-                <li>
-                  <a href={item.href} class="text-lg leading-6 font-bold text-white hover:text-primary">
-                    {item.label}
-                  </a>
-                </li>
-              ))
-            }
+            {site.footerNav.map((item) => (
+              <li>
+                <a href={item.href} class="text-lg leading-6 font-bold text-white hover:text-primary">
+                  {item.label}
+                </a>
+              </li>
+            ))}
           </ul>
         </nav>
 
         <div class="flex w-full flex-col gap-[25px] sm:w-[230px]">
           <h2 class="font-heading text-lg leading-[28.8px] text-white capitalize">Working Time</h2>
           <ul class="flex flex-col gap-[13px] text-lg leading-6 font-medium">
-            {
-              contact.hours.rows.map((row) => (
-                <li>
-                  {row.label}: {row.value}
-                </li>
-              ))
-            }
+            {contact.hours.rows.map((row) => (
+              <li>
+                {row.label}: {row.value}
+              </li>
+            ))}
           </ul>
         </div>
 
         <div class="flex w-full flex-col gap-4 sm:w-[340px]">
-          <a href={contact.phone.href} class="font-heading text-lg leading-6 text-primary underline underline-offset-2 hover:text-white">
+          <a
+            href={contact.phone.href}
+            class="font-heading text-lg leading-6 text-primary underline underline-offset-2 hover:text-white"
+          >
             {contact.phone.display}
           </a>
-          <a href={`mailto:${contact.email}`} class="text-[22px] leading-[37.33px] font-semibold whitespace-nowrap text-white hover:text-primary xl:text-[24px]">
+          <a
+            href={`mailto:${contact.email}`}
+            class="text-[22px] leading-[37.33px] font-semibold whitespace-nowrap text-white hover:text-primary xl:text-[24px]"
+          >
             {contact.email}
           </a>
-          <a href={contact.address.mapUrl} target="_blank" rel="noopener" class="flex items-start gap-[10px] text-base leading-[21.33px] font-semibold text-white hover:text-primary">
+          <a
+            href={contact.address.mapUrl}
+            target="_blank"
+            rel="noopener"
+            class="flex items-start gap-[10px] text-base leading-[21.33px] font-semibold text-white hover:text-primary"
+          >
             <Icon name="location-alt" class="mt-0.5 text-xl text-primary" />
             <span>
               {isSet(contact.address.street) && <>{contact.address.street}, </>}
@@ -88,8 +93,14 @@ const { contact } = site;
 
   <div class="border-t border-white/10 px-[15px] pt-10 pb-[50px] text-center text-lg leading-6 sm:px-[30px] max-sm:pb-[100px]">
     <p>
-      © {year} <a href="/" class="text-primary hover:text-white">{site.name}</a>. Designed by{" "}
-      <a href={site.developer.url} target="_blank" rel="noopener" class="text-primary hover:text-white">{site.developer.name}</a>
+      © {year}{" "}
+      <a href="/" class="text-primary hover:text-white">
+        {site.name}
+      </a>
+      . Designed by{" "}
+      <a href={site.developer.url} target="_blank" rel="noopener" class="text-primary hover:text-white">
+        {site.developer.name}
+      </a>
     </p>
   </div>
 </footer>

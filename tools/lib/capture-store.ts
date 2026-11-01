@@ -47,6 +47,8 @@ function shortHash(value: string | Buffer, length = 8): string {
 }
 
 function sanitize(segment: string): string {
+  // Control characters are invalid in Windows file names, so the range is intentional.
+  // eslint-disable-next-line no-control-regex
   return decodeURIComponent(segment).replace(/[<>:"\\|?*\u0000-\u001f]/g, "_");
 }
 
@@ -133,7 +135,10 @@ export class CaptureStore {
       failures: failures.length,
     };
     await fs.mkdir(path.dirname(manifestFile), { recursive: true });
-    await fs.writeFile(manifestFile, `${JSON.stringify({ generatedAt: new Date().toISOString(), totals, entries, failures }, null, 2)}\n`);
+    await fs.writeFile(
+      manifestFile,
+      `${JSON.stringify({ generatedAt: new Date().toISOString(), totals, entries, failures }, null, 2)}\n`,
+    );
   }
 
   private async save(response: Response, ctx: CaptureContext): Promise<void> {
@@ -187,7 +192,13 @@ export class CaptureStore {
     const url = request.url();
     if (!/^https?:/.test(url) || !this.keep(request.resourceType())) return;
     const key = `${url} ${reason}`;
-    const failure = this.failures.get(key) ?? { url, type: request.resourceType(), reason, pages: [], widths: [] };
+    const failure = this.failures.get(key) ?? {
+      url,
+      type: request.resourceType(),
+      reason,
+      pages: [],
+      widths: [],
+    };
     addUnique(failure.pages, ctx.slug);
     addUnique(failure.widths, ctx.width);
     this.failures.set(key, failure);

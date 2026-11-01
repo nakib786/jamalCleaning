@@ -1,0 +1,168 @@
+---
+/**
+ * "Hear what our global clients say": photo panel with a ratings card (hidden on phones)
+ * and a testimonial list whose items light up (0.2 → 1 opacity) once they pass the middle
+ * of the viewport (theme `cetro-testimonials`, layout 3).
+ */
+import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
+import cleaningBackground from "../../../assets/images/testimonials/cleaning-1.jpg";
+import cleaningTeam from "../../../assets/images/testimonials/cleaning-2.png";
+import ratingsAvatars from "../../../assets/images/testimonials/ratings.png";
+import Icon from "../../ui/Icon.astro";
+import SectionHeading from "../../ui/SectionHeading.astro";
+
+const testimonials = (await getCollection("testimonials"))
+  .filter((t) => t.data.home)
+  .sort((a, b) => a.data.order - b.data.order);
+---
+
+<section class="section-gutter pb-[60px] sm:pb-20 md:pb-[100px] lg:pb-[132px]">
+  <div class="site-container flex flex-col">
+    <SectionHeading
+      label="What clients say"
+      parts={["Hear what", { accent: "our global" }, "clients say"]}
+      align="center"
+      class="mx-auto w-full pb-[30px] xl:max-w-[695px] min-[1025px]:pb-[60px]"
+      labelClass="pb-[30px]"
+    />
+
+    <div class="flex flex-col gap-[30px] md:flex-row min-[1025px]:gap-[70px]">
+      <!-- Photo panel: green fill + faded photo, cut by a notch in the top-right corner. -->
+      <div
+        class="testimonial-panel relative hidden shrink-0 overflow-hidden rounded-[24px] rounded-tr-none sm:block md:w-1/2 xl:w-[650px]"
+        data-reveal="right"
+      >
+        <div class="absolute inset-0 bg-[#08783c]" aria-hidden="true"></div>
+        <Image
+          src={cleaningBackground}
+          alt=""
+          widths={[480, 650, 945]}
+          sizes="(min-width: 1201px) 650px, (min-width: 881px) 50vw, 100vw"
+          class="absolute inset-0 size-full object-cover opacity-[0.24]"
+        />
+        <div class="absolute inset-x-0 bottom-0 z-[2] flex justify-center">
+          <Image
+            src={cleaningTeam}
+            alt="Three smiling cleaners in green aprons and yellow gloves holding cleaning supplies"
+            widths={[400, 571, 765]}
+            sizes="(min-width: 1201px) 571px, (min-width: 1025px) 450px, 400px"
+            class="team-photo object-cover"
+          />
+        </div>
+        <div
+          class="notch absolute top-0 right-0 z-[3] h-[50px] w-[156px] rounded-bl-[24px] bg-white"
+          aria-hidden="true"
+        ></div>
+        <div class="notch-corner absolute top-0 right-[156px] z-[3] size-6" aria-hidden="true"></div>
+        <div class="notch-corner absolute top-[50px] right-0 z-[3] size-6" aria-hidden="true"></div>
+
+        <div class="absolute bottom-[30px] left-[30px] z-[4] flex min-h-[200px] w-[370px] max-w-[calc(100%-60px)] flex-col rounded-[24px] bg-[#fefdf4] pt-6 pr-[21px] pb-9 pl-[31px] md:bottom-[37px]">
+          <p class="pb-[3px] font-heading text-xl leading-10 text-secondary capitalize">Ratings 4.5</p>
+          <p class="pb-[15px] leading-6 font-medium text-[#5c6672]">Clients praise our exceptional work.</p>
+          <div class="flex items-center gap-2">
+            <Image src={ratingsAvatars} alt="" width={187} class="h-[58px] w-[187px]" />
+            <p class="max-w-[123px] text-lg leading-5 font-semibold text-secondary">586k Clients globally</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex min-w-0 flex-1 flex-col" data-reveal="left">
+        <ul class="flex flex-col gap-[30px] xl:gap-[60px]">
+          {testimonials.map((t) => (
+            <li class="testimonial-item max-sm:text-center" data-testimonial>
+              <figure>
+                <div
+                  class="mb-[26px] -ml-px flex gap-[1.9px] border-t border-line pt-[25px] text-[17px] leading-none text-primary max-sm:justify-center xl:pt-[47px]"
+                  role="img"
+                  aria-label={`Rated ${t.data.rating} out of 5`}
+                >
+                  {Array.from({ length: t.data.rating }, () => (
+                    <Icon name="rating" />
+                  ))}
+                </div>
+                <blockquote class="mb-[30px] text-[28px] leading-9 font-semibold text-secondary min-[1025px]:mb-[35px]">
+                  <p>"{t.data.quote}"</p>
+                </blockquote>
+                <figcaption class="flex items-center max-sm:justify-center">
+                  {t.data.avatar && (
+                    <Image
+                      src={t.data.avatar}
+                      alt=""
+                      width={62}
+                      height={62}
+                      class="mr-[18px] size-[62px] rounded-full object-cover"
+                    />
+                  )}
+                  <span class="flex flex-col text-left">
+                    <span class="mb-1.5 font-heading text-base leading-[30px] text-secondary capitalize">
+                      {t.data.name}
+                    </span>
+                    <span class="text-lg leading-none">{t.data.role}</span>
+                  </span>
+                </figcaption>
+              </figure>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .testimonial-panel {
+    min-height: 720px;
+    @media (width <= 1200px) {
+      min-height: 630px;
+    }
+    @media (width <= 1024px) {
+      min-height: 531px;
+    }
+  }
+  .team-photo {
+    width: 571px;
+    height: 653px;
+    @media (width <= 1200px) {
+      width: 450px;
+      height: 550px;
+    }
+    @media (width <= 1024px) {
+      width: 400px;
+      height: 450px;
+    }
+  }
+  /* Rounds the two outer corners of the notch. */
+  .notch-corner {
+    background: radial-gradient(circle at 0 100%, transparent 23.5px, #fff 24px);
+  }
+
+  html.js .testimonial-item {
+    transition: opacity 0.35s ease;
+    &:not(.is-active) {
+      opacity: 0.2;
+    }
+  }
+</style>
+
+<script>
+  // Port of the theme's testimonial.js: an item lights up once its top passes the viewport middle.
+  const items = [...document.querySelectorAll<HTMLElement>("[data-testimonial]")];
+  if (items.length) {
+    let queued = false;
+    const update = () => {
+      queued = false;
+      const middle = window.innerHeight / 2;
+      items.forEach((item) => item.classList.toggle("is-active", item.getBoundingClientRect().top <= middle));
+    };
+    const schedule = () => {
+      if (!queued) {
+        queued = true;
+        requestAnimationFrame(update);
+      }
+    };
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule, { passive: true });
+    update();
+  }
+</script>

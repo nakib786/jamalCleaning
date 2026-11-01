@@ -68,7 +68,12 @@ async function main(): Promise<void> {
     }
     const l = Math.max(0, left - pad);
     const t = Math.max(0, top - pad);
-    return { left: l, top: t, width: Math.min(info.width, right + pad) - l, height: Math.min(info.height, bottom + pad) - t };
+    return {
+      left: l,
+      top: t,
+      width: Math.min(info.width, right + pad) - l,
+      height: Math.min(info.height, bottom + pad) - t,
+    };
   };
 
   // The emblem and the wordmark are separated by the emptiest row in the middle band.
@@ -121,9 +126,16 @@ async function main(): Promise<void> {
 
   // Structured-data logo and favicons.
   await fs.mkdir(PUBLIC, { recursive: true });
-  await sharp(source).extract(full).resize({ width: 600 }).png({ compressionLevel: 9 }).toFile(path.join(PUBLIC, "logo.png"));
+  await sharp(source)
+    .extract(full)
+    .resize({ width: 600 })
+    .png({ compressionLevel: 9 })
+    .toFile(path.join(PUBLIC, "logo.png"));
   const square = async (size: number, background = { r: 255, g: 255, b: 255, alpha: 0 }) =>
-    sharp(markBuffer).resize(size, size, { fit: "contain", background }).png({ compressionLevel: 9 }).toBuffer();
+    sharp(markBuffer)
+      .resize(size, size, { fit: "contain", background })
+      .png({ compressionLevel: 9 })
+      .toBuffer();
   const icoImages = await Promise.all([16, 32, 48].map(async (size) => ({ size, data: await square(size) })));
   await fs.writeFile(path.join(PUBLIC, "favicon.ico"), ico(icoImages));
   await fs.writeFile(path.join(PUBLIC, "favicon-32.png"), await square(32));
