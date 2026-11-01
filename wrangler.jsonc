@@ -22,12 +22,12 @@
 
   // Form submissions are emailed through Email Routing: a Worker may send (free, any plan) to a
   // verified destination address. The binding is locked to that address.
-  "send_email": [{ "name": "EMAIL", "destination_address": "manpreetjamal56@gmail.com" }],
+  "send_email": [{ "name": "EMAIL", "destination_address": "n@aurorabusiness.ca" }],
 
   // Non-secret settings. Secrets (TURNSTILE_SECRET_KEY) are set with `wrangler secret put`.
   "vars": {
     "SITE_NAME": "Jamal Cleaning Services",
-    "EMAIL_TO": "manpreetjamal56@gmail.com",
+    "EMAIL_TO": "n@aurorabusiness.ca",
     "EMAIL_FROM": "website@jmcleaningservice.ca",
   },
 
