@@ -4,6 +4,8 @@
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
   "name": "jamal-cleaning-site",
+  // Manpreetjamal56@gmail.com's Account (the login can see several accounts).
+  "account_id": "ddcccb58eab0c262a67bebb4c9dfe733",
   "main": "worker/index.ts",
   "compatibility_date": "2026-10-28",
 
