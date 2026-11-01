@@ -31,6 +31,18 @@
     "EMAIL_FROM": "website@jmcleaningservice.ca",
   },
 
+  // Used by `wrangler preview` (Cloudflare Workers Builds for non-production branches and pull requests).
+  // Previews must not touch production settings, so they only ever email the testing address,
+  // whatever EMAIL_TO / send_email are switched to for the live site.
+  "previews": {
+    "vars": {
+      "SITE_NAME": "Jamal Cleaning Services (preview)",
+      "EMAIL_TO": "n@aurorabusiness.ca",
+      "EMAIL_FROM": "website@jmcleaningservice.ca",
+    },
+    "send_email": [{ "name": "EMAIL", "destination_address": "n@aurorabusiness.ca" }],
+  },
+
   "observability": { "enabled": true },
 
   // workers.dev URL and per-version preview URLs stay on for testing before the custom domain is live.

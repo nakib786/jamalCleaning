@@ -134,6 +134,18 @@ In the GitHub repo → **Settings** → **Secrets and variables** → **Actions*
 - secret `CLOUDFLARE_ACCOUNT_ID`: shown on the account's overview page
 - variable `PUBLIC_TURNSTILE_SITE_KEY`: the Turnstile site key
 
+### Cloudflare Workers Builds (dashboard Git integration)
+
+If the repository is connected in the dashboard (Worker → **Settings** → **Builds**), Cloudflare builds and deploys on its own, so the GitHub Action above is not needed and its deploy step stays skipped unless you add the token secret. Use one or the other, not both. The settings that work with this repo:
+
+| Setting                                 | Value                  |
+| --------------------------------------- | ---------------------- |
+| Build command                           | `npm run build`        |
+| Deploy command (production branch)      | `npx wrangler deploy`  |
+| Deploy command (other branches and PRs) | `npx wrangler preview` |
+
+`wrangler preview` needs the `previews` block in `wrangler.jsonc` (already there). Previews only ever email the testing address; change that block deliberately if previews should email someone else. A preview Worker has no `TURNSTILE_SECRET_KEY` unless you add one (`npx wrangler preview secret put TURNSTILE_SECRET_KEY`), so forms on a preview URL will not verify until you do.
+
 ## 10. Logs
 
 ```sh

@@ -1,11 +1,15 @@
-# Optional: build and deploy to Cloudflare Workers on every push to main.
-# Needs repository secrets CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID and the variable
-# PUBLIC_TURNSTILE_SITE_KEY (see DEPLOY.md, step 9).
+# Checks (lint, formatting, type-check, build) run on every pull request and push to main.
+# The Cloudflare deploy step is optional: it only runs on main when the repository secrets
+# CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID exist (and the variable PUBLIC_TURNSTILE_SITE_KEY
+# is set), see DEPLOY.md, step 9. Without them the workflow still checks the build and stays green,
+# which is the case while Cloudflare Workers Builds (the dashboard's Git integration) does the deploying.
+# Use one deploy mechanism or the other, not both.
 name: Deploy
 
 on:
   push:
     branches: [main]
+  pull_request:
   workflow_dispatch:
 
 concurrency:
@@ -17,6 +21,9 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+    env:
+      # The secrets context cannot be used in a step `if`, so expose whether the token exists.
+      HAS_CLOUDFLARE_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN != '' }}
     steps:
       - uses: actions/checkout@v4
 
@@ -36,8 +43,13 @@ jobs:
           PUBLIC_TURNSTILE_SITE_KEY: ${{ vars.PUBLIC_TURNSTILE_SITE_KEY }}
 
       - name: Deploy
+        if: env.HAS_CLOUDFLARE_TOKEN == 'true' && github.event_name != 'pull_request'
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: deploy
+
+      - name: Deploy skipped
+        if: env.HAS_CLOUDFLARE_TOKEN != 'true' || github.event_name == 'pull_request'
+        run: echo "Not deploying from GitHub Actions (no CLOUDFLARE_API_TOKEN secret, or this is a pull request)."
