@@ -1,0 +1,29 @@
+# Response headers for Workers static assets (copied to dist/ by `astro build`).
+# HTML keeps the platform default (revalidate on every request, with ETags), so new deploys show up at once.
+
+/*
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()
+  Cross-Origin-Opener-Policy: same-origin
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com https://www.google.com https://maps.google.com; form-action 'self'; base-uri 'self'; frame-ancestors 'self'; object-src 'none'; upgrade-insecure-requests
+
+# Fingerprinted build output (JS, CSS, optimised images, fonts): cache for a year.
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Icons and the share image keep their names between deploys: cache for a day.
+/favicon.ico
+  Cache-Control: public, max-age=86400
+/favicon-32.png
+  Cache-Control: public, max-age=86400
+/apple-touch-icon.png
+  Cache-Control: public, max-age=86400
+/icon-*.png
+  Cache-Control: public, max-age=86400
+/logo.png
+  Cache-Control: public, max-age=86400
+/site.webmanifest
+  Cache-Control: public, max-age=86400

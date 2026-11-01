@@ -6,3 +6,4 @@ reference/
 verify-output/
 .wrangler/
 package-lock.json
+worker/worker-configuration.d.ts

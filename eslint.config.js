@@ -9,7 +9,16 @@ import tseslint from "typescript-eslint";
 
 export default defineConfig(
   {
-    ignores: ["dist/", ".astro/", "node_modules/", "captured/", "reference/", "verify-output/", ".wrangler/"],
+    ignores: [
+      "dist/",
+      ".astro/",
+      "node_modules/",
+      "captured/",
+      "reference/",
+      "verify-output/",
+      ".wrangler/",
+      "worker/worker-configuration.d.ts",
+    ],
   },
   js.configs.recommended,
   tseslint.configs.strict,

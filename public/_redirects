@@ -1,0 +1,21 @@
+# Path redirects for Workers static assets (copied to dist/ by `astro build`).
+# Trailing slashes are handled by `html_handling: "force-trailing-slash"` in wrangler.jsonc.
+# www -> apex is a Cloudflare Redirect Rule (host-level), see DEPLOY.md step 5.
+
+# Old single-page site
+/index.html              /                 301
+/home                    /                 301
+
+# Short / common URLs
+/about                   /about-us/        301
+/contact                 /contact-us/      301
+/faq                     /faqs/            301
+/quote                   /contact-us/      301
+/appointment             /contact-us/      301
+/appointment/            /contact-us/      301
+
+# Demo-theme URL patterns, in case they were ever shared or indexed
+/portfolios/*            /projects/:splat  301
+/portfolios              /projects/        301
+/services-style-01/      /services/        301
+/projects-style/         /projects/        301

@@ -1,43 +1,73 @@
-# Astro Starter Kit: Minimal
+# Jamal Cleaning Services — website
+
+Website for [Jamal Cleaning Services](https://jmcleaningservice.ca/), rebuilt from the licensed **Cetro** theme
+(Home 4 + Services Style 1) as a modern codebase, ready to deploy on Cloudflare.
+
+## Stack and why
+
+- **Astro 7** (static output) + **TypeScript** (strict) + **Tailwind CSS v4**. This is a content site: Astro
+  ships plain HTML and CSS, only adds JavaScript where something moves, optimises images at build time
+  (AVIF/WebP with `srcset`) and self-hosts the fonts. That gives fast pages and the smallest possible
+  Cloudflare footprint (static assets, no server rendering). Next.js would add a React runtime to every page
+  and an adapter for Cloudflare without any benefit for this site.
+- The theme's jQuery plugins were replaced with **vanilla TypeScript** and two small libraries:
+  **Embla Carousel** (sliders), **Lenis** (smooth scrolling, as on the original); entrance animations,
+  counters and sticky effects use `IntersectionObserver` and CSS. React is installed for future islands but
+  no page needs it today.
+- **Cloudflare Workers with static assets** for hosting, with one Worker for the forms (Turnstile spam check
+  - Cloudflare Email Service). See [DEPLOY.md](DEPLOY.md).
+- ESLint (incl. a11y rules), Prettier and `astro check` run clean (`npm run check`).
+
+## Run it
 
 ```sh
-npm create astro@latest -- --template minimal
+npm install
+npm run dev        # http://localhost:4321
+npm run build      # astro check + static build into dist/
+npm run preview    # build + Cloudflare `wrangler dev` (forms work), http://localhost:8787
+npm run deploy     # build + deploy to Cloudflare (see DEPLOY.md first)
+npm run check      # type check (site + worker), lint, format check
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Node 22+ is required. For local form testing copy `.dev.vars.example` to `.dev.vars` and `.env.example` to `.env`.
 
-## 🚀 Project Structure
+## Edit the content
 
-Inside of your Astro project, you'll see the following folders and files:
+| What                                                                         | Where                                                                      |
+| ---------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| Business name, phone, email, address, hours, social links, nav, SEO defaults | `src/config/site.ts` (one file; `[PLACEHOLDERS]` stay hidden until filled) |
+| Logo, favicons, share image                                                  | replace `src/assets/brand/logo.png`, run `npx tsx tools/assets/brand.ts`   |
+| Services (cards, detail pages)                                               | `src/content/services/*.md`                                                |
+| Projects (portfolio)                                                         | `src/content/projects/*.md`                                                |
+| Testimonials (and where each appears)                                        | `src/content/testimonials.json`                                            |
+| FAQs                                                                         | `src/content/faqs.json`                                                    |
+| Page sections                                                                | `src/components/sections/`, `src/pages/`                                   |
+
+The content schemas (with comments on every field) are in `src/content.config.ts`. Much of the copy, the
+counters and the testimonials are still the theme's demo text: replace them with real figures and reviews
+before launch.
+
+## Project layout
 
 ```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+src/
+  assets/            images, icons, fonts (optimised at build time)
+  components/
+    cards/           ServiceCard, ProjectCard
+    forms/           QuoteForm, ContactForm, NewsletterForm
+    layout/          Header, TopBar, MobileMenu, MobileBar, SearchDialog, Footer, PageTitle, Logo
+    sections/        home/*, testimonials/* (page sections)
+    seo/             Seo (meta, Open Graph, JSON-LD)
+    ui/              Icon, SectionHeading, Accordion, Marquee
+  config/site.ts     brand and contact details
+  content/           services, projects, testimonials, FAQs
+  layouts/           BaseLayout
+  pages/             one file per route (26 pages)
+  scripts/           site-wide behaviour, form handling
+  styles/global.css  design tokens and shared styles
+worker/              Cloudflare Worker for /api/* (forms)
+public/              _headers, _redirects, robots.txt, favicons
+tools/               crawl/inspect/verify scripts used to rebuild the theme (not deployed)
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+`site-map.md` lists every page of the original demo, the route it became, and what was skipped and why.

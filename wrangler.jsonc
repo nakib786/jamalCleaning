@@ -1,0 +1,43 @@
+// Cloudflare Workers with static assets — Cloudflare's recommended setup for new static/hybrid sites.
+// `astro build` writes the site to ./dist; the Worker in worker/index.ts only runs for /api/*.
+// See DEPLOY.md for first deploy, custom domain, secrets and rollback.
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "jamal-cleaning-site",
+  "main": "worker/index.ts",
+  "compatibility_date": "2026-10-28",
+
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    // Pages are built as /about-us/index.html, so /about-us redirects to /about-us/ (matches canonical URLs).
+    "html_handling": "force-trailing-slash",
+    // Unknown URLs get dist/404.html with a 404 status.
+    "not_found_handling": "404-page",
+    // Only form endpoints invoke the Worker; everything else is served directly from the asset cache.
+    "run_worker_first": ["/api/*"],
+  },
+
+  // Form submissions are emailed through Cloudflare Email Service. The sender domain must be
+  // onboarded first: `npx wrangler email sending enable jmcleaningservice.ca` (see DEPLOY.md).
+  "send_email": [{ "name": "EMAIL" }],
+
+  // Non-secret settings. Secrets (TURNSTILE_SECRET_KEY) are set with `wrangler secret put`.
+  "vars": {
+    "SITE_NAME": "Jamal Cleaning Services",
+    "EMAIL_TO": "info@jmcleaningservice.ca",
+    "EMAIL_FROM": "website@jmcleaningservice.ca",
+  },
+
+  "observability": { "enabled": true },
+
+  // workers.dev URL and per-version preview URLs stay on for testing before the custom domain is live.
+  "workers_dev": true,
+  "preview_urls": true,
+
+  // Added when the domain is connected (DEPLOY.md, step 5):
+  // "routes": [
+  //   { "pattern": "jmcleaningservice.ca", "custom_domain": true },
+  //   { "pattern": "www.jmcleaningservice.ca", "custom_domain": true }
+  // ],
+}
