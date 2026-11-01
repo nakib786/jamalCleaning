@@ -1,16 +1,156 @@
 ---
+/**
+ * Testimonials: photo panel + quote slider (dots), the card carousel, and the scroll-lit list
+ * from the home page. Quotes come from src/content/testimonials.json (`placements`).
+ */
+import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
+import worldMap from "../assets/images/home/world-map.png";
 import PageTitle from "../components/layout/PageTitle.astro";
+import Testimonials from "../components/sections/home/Testimonials.astro";
+import TestimonialCards from "../components/sections/testimonials/TestimonialCards.astro";
+import TestimonialPanel from "../components/sections/testimonials/TestimonialPanel.astro";
+import Icon from "../components/ui/Icon.astro";
+import SectionHeading from "../components/ui/SectionHeading.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
+
+const slides = (await getCollection("testimonials"))
+  .filter((t) => t.data.placements.includes("slider"))
+  .sort((a, b) => a.data.order - b.data.order);
 ---
 
 <BaseLayout
   title="Testimonials"
-  description="What clients in Prince George say about Jamal Cleaning Services."
+  description="What clients say about Jamal Cleaning Services — reviews of our home, office and commercial cleaning in Prince George, BC."
 >
   <PageTitle title="Testimonials" />
-  <section class="section-gutter py-[120px]">
-    <div class="site-container text-center">
-      <p class="text-lg">This page is being rebuilt to match the reference design.</p>
+
+  <section class="section-gutter relative overflow-hidden py-[60px] sm:py-20 md:py-[100px] lg:pt-[130px] lg:pb-[140px]">
+    <Image
+      src={worldMap}
+      alt=""
+      width={1245}
+      class="pointer-events-none absolute top-[204px] left-[calc(50%-566px)] hidden h-[727px] w-[1245px] max-w-none opacity-15 lg:block"
+      aria-hidden="true"
+    />
+    <div class="site-container relative flex flex-col gap-[30px] md:flex-row min-[1025px]:gap-[72px]">
+      <TestimonialPanel class="md:w-1/2 xl:w-[650px]" />
+
+      <div
+        class="flex min-w-0 flex-1 flex-col max-sm:items-center max-sm:text-center md:pt-[22px]"
+        data-reveal="left"
+      >
+        <SectionHeading
+          label="What clients say"
+          parts={["Hear what", { accent: "our global" }, "clients say"]}
+          class="pb-[30px] max-sm:items-center max-sm:text-center lg:pb-[52px] xl:max-w-[646px]"
+          labelClass="pb-2.5 sm:pb-[30px]"
+        />
+        <div class="w-full xl:max-w-[598px]" data-quote-slider>
+          <div class="overflow-hidden" data-viewport>
+            <ul class="flex touch-pan-y">
+              {slides.map((t, i) => (
+                <li
+                  class="min-w-0 shrink-0 grow-0 basis-full"
+                  role="group"
+                  aria-roledescription="slide"
+                  aria-label={`${i + 1} of ${slides.length}`}
+                >
+                  <figure class="flex flex-col">
+                    {t.data.rating > 0 && (
+                      <div
+                        class="mb-[21px] -ml-px flex gap-[1.9px] text-[17px] leading-none text-primary max-sm:justify-center"
+                        role="img"
+                        aria-label={`Rated ${t.data.rating} out of 5`}
+                      >
+                        {Array.from({ length: t.data.rating }, () => (
+                          <Icon name="rating" />
+                        ))}
+                      </div>
+                    )}
+                    <blockquote class="mb-[50px] text-xl leading-[1.3] text-secondary">
+                      <p>"{t.data.quote}"</p>
+                    </blockquote>
+                    <figcaption class="flex items-center max-sm:justify-center">
+                      {t.data.avatar && (
+                        <Image
+                          src={t.data.avatar}
+                          alt=""
+                          width={62}
+                          height={62}
+                          class="mr-[15px] size-[62px] rounded-full object-cover"
+                        />
+                      )}
+                      <span class="flex flex-col text-left">
+                        <span class="mb-1.5 font-heading text-base leading-[30px] text-secondary capitalize">
+                          {t.data.name}
+                        </span>
+                        <span class="text-lg leading-none">{t.data.role}</span>
+                      </span>
+                    </figcaption>
+                  </figure>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div class="mt-[50px] flex gap-5 pl-1 max-sm:justify-center" data-dots></div>
+        </div>
+      </div>
     </div>
   </section>
+
+  <TestimonialCards />
+  <Testimonials class="pt-[60px] sm:pt-20 md:pt-[100px] lg:pt-[130px]" />
 </BaseLayout>
+
+<style>
+  [data-dots] :global(button) {
+    position: relative;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: var(--color-lighter);
+    transition: background-color 0.3s ease;
+  }
+  [data-dots] :global(button)::before {
+    content: "";
+    position: absolute;
+    inset: -4px;
+    border: 1px solid var(--color-primary);
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  [data-dots] :global(button[aria-current="true"]),
+  [data-dots] :global(button:hover) {
+    background-color: var(--color-primary);
+    &::before {
+      opacity: 1;
+    }
+  }
+</style>
+
+<script>
+  import EmblaCarousel from "embla-carousel";
+
+  document.querySelectorAll<HTMLElement>("[data-quote-slider]").forEach((root) => {
+    const viewport = root.querySelector<HTMLElement>("[data-viewport]");
+    const dots = root.querySelector<HTMLElement>("[data-dots]");
+    if (!viewport || !dots) return;
+    const carousel = EmblaCarousel(viewport, { loop: true, duration: 25 });
+    const buttons = carousel.scrollSnapList().map((_, i) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.setAttribute("aria-label", `Show testimonial ${i + 1}`);
+      button.addEventListener("click", () => carousel.scrollTo(i));
+      dots.append(button);
+      return button;
+    });
+    const sync = () => {
+      const current = carousel.selectedScrollSnap();
+      buttons.forEach((b, i) => b.setAttribute("aria-current", String(i === current)));
+    };
+    carousel.on("select", sync);
+    sync();
+  });
+</script>

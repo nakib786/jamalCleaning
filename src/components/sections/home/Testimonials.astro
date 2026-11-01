@@ -6,18 +6,23 @@
  */
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
-import cleaningBackground from "../../../assets/images/testimonials/cleaning-1.jpg";
-import cleaningTeam from "../../../assets/images/testimonials/cleaning-2.png";
-import ratingsAvatars from "../../../assets/images/testimonials/ratings.png";
 import Icon from "../../ui/Icon.astro";
 import SectionHeading from "../../ui/SectionHeading.astro";
+import TestimonialPanel from "../testimonials/TestimonialPanel.astro";
+
+interface Props {
+  /** Extra classes for the section, e.g. top padding where it follows another section. */
+  class?: string;
+}
+
+const { class: className } = Astro.props;
 
 const testimonials = (await getCollection("testimonials"))
-  .filter((t) => t.data.home)
+  .filter((t) => t.data.placements.includes("list"))
   .sort((a, b) => a.data.order - b.data.order);
 ---
 
-<section class="section-gutter pb-[60px] sm:pb-20 md:pb-[100px] lg:pb-[132px]">
+<section class:list={["section-gutter pb-[60px] sm:pb-20 md:pb-[100px] lg:pb-[132px]", className]}>
   <div class="site-container flex flex-col">
     <SectionHeading
       label="What clients say"
@@ -28,44 +33,7 @@ const testimonials = (await getCollection("testimonials"))
     />
 
     <div class="flex flex-col gap-[30px] md:flex-row min-[1025px]:gap-[70px]">
-      <!-- Photo panel: green fill + faded photo, cut by a notch in the top-right corner. -->
-      <div
-        class="testimonial-panel relative hidden shrink-0 overflow-hidden rounded-[24px] rounded-tr-none sm:block md:w-1/2 xl:w-[650px]"
-        data-reveal="right"
-      >
-        <div class="absolute inset-0 bg-[#08783c]" aria-hidden="true"></div>
-        <Image
-          src={cleaningBackground}
-          alt=""
-          widths={[480, 650, 945]}
-          sizes="(min-width: 1201px) 650px, (min-width: 881px) 50vw, 100vw"
-          class="absolute inset-0 size-full object-cover opacity-[0.24]"
-        />
-        <div class="absolute inset-x-0 bottom-0 z-[2] flex justify-center">
-          <Image
-            src={cleaningTeam}
-            alt="Three smiling cleaners in green aprons and yellow gloves holding cleaning supplies"
-            widths={[400, 571, 765]}
-            sizes="(min-width: 1201px) 571px, (min-width: 1025px) 450px, 400px"
-            class="team-photo object-cover"
-          />
-        </div>
-        <div
-          class="notch absolute top-0 right-0 z-[3] h-[50px] w-[156px] rounded-bl-[24px] bg-white"
-          aria-hidden="true"
-        ></div>
-        <div class="notch-corner absolute top-0 right-[156px] z-[3] size-6" aria-hidden="true"></div>
-        <div class="notch-corner absolute top-[50px] right-0 z-[3] size-6" aria-hidden="true"></div>
-
-        <div class="absolute bottom-[30px] left-[30px] z-[4] flex min-h-[200px] w-[370px] max-w-[calc(100%-60px)] flex-col rounded-[24px] bg-[#fefdf4] pt-6 pr-[21px] pb-9 pl-[31px] md:bottom-[37px]">
-          <p class="pb-[3px] font-heading text-xl leading-10 text-secondary capitalize">Ratings 4.5</p>
-          <p class="pb-[15px] leading-6 font-medium text-[#5c6672]">Clients praise our exceptional work.</p>
-          <div class="flex items-center gap-2">
-            <Image src={ratingsAvatars} alt="" width={187} class="h-[58px] w-[187px]" />
-            <p class="max-w-[123px] text-lg leading-5 font-semibold text-secondary">586k Clients globally</p>
-          </div>
-        </div>
-      </div>
+      <TestimonialPanel class="md:w-1/2 xl:w-[650px]" />
 
       <div class="flex min-w-0 flex-1 flex-col" data-reveal="left">
         <ul class="flex flex-col gap-[30px] xl:gap-[60px]">
@@ -111,32 +79,6 @@ const testimonials = (await getCollection("testimonials"))
 </section>
 
 <style>
-  .testimonial-panel {
-    min-height: 720px;
-    @media (width <= 1200px) {
-      min-height: 630px;
-    }
-    @media (width <= 1024px) {
-      min-height: 531px;
-    }
-  }
-  .team-photo {
-    width: 571px;
-    height: 653px;
-    @media (width <= 1200px) {
-      width: 450px;
-      height: 550px;
-    }
-    @media (width <= 1024px) {
-      width: 400px;
-      height: 450px;
-    }
-  }
-  /* Rounds the two outer corners of the notch. */
-  .notch-corner {
-    background: radial-gradient(circle at 0 100%, transparent 23.5px, #fff 24px);
-  }
-
   html.js .testimonial-item {
     transition: opacity 0.35s ease;
     &:not(.is-active) {

@@ -105,8 +105,11 @@ const testimonials = defineCollection({
       /** 0 hides the stars. */
       rating: z.number().min(0).max(5).default(5),
       avatar: image().optional(),
-      /** Shown in the home page "What clients say" list. */
-      home: z.boolean().default(false),
+      /**
+       * Where the testimonial appears: "list" = home page / testimonials page list (photo panel beside it),
+       * "slider" = testimonials page slider, "cards" = card carousel (testimonials and about pages).
+       */
+      placements: z.array(z.enum(["list", "slider", "cards"])).default([]),
       /** Display order. */
       order: z.number().default(0),
     }),

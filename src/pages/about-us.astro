@@ -1,16 +1,312 @@
 ---
+/**
+ * About: "Why should you choose our services?" with three service highlights and two photos,
+ * the marquee, four step cards, the dark "Smart cleaning solution" band with counters, and the
+ * testimonial card carousel.
+ */
+import { Image } from "astro:assets";
+import agency1 from "../assets/images/about/agency-1.jpg";
+import agency2 from "../assets/images/about/agency-2.jpg";
+import agencyDecor from "../assets/images/about/agency-decor.png";
+import cleaningTeam from "../assets/images/about/cleaning-team.png";
+import step1 from "../assets/images/about/step-1.jpg";
+import step2 from "../assets/images/about/step-2.jpg";
+import step3 from "../assets/images/about/step-3.jpg";
+import step4 from "../assets/images/about/step-4.jpg";
+import bannerImage from "../assets/images/page-title/breadcrumb-about.jpg";
+import HouseCleaning from "../assets/images/misc/icons/house-cleaning.svg";
+import OfficeCleaning from "../assets/images/misc/icons/office-cleaning.svg";
+import StoreCleaning from "../assets/images/misc/icons/store-cleaning.svg";
 import PageTitle from "../components/layout/PageTitle.astro";
+import TestimonialCards from "../components/sections/testimonials/TestimonialCards.astro";
+import Icon from "../components/ui/Icon.astro";
+import Marquee from "../components/ui/Marquee.astro";
+import SectionHeading from "../components/ui/SectionHeading.astro";
+import { site } from "../config/site";
 import BaseLayout from "../layouts/BaseLayout.astro";
+
+const highlights = [
+  {
+    icon: HouseCleaning,
+    title: "House Cleaning",
+    text: "Apartment, condos, and houses - busy people who want their home to feel fresh again.",
+  },
+  {
+    icon: OfficeCleaning,
+    title: "Office Cleaning",
+    text: "Maintain a clean, healthy workspace that supports productivity and professionalism.",
+  },
+  {
+    icon: StoreCleaning,
+    title: "Store Cleaning",
+    text: "Retail shops, studios, and showrooms - spotless spaces that make a great impression.",
+  },
+];
+
+const steps = [
+  {
+    title: "Provide the details",
+    text: "Fill out a quick form with details about your space, schedule, and preferences.",
+    image: step1,
+    alt: "Hand ticking a checklist on a clipboard",
+  },
+  {
+    title: "Pick a suitable plan",
+    text: "We’ll send you a personalized estimate, no hidden fees, no upselling.",
+    image: step2,
+    alt: "Cleaning team planning a job together",
+  },
+  {
+    title: "We house cleaned",
+    text: "Our team arrives on time, equipped, and ready to clean thoroughly.",
+    image: step3,
+    alt: "Cleaner wiping a kitchen surface",
+  },
+  {
+    title: "You enjoy & relax",
+    text: "Enjoy a spotless home or workspace that looks, feels, and smells truly clean.",
+    image: step4,
+    alt: "Person relaxing on a sofa in a clean living room",
+  },
+];
+
+const counters = [
+  {
+    value: 299,
+    suffix: "k",
+    title: "Successful Projects",
+    text: "Over 250 successful projects delivered with quality and care",
+  },
+  {
+    value: 364,
+    suffix: "+",
+    title: "Skilled Tradespeople",
+    text: "Our team of 30 experts ensures top-quality results",
+  },
+  {
+    value: 199,
+    suffix: "+",
+    title: "Happy Clients",
+    text: "All of our clients are satisfied with our work and service",
+  },
+];
 ---
 
 <BaseLayout
   title="About Us"
-  description="Learn about Jamal Cleaning Services — professional, insured cleaners serving homes and businesses across Prince George, BC."
+  description="About Jamal Cleaning Services: trusted house, office and store cleaning in Prince George, BC — trained cleaners, eco-friendly products, open 7 days a week."
 >
-  <PageTitle title="About Us" />
-  <section class="section-gutter py-[120px]">
-    <div class="site-container text-center">
-      <p class="text-lg">This page is being rebuilt to match the reference design.</p>
+  <PageTitle title="About Us" image={bannerImage} />
+
+  <!-- Why choose us ------------------------------------------------------------------------ -->
+  <section class="section-gutter relative py-[60px] sm:py-20 md:py-[100px] lg:pt-[139px] lg:pb-[118px]">
+    <Image
+      src={agencyDecor}
+      alt=""
+      width={852}
+      class="pointer-events-none absolute top-[119px] left-0 hidden opacity-[0.26] min-[1441px]:block"
+      aria-hidden="true"
+    />
+    <div class="site-container relative z-[1] flex flex-col items-center">
+      <SectionHeading
+        label="About cleaning agency"
+        parts={["Why should", { accent: "you choose" }, "our services?"]}
+        align="center"
+        class="w-full max-w-[880px]"
+        labelClass="pb-2.5 sm:pb-[31px]"
+        headingClass="pb-[30px] sm:pb-[39px] sm:text-[60px] sm:leading-[90px]"
+      />
+      <p class="w-[698px] max-w-full pb-[50px] text-center leading-6 sm:pb-[76px]" data-reveal="up">
+        We are committed to delivering exceptional cleaning services that leave your spaces sparkling clean
+        and hygienic. Our professional team uses eco-friendly products to ensure a safe and healthy
+        environment for you.
+      </p>
+
+      <div class="flex w-full flex-col gap-[50px] lg:flex-row lg:items-center xl:gap-[81px]">
+        <ul class="flex flex-col gap-6 lg:w-[550px] lg:shrink-0 lg:pt-[18px]" data-reveal="up">
+          {highlights.map((item, i) => (
+            <li
+              class:list={[
+                "flex items-center gap-[21px]",
+                i === 1 && "border-y border-line pt-[30px] pb-[34px]",
+                i === 2 && "pt-1.5",
+              ]}
+            >
+              <span class="flex size-20 shrink-0 items-center justify-center rounded-full bg-highlight text-secondary">
+                <item.icon class="size-[42px]" aria-hidden="true" />
+              </span>
+              <span>
+                <span class="block font-heading text-base leading-10 text-secondary capitalize">
+                  {item.title}
+                </span>
+                <span class="block leading-6 sm:pr-[52px]">{item.text}</span>
+              </span>
+            </li>
+          ))}
+        </ul>
+        <div class="flex flex-1 items-center gap-[9px]">
+          <Image
+            src={agency1}
+            alt="Basket of cleaning supplies on a kitchen counter"
+            widths={[378, 756]}
+            sizes="(min-width: 1025px) 378px, 100vw"
+            class="h-[397px] w-full rounded-[24px] object-cover sm:max-md:w-1/2 md:max-lg:w-full lg:w-1/2"
+            data-reveal="right"
+          />
+          <Image
+            src={agency2}
+            alt="Two cleaners with a mop and supply cart in an office"
+            widths={[378, 756]}
+            sizes="(min-width: 1025px) 378px, 50vw"
+            class="hidden h-[397px] w-1/2 rounded-[24px] object-cover max-sm:block lg:block"
+            data-reveal="left"
+          />
+        </div>
+      </div>
     </div>
   </section>
+
+  <Marquee class="pb-[60px] lg:pb-[88px]" />
+
+  <!-- Four steps ------------------------------------------------------------------------------ -->
+  <section class="section-gutter bg-surface py-[60px] sm:py-20 md:py-[100px] lg:pt-[120px] lg:pb-[108px]">
+    <div class="site-container flex flex-col">
+      <SectionHeading
+        label="How it works"
+        parts={["Get cleaner", { accent: "space in four" }, "steps"]}
+        align="center"
+        class="mx-auto w-full max-w-[678px] pb-[30px] lg:pb-[60px]"
+        labelClass="pb-2.5 sm:pb-[30px]"
+      />
+      <ol class="grid gap-[30px] sm:grid-cols-2 xl:grid-cols-4">
+        {steps.map((step, i) => (
+          <li
+            class="step-card group relative rounded-[24px] bg-white px-2.5 pt-2.5 pb-[43px]"
+            style={`--step-offset:${i * 50}px`}
+            data-reveal="up"
+            data-reveal-delay={String(i * 100)}
+          >
+            <div class="relative">
+              <div class="relative overflow-hidden rounded-[24px] pb-[64.52%]">
+                <Image
+                  src={step.image}
+                  alt={step.alt}
+                  widths={[310, 620]}
+                  sizes="(min-width: 1201px) 301px, (min-width: 768px) 50vw, 100vw"
+                  class="absolute inset-0 size-full object-cover transition-transform duration-[400ms] ease-in-out group-hover:scale-[1.07]"
+                />
+              </div>
+              <span class="step-bump absolute right-5 bottom-0 z-[3] h-[34px] w-[100px]" aria-hidden="true" />
+              <span class="absolute right-11 -bottom-[26px] z-[4] flex size-[52px] items-center justify-center rounded-full bg-primary text-base leading-5 font-bold text-white">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+            </div>
+            <div class="pt-10 pr-9 pl-[21px]">
+              <h3 class="mb-[15px] font-heading text-base leading-[30px] text-secondary capitalize">
+                {step.title}
+              </h3>
+              <p class="leading-6">{step.text}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- Smart cleaning band --------------------------------------------------------------------- -->
+  <section class="section-gutter relative overflow-hidden bg-teal pt-[60px] sm:pt-20 md:pt-[100px] lg:min-h-[960px] lg:pt-[130px]">
+    <div class="site-container relative flex flex-col gap-[50px] lg:flex-row lg:justify-between lg:gap-10">
+      <div class="relative z-[3] flex flex-col max-lg:items-center max-lg:text-center lg:w-[688px]">
+        <SectionHeading
+          label="Our trusted partner"
+          parts={["Smart cleaning", { accent: "solution for you 24/7" }, "hours"]}
+          dark
+          class="pb-[30px] max-lg:items-center max-lg:text-center"
+          labelClass="pb-2.5 sm:pb-[30px]"
+          reveal="up"
+        />
+        <p class="max-w-[480px] pb-[30px] leading-6 text-white" data-reveal="up">
+          Behind our commitment to providing a best cleaning service, we have strengths and differences that
+          create trust and love from customers.
+        </p>
+        <div class="flex flex-wrap items-center gap-[30px] max-lg:justify-center" data-reveal="up">
+          <a href="/services/" class="btn btn-md btn-on-dark">
+            <span>Learn More</span>
+            <span class="btn-icon">
+              <Icon name="right-arrow" class="text-base" />
+            </span>
+          </a>
+          <a href={site.contact.phone.href} class="group flex items-center gap-3 text-white">
+            <Icon name="phone-call" class="text-[28px]" />
+            <span class="flex flex-col text-left">
+              <span class="text-base leading-[14px] font-semibold capitalize">Need help?</span>
+              <span class="mt-1.5 font-heading text-sm leading-4 transition-colors group-hover:text-highlight">
+                {site.contact.phone.display}
+              </span>
+            </span>
+          </a>
+        </div>
+      </div>
+
+      <ul class="relative z-[3] grid gap-[30px] max-lg:text-center sm:grid-cols-3 lg:flex lg:w-[388px] lg:flex-col lg:gap-[60px]">
+        {counters.map((c, i) => (
+          <li class="lg:min-h-[188px]" data-reveal="up" data-reveal-delay={String(i * 100)}>
+            <p class="font-heading text-[50px] leading-[80px] text-white">
+              <span data-counter={c.value}>{c.value}</span>
+              {c.suffix}
+            </p>
+            <h3 class="mt-[18px] font-heading text-sm leading-[30px] text-white capitalize">{c.title}</h3>
+            <p class="mt-2.5 leading-6 text-white lg:max-w-[309px]">{c.text}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <div
+      class="pointer-events-none relative mt-10 flex h-[370px] justify-center sm:h-[490px] lg:absolute lg:inset-0 lg:mt-0 lg:h-auto"
+      aria-hidden="true"
+    >
+      <span class="brand-watermark absolute top-[150px] left-1/2 -translate-x-1/2 font-heading text-[120px] leading-[1.06] whitespace-nowrap uppercase sm:top-[200px] sm:text-[220px] lg:top-[693px] lg:text-[330px]">
+        Jamal
+      </span>
+      <Image
+        src={cleaningTeam}
+        alt=""
+        widths={[400, 521]}
+        sizes="(min-width: 1025px) 505px, 80vw"
+        class="absolute bottom-0 left-1/2 z-[2] w-[300px] -translate-x-1/2 sm:w-[400px] lg:ml-[35px] lg:w-[505px]"
+      />
+    </div>
+  </section>
+
+  <TestimonialCards />
 </BaseLayout>
+
+<style>
+  @media (width >= 1201px) {
+    .step-card {
+      margin-top: var(--step-offset);
+      align-self: start;
+    }
+  }
+  /* White hump behind the step number (theme .decor-border). */
+  .step-bump::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    width: 100px;
+    height: 33px;
+    background-color: #fff;
+    clip-path: path(
+      "M 0 33 H 100 C 86 33 85 33 79 19 C 75 6 60.6183 0 51 0 C 37.3818 0 26.4011 6.9412 20.7412 19.1769 C 16.3213 33.1703 15 33 0 33 Z"
+    );
+  }
+  /* Big brand word fading out downwards (theme heading "text gradient"). */
+  .brand-watermark {
+    background: linear-gradient(180deg, var(--color-primary) 0%, rgba(0, 166, 80, 0) 85%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+</style>

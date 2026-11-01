@@ -4,20 +4,20 @@
     "name": "dishes cleaning",
     "role": "Fresh Design",
     "rating": 5,
-    "home": true,
     "order": 1,
     "quote": "As a busy parent, this cleaning service is a lifesaver! Thorough, friendly, and trustworthy. Coming home to a spotless house is such a relief. Highly recommend!",
-    "avatar": "../assets/images/testimonials/avatar-1.jpg"
+    "avatar": "../assets/images/testimonials/avatar-1.jpg",
+    "placements": ["list"]
   },
   {
     "id": "office-crew",
     "name": "dishes cleaning",
     "role": "Fresh Design",
     "rating": 5,
-    "home": true,
     "order": 2,
     "quote": "The cleaning crew did an amazing job on our office. Efficient and eco-friendly, our workspace has never looked better. Team morale is up. Highly recommend!",
-    "avatar": "../assets/images/testimonials/avatar-1.jpg"
+    "avatar": "../assets/images/testimonials/avatar-1.jpg",
+    "placements": ["list"]
   },
   {
     "id": "true-partner",
@@ -26,33 +26,37 @@
     "rating": 5,
     "order": 3,
     "quote": "Working with Jamal Cleaning Services has been a real pleasure and a real experience. It doesn’t feel like an outside operation – the team work as one. It’s been comforting to know that when you have your back to the wall, as you do with a project this size, Jamal Cleaning Services are standing there beside us not walking away… they are a true partner.",
-    "avatar": "../assets/images/testimonials/avatar-1.jpg"
+    "avatar": "../assets/images/testimonials/avatar-1.jpg",
+    "placements": ["slider"]
   },
   {
     "id": "welcome-the-team",
     "name": "Ariana Green",
     "role": "Manager",
-    "rating": 0,
+    "rating": 5,
     "order": 4,
     "quote": "I always look forward to welcoming the Jamal Cleaning team into my home. I get to relax and enjoy the morning, and before I know it, my entire home is clean and sparkly from top to bottom. Thank you. Thank you. Thank you.",
-    "avatar": "../assets/images/testimonials/avatar-1.jpg"
+    "avatar": "../assets/images/testimonials/avatar-1.jpg",
+    "placements": ["slider", "cards"]
   },
   {
     "id": "new-to-the-area",
     "name": "Ariana Green",
     "role": "Manager",
-    "rating": 0,
+    "rating": 5,
     "order": 5,
     "quote": "We recently moved to the area and are very happy that we chose Jamal Cleaning Services. They do an excellent job every time. They provide their arrival time and are always punctual. It is also important to us that they use environmentally friendly cleaning products.",
-    "avatar": "../assets/images/testimonials/avatar-1.jpg"
+    "avatar": "../assets/images/testimonials/avatar-1.jpg",
+    "placements": ["slider", "cards"]
   },
   {
     "id": "monthly-clean",
     "name": "dishes cleaning",
     "role": "Manager",
-    "rating": 0,
+    "rating": 5,
     "order": 6,
     "quote": "If it wasn’t for Jamal Cleaning Services, I don’t think I could live in my home. Every month, the efficient, friendly crew shows up and does a thorough cleaning. When they are done, everything looks brand-new, beautiful, everything smells good, and I am so happy to have found this great service.",
-    "avatar": "../assets/images/testimonials/avatar-1.jpg"
+    "avatar": "../assets/images/testimonials/avatar-1.jpg",
+    "placements": ["cards"]
   }
 ]

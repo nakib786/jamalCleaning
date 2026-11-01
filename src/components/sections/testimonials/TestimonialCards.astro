@@ -1,0 +1,101 @@
+---
+/**
+ * "Hear what our global clients say" card carousel (theme testimonials layout 2): white cards with
+ * the avatar overlapping the top edge, 3 / 2 / 1 per view, looping autoplay (5s, pauses on hover),
+ * on a warm grey band with a faint world map. Shows testimonials whose placements include "cards".
+ */
+import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
+import worldMap from "../../../assets/images/home/world-map.png";
+import SectionHeading from "../../ui/SectionHeading.astro";
+
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+const testimonials = (await getCollection("testimonials"))
+  .filter((t) => t.data.placements.includes("cards"))
+  .sort((a, b) => a.data.order - b.data.order);
+---
+
+<section
+  class:list={[
+    "section-gutter relative overflow-hidden bg-[#f5f4ee] py-[60px] sm:py-20 md:py-[100px] lg:py-[130px] xl:pt-[100px] 2xl:pt-[130px]",
+    className,
+  ]}
+>
+  <div
+    class="pointer-events-none absolute inset-x-0 bottom-0 hidden justify-center sm:flex"
+    aria-hidden="true"
+  >
+    <Image src={worldMap} alt="" width={1245} class="h-[727px] w-[1245px] max-w-none opacity-15" />
+  </div>
+  <div class="site-container relative z-[1] flex flex-col">
+    <SectionHeading
+      label="What clients say"
+      parts={["Hear what", { accent: "our global" }, "clients say"]}
+      align="center"
+      class="mx-auto w-full max-w-[678px]"
+      labelClass="pb-2.5 sm:pb-[30px]"
+      headingClass="max-md:pb-[30px] max-sm:pb-0"
+    />
+    <div class="mt-[105px] overflow-hidden pt-[45px]" data-testimonial-carousel data-reveal="up">
+      <ul class="cards-track flex touch-pan-y">
+        {testimonials.map((t) => (
+          <li class="card-slide min-w-0 shrink-0">
+            <figure class="relative flex h-full flex-col rounded-[24px] bg-white px-10 pt-[78px] pb-8 text-center sm:px-[50px] md:px-10 lg:px-[60px] min-[1441px]:px-[72px]">
+              {t.data.avatar && (
+                <Image
+                  src={t.data.avatar}
+                  alt=""
+                  width={89}
+                  height={89}
+                  class="absolute top-0 left-1/2 size-[89px] -translate-1/2 rounded-full border-4 border-white object-cover"
+                />
+              )}
+              <blockquote class="mb-[30px] border-b border-line pb-[30px] text-lg leading-6 font-medium text-secondary">
+                <p>“{t.data.quote}”</p>
+              </blockquote>
+              <figcaption class="mt-auto">
+                <span class="mb-1 block font-heading text-sm leading-[30px] text-secondary capitalize">
+                  {t.data.name}
+                </span>
+                <span class="block text-lg leading-none">{t.data.role}</span>
+              </figcaption>
+            </figure>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cards-track {
+    margin-left: -30px;
+  }
+  .card-slide {
+    flex-basis: 100%;
+    padding-left: 30px;
+    @media (width >= 768px) {
+      flex-basis: 50%;
+    }
+    @media (width >= 1201px) {
+      flex-basis: calc(100% / 3);
+    }
+  }
+</style>
+
+<script>
+  import EmblaCarousel from "embla-carousel";
+  import Autoplay from "embla-carousel-autoplay";
+
+  document.querySelectorAll<HTMLElement>("[data-testimonial-carousel]").forEach((viewport) => {
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const plugins = reducedMotion
+      ? []
+      : [Autoplay({ delay: 5000, stopOnMouseEnter: true, stopOnInteraction: true })];
+    EmblaCarousel(viewport, { loop: true, align: "start", duration: 25 }, plugins);
+  });
+</script>
