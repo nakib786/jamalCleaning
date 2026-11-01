@@ -5,9 +5,10 @@ Status as of session 2 (2026-10-31). Prompt.md is the spec; `site-map.md` lists 
 ## Scope (owner decisions)
 
 - Build **Home 4** and **Services Style 1** variants only.
-- **No blog, no team pages, no pricing plans, no shop** (owner request). Don't link to them anywhere.
-- 27 pages in total: `/`, `/services/` + 6 service pages, `/projects/` + 12 project pages,
-  `/about-us/`, `/testimonials/`, `/appointment/`, `/faqs/`, `/contact-us/`, `404`.
+- **No blog, no team pages, no pricing plans, no shop, no appointment page** (owner requests). Don't link to them anywhere.
+  "Get a Quote" / "Book a Service" go to `/contact-us/` (`site.quote.href`).
+- 26 pages in total: `/`, `/services/` + 6 service pages, `/projects/` + 12 project pages,
+  `/about-us/`, `/testimonials/`, `/faqs/`, `/contact-us/`, `404`.
 - We hold a Cetro license; theme CSS/JS/images were captured from the demo for reference and reuse.
 
 ## Done
@@ -39,9 +40,11 @@ For the reference/verification tools you also need Chrome on port 9222 (see `too
 2. **Content collections:** done (`src/content/`). Service and project detail content is structured frontmatter (see
    `src/content.config.ts`); the demo's shared detail text was copied into every file. Testimonials name "Jamal Cleaning"
    where the demo named other brands.
-3. **Inner pages** (replace the stubs in `src/pages/`): about-us, services (Style 1 grid), service detail, projects (with category
-   filter), project detail, testimonials, appointment (form → `/api/quote`), faqs (`<details>` accordions + FAQPage JSON-LD),
-   contact-us (form → `/api/contact`, lazy map iframe), 404. Match `reference/screenshots/<slug>/{1440,768,390}.jpg`.
+3. **Inner pages:** services list, service detail, projects list (category filter + `#hash`) and project detail are
+   **done** and match the reference at 1440. Still stubs: about-us, testimonials, faqs (two-column accordions + FAQPage
+   JSON-LD), contact-us (info cards + form → `/api/contact`, lazy map), 404. Reuse `components/ui/Accordion.astro`,
+   `cards/ServiceCard.astro`, `cards/ProjectCard.astro`, the home `Testimonials`/`Steps`/`Marquee` pieces where the
+   reference repeats them. Match `reference/screenshots/<slug>/{1440,768,390}.jpg`.
 4. **Step 2 finish:** `npm run crawl:capture` (polite, ~1 h) → full `captured/manifest.json` + failures; copy anything still missing.
 5. **Step 4:** confirm no demo extras remain (no "Cetro"/"Pavothemes"/example.com, no analytics, no demo switcher, no "Buy now").
 6. **Cloudflare (Workers static assets — Cloudflare's current recommendation for new projects):** add `wrangler.jsonc`

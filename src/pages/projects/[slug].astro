@@ -1,29 +1,204 @@
 ---
-import { getCollection, render } from "astro:content";
+/**
+ * Project detail (theme single-portfolio template): wide photo, sticky fact sheet beside the
+ * case study (overview with photo pair, benefits checklist, customer review), and
+ * previous / next project links. Content comes from src/content/projects/.
+ */
+import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
+import bannerImage from "../../assets/images/page-title/breadcrumb-project.jpg";
 import PageTitle from "../../components/layout/PageTitle.astro";
+import Icon from "../../components/ui/Icon.astro";
+import { site } from "../../config/site";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { categorySlug } from "../../lib/projects";
 
 export async function getStaticPaths() {
-  const entries = await getCollection("projects");
-  return entries.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+  const entries = (await getCollection("projects")).sort((a, b) => a.data.order - b.data.order);
+  return entries.map((entry, i) => ({
+    params: { slug: entry.id },
+    // "Previous" is the next-older project (higher order), like the theme's post navigation.
+    props: { entry, previous: entries[i + 1], next: entries[i - 1] },
+  }));
 }
 
-const { entry } = Astro.props;
-const { Content } = await render(entry);
+const { entry, previous, next } = Astro.props;
+const { data } = entry;
+const { overview, benefits, review } = data;
+
+const facts = [
+  { label: "Completion Date", value: data.completed },
+  { label: "Clients", value: data.client },
+  { label: "Location", value: data.location },
+  { label: "Category", value: data.factCategory ?? data.category },
+].filter((f): f is { label: string; value: string } => Boolean(f.value));
+
+const projectLd = {
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  name: data.title,
+  description: data.seoDescription ?? data.excerpt,
+  url: new URL(Astro.url.pathname, site.url).href,
+  creator: { "@id": `${site.url}/#business` },
+  genre: data.category,
+};
+const h2 = "font-heading text-[30px] leading-[50px] text-secondary capitalize";
+const factRowPadding = [
+  "pt-[25px] pb-[23px]",
+  "pt-[21px] pb-[22px]",
+  "pt-[21px] pb-[23px]",
+  "pt-5 pb-[30px]",
+];
 ---
 
 <BaseLayout
-  title={entry.data.title}
-  description={entry.data.seoDescription ?? entry.data.excerpt}
-  image={entry.data.image}
+  title={data.title}
+  description={data.seoDescription ?? data.excerpt}
+  image={data.image}
+  imageAlt={data.imageAlt}
+  type="article"
+  jsonLd={[projectLd]}
 >
   <PageTitle
-    title={entry.data.title}
-    crumbs={[{ label: "Projects", href: "/projects/" }, { label: entry.data.title }]}
+    title={data.title}
+    crumbs={[
+      { label: "Projects", href: "/projects/" },
+      { label: data.category, href: `/projects/#${categorySlug(data.category)}` },
+      { label: data.title },
+    ]}
+    image={bannerImage}
   />
-  <section class="section-gutter py-[120px]">
-    <article class="site-container prose">
-      <Content />
-    </article>
-  </section>
+
+  <div class="section-gutter py-[60px] sm:py-20 md:py-[100px] lg:pt-[138px] lg:pb-[130px]">
+    <div class="site-container flex flex-col gap-[30px] sm:gap-[60px]">
+      <Image
+        src={data.image}
+        alt={data.imageAlt}
+        widths={[480, 768, 1024, 1440]}
+        sizes="(min-width: 1441px) 1375px, 100vw"
+        loading="eager"
+        class="h-[400px] w-full rounded-[24px] object-cover sm:h-[450px] md:h-[600px]"
+      />
+
+      <div class="flex flex-col gap-[30px] sm:flex-row sm:items-start lg:gap-[60px] xl:gap-[70px]">
+        {facts.length > 0 && (
+          <dl class="w-full shrink-0 rounded-[18px] border border-line sm:sticky sm:top-[30px] sm:w-[270px] md:w-[330px]">
+            {facts.map((fact, i) => (
+              <div
+                class:list={[
+                  "flex flex-col gap-1.5 px-[30px]",
+                  factRowPadding[i] ?? "py-[22px]",
+                  i > 0 && "border-t border-line",
+                ]}
+              >
+                <dt class="font-heading text-sm leading-[30px] text-secondary capitalize">{fact.label} :</dt>
+                <dd class="text-base leading-6 font-medium capitalize">{fact.value}</dd>
+              </div>
+            ))}
+          </dl>
+        )}
+
+        <article class="min-w-0 flex-1">
+          {overview && (
+            <>
+              <h2 class:list={[h2, "pb-5"]}>{overview.heading}</h2>
+              {overview.paragraphs.slice(0, 1).map((p) => (
+                <p class="leading-6">{p}</p>
+              ))}
+              {data.gallery.length > 0 && (
+                <div class="flex flex-col gap-[30px] py-[30px] sm:pt-[41px] sm:pb-[34px] min-[1025px]:flex-row">
+                  {data.gallery.map((photo) => (
+                    <Image
+                      src={photo.src}
+                      alt={photo.alt}
+                      widths={[473, 946]}
+                      sizes="(min-width: 1025px) 473px, 100vw"
+                      class="w-full rounded-[18px] object-cover min-[1025px]:h-[338px] min-[1025px]:w-[calc(50%-15px)]"
+                    />
+                  ))}
+                </div>
+              )}
+              {overview.paragraphs.slice(1).map((p) => (
+                <p class="leading-6">{p}</p>
+              ))}
+            </>
+          )}
+
+          {benefits && (
+            <>
+              <h2 class:list={[h2, "pt-[30px] pb-5 sm:pt-10"]}>{benefits.heading}</h2>
+              {benefits.paragraphs.map((p) => (
+                <p class="leading-6">{p}</p>
+              ))}
+              {benefits.list.length > 0 && (
+                <ul class="grid gap-x-[30px] gap-y-5 py-[30px] min-[1025px]:grid-cols-2 xl:gap-x-[62px] xl:pt-[27px] xl:pr-[31px] xl:pb-10">
+                  {benefits.list.map((item) => (
+                    <li class="flex items-start gap-2 text-base leading-6 font-semibold text-secondary">
+                      <Icon name="check-fill1" class="mt-[3px] text-lg text-primary" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </>
+          )}
+
+          {review && (
+            <>
+              <h2 class:list={[h2, "pb-5"]}>{review.heading}</h2>
+              {review.paragraphs.map((p) => (
+                <p class="leading-6">{p}</p>
+              ))}
+              <figure class="mt-9 flex flex-col gap-[29px] rounded-[24px] bg-surface p-[30px] sm:flex-row xl:pt-9 xl:pr-[82px] xl:pb-[35px] xl:pl-[49px]">
+                <span
+                  class="flex size-20 shrink-0 items-center justify-center rounded-full bg-highlight text-secondary"
+                  aria-hidden="true"
+                >
+                  <Icon name="quotes" class="text-2xl" />
+                </span>
+                <div>
+                  <blockquote class="mb-[27px] text-[26px] leading-[30px] font-medium text-secondary">
+                    <p>"{review.quote}"</p>
+                  </blockquote>
+                  <figcaption class="font-heading text-xs leading-[30px] text-secondary capitalize">
+                    {review.author}
+                  </figcaption>
+                </div>
+              </figure>
+            </>
+          )}
+        </article>
+      </div>
+
+      {(previous || next) && (
+        <nav
+          class="flex justify-between gap-6 border-t border-line pt-[30px] min-[1025px]:mt-5"
+          aria-label="More projects"
+        >
+          {previous ? (
+            <a href={`/projects/${previous.id}/`} class="group flex flex-col gap-1">
+              <span class="flex items-center gap-1.5 text-sm leading-[26px] font-bold text-lighter uppercase">
+                <Icon name="angle-left" class="text-base" /> Previous project
+              </span>
+              <span class="font-heading text-sm leading-[26px] text-secondary transition-colors group-hover:text-primary">
+                {previous.data.title}
+              </span>
+            </a>
+          ) : (
+            <span />
+          )}
+          {next && (
+            <a href={`/projects/${next.id}/`} class="group flex flex-col items-end gap-1 text-right">
+              <span class="flex items-center gap-1.5 text-sm leading-[26px] font-bold text-lighter uppercase">
+                Next project <Icon name="angle-right" class="text-base" />
+              </span>
+              <span class="font-heading text-sm leading-[26px] text-secondary transition-colors group-hover:text-primary">
+                {next.data.title}
+              </span>
+            </a>
+          )}
+        </nav>
+      )}
+    </div>
+  </div>
 </BaseLayout>

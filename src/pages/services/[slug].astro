@@ -1,29 +1,203 @@
 ---
-import { getCollection, render } from "astro:content";
+/**
+ * Service detail (theme single-service template): sticky sidebar with the other services and a
+ * "Do you need help?" card, and the article — photo, intro, feature boxes, photo pair, text
+ * sections with a checklist, and a FAQ accordion. Content comes from src/content/services/.
+ */
+import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
+import bannerImage from "../../assets/images/page-title/breadcrumb-services.jpg";
+import helpCleaner from "../../assets/images/services/help-cleaner.png";
 import PageTitle from "../../components/layout/PageTitle.astro";
+import Accordion from "../../components/ui/Accordion.astro";
+import Icon from "../../components/ui/Icon.astro";
+import { site } from "../../config/site";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
 export async function getStaticPaths() {
   const entries = await getCollection("services");
-  return entries.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+  return entries.map((entry) => ({ params: { slug: entry.id }, props: { entry, all: entries } }));
 }
 
-const { entry } = Astro.props;
-const { Content } = await render(entry);
+const { entry, all } = Astro.props;
+const { data } = entry;
+const { about } = data;
+// The sidebar lists services in reverse display order, like the theme.
+const others = [...all].sort((a, b) => b.data.order - a.data.order);
+
+const featureIcons = import.meta.glob<{ default: (props: Record<string, unknown>) => unknown }>(
+  "../../assets/images/misc/icons/*.svg",
+  { eager: true },
+);
+const featureIcon = (name: string) => featureIcons[`../../assets/images/misc/icons/${name}.svg`]?.default;
+
+const serviceLd = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: data.title,
+  description: data.seoDescription ?? data.excerpt,
+  serviceType: data.title,
+  url: new URL(Astro.url.pathname, site.url).href,
+  provider: { "@id": `${site.url}/#business` },
+  areaServed: { "@type": "City", name: site.contact.address.locality },
+};
+const h2 = "font-heading text-[30px] leading-[50px] text-secondary capitalize";
+/** Checklists fill column by column (two lists side by side), like the theme. */
+const halves = (items: string[]) => {
+  const middle = Math.ceil(items.length / 2);
+  return [items.slice(0, middle), items.slice(middle)].filter((half) => half.length > 0);
+};
 ---
 
 <BaseLayout
-  title={entry.data.title}
-  description={entry.data.seoDescription ?? entry.data.excerpt}
-  image={entry.data.image}
+  title={data.title}
+  description={data.seoDescription ?? data.excerpt}
+  image={data.image}
+  imageAlt={data.imageAlt}
+  jsonLd={[serviceLd]}
 >
   <PageTitle
-    title={entry.data.title}
-    crumbs={[{ label: "Services", href: "/services/" }, { label: entry.data.title }]}
+    title={data.title}
+    hideTitle
+    crumbs={[{ label: "Services", href: "/services/" }, { label: data.title }]}
+    image={bannerImage}
   />
-  <section class="section-gutter py-[120px]">
-    <article class="site-container prose">
-      <Content />
-    </article>
-  </section>
+
+  <div class="section-gutter mt-[60px] pb-[60px] sm:mt-20 sm:pb-20 md:mt-[100px] md:pb-[100px] lg:mt-[141px] lg:pb-[130px]">
+    <div class="site-container flex flex-col items-start gap-[30px] sm:flex-row xl:gap-[60px]">
+      <aside class="flex w-full shrink-0 flex-col gap-[30px] sm:sticky sm:top-[30px] sm:w-[45%] lg:w-[420px]">
+        <nav
+          class="rounded-[24px] border border-line p-[30px] lg:px-[39px] lg:pt-[39px] lg:pb-[30px]"
+          aria-label="Other services"
+        >
+          <p class="pb-3.5 font-heading text-2xl leading-10 text-secondary">Other Services</p>
+          <ul>
+            {others.map((service) => {
+              const current = service.id === entry.id;
+              return (
+                <li class="border-b border-line last:border-b-0">
+                  <a
+                    href={`/services/${service.id}/`}
+                    class:list={[
+                      "flex w-full items-center pt-4 pb-[15px] text-lg leading-6 font-semibold text-secondary capitalize transition-all duration-[400ms] hover:rounded-[9px] hover:bg-primary hover:px-5 hover:text-white",
+                      current && "rounded-[9px] bg-primary px-5 text-white",
+                    ]}
+                    aria-current={current ? "page" : undefined}
+                  >
+                    {service.data.title}
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        </nav>
+
+        <div class="relative min-h-[500px] overflow-hidden rounded-[24px] bg-[linear-gradient(180deg,#192017_0%,#00a650_100%)] p-[30px] pb-0 text-white sm:min-h-[540px] lg:pt-[42px] lg:pr-[43px] lg:pl-[44px]">
+          <p class="font-heading text-sm leading-[30px] capitalize">Do You Need Help?</p>
+          <p class="pt-[18px] pb-2.5 font-heading text-2xl leading-10">
+            <a href={site.contact.phone.href} class="hover:text-highlight">
+              {site.contact.phone.display}
+            </a>
+          </p>
+          <p class="text-lg leading-6 font-semibold">
+            <a href={`mailto:${site.contact.email}`} class="break-all hover:text-highlight">
+              {site.contact.email}
+            </a>
+          </p>
+          <Image
+            src={helpCleaner}
+            alt="Smiling cleaner giving a thumbs up and holding a bucket of cleaning supplies"
+            width={341}
+            class="absolute bottom-0 left-[30px] w-[341px] max-w-[calc(100%-30px)] lg:left-14"
+          />
+        </div>
+      </aside>
+
+      <article class="min-w-0 flex-1">
+        <Image
+          src={data.image}
+          alt={data.imageAlt}
+          widths={[480, 768, 1000]}
+          sizes="(min-width: 1441px) 895px, (min-width: 768px) 55vw, 100vw"
+          loading="eager"
+          class="mb-[31px] h-[450px] w-full rounded-[24px] object-cover min-[1025px]:h-[520px]"
+        />
+
+        {about && (
+          <>
+            <h2 class:list={[h2, "pb-5"]}>{about.heading}</h2>
+            {about.paragraphs.map((p, i) => (
+              <p class:list={["leading-6", i < about.paragraphs.length - 1 && "pb-6"]}>{p}</p>
+            ))}
+          </>
+        )}
+
+        {data.features.length > 0 && (
+          <ul class="grid gap-[30px] py-[30px] sm:pt-[38px] sm:pb-[37px] xl:grid-cols-2 xl:gap-x-[30px] xl:gap-y-10">
+            {data.features.map((feature) => {
+              const FeatureIcon = featureIcon(feature.icon);
+              return (
+                <li class="flex flex-col items-center gap-[21px] text-center sm:flex-row sm:items-start sm:text-left">
+                  <span class="flex size-20 shrink-0 items-center justify-center rounded-full bg-highlight text-secondary">
+                    {FeatureIcon && <FeatureIcon class="size-[42px]" aria-hidden="true" />}
+                  </span>
+                  <span class="sm:pr-4">
+                    <span class="mb-[15px] block font-heading text-lg leading-[30px] text-secondary capitalize">
+                      {feature.title}
+                    </span>
+                    <span class="block leading-6">{feature.text}</span>
+                  </span>
+                </li>
+              );
+            })}
+          </ul>
+        )}
+
+        {data.gallery.length > 0 && (
+          <div class="flex flex-col gap-[30px] pb-[30px] min-[1025px]:flex-row">
+            {data.gallery.map((photo) => (
+              <Image
+                src={photo.src}
+                alt={photo.alt}
+                widths={[433, 866]}
+                sizes="(min-width: 1025px) 433px, 100vw"
+                class="w-full rounded-[18px] object-cover min-[1025px]:h-[298px] min-[1025px]:w-[calc(50%-15px)]"
+              />
+            ))}
+          </div>
+        )}
+
+        {data.sections.map((section, i) => (
+          <section>
+            <h2 class:list={[h2, "pb-6", i > 0 && "pt-[30px] sm:pt-10"]}>{section.heading}</h2>
+            {section.paragraphs.map((p) => (
+              <p class="leading-6 lg:pr-4">{p}</p>
+            ))}
+            {section.checklist.length > 0 && (
+              <div class="grid gap-[15px] pt-[31px] pb-[30px] min-[1025px]:grid-cols-2 min-[1025px]:gap-x-[30px] xl:gap-x-[60px] min-[1441px]:gap-x-[120px]">
+                {halves(section.checklist).map((half) => (
+                  <ul class="flex flex-col gap-[15px]">
+                    {half.map((item) => (
+                      <li class="flex items-start gap-2 text-lg leading-6 font-semibold text-secondary capitalize">
+                        <Icon name="check-fill1" class="mt-[3px] text-lg text-primary" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                ))}
+              </div>
+            )}
+            {section.note && <p class="leading-6 lg:pr-5">{section.note}</p>}
+          </section>
+        ))}
+
+        {data.faqs.length > 0 && (
+          <section>
+            <h2 class:list={[h2, "pt-[30px] pb-6 sm:pt-[50px]"]}>Frequently asked questions</h2>
+            <Accordion items={data.faqs} name={`faq-${entry.id}`} />
+          </section>
+        )}
+      </article>
+    </div>
+  </div>
 </BaseLayout>

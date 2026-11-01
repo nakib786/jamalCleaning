@@ -1,16 +1,101 @@
 ---
+/**
+ * Projects (theme "Projects Style"): centred heading and a 3 / 2 / 1-column grid of project cards
+ * (caption on hover from 1024px). All projects on one page with a category filter, which
+ * replaces the demo's pagination and category archive pages. `/projects/#outdoor` pre-selects.
+ */
+import { getCollection } from "astro:content";
+import bannerImage from "../../assets/images/page-title/breadcrumb-project.jpg";
+import ProjectCard from "../../components/cards/ProjectCard.astro";
 import PageTitle from "../../components/layout/PageTitle.astro";
+import SectionHeading from "../../components/ui/SectionHeading.astro";
+import { categorySlug } from "../../lib/projects";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const projects = (await getCollection("projects")).sort((a, b) => a.data.order - b.data.order);
+const categories = [...new Set(projects.map((p) => p.data.category))].sort();
 ---
 
 <BaseLayout
   title="Projects"
-  description="Recent cleaning projects by Jamal Cleaning Services across Prince George, BC."
+  description="Recent cleaning projects by Jamal Cleaning Services: commercial, residential, outdoor and sanitization work in Prince George, BC."
 >
-  <PageTitle title="Projects" />
-  <section class="section-gutter py-[120px]">
-    <div class="site-container text-center">
-      <p class="text-lg">This page is being rebuilt to match the reference design.</p>
+  <PageTitle title="Projects" image={bannerImage} />
+  <section class="section-gutter py-[60px] sm:py-20 md:py-[100px] lg:py-[130px]" data-project-filter>
+    <div class="site-container flex flex-col gap-[30px]">
+      <SectionHeading
+        label="Our projects"
+        parts={["You can check", { accent: "portfolio to check" }, "quality."]}
+        align="center"
+        class="mx-auto w-full xl:max-w-[810px]"
+        labelClass="pb-[30px]"
+      />
+
+      <div
+        class="flex flex-wrap justify-center gap-2.5"
+        role="group"
+        aria-label="Filter projects by category"
+      >
+        {["All", ...categories].map((category) => (
+          <button
+            type="button"
+            class="filter-button rounded-full border border-line px-6 py-2.5 text-base leading-6 font-bold text-secondary capitalize transition-colors duration-300 hover:border-primary hover:text-primary"
+            data-filter={category === "All" ? "all" : categorySlug(category)}
+            aria-pressed={category === "All" ? "true" : "false"}
+          >
+            {category}
+          </button>
+        ))}
+      </div>
+
+      <ul class="grid gap-[30px] sm:grid-cols-2 lg:grid-cols-3" data-reveal="up">
+        {projects.map((project) => (
+          <li data-category={categorySlug(project.data.category)}>
+            <ProjectCard
+              project={project}
+              hoverCaption
+              sizes="(min-width: 1025px) 440px, (min-width: 768px) 50vw, 100vw"
+            />
+          </li>
+        ))}
+      </ul>
+      <p class="hidden text-center" data-empty>
+        No projects in this category yet.
+      </p>
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .filter-button[aria-pressed="true"] {
+    border-color: var(--color-primary);
+    background-color: var(--color-primary);
+    color: #fff;
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>("[data-project-filter]").forEach((root) => {
+    const buttons = [...root.querySelectorAll<HTMLButtonElement>("[data-filter]")];
+    const items = [...root.querySelectorAll<HTMLElement>("[data-category]")];
+    const empty = root.querySelector<HTMLElement>("[data-empty]");
+
+    const apply = (filter: string, updateHash: boolean) => {
+      const known = buttons.some((b) => b.dataset.filter === filter);
+      const active = known ? filter : "all";
+      buttons.forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.filter === active)));
+      let shown = 0;
+      items.forEach((item) => {
+        const match = active === "all" || item.dataset.category === active;
+        item.hidden = !match;
+        if (match) shown++;
+      });
+      empty?.classList.toggle("hidden", shown > 0);
+      if (updateHash) history.replaceState(null, "", active === "all" ? location.pathname : `#${active}`);
+    };
+
+    buttons.forEach((b) => b.addEventListener("click", () => apply(b.dataset.filter ?? "all", true)));
+    window.addEventListener("hashchange", () => apply(location.hash.slice(1), false));
+    if (location.hash) apply(location.hash.slice(1), false);
+  });
+</script>

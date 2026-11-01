@@ -1,16 +1,49 @@
 ---
+/** Services (theme "Services Style 01"): heading and a 3 / 2 / 1-column grid of service cards. */
+import { getCollection } from "astro:content";
+import bannerImage from "../../assets/images/page-title/breadcrumb-services.jpg";
+import ServiceCard from "../../components/cards/ServiceCard.astro";
 import PageTitle from "../../components/layout/PageTitle.astro";
+import SectionHeading from "../../components/ui/SectionHeading.astro";
+import { site } from "../../config/site";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const services = (await getCollection("services")).sort((a, b) => a.data.order - b.data.order);
+
+const itemList = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  itemListElement: services.map((s, i) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    url: new URL(`/services/${s.id}/`, site.url).href,
+    name: s.data.title,
+  })),
+};
 ---
 
 <BaseLayout
   title="Services"
-  description="Residential, move-in/out, construction, specialized and regular home cleaning services in Prince George, BC."
+  description="Construction, move-in/out, regular home, skilled, specialized and residential cleaning services in Prince George, BC. Get a free quote."
+  jsonLd={[itemList]}
 >
-  <PageTitle title="Services" />
-  <section class="section-gutter py-[120px]">
-    <div class="site-container text-center">
-      <p class="text-lg">This page is being rebuilt to match the reference design.</p>
+  <PageTitle title="Services" image={bannerImage} />
+  <section class="section-gutter py-[60px] sm:py-20 md:py-[100px] lg:py-[130px]">
+    <div class="site-container flex flex-col gap-[30px]">
+      <SectionHeading
+        label="Featured service"
+        parts={["Our company", { accent: "provide the best" }, "cleaning service"]}
+        class="max-sm:items-center max-sm:text-center"
+        labelClass="pb-[30px]"
+        headingClass="xl:max-w-[941px]"
+      />
+      <ul class="grid gap-[30px] pt-6 sm:grid-cols-2 lg:grid-cols-3" data-reveal="up">
+        {services.map((service) => (
+          <li>
+            <ServiceCard service={service} />
+          </li>
+        ))}
+      </ul>
     </div>
   </section>
 </BaseLayout>

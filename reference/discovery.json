@@ -1168,10 +1168,9 @@
         "Page",
         "close"
       ],
-      "inBuild": true,
-      "bundle": true,
-      "template": "appointment",
-      "route": "/appointment/"
+      "inBuild": false,
+      "bundle": false,
+      "note": "Dropped at the owner's request; quote requests go to /contact-us/ and the home page form"
     },
     {
       "url": "https://demo2.pavothemes.com/cetro/icons/",

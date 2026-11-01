@@ -1,0 +1,64 @@
+---
+/**
+ * Service card (theme service style 1): bordered card with photo, an arrow button sitting
+ * in a white "bump" on the photo's bottom edge, title and a four-line excerpt.
+ */
+import type { CollectionEntry } from "astro:content";
+import { Image } from "astro:assets";
+import Icon from "../ui/Icon.astro";
+
+interface Props {
+  service: CollectionEntry<"services">;
+}
+
+const { service } = Astro.props;
+const href = `/services/${service.id}/`;
+---
+
+<article class="group relative h-full rounded-[26px] border border-line px-[9px] pt-[11px] pb-[15px] sm:pt-2.5 sm:pb-[43px]">
+  <div class="flex flex-col gap-[35px]">
+    <div class="relative">
+      <div class="relative overflow-hidden rounded-[24px] bg-[#d9d9d9] pt-[65.118%]">
+        <Image
+          src={service.data.image}
+          alt={service.data.imageAlt}
+          widths={[360, 480, 720, 1000]}
+          sizes="(min-width: 1025px) 420px, (min-width: 768px) 50vw, 100vw"
+          class="absolute inset-0 size-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+        />
+      </div>
+      <div class="bump absolute right-5 bottom-0 z-[3] h-[34px] w-[100px]" aria-hidden="true"></div>
+      <a
+        href={href}
+        class="absolute right-[45px] -bottom-[25px] z-[4] flex size-[50px] items-center justify-center rounded-full bg-primary text-white transition-colors duration-300 hover:bg-secondary"
+        aria-label={`${service.data.title}: read more`}
+      >
+        <Icon name="right-arrow" class="text-lg" />
+      </a>
+    </div>
+    <div class="relative z-[1] px-[30px]">
+      <h3 class="font-heading text-xl leading-10 text-secondary capitalize">
+        <a href={href} class="hover:text-primary">
+          {service.data.title}
+        </a>
+      </h3>
+      <p class="mt-[22px] line-clamp-4 border-t border-line pt-[29px] leading-6">{service.data.excerpt}</p>
+    </div>
+  </div>
+</article>
+
+<style>
+  /* White hump behind the button (theme .decor-border). */
+  .bump::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 100px;
+    height: 34px;
+    background-color: #fff;
+    clip-path: path(
+      "M 0 33 H 100 C 90.7952 33 83 31 79 21 C 73.5989 6.9412 62.6183 0 50 0 C 37.3818 0 26.4011 6.9412 21 21 C 17 31 9.2047 33 0 33 Z"
+    );
+  }
+</style>

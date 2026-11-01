@@ -1,0 +1,41 @@
+---
+/**
+ * FAQ accordion (Elementor nested accordion as styled by the theme): rounded bordered items,
+ * Boldonse question, +/− icon. Native <details>; items sharing a `name` open one at a time.
+ */
+interface Item {
+  question: string;
+  answer: string;
+}
+
+interface Props {
+  items: Item[];
+  /** Group name: only one item of the group is open at a time. */
+  name: string;
+  /** Index of the item open on load (-1 for none). */
+  open?: number;
+  class?: string;
+}
+
+const { items, name, open = 0, class: className } = Astro.props;
+---
+
+<div class:list={["flex flex-col gap-2.5", className]}>
+  {items.map((item, i) => (
+    <details class="faq group" name={name} open={i === open}>
+      <summary class="flex cursor-pointer list-none items-center justify-between gap-2.5 rounded-[24px] border border-line px-[29px] pt-[26px] pb-[22px] font-heading text-base leading-[30px] text-[#1f2124] transition-colors group-open:rounded-b-none group-open:border-b-0 hover:[&_.faq-icon]:text-primary [&::-webkit-details-marker]:hidden">
+        <span>{item.question}</span>
+        <span
+          class="faq-icon relative size-3.5 shrink-0 text-secondary transition-colors group-open:text-primary"
+          aria-hidden="true"
+        >
+          <span class="absolute top-1/2 left-0 h-[1.5px] w-full -translate-y-1/2 bg-current" />
+          <span class="absolute top-0 left-1/2 h-full w-[1.5px] -translate-x-1/2 bg-current group-open:hidden" />
+        </span>
+      </summary>
+      <div class="rounded-b-[24px] border border-t-0 border-line px-[29px] pb-[29px]">
+        <p class="max-w-[795px] leading-6">{item.answer}</p>
+      </div>
+    </details>
+  ))}
+</div>

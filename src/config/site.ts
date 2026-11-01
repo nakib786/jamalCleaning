@@ -85,7 +85,7 @@ export const site = {
   },
 
   /** Primary call to action (header button, banners). */
-  quote: { label: "Get a Quote!", href: "/appointment/" },
+  quote: { label: "Get a Quote!", href: "/contact-us/" },
 
   nav: [
     { label: "Home", href: "/" },
@@ -109,7 +109,6 @@ export const site = {
       children: [
         { label: "About Us", href: "/about-us/" },
         { label: "Testimonials", href: "/testimonials/" },
-        { label: "Appointment", href: "/appointment/" },
         { label: "F.A.Q.", href: "/faqs/" },
       ],
     },

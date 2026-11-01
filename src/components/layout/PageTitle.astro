@@ -16,9 +16,11 @@ interface Props {
   /** Trail after "Home"; the last item is the current page. Defaults to [title]. */
   crumbs?: Crumb[];
   image?: ImageMetadata;
+  /** Show only the breadcrumb (service detail pages); the h1 stays for screen readers and SEO. */
+  hideTitle?: boolean;
 }
 
-const { title, crumbs = [{ label: title }], image = defaultBg } = Astro.props;
+const { title, crumbs = [{ label: title }], image = defaultBg, hideTitle = false } = Astro.props;
 const trail: Crumb[] = [{ label: "Home", href: "/" }, ...crumbs];
 const breadcrumbLd = {
   "@context": "https://schema.org",
@@ -46,7 +48,13 @@ const breadcrumbLd = {
   />
   <div class="absolute inset-0 -z-10 bg-[#070b03a3]" aria-hidden="true"></div>
   <div class="text-center">
-    <h1 class="mb-6 font-heading text-[40px] leading-[1.6] tracking-[-3px] text-white sm:text-[60px]">
+    <h1
+      class:list={[
+        hideTitle
+          ? "sr-only"
+          : "mb-6 font-heading text-[40px] leading-[1.6] tracking-[-3px] text-white sm:text-[60px]",
+      ]}
+    >
       {title}
     </h1>
     <nav aria-label="Breadcrumb">

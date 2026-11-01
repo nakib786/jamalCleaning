@@ -41,6 +41,13 @@ const RULES: Rule[] = [
   [/^(team|teams(__[\w-]+)?)$/, () => ({ inBuild: false, note: OWNER_EXCLUDED })],
   [/^pricing-plans$/, () => ({ inBuild: false, note: OWNER_EXCLUDED })],
   [/^blog(__page__\d+)?$/, () => ({ inBuild: false, note: OWNER_EXCLUDED })],
+  [
+    /^appointment$/,
+    () => ({
+      inBuild: false,
+      note: "Dropped at the owner's request; quote requests go to /contact-us/ and the home page form",
+    }),
+  ],
   [/^home-4$/, () => ({ template: "home", route: "/" })],
   [/^services-style-01$/, () => ({ template: "services", route: "/services/" })],
   [
@@ -76,7 +83,6 @@ const RULES: Rule[] = [
   [/^teams__([\w-]+)$/, (m) => ({ template: "team-member", route: `/team/${m[1]}/` })],
   [/^pricing-plans$/, () => ({ template: "pricing", route: "/pricing-plans/" })],
   [/^testimonials$/, () => ({ template: "testimonials", route: "/testimonials/" })],
-  [/^appointment$/, () => ({ template: "appointment", route: "/appointment/" })],
   [/^faqs$/, () => ({ template: "faqs", route: "/faqs/" })],
   [/^contact-us$/, () => ({ template: "contact", route: "/contact-us/" })],
   [
