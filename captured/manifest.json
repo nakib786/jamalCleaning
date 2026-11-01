@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-11-01T01:51:35.634Z",
+  "generatedAt": "2026-11-01T01:51:59.137Z",
   "totals": {
-    "files": 339,
-    "bytes": 31118504,
+    "files": 342,
+    "bytes": 32574641,
     "failures": 5
   },
   "entries": [
@@ -134,7 +134,8 @@
         "home-4",
         "services-style-01",
         "services__residential-services",
-        "projects-style"
+        "projects-style",
+        "portfolios__swimming-pool-cleaning-and-maintenance"
       ],
       "widths": [
         1440,
@@ -153,7 +154,8 @@
         "home-4",
         "services-style-01",
         "services__residential-services",
-        "projects-style"
+        "projects-style",
+        "portfolios__swimming-pool-cleaning-and-maintenance"
       ],
       "widths": [
         1440,
@@ -2511,7 +2513,8 @@
         "home-4",
         "services-style-01",
         "services__residential-services",
-        "projects-style"
+        "projects-style",
+        "portfolios__swimming-pool-cleaning-and-maintenance"
       ],
       "widths": [
         1440,
@@ -2530,7 +2533,8 @@
         "home-4",
         "services-style-01",
         "services__residential-services",
-        "projects-style"
+        "projects-style",
+        "portfolios__swimming-pool-cleaning-and-maintenance"
       ],
       "widths": [
         1440,
@@ -2549,7 +2553,8 @@
         "home-4",
         "services-style-01",
         "services__residential-services",
-        "projects-style"
+        "projects-style",
+        "portfolios__swimming-pool-cleaning-and-maintenance"
       ],
       "widths": [
         1440,
@@ -2568,7 +2573,8 @@
         "home-4",
         "services-style-01",
         "services__residential-services",
-        "projects-style"
+        "projects-style",
+        "portfolios__swimming-pool-cleaning-and-maintenance"
       ],
       "widths": [
         1440,
@@ -2587,7 +2593,8 @@
         "home-4",
         "services-style-01",
         "services__residential-services",
-        "projects-style"
+        "projects-style",
+        "portfolios__swimming-pool-cleaning-and-maintenance"
       ],
       "widths": [
         1440,
@@ -4970,7 +4977,8 @@
         "home-4",
         "services-style-01",
         "services__residential-services",
-        "projects-style"
+        "projects-style",
+        "portfolios__swimming-pool-cleaning-and-maintenance"
       ],
       "widths": [
         1440,
@@ -4989,7 +4997,8 @@
         "home-4",
         "services-style-01",
         "services__residential-services",
-        "projects-style"
+        "projects-style",
+        "portfolios__swimming-pool-cleaning-and-maintenance"
       ],
       "widths": [
         1440,
@@ -5008,7 +5017,8 @@
         "home-4",
         "services-style-01",
         "services__residential-services",
-        "projects-style"
+        "projects-style",
+        "portfolios__swimming-pool-cleaning-and-maintenance"
       ],
       "widths": [
         1440,
@@ -5027,7 +5037,8 @@
         "home-4",
         "services-style-01",
         "services__residential-services",
-        "projects-style"
+        "projects-style",
+        "portfolios__swimming-pool-cleaning-and-maintenance"
       ],
       "widths": [
         1440,
@@ -7490,6 +7501,21 @@
       ]
     },
     {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/breadcrumb-single.jpg",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/breadcrumb-single.jpg",
+      "type": "image",
+      "contentType": "image/jpeg",
+      "size": 1086805,
+      "status": 200,
+      "sha256": "0817154d2330f063ca586b67aa8489337ec2da1bfbc41b5e4ec7b9718ac00e3b",
+      "pages": [
+        "portfolios__swimming-pool-cleaning-and-maintenance"
+      ],
+      "widths": [
+        1440
+      ]
+    },
+    {
       "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/footer-background.jpg",
       "file": "captured/demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/footer-background.jpg",
       "type": "image",
@@ -7501,7 +7527,8 @@
         "home-4",
         "services-style-01",
         "services__residential-services",
-        "projects-style"
+        "projects-style",
+        "portfolios__swimming-pool-cleaning-and-maintenance"
       ],
       "widths": [
         1440,
@@ -7793,7 +7820,8 @@
         "home-4",
         "services-style-01",
         "services__residential-services",
-        "projects-style"
+        "projects-style",
+        "portfolios__swimming-pool-cleaning-and-maintenance"
       ],
       "widths": [
         1440,
@@ -7828,7 +7856,8 @@
         "home-4",
         "services-style-01",
         "services__residential-services",
-        "projects-style"
+        "projects-style",
+        "portfolios__swimming-pool-cleaning-and-maintenance"
       ],
       "widths": [
         1440,
@@ -7847,7 +7876,8 @@
         "home-4",
         "services-style-01",
         "services__residential-services",
-        "projects-style"
+        "projects-style",
+        "portfolios__swimming-pool-cleaning-and-maintenance"
       ],
       "widths": [
         1440,
@@ -7866,7 +7896,8 @@
         "home-4",
         "services-style-01",
         "services__residential-services",
-        "projects-style"
+        "projects-style",
+        "portfolios__swimming-pool-cleaning-and-maintenance"
       ],
       "widths": [
         1440,
@@ -7885,7 +7916,38 @@
         "home-4",
         "services-style-01",
         "services__residential-services",
-        "projects-style"
+        "projects-style",
+        "portfolios__swimming-pool-cleaning-and-maintenance"
+      ],
+      "widths": [
+        1440
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/portfolio-single-1.jpg",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/portfolio-single-1.jpg",
+      "type": "image",
+      "contentType": "image/jpeg",
+      "size": 206956,
+      "status": 200,
+      "sha256": "17f94de469976ec170add3e636a1cadce0d27d20f096303d99160f3f08f514f0",
+      "pages": [
+        "portfolios__swimming-pool-cleaning-and-maintenance"
+      ],
+      "widths": [
+        1440
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/portfolio-single-2.jpg",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/portfolio-single-2.jpg",
+      "type": "image",
+      "contentType": "image/jpeg",
+      "size": 162376,
+      "status": 200,
+      "sha256": "46e23891682dba7e2bfcb269ec15ecdb61551ff0ac4460b5a6465862ac2fe003",
+      "pages": [
+        "portfolios__swimming-pool-cleaning-and-maintenance"
       ],
       "widths": [
         1440
@@ -7981,7 +8043,8 @@
       "sha256": "973012f3bb2f044d15b1abab491045d9fbd55098a583f480b84e79312b291c9c",
       "pages": [
         "home-4",
-        "projects-style"
+        "projects-style",
+        "portfolios__swimming-pool-cleaning-and-maintenance"
       ],
       "widths": [
         1440
