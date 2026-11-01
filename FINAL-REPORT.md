@@ -10,7 +10,8 @@ A fast, mobile-friendly 26-page website for Jamal Cleaning Services, hosted on C
 - **Services**: an overview page plus 6 service pages (Regular Home, Residential, Move In/Out, Construction, Skilled/Deep, Specialized)
 - **Projects**: a filterable gallery plus 12 project pages
 - **Forms** (quote request, contact, newsletter) that email you, protected against spam by Cloudflare Turnstile
-- Search-engine basics (page titles, descriptions, sitemap, robots.txt). On phones the phone number sits in the top bar and the menu has call, email and Get a Quote buttons
+- **WhatsApp first**: a floating "Chat with us" WhatsApp button on every page, plus WhatsApp in the header, menu, home hero, service pages, Contact page and footer. Chats open with a ready-made first message (naming the service on service pages)
+- Search-engine basics (page titles, descriptions, sitemap, robots.txt). On phones the top bar shows WhatsApp and the phone number, and the menu has WhatsApp, call, email and Get a Quote buttons
 
 Contact details, hours, address and social links are all set in one file (`src/config/site.ts`). Text for services, projects, FAQs and testimonials lives in `src/content/`.
 

@@ -2,9 +2,10 @@
 /** Site footer (Cetro footer template): newsletter, four columns, copyright bar. */
 import { Image } from "astro:assets";
 import footerBg from "../../assets/images/footer/footer-background.jpg";
-import { isSet, site } from "../../config/site";
+import { isSet, site, whatsappLink } from "../../config/site";
 import NewsletterForm from "../forms/NewsletterForm.astro";
 import Icon from "../ui/Icon.astro";
+import WhatsAppIcon from "../ui/WhatsAppIcon.astro";
 import Logo from "./Logo.astro";
 
 const year = new Date().getFullYear();
@@ -62,6 +63,15 @@ const { contact } = site;
         </div>
 
         <div class="flex w-full flex-col gap-4 sm:w-[340px]">
+          <a
+            href={whatsappLink()}
+            target="_blank"
+            rel="noopener"
+            class="group flex items-center gap-[10px] text-lg leading-6 font-bold text-white hover:text-primary"
+          >
+            <WhatsAppIcon class="text-2xl text-primary" />
+            <span>Chat on WhatsApp</span>
+          </a>
           <a
             href={contact.phone.href}
             class="font-heading text-lg leading-6 text-primary underline underline-offset-2 hover:text-white"

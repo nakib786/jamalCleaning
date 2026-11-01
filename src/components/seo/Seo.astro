@@ -3,7 +3,7 @@
 import type { ImageMetadata } from "astro";
 import { getImage } from "astro:assets";
 import { getCollection } from "astro:content";
-import { isSet, site, socialLinks } from "../../config/site";
+import { isSet, site, socialLinks, whatsappLink } from "../../config/site";
 
 export interface SeoProps {
   /** Page title; the site name is appended via `site.seo.titleTemplate` (omit on the home page). */
@@ -46,6 +46,15 @@ const business = {
   description: site.description,
   telephone: site.contact.phone.e164,
   email: site.contact.email,
+  // WhatsApp is the main way customers reach the business (offered first on every page).
+  contactPoint: {
+    "@type": "ContactPoint",
+    contactType: "customer service",
+    name: "WhatsApp",
+    url: whatsappLink(""),
+    telephone: `+${site.contact.whatsapp.number}`,
+    areaServed: site.contact.address.country,
+  },
   slogan: site.tagline,
   address: {
     "@type": "PostalAddress",

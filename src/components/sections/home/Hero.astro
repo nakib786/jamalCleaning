@@ -2,7 +2,9 @@
 /** Home hero: full-bleed photo with dark overlay and curved bottom edge (theme mask.png as SVG). */
 import { Image } from "astro:assets";
 import hero from "../../../assets/images/home/hero.jpg";
+import { whatsappLink } from "../../../config/site";
 import Icon from "../../ui/Icon.astro";
+import WhatsAppIcon from "../../ui/WhatsAppIcon.astro";
 
 // The theme masks the hero with a 1920×1000 image whose bottom edge is an elliptical
 // arc (centre 960,649, radii 1200×350). Same shape as an inline SVG, centred like the original.
@@ -37,12 +39,20 @@ const mask = `url("data:image/svg+xml,${encodeURIComponent(
       <p class="leading-6 text-white sm:w-[85%]">
         Professional cleaning services for offices, homes, and commercial spaces – done right, every time.
       </p>
-      <a href="/services/" class="btn btn-lg btn-on-dark mt-[30px] sm:mt-14">
-        <span>Explore Services</span>
-        <span class="btn-icon">
-          <Icon name="right-arrow" class="text-base" />
-        </span>
-      </a>
+      <div class="mt-[30px] flex flex-wrap items-center gap-x-[30px] gap-y-4 sm:mt-14">
+        <a href={whatsappLink()} target="_blank" rel="noopener" class="btn btn-lg btn-on-dark">
+          <span>Chat on WhatsApp</span>
+          <span class="btn-icon">
+            <WhatsAppIcon class="text-base" />
+          </span>
+        </a>
+        <a href="/services/" class="link-arrow text-white hover:text-highlight">
+          <span>Explore Services</span>
+          <span class="flex size-[22px] items-center justify-center rounded-full bg-white text-primary">
+            <Icon name="right-arrow" class="text-xs" />
+          </span>
+        </a>
+      </div>
     </div>
   </div>
 </section>

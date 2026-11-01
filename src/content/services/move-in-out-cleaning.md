@@ -54,5 +54,5 @@ faqs:
   - question: "Can you clean a home that still has furniture in it?"
     answer: "Yes, although an empty home lets us reach every surface. Let us know what to expect when you request a quote."
   - question: "How do I book a cleaning session?"
-    answer: "Request a quote on our Contact page or give us a call. We will confirm the details and agree on a time that suits you."
+    answer: "Message us on WhatsApp, request a quote on our Contact page or give us a call. We will confirm the details and agree on a time that suits you."
 ---

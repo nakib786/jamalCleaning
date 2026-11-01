@@ -22,7 +22,8 @@ import TestimonialCards from "../components/sections/testimonials/TestimonialCar
 import Icon from "../components/ui/Icon.astro";
 import Marquee from "../components/ui/Marquee.astro";
 import SectionHeading from "../components/ui/SectionHeading.astro";
-import { site } from "../config/site";
+import WhatsAppIcon from "../components/ui/WhatsAppIcon.astro";
+import { site, whatsappLink } from "../config/site";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
 const aboutLd = {
@@ -245,12 +246,17 @@ const counters = [
               <Icon name="right-arrow" class="text-base" />
             </span>
           </a>
-          <a href={site.contact.phone.href} class="group flex items-center gap-3 text-white">
-            <Icon name="phone-call" class="text-[28px]" />
+          <a
+            href={whatsappLink()}
+            target="_blank"
+            rel="noopener"
+            class="group flex items-center gap-3 text-white"
+          >
+            <WhatsAppIcon class="text-[30px] transition-colors group-hover:text-highlight" />
             <span class="flex flex-col text-left">
-              <span class="text-base leading-[14px] font-semibold capitalize">Need help?</span>
+              <span class="text-base leading-[14px] font-semibold capitalize">Chat on WhatsApp</span>
               <span class="mt-1.5 font-heading text-sm leading-4 transition-colors group-hover:text-highlight">
-                {site.contact.phone.display}
+                {site.contact.whatsapp.display}
               </span>
             </span>
           </a>

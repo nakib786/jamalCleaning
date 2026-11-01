@@ -52,7 +52,7 @@ faqs:
   - question: "Are your cleaning products eco-friendly?"
     answer: "We use eco-friendly cleaning products where the job allows. If someone in your home has allergies or sensitivities, tell us when you book and we will work with you."
   - question: "How do I book a cleaning session?"
-    answer: "Request a quote on our Contact page or give us a call. We will confirm the details and agree on a time that suits you."
+    answer: "Message us on WhatsApp, request a quote on our Contact page or give us a call. We will confirm the details and agree on a time that suits you."
   - question: "Do I need to be home during the service?"
     answer: "No. If you would rather not be home, we can agree on how to access the property when you book. If you prefer to be there, that works too."
 ---

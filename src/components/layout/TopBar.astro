@@ -1,6 +1,7 @@
 ---
-import { site, socialLinks } from "../../config/site";
+import { site, socialLinks, whatsappLink } from "../../config/site";
 import Icon from "../ui/Icon.astro";
+import WhatsAppIcon from "../ui/WhatsAppIcon.astro";
 
 const { contact } = site;
 ---
@@ -30,6 +31,15 @@ const { contact } = site;
     </li>
   </ul>
   <div class="flex items-center gap-[21px] max-sm:mx-auto sm:ml-auto">
+    <a
+      href={whatsappLink()}
+      target="_blank"
+      rel="noopener"
+      class="flex items-center gap-2 font-bold hover:text-primary"
+    >
+      <WhatsAppIcon class="text-base" />
+      <span>WhatsApp us</span>
+    </a>
     {socialLinks.length > 0 ? (
       socialLinks.map((s) => (
         <a

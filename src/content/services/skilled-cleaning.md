@@ -54,5 +54,5 @@ faqs:
   - question: "Should I book a deep clean before regular service?"
     answer: "Often it helps. A deep clean brings the space up to standard, and regular visits then keep it there."
   - question: "How do I book a cleaning session?"
-    answer: "Request a quote on our Contact page or give us a call. We will confirm the details and agree on a time that suits you."
+    answer: "Message us on WhatsApp, request a quote on our Contact page or give us a call. We will confirm the details and agree on a time that suits you."
 ---

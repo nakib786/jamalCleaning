@@ -67,6 +67,20 @@ Left to do, in order:
 
 - **Google Maps (owner-supplied):** the Contact page map is now the business's own listing ("Jamal Cleaning Services Ltd.", embed code in `site.contact.address.mapEmbedUrl`), "Get directions" uses the owner's short link (`mapUrl`), the coordinates in `site.contact.address.geo` come from the embed's map centre (approximate, not a street-level pin), and `legalName` is in the business JSON-LD. Still missing: **street address and postal code** (the embed does not contain them). The listing name has "Ltd." while the site says "Jamal Cleaning Services": keep name, address and phone identical everywhere (Google Business Profile, Bing, Facebook) for local search.
 
+- **Footer newsletter:** the Turnstile check now has space above it and is centred under the email field.
+
+### WhatsApp-first (2026-11-01)
+
+WhatsApp is now the main contact channel. Number and default first message: `site.contact.whatsapp` in `src/config/site.ts`; links are built with `whatsappLink(message?)` (wa.me with a pre-filled message the visitor can edit). Logo: `src/components/ui/WhatsAppIcon.astro`.
+
+- **Every page:** floating "Chat with us" button bottom right (`src/components/layout/WhatsAppFloat.astro`); the back-to-top button now sits above it. Pages can pass `whatsappMessage` to `BaseLayout`; service pages use "…a free quote for <service>".
+- **Header** (≥1536 px): "Chat on WhatsApp" + number replaces "Need Help?" + phone. **Top bar** (Home): "WhatsApp us" before the phone. **Mobile menu:** green "Chat on WhatsApp" button first; "Get a Quote!" is now the dark button.
+- **Home hero:** "Chat on WhatsApp" is the main button; "Explore Services" became a text link. **About** band: the "Need help?" phone link is now WhatsApp.
+- **Service pages:** "Chat on WhatsApp" button in the "Do you need help?" card (card made taller so the photo stays clear) and "message us on WhatsApp" in the Quick answer.
+- **Contact:** first card is "WhatsApp & Phone"; a "Prefer to chat?" box with a WhatsApp button sits beside the form. **Footer:** "Chat on WhatsApp" heads the contact column.
+- **Text:** booking FAQs (FAQs page and every service page) mention WhatsApp; search "no results" hint; `/llms.txt` lists WhatsApp as the preferred contact; business JSON-LD has a WhatsApp `contactPoint`.
+- **Forms unchanged at the owner's request:** quote, contact and newsletter forms still send by email exactly as before.
+
 ### Verification tools (all need the production build served: `npm run preview`)
 
 | Script                      | Checks                                                                                                    |

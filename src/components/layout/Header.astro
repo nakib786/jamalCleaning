@@ -3,9 +3,9 @@
  * Site header (Cetro "header 4"): optional top bar + transparent bar positioned over
  * the hero / page title. Desktop nav ≥1201px; the menu toggle opens MobileMenu below that.
  */
-import PhoneHelp from "../../assets/icons/phone-help.svg";
-import { site, type NavItem } from "../../config/site";
+import { site, whatsappLink, type NavItem } from "../../config/site";
 import Icon from "../ui/Icon.astro";
+import WhatsAppIcon from "../ui/WhatsAppIcon.astro";
 import Logo from "./Logo.astro";
 import TopBar from "./TopBar.astro";
 
@@ -99,11 +99,18 @@ const isActive = (item: NavItem): boolean =>
     </nav>
 
     <div class="hidden w-[30%] items-center justify-end gap-[15px] sm:flex 2xl:w-[40%]">
-      <a href={site.contact.phone.href} class="mr-2 hidden items-center gap-[15px] text-white 2xl:flex">
-        <PhoneHelp class="h-[26px] w-6 text-white" aria-hidden="true" />
+      <a
+        href={whatsappLink()}
+        target="_blank"
+        rel="noopener"
+        class="group mr-2 hidden items-center gap-[15px] text-white 2xl:flex"
+      >
+        <WhatsAppIcon class="text-[26px] transition-colors group-hover:text-primary" />
         <span class="flex flex-col">
-          <span class="text-sm leading-[18px] font-semibold">Need Help?</span>
-          <span class="font-heading text-[13px] leading-[20px]">{site.contact.phone.display}</span>
+          <span class="text-sm leading-[18px] font-semibold">Chat on WhatsApp</span>
+          <span class="font-heading text-[13px] leading-[20px] transition-colors group-hover:text-primary">
+            {site.contact.whatsapp.display}
+          </span>
         </span>
       </a>
       <button

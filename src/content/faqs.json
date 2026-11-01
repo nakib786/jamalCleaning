@@ -37,7 +37,7 @@
   {
     "id": "booking-1",
     "question": "How do I book a cleaning session?",
-    "answer": "Request a quote on our Contact page or give us a call. We will confirm the details and agree on a time that suits you.",
+    "answer": "Message us on WhatsApp, request a quote on our Contact page or give us a call. We will confirm the details and agree on a time that suits you.",
     "group": "Booking & Service",
     "order": 6
   },
@@ -58,14 +58,14 @@
   {
     "id": "booking-4",
     "question": "How do I get a quote?",
-    "answer": "Send a request on the Contact page with a few details about your space and the cleaning you need, and we will get back to you with a quote.",
+    "answer": "Message us on WhatsApp or send a request on the Contact page with a few details about your space and the cleaning you need, and we will get back to you with a quote. On WhatsApp you can also send photos of the space.",
     "group": "Booking & Service",
     "order": 9
   },
   {
     "id": "booking-5",
     "question": "Can I reschedule or cancel a booking?",
-    "answer": "Contact us as early as you can and we will do our best to find a new time that suits you.",
+    "answer": "Message us on WhatsApp or call as early as you can and we will do our best to find a new time that suits you.",
     "group": "Booking & Service",
     "order": 10
   }

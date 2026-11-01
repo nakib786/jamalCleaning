@@ -5,7 +5,7 @@
  */
 import { getCollection } from "astro:content";
 import type { APIRoute } from "astro";
-import { isSet, site } from "../config/site";
+import { isSet, site, whatsappLink } from "../config/site";
 
 export const GET: APIRoute = async () => {
   const url = (path: string) => new URL(path, site.url).href;
@@ -25,6 +25,7 @@ export const GET: APIRoute = async () => {
     `- Location: ${contact.address.locality}, ${contact.address.region}, ${contact.address.country === "CA" ? "Canada" : contact.address.country}`,
     ...(isSet(contact.address.street) ? [`- Address: ${contact.address.street}`] : []),
     `- Hours: ${contact.hours.short}`,
+    `- WhatsApp (preferred contact): ${contact.whatsapp.display}, ${whatsappLink("")}`,
     `- Phone: ${contact.phone.display}`,
     `- Email: ${contact.email}`,
     `- Request a quote: ${url(site.quote.href)}`,
@@ -39,7 +40,7 @@ export const GET: APIRoute = async () => {
     "",
     `- [About us](${url("/about-us/")}): who we are and how we work`,
     `- [FAQs](${url("/faqs/")}): answers about booking, products and what to expect`,
-    `- [Contact](${url("/contact-us/")}): phone, email, address and quote request form`,
+    `- [Contact](${url("/contact-us/")}): WhatsApp, phone, email, address and quote request form`,
     "",
     "## Frequently asked questions",
     "",

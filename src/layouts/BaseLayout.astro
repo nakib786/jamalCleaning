@@ -4,6 +4,7 @@ import Footer from "../components/layout/Footer.astro";
 import Header from "../components/layout/Header.astro";
 import MobileMenu from "../components/layout/MobileMenu.astro";
 import SearchDialog from "../components/layout/SearchDialog.astro";
+import WhatsAppFloat from "../components/layout/WhatsAppFloat.astro";
 import Seo, { type SeoProps } from "../components/seo/Seo.astro";
 import Icon from "../components/ui/Icon.astro";
 import "../styles/global.css";
@@ -13,9 +14,11 @@ interface Props extends SeoProps {
   topBar?: boolean;
   /** Solid header background for pages without a banner (404). */
   solidHeader?: boolean;
+  /** Pre-filled WhatsApp message for this page's floating chat button (e.g. naming the service). */
+  whatsappMessage?: string;
 }
 
-const { topBar = false, solidHeader = false, ...seo } = Astro.props;
+const { topBar = false, solidHeader = false, whatsappMessage, ...seo } = Astro.props;
 ---
 
 <!doctype html>
@@ -45,9 +48,11 @@ const { topBar = false, solidHeader = false, ...seo } = Astro.props;
     <Footer />
     <MobileMenu />
     <SearchDialog />
+    <WhatsAppFloat message={whatsappMessage} />
+    <!-- Stacked above the floating WhatsApp button, centred on it. -->
     <button
       type="button"
-      class="scroll-top invisible fixed right-[30px] bottom-[30px] z-[999] flex size-12 translate-y-3 items-center justify-center rounded-[20px] bg-primary text-white opacity-0 transition-all duration-500 hover:bg-secondary"
+      class="scroll-top invisible fixed right-[19px] bottom-[83px] z-[996] sm:right-[36px] sm:bottom-[102px] flex size-12 translate-y-3 items-center justify-center rounded-[20px] bg-primary text-white opacity-0 transition-all duration-500 hover:bg-secondary"
       aria-label="Back to top"
       data-scroll-top
     >

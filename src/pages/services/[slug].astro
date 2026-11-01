@@ -11,7 +11,8 @@ import helpCleaner from "../../assets/images/services/help-cleaner.png";
 import PageTitle from "../../components/layout/PageTitle.astro";
 import Accordion from "../../components/ui/Accordion.astro";
 import Icon from "../../components/ui/Icon.astro";
-import { site } from "../../config/site";
+import WhatsAppIcon from "../../components/ui/WhatsAppIcon.astro";
+import { site, whatsappLink } from "../../config/site";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
 export async function getStaticPaths() {
@@ -55,6 +56,8 @@ const faqLd =
       }
     : null;
 const h2 = "font-heading text-[30px] leading-[50px] text-secondary capitalize";
+/** WhatsApp chats opened from this page start with a message naming the service. */
+const whatsappMessage = `Hi Jamal Cleaning! I'd like a free quote for ${data.title}.`;
 /** Checklists fill column by column (two lists side by side), like the theme. */
 const halves = (items: string[]) => {
   const middle = Math.ceil(items.length / 2);
@@ -68,6 +71,7 @@ const halves = (items: string[]) => {
   image={data.image}
   imageAlt={data.imageAlt}
   jsonLd={faqLd ? [serviceLd, faqLd] : [serviceLd]}
+  whatsappMessage={whatsappMessage}
 >
   <PageTitle
     title={data.title}
@@ -105,8 +109,19 @@ const halves = (items: string[]) => {
           </ul>
         </nav>
 
-        <div class="relative min-h-[500px] overflow-hidden rounded-[24px] bg-[linear-gradient(180deg,#192017_0%,#00a650_100%)] p-[30px] pb-0 text-white sm:min-h-[540px] lg:pt-[42px] lg:pr-[43px] lg:pl-[44px]">
+        <div class="relative min-h-[610px] overflow-hidden rounded-[24px] bg-[linear-gradient(180deg,#192017_0%,#00a650_100%)] p-[30px] pb-0 text-white sm:min-h-[640px] lg:pt-[42px] lg:pr-[43px] lg:pl-[44px]">
           <p class="font-heading text-sm leading-[30px] capitalize">Do You Need Help?</p>
+          <a
+            href={whatsappLink(whatsappMessage)}
+            target="_blank"
+            rel="noopener"
+            class="btn btn-on-dark mt-[18px]"
+          >
+            <span>Chat on WhatsApp</span>
+            <span class="btn-icon">
+              <WhatsAppIcon class="text-base" />
+            </span>
+          </a>
           <p class="pt-[18px] pb-2.5 font-heading text-2xl leading-10">
             <a href={site.contact.phone.href} class="hover:text-highlight">
               {site.contact.phone.display}
@@ -141,6 +156,15 @@ const halves = (items: string[]) => {
             <p class="pb-2 font-heading text-base leading-[30px] text-secondary">Quick answer</p>
             <p class="leading-6">
               {data.quickAnswer} To book,{" "}
+              <a
+                href={whatsappLink(whatsappMessage)}
+                target="_blank"
+                rel="noopener"
+                class="font-semibold text-secondary underline underline-offset-2 hover:text-primary-strong"
+              >
+                message us on WhatsApp
+              </a>
+              ,{" "}
               <a
                 href={site.quote.href}
                 class="font-semibold text-secondary underline underline-offset-2 hover:text-primary-strong"

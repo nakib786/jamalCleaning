@@ -52,7 +52,7 @@ faqs:
   - question: "Can I book a one-time clean?"
     answer: "Yes. You can book a single visit or set up a regular schedule, whichever suits you."
   - question: "How do I book a cleaning session?"
-    answer: "Request a quote on our Contact page or give us a call. We will confirm the details and agree on a time that suits you."
+    answer: "Message us on WhatsApp, request a quote on our Contact page or give us a call. We will confirm the details and agree on a time that suits you."
   - question: "Can you focus on specific rooms?"
     answer: "Yes. Tell us which rooms or tasks matter most and we will build the visit around them."
 ---

@@ -37,13 +37,15 @@ function arg(name: string): string | undefined {
 
 /**
  * Show scroll-driven elements in their final state, without waiting for animations:
- * entrance reveals ([data-reveal]) and the scroll-lit testimonials, which are dimmed
- * only until the reader has scrolled past them.
+ * entrance reveals ([data-reveal]), the home hero's fade-in (a Tailwind `animate-[reveal-…]`
+ * class) and the scroll-lit testimonials, which are dimmed only until the reader has
+ * scrolled past them.
  */
 async function settle(page: Page): Promise<void> {
   await page.addStyleTag({
     content:
       "[data-reveal]{opacity:1!important;animation:none!important;transform:none!important}" +
+      '[class*="animate-[reveal-"]{animation:none!important}' +
       "[data-testimonial]{opacity:1!important}",
   });
   await page.evaluate(() => document.fonts.ready);

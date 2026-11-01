@@ -54,5 +54,5 @@ faqs:
   - question: "Can you work around children and pets?"
     answer: "Yes. We choose products to suit the space and follow label directions. Tell us about children, pets or sensitivities when you book."
   - question: "How do I book a cleaning session?"
-    answer: "Request a quote on our Contact page or give us a call. We will confirm the details and agree on a time that suits you."
+    answer: "Message us on WhatsApp, request a quote on our Contact page or give us a call. We will confirm the details and agree on a time that suits you."
 ---

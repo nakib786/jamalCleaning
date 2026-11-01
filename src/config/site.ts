@@ -46,7 +46,17 @@ export const site = {
 
   contact: {
     phone: { display: "(236) 331-7323", href: "tel:+12363317323", e164: "+12363317323" },
-    whatsapp: "https://wa.me/12363317323",
+    /**
+     * WhatsApp is the main contact channel: it is offered first on every page (floating button,
+     * header, menus, forms). Links are built with `whatsappLink()` below.
+     */
+    whatsapp: {
+      /** Full international number, digits only (wa.me format: country code, no "+"). */
+      number: "12363317323",
+      display: "(236) 331-7323",
+      /** First message typed for the visitor when the chat opens (they can edit it before sending). */
+      message: "Hi Jamal Cleaning! I'd like a free quote for a cleaning.",
+    },
     email: "info@jmcleaningservice.ca",
     address: {
       street: "[STREET ADDRESS]",
@@ -151,6 +161,15 @@ export const site = {
 /** True when a config value has been filled in (not a [PLACEHOLDER] or empty). */
 export function isSet(value: string | undefined | null): value is string {
   return Boolean(value) && !/^\[.*\]$/.test(value?.trim() ?? "");
+}
+
+/**
+ * WhatsApp chat link (https://wa.me/…) with a pre-filled first message. Pass a page-specific
+ * message (e.g. naming the service) or an empty string for no message.
+ */
+export function whatsappLink(message: string = site.contact.whatsapp.message): string {
+  const base = `https://wa.me/${site.contact.whatsapp.number}`;
+  return message ? `${base}?text=${encodeURIComponent(message)}` : base;
 }
 
 /** Social links that are filled in, in display order. */

@@ -9,7 +9,8 @@ import ContactForm from "../components/forms/ContactForm.astro";
 import PageTitle from "../components/layout/PageTitle.astro";
 import Icon from "../components/ui/Icon.astro";
 import SectionHeading from "../components/ui/SectionHeading.astro";
-import { isSet, site } from "../config/site";
+import WhatsAppIcon from "../components/ui/WhatsAppIcon.astro";
+import { isSet, site, whatsappLink } from "../config/site";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import type { IconName } from "../components/ui/icons.generated";
 
@@ -27,13 +28,13 @@ interface Line {
   text: string;
   href?: string;
 }
-const cards: { icon: IconName; title: string; lines: Line[] }[] = [
+const cards: { icon: IconName | "whatsapp"; title: string; lines: Line[] }[] = [
   {
-    icon: "phone-call",
-    title: "Hotline Number",
+    icon: "whatsapp",
+    title: "WhatsApp & Phone",
     lines: [
-      { text: `Phone: ${contact.phone.display}`, href: contact.phone.href },
-      { text: "Chat with us on WhatsApp", href: contact.whatsapp },
+      { text: `WhatsApp: ${contact.whatsapp.display}`, href: whatsappLink() },
+      { text: `Call: ${contact.phone.display}`, href: contact.phone.href },
     ],
   },
   {
@@ -63,7 +64,7 @@ const cards: { icon: IconName; title: string; lines: Line[] }[] = [
 
 <BaseLayout
   title="Contact Us"
-  description={`Contact Jamal Cleaning Services in ${contact.address.locality}: call ${contact.phone.display}, email ${contact.email} or send us a message for a free quote.`}
+  description={`Contact Jamal Cleaning Services in ${contact.address.locality}: chat on WhatsApp or call ${contact.phone.display}, email ${contact.email} or send us a message for a free quote.`}
   jsonLd={[contactLd]}
 >
   <PageTitle title="Contact Us" />
@@ -88,7 +89,11 @@ const cards: { icon: IconName; title: string; lines: Line[] }[] = [
               class="mb-6 flex size-[86px] items-center justify-center rounded-full bg-highlight text-secondary"
               aria-hidden="true"
             >
-              <Icon name={card.icon} class="text-[38px]" />
+              {card.icon === "whatsapp" ? (
+                <WhatsAppIcon class="text-[38px]" />
+              ) : (
+                <Icon name={card.icon} class="text-[38px]" />
+              )}
             </span>
             <h3 class="mb-4 font-heading text-lg leading-[30px] text-secondary capitalize">{card.title}</h3>
             {card.lines.map((line) => (
@@ -135,6 +140,18 @@ const cards: { icon: IconName; title: string; lines: Line[] }[] = [
         <p class="mt-5 leading-6">
           We take pride in serving our community and building lasting relationships with our clients.
         </p>
+        <div class="mt-[30px] flex flex-col gap-4 rounded-[24px] border border-line bg-surface p-6 max-lg:items-center sm:p-[30px]">
+          <p class="font-heading text-lg leading-[30px] text-secondary">Prefer to chat?</p>
+          <p class="leading-6">
+            Message us on WhatsApp. You can send photos of the space along with your request.
+          </p>
+          <a href={whatsappLink()} target="_blank" rel="noopener" class="btn self-start max-lg:self-center">
+            <span>Chat on WhatsApp</span>
+            <span class="btn-icon">
+              <WhatsAppIcon class="text-base" />
+            </span>
+          </a>
+        </div>
       </div>
       <div class="relative z-[1] w-full lg:w-[600px] lg:pt-[47px] xl:w-[810px]" data-reveal="left">
         <ContactForm />

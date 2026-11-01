@@ -54,5 +54,5 @@ faqs:
   - question: "Do you clean renovated homes as well as commercial sites?"
     answer: "Yes, we clean renovated homes as well as offices, shops and other commercial spaces."
   - question: "How do I book a cleaning session?"
-    answer: "Request a quote on our Contact page or give us a call. We will confirm the details and agree on a time that suits you."
+    answer: "Message us on WhatsApp, request a quote on our Contact page or give us a call. We will confirm the details and agree on a time that suits you."
 ---
