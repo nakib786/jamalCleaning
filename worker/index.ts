@@ -161,11 +161,21 @@ async function handleSubmission(kind: FormKind, data: Record<string, string>, re
 
   const site = env.SITE_NAME || "Website";
   const page = request.headers.get("referer") ?? "";
-  const rows = values.map(
-    (v) =>
-      `<tr><th align="left" style="padding:4px 12px 4px 0;vertical-align:top">${escapeHtml(v.label)}</th><td style="padding:4px 0;white-space:pre-wrap">${escapeHtml(v.value)}</td></tr>`,
-  );
-  const text = [...values.map((v) => `${v.label}: ${v.value}`), "", page && `Sent from: ${page}`].join("\n");
+  const credit = "Website by Aurora N&N Business Solution Inc. — https://aurorabusiness.ca";
+  const text = [
+    form.subject,
+    "",
+    ...values.map((v) => `${v.label}: ${v.value}`),
+    "",
+    page && `Sent from: ${page}`,
+    data.email && "Reply to this email to answer the customer directly.",
+    "",
+    "--",
+    credit,
+  ]
+    .filter((line): line is string => Boolean(line))
+    .join("\n");
+  const html = emailHtml(site, form.subject, values, page, data.email);
 
   await env.EMAIL.send({
     to: env.EMAIL_TO.split(",")
@@ -174,9 +184,49 @@ async function handleSubmission(kind: FormKind, data: Record<string, string>, re
     from: { email: env.EMAIL_FROM, name: site },
     replyTo: data.email,
     subject: `${form.subject}${data.name ? ` from ${data.name}` : ""} — ${site}`,
-    html: `<h2 style="font-family:Arial,sans-serif">${escapeHtml(form.subject)}</h2><table style="font-family:Arial,sans-serif;font-size:15px">${rows.join("")}</table>${page ? `<p style="font-family:Arial,sans-serif;color:#666;font-size:13px">Sent from ${escapeHtml(page)}</p>` : ""}`,
+    html,
     text,
   });
+}
+
+/** Branded notification email (inline styles and tables for email-client compatibility). */
+function emailHtml(
+  site: string,
+  title: string,
+  values: { label: string; value: string }[],
+  page: string,
+  replyTo: string | undefined,
+): string {
+  const font = "font-family:Arial,Helvetica,sans-serif;";
+  const rows = values
+    .map(
+      (v, i) =>
+        `<tr style="background:${i % 2 ? "#ffffff" : "#f6f8f7"}"><td style="${font}padding:12px 16px;width:34%;vertical-align:top;color:#5c5e5e;font-size:14px;font-weight:bold;border-bottom:1px solid #e7e9f1">${escapeHtml(v.label)}</td><td style="${font}padding:12px 16px;vertical-align:top;color:#212e3b;font-size:15px;line-height:1.5;white-space:pre-wrap;border-bottom:1px solid #e7e9f1">${escapeHtml(v.value)}</td></tr>`,
+    )
+    .join("");
+  const time = new Date().toLocaleString("en-CA", {
+    timeZone: "America/Vancouver",
+    dateStyle: "medium",
+    timeStyle: "short",
+  });
+  return `<!doctype html><html><body style="margin:0;padding:0;background:#eef1f0">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#eef1f0;padding:24px 12px"><tr><td align="center">
+<table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background:#ffffff;border-radius:12px;overflow:hidden">
+<tr><td style="${font}background:#044340;padding:22px 28px;color:#ffffff">
+<div style="font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#96fe81">${escapeHtml(site)}</div>
+<div style="font-size:22px;font-weight:bold;margin-top:6px">${escapeHtml(title)}</div>
+<div style="font-size:13px;color:#cfe3dd;margin-top:6px">Received ${escapeHtml(time)} (Pacific time)</div>
+</td></tr>
+<tr><td style="padding:20px 28px 8px"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #e7e9f1;border-radius:8px;overflow:hidden">${rows}</table></td></tr>
+<tr><td style="${font}padding:12px 28px 24px;color:#5c5e5e;font-size:13px;line-height:1.5">
+${replyTo ? `<a href="mailto:${escapeHtml(replyTo)}" style="display:inline-block;background:#00a650;color:#ffffff;text-decoration:none;font-weight:bold;padding:10px 20px;border-radius:100px;font-size:14px">Reply to ${escapeHtml(replyTo)}</a><br><br>` : ""}
+${page ? `Sent from <a href="${escapeHtml(page)}" style="color:#00a650">${escapeHtml(page)}</a>` : ""}
+</td></tr>
+<tr><td style="${font}background:#f6f8f7;border-top:1px solid #e7e9f1;padding:14px 28px;color:#9fa2a4;font-size:12px;text-align:center">
+This message was sent automatically by the ${escapeHtml(site)} website contact form.<br>
+Website designed &amp; developed by <a href="https://aurorabusiness.ca" style="color:#044340;font-weight:bold;text-decoration:none">Aurora N&amp;N Business Solution Inc.</a>
+</td></tr>
+</table></td></tr></table></body></html>`;
 }
 
 async function verifyTurnstile(token: string, request: Request, env: Env): Promise<void> {
