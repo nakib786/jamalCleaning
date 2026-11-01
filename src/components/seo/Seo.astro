@@ -55,6 +55,7 @@ const business = {
     addressCountry: site.contact.address.country,
   },
   geo: { "@type": "GeoCoordinates", ...site.contact.address.geo },
+  hasMap: site.contact.address.mapUrl,
   areaServed: { "@type": "City", name: site.contact.address.locality },
   // The services listed on the site, so answer engines connect the business to what it offers.
   hasOfferCatalog: {

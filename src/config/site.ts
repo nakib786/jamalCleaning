@@ -56,7 +56,7 @@ export const site = {
       short: "Prince George, BC, Canada",
       geo: { latitude: 53.9171, longitude: -122.7497 },
       /** Link for "get directions" and the map embed on the contact page. */
-      mapUrl: "https://www.google.com/maps/search/?api=1&query=Prince+George%2C+BC",
+      mapUrl: "https://maps.app.goo.gl/D7ibhfUKgzgssFM79",
       mapEmbedUrl: "https://www.google.com/maps?q=Prince%20George%2C%20BC&output=embed",
     },
     hours: {
