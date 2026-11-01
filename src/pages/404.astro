@@ -1,13 +1,33 @@
 ---
-import PageTitle from "../components/layout/PageTitle.astro";
+/** Custom 404 (served by Cloudflare for unknown URLs via `not_found_handling: "404-page"`). */
+import { Image } from "astro:assets";
+import notFound from "../assets/images/misc/404.png";
+import Icon from "../components/ui/Icon.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<BaseLayout title="Page not found" description="The page you are looking for could not be found." noindex>
-  <PageTitle title="404" crumbs={[{ label: "Page not found" }]} />
-  <section class="section-gutter py-[120px]">
-    <div class="site-container text-center">
-      <p class="text-lg">This page is being rebuilt to match the reference design.</p>
+<BaseLayout
+  title="Page not found"
+  description="The page you are looking for could not be found."
+  noindex
+  solidHeader
+>
+  <section class="section-gutter pt-[180px] pb-[60px] sm:pt-[260px] sm:pb-[130px]">
+    <div class="mx-auto flex max-w-[685px] flex-col items-center text-center">
+      <Image src={notFound} alt="" width={396} loading="eager" class="mb-[46px] w-[396px] max-w-full" />
+      <h1 class="display-heading pb-[30px]">
+        <span class="accent">Oops!</span> Page not found!
+      </h1>
+      <p class="w-[530px] max-w-full pb-[33px] leading-6">
+        We searched everywhere but couldn’t find what you’re looking for. Let’s find a better place for you to
+        go.
+      </p>
+      <a href="/" class="btn btn-md btn-dark">
+        <span>Back To Home</span>
+        <span class="btn-icon">
+          <Icon name="right-arrow" class="text-base" />
+        </span>
+      </a>
     </div>
   </section>
 </BaseLayout>

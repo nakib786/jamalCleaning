@@ -1,0 +1,122 @@
+---
+/**
+ * Contact form (theme Contact Form 7 layout): name / phone, email / service, message, consent,
+ * submit. Posts to the Worker at /api/contact; src/scripts/forms.ts adds Turnstile and AJAX.
+ */
+import { getCollection } from "astro:content";
+import Icon from "../ui/Icon.astro";
+
+interface Props {
+  idPrefix?: string;
+}
+
+const { idPrefix = "contact" } = Astro.props;
+const services = (await getCollection("services"))
+  .sort((a, b) => a.data.order - b.data.order)
+  .map((s) => s.data.title);
+---
+
+<form
+  class="contact-form api-form grid gap-5 sm:grid-cols-2 sm:gap-x-[30px] sm:gap-y-7"
+  action="/api/contact"
+  method="post"
+  data-api-form
+  data-success="Thank you! Your message has been sent — we'll get back to you shortly."
+>
+  <div>
+    <label class="sr-only" for={`${idPrefix}-name`}>
+      Name
+    </label>
+    <input
+      id={`${idPrefix}-name`}
+      type="text"
+      name="name"
+      autocomplete="name"
+      placeholder="Name *"
+      required
+      maxlength="120"
+    />
+  </div>
+  <div>
+    <label class="sr-only" for={`${idPrefix}-phone`}>
+      Phone number
+    </label>
+    <input
+      id={`${idPrefix}-phone`}
+      type="tel"
+      name="phone"
+      autocomplete="tel"
+      placeholder="Phone number"
+      maxlength="40"
+    />
+  </div>
+  <div>
+    <label class="sr-only" for={`${idPrefix}-email`}>
+      Email address
+    </label>
+    <input
+      id={`${idPrefix}-email`}
+      type="email"
+      name="email"
+      autocomplete="email"
+      placeholder="Your email address *"
+      required
+      maxlength="160"
+    />
+  </div>
+  <div>
+    <label class="sr-only" for={`${idPrefix}-service`}>
+      Service
+    </label>
+    <select id={`${idPrefix}-service`} name="service" required class="text-black">
+      <option value="">Our Services *</option>
+      {services.map((s) => (
+        <option value={s}>{s}</option>
+      ))}
+      <option value="Other">Other</option>
+    </select>
+  </div>
+  <div class="sm:col-span-2">
+    <label class="sr-only" for={`${idPrefix}-message`}>
+      Message
+    </label>
+    <textarea
+      id={`${idPrefix}-message`}
+      name="message"
+      placeholder="Message Here..."
+      rows="4"
+      maxlength="3000"
+    ></textarea>
+  </div>
+  <div class="hidden" aria-hidden="true">
+    <label for={`${idPrefix}-company`}>Company</label>
+    <input id={`${idPrefix}-company`} type="text" name="company" tabindex="-1" autocomplete="off" />
+  </div>
+  <label class="flex items-start gap-2.5 leading-6 sm:col-span-2">
+    <input type="checkbox" name="consent" value="yes" required class="mt-1 size-4 shrink-0 accent-primary" />
+    <span>I agree to be contacted by email or phone about my enquiry.</span>
+  </label>
+  <div class="empty:hidden sm:col-span-2" data-turnstile></div>
+  <div class="sm:col-span-2">
+    <button type="submit" class="btn btn-md btn-dark">
+      <span>Send a Message</span>
+      <span class="btn-icon">
+        <Icon name="right-arrow" class="text-base" />
+      </span>
+    </button>
+  </div>
+  <p
+    class="form-status text-sm text-secondary empty:hidden sm:col-span-2"
+    role="status"
+    aria-live="polite"
+  ></p>
+</form>
+
+<style>
+  .contact-form :is(input:not([type="checkbox"]), select) {
+    height: 60px;
+  }
+  .contact-form textarea {
+    height: 126px;
+  }
+</style>

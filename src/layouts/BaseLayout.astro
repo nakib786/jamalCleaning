@@ -12,9 +12,11 @@ import "../styles/global.css";
 interface Props extends SeoProps {
   /** Home page header shows the contact top bar. */
   topBar?: boolean;
+  /** Solid header background for pages without a banner (404). */
+  solidHeader?: boolean;
 }
 
-const { topBar = false, ...seo } = Astro.props;
+const { topBar = false, solidHeader = false, ...seo } = Astro.props;
 ---
 
 <!doctype html>
@@ -37,7 +39,7 @@ const { topBar = false, ...seo } = Astro.props;
     >
       Skip to content
     </a>
-    <Header topBar={topBar} />
+    <Header topBar={topBar} solid={solidHeader} />
     <main id="main">
       <slot />
     </main>

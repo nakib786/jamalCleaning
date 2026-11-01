@@ -41,8 +41,9 @@ For the reference/verification tools you also need Chrome on port 9222 (see `too
    `src/content.config.ts`); the demo's shared detail text was copied into every file. Testimonials name "Jamal Cleaning"
    where the demo named other brands.
 3. **Inner pages:** services list, service detail, projects list (category filter + `#hash`) and project detail are
-   **done** and match the reference at 1440. Still stubs: about-us, testimonials, faqs (two-column accordions + FAQPage
-   JSON-LD), contact-us (info cards + form → `/api/contact`, lazy map), 404. Reuse `components/ui/Accordion.astro`,
+   **done** and match the reference at 1440. FAQs (two-column accordions + FAQPage
+   JSON-LD), contact-us (info cards, `ContactForm` → `/api/contact`, lazy map) and 404 are **done** too. Still stubs:
+   about-us and testimonials. Reuse `components/ui/Accordion.astro`,
    `cards/ServiceCard.astro`, `cards/ProjectCard.astro`, the home `Testimonials`/`Steps`/`Marquee` pieces where the
    reference repeats them. Match `reference/screenshots/<slug>/{1440,768,390}.jpg`.
 4. **Step 2 finish:** `npm run crawl:capture` (polite, ~1 h) → full `captured/manifest.json` + failures; copy anything still missing.

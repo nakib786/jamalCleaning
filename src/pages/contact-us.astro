@@ -1,16 +1,147 @@
 ---
+/**
+ * Contact: "Get in touch" with four info cards, the contact form beside a short intro (faint
+ * world map behind), and a full-width map. Details come from src/config/site.ts.
+ */
+import { Image } from "astro:assets";
+import worldMap from "../assets/images/contact/contact.png";
+import ContactForm from "../components/forms/ContactForm.astro";
 import PageTitle from "../components/layout/PageTitle.astro";
+import Icon from "../components/ui/Icon.astro";
+import SectionHeading from "../components/ui/SectionHeading.astro";
+import { isSet, site } from "../config/site";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import type { IconName } from "../components/ui/icons.generated";
+
+const { contact } = site;
+const street = isSet(contact.address.street) ? contact.address.street : null;
+
+interface Line {
+  text: string;
+  href?: string;
+}
+const cards: { icon: IconName; title: string; lines: Line[] }[] = [
+  {
+    icon: "phone-call",
+    title: "Hotline Number",
+    lines: [
+      { text: `Phone: ${contact.phone.display}`, href: contact.phone.href },
+      { text: "Chat with us on WhatsApp", href: contact.whatsapp },
+    ],
+  },
+  {
+    icon: "email",
+    title: "Support Email",
+    lines: [{ text: contact.email, href: `mailto:${contact.email}` }],
+  },
+  {
+    icon: "map-alt",
+    title: "Office Address",
+    lines: [
+      {
+        text: street
+          ? `${street}, ${contact.address.locality}, ${contact.address.region}`
+          : contact.address.short,
+      },
+      { text: "Get directions", href: contact.address.mapUrl },
+    ],
+  },
+  {
+    icon: "schedule",
+    title: "Working Days",
+    lines: contact.hours.short.split(" · ").map((text) => ({ text })),
+  },
+];
 ---
 
 <BaseLayout
   title="Contact Us"
-  description="Contact Jamal Cleaning Services in Prince George, BC — call, email or send us a message for a free quote."
+  description={`Contact Jamal Cleaning Services in ${contact.address.locality}: call ${contact.phone.display}, email ${contact.email} or send us a message for a free quote.`}
 >
   <PageTitle title="Contact Us" />
-  <section class="section-gutter py-[120px]">
-    <div class="site-container text-center">
-      <p class="text-lg">This page is being rebuilt to match the reference design.</p>
+
+  <section class="section-gutter my-[70px] md:my-[100px] lg:my-[130px]">
+    <div class="site-container flex flex-col items-center text-center">
+      <h2 class="display-heading" data-reveal="up">
+        Get <span class="accent">In touch</span>
+      </h2>
+      <p class="mt-5 w-[700px] max-w-full leading-6" data-reveal="up">
+        Transform your space with our reliable and eco-friendly cleaning services. Let us handle the mess
+        while you enjoy a pristine environment.
+      </p>
+      <ul class="mt-[50px] grid w-full gap-[15px] sm:mt-[60px] sm:grid-cols-2 sm:gap-[30px] xl:grid-cols-4">
+        {cards.map((card, i) => (
+          <li
+            class="flex flex-col items-center rounded-[24px] border border-line bg-white p-[30px] sm:px-[30px] sm:pt-10 sm:pb-[45px]"
+            data-reveal="up"
+            data-reveal-delay={String(i * 100)}
+          >
+            <span
+              class="mb-6 flex size-[86px] items-center justify-center rounded-full bg-highlight text-secondary"
+              aria-hidden="true"
+            >
+              <Icon name={card.icon} class="text-[38px]" />
+            </span>
+            <h3 class="mb-4 font-heading text-lg leading-[30px] text-secondary capitalize">{card.title}</h3>
+            {card.lines.map((line) => (
+              <p class="text-base leading-[21.33px] font-medium break-words">
+                {line.href ? (
+                  <a
+                    href={line.href}
+                    class="hover:text-primary"
+                    {...(line.href.startsWith("http") ? { target: "_blank", rel: "noopener" } : {})}
+                  >
+                    {line.text}
+                  </a>
+                ) : (
+                  line.text
+                )}
+              </p>
+            ))}
+          </li>
+        ))}
+      </ul>
     </div>
+  </section>
+
+  <section class="section-gutter mb-[70px] md:mb-[100px] lg:mb-[135px]">
+    <div class="site-container relative flex flex-col gap-[50px] lg:flex-row lg:justify-between lg:gap-5">
+      <Image
+        src={worldMap}
+        alt=""
+        width={991}
+        class="pointer-events-none absolute -top-[100px] right-0 hidden w-[991px] max-w-full opacity-[0.09] sm:block lg:-top-[170px] min-[1441px]:right-[100px]"
+        aria-hidden="true"
+      />
+      <div
+        class="relative z-[1] flex flex-col max-lg:items-center max-lg:text-center lg:w-[540px]"
+        data-reveal="right"
+      >
+        <SectionHeading
+          label="Connect with us"
+          parts={["Have", { accent: "questions? Get in" }, "touch!"]}
+          class="gap-5 max-lg:items-center max-lg:text-center"
+          labelClass="pb-0"
+          headingClass="lg:pt-2.5 max-md:pb-[30px] max-sm:pb-0"
+        />
+        <p class="mt-5 leading-6">
+          We take pride in serving our community and building lasting relationships with our clients.
+        </p>
+      </div>
+      <div class="relative z-[1] w-full lg:w-[600px] lg:pt-[47px] xl:w-[810px]" data-reveal="left">
+        <ContactForm />
+      </div>
+    </div>
+  </section>
+
+  <section aria-label="Map" data-reveal="up">
+    <iframe
+      src={contact.address.mapEmbedUrl}
+      title={`Map of ${contact.address.short}`}
+      class="block h-[300px] w-full border-0 sm:h-[400px] lg:h-[602px]"
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      allowfullscreen
+    ></iframe>
   </section>
 </BaseLayout>

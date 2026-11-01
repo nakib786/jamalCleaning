@@ -1,16 +1,55 @@
 ---
+/** FAQs: heading, faint world map, and two columns of accordions (one per FAQ group). */
+import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
+import worldMap from "../assets/images/contact/contact.png";
 import PageTitle from "../components/layout/PageTitle.astro";
+import Accordion from "../components/ui/Accordion.astro";
+import SectionHeading from "../components/ui/SectionHeading.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
+
+const faqs = (await getCollection("faqs")).sort((a, b) => a.data.order - b.data.order).map((f) => f.data);
+const groups = [...new Set(faqs.map((f) => f.group))].map((group) => faqs.filter((f) => f.group === group));
+
+const faqLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  // Each question once, even if it appears in more than one group.
+  mainEntity: [...new Map(faqs.map((f) => [f.question, f])).values()].map((f) => ({
+    "@type": "Question",
+    name: f.question,
+    acceptedAnswer: { "@type": "Answer", text: f.answer },
+  })),
+};
 ---
 
 <BaseLayout
-  title="F.A.Q."
-  description="Answers to common questions about our residential and commercial cleaning services in Prince George."
+  title="FAQs"
+  description="Answers to common questions about Jamal Cleaning Services: what we clean, products, booking and what to expect on the day."
+  jsonLd={[faqLd]}
 >
-  <PageTitle title="F.A.Q." />
-  <section class="section-gutter py-[120px]">
-    <div class="site-container text-center">
-      <p class="text-lg">This page is being rebuilt to match the reference design.</p>
+  <PageTitle title="FAQs" />
+  <section class="section-gutter bg-[#f5f4ef] py-[70px] md:py-[100px] lg:py-[130px]">
+    <div class="site-container relative">
+      <Image
+        src={worldMap}
+        alt=""
+        width={950}
+        class="pointer-events-none absolute top-[45px] right-0 hidden w-[950px] max-w-full opacity-[0.09] lg:block"
+        aria-hidden="true"
+      />
+      <SectionHeading
+        label="Frequently asked question"
+        parts={["You have", { accent: "questions, we have" }, "answers"]}
+        class="relative z-[1] gap-2.5 max-lg:items-center max-lg:text-center lg:w-[730px]"
+        labelClass="pb-2.5"
+        headingClass="lg:max-w-[728px] lg:pt-2.5 max-md:pb-[30px] max-sm:pb-0"
+      />
+      <div class="relative z-[1] mt-[60px] flex flex-col gap-2.5 lg:flex-row lg:gap-[30px]">
+        {groups.map((items, i) => (
+          <Accordion items={items} name={`faq-page-${i}`} variant="filled" class="flex-1" />
+        ))}
+      </div>
     </div>
   </section>
 </BaseLayout>
