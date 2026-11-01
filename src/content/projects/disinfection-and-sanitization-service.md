@@ -6,8 +6,7 @@ excerpt: "Disinfection and Sanitization Service by the Jamal Cleaning Services t
 image: ../../assets/images/projects/disinfection-and-sanitization-service.jpg
 imageAlt: "Cleaner in a blue shirt spraying disinfectant on shelves"
 completed: "October 30, 2025"
-client: "Themeforest, Evanto"
-location: "Main Address, USA"
+location: "Prince George, BC"
 factCategory: "Residential"
 overview:
   heading: "Project Overview"

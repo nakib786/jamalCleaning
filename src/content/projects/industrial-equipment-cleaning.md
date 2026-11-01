@@ -6,8 +6,7 @@ excerpt: "Industrial Equipment Cleaning by the Jamal Cleaning Services team — 
 image: ../../assets/images/projects/industrial-equipment-cleaning.jpg
 imageAlt: "Two cleaners wiping a table and mopping a living-room floor"
 completed: "October 30, 2025"
-client: "Themeforest, Evanto"
-location: "Main Address, USA"
+location: "Prince George, BC"
 factCategory: "Residential"
 overview:
   heading: "Project Overview"

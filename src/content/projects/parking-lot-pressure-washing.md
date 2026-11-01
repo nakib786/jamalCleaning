@@ -6,8 +6,7 @@ excerpt: "Parking Lot Pressure Washing by the Jamal Cleaning Services team — a
 image: ../../assets/images/projects/parking-lot-pressure-washing.jpg
 imageAlt: "Two cleaners in hi-vis vests using floor scrubbers by a large window"
 completed: "October 30, 2025"
-client: "Themeforest, Evanto"
-location: "Main Address, USA"
+location: "Prince George, BC"
 factCategory: "Residential"
 overview:
   heading: "Project Overview"

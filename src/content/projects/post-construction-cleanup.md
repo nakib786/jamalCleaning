@@ -6,8 +6,7 @@ excerpt: "Post-Construction Cleanup by the Jamal Cleaning Services team — a co
 image: ../../assets/images/projects/post-construction-cleanup.jpg
 imageAlt: "Cleaning crew mopping and collecting rubbish in an office corridor"
 completed: "October 30, 2025"
-client: "Themeforest, Evanto"
-location: "Main Address, USA"
+location: "Prince George, BC"
 factCategory: "Residential"
 overview:
   heading: "Project Overview"

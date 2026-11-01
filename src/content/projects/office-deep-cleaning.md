@@ -6,8 +6,7 @@ excerpt: "Office Deep Cleaning by the Jamal Cleaning Services team — a residen
 image: ../../assets/images/projects/office-deep-cleaning.jpg
 imageAlt: "Two cleaners in hi-vis vests with a broom and dustpan in a classroom"
 completed: "October 30, 2025"
-client: "Themeforest, Evanto"
-location: "Main Address, USA"
+location: "Prince George, BC"
 factCategory: "Residential"
 overview:
   heading: "Project Overview"

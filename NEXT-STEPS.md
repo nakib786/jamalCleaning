@@ -1,6 +1,6 @@
 # Next steps — how to continue this build
 
-Status as of session 2 (2026-10-31). Prompt.md is the spec; `site-map.md` lists every page and route.
+Status as of the end of session 2 (2026-10-31). **Start with "Resume here" below.** Prompt.md is the spec; `site-map.md` lists every page and route.
 
 ## Scope (owner decisions)
 
@@ -33,6 +33,34 @@ npm run dev            # http://localhost:4321
 ```
 
 For the reference/verification tools you also need Chrome on port 9222 (see `tools/README.md`).
+
+## Resume here (end of session 2)
+
+Everything is built, checked (`npm run check` clean) and committed. Nothing is deployed. Left to do, in order:
+
+1. **Lighthouse fixes** (mobile, measured on the production build via `wrangler dev`):
+
+   | Page                               | Perf | A11y | Best pr. | SEO | LCP   |
+   | ---------------------------------- | ---- | ---- | -------- | --- | ----- |
+   | `/`                                | 95   | 96   | 100      | 100 | 2.7 s |
+   | `/services/`                       | 88   | 96   | 100      | 100 | 3.9 s |
+   | `/services/construction-cleaning/` | 95   | 96   | 100      | 100 | 2.8 s |
+   | `/projects/`                       | 93   | 96   | 100      | 100 | 3.2 s |
+   | `/about-us/`                       | 100  | 96   | 100      | 92  | 1.8 s |
+   | `/contact-us/`                     | 97   | 93   | 100      | 100 | 2.5 s |
+
+   Failing audits: `color-contrast` (most pages — likely the green `#00a650` accent text or the light-grey
+   marquee/label text; check which nodes in the Lighthouse report and darken only where it doesn't change the
+   look), `link-text` on /about-us/ (the "Learn More" link), `target-size` on /contact-us/ (consent checkbox).
+   `/services/` LCP 3.9 s: preload or `fetchpriority="high"` on the page-title banner image. Re-run:
+   `npm run build`, `npx wrangler dev`, then `npx -y lighthouse@12 http://127.0.0.1:8787/<page> --only-categories=performance,accessibility,best-practices,seo`.
+
+2. **Step 2 capture:** `npm run crawl:capture` was started and stopped part-way (manifest saved up to
+   services pages, 5 failures so far). Re-run it to finish (~1 h, polite), then note the failures in the report.
+3. **Step 8 verify:** full 390/768 screenshot pass for every inner page (only Home was checked at those widths),
+   plus `tools/verify/compare.ts` and `tools/verify/links.ts` (not written yet). Helper scripts used this session
+   (screenshot, side-by-side, CSS lookup) were in the session scratchpad; re-create as `tools/verify/*` if needed.
+4. **Final report** for the owner (Prompt.md "Final report" section).
 
 ## Continue in this order
 

@@ -6,8 +6,7 @@ excerpt: "Carpet and Upholstery Cleaning by the Jamal Cleaning Services team —
 image: ../../assets/images/projects/carpet-and-upholstery-cleaning.jpg
 imageAlt: "Cleaner in an orange shirt and green apron wiping a kitchen sink"
 completed: "October 30, 2025"
-client: "Themeforest, Evanto"
-location: "Main Address, USA"
+location: "Prince George, BC"
 factCategory: "Residential"
 overview:
   heading: "Project Overview"

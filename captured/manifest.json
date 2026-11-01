@@ -1,11 +1,27 @@
 {
-  "generatedAt": "2026-10-31T04:44:07.149Z",
+  "generatedAt": "2026-11-01T01:51:35.634Z",
   "totals": {
-    "files": 257,
-    "bytes": 13218604,
-    "failures": 4
+    "files": 339,
+    "bytes": 31118504,
+    "failures": 5
   },
   "entries": [
+    {
+      "url": "https://demo2.pavothemes.com/cdn-cgi/challenge-platform/h/g/jsd/oneshot/c787ce48cf6b/0.28781208833882654:1793495960:yWt5OERLo2T6UpoggSJH0y1DSlrDn1J0EWsJSc0b5DI/a5373ca51a6450d0",
+      "file": "captured/demo2.pavothemes.com/cdn-cgi/challenge-platform/h/g/jsd/oneshot/c787ce48cf6b/0.28781208833882654_1793495960_yWt5OERLo2T6UpoggSJH0y1DSlrDn1J0EWsJSc0b5DI/a5373ca51a6450d0",
+      "type": "xhr",
+      "contentType": "text/plain; charset=UTF-8",
+      "size": 0,
+      "status": 200,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "pages": [
+        "home-4"
+      ],
+      "widths": [
+        1440,
+        390
+      ]
+    },
     {
       "url": "https://demo2.pavothemes.com/cdn-cgi/challenge-platform/h/g/scripts/jsd/c787ce48cf6b/main.js?ray=a52fde18cbd0a14f",
       "file": "captured/demo2.pavothemes.com/cdn-cgi/challenge-platform/h/g/scripts/jsd/c787ce48cf6b/main@q386d82b2.js",
@@ -19,6 +35,22 @@
       ],
       "widths": [
         1440
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cdn-cgi/challenge-platform/h/g/scripts/jsd/c787ce48cf6b/main.js?ray=a5373ca51a6450d0",
+      "file": "captured/demo2.pavothemes.com/cdn-cgi/challenge-platform/h/g/scripts/jsd/c787ce48cf6b/main@qa3c81de4.js",
+      "type": "script",
+      "contentType": "application/javascript; charset=UTF-8",
+      "size": 43679,
+      "status": 200,
+      "sha256": "aabac10d7662e3ecae5617e72d30888936dcdd80a49198dfe7e444b8d2958712",
+      "pages": [
+        "home-4"
+      ],
+      "widths": [
+        1440,
+        390
       ]
     },
     {
@@ -87,6 +119,44 @@
       "widths": [
         1440,
         768,
+        390
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/?wc-ajax=get_refreshed_fragments",
+      "file": "captured/demo2.pavothemes.com/cetro/index@q0df94d9d",
+      "type": "xhr",
+      "contentType": "application/json; charset=UTF-8",
+      "size": 650,
+      "status": 200,
+      "sha256": "b12300781653a174b366e3ed7ac5c3fdfbbaeb15b3559b2b470494192ebc66d4",
+      "pages": [
+        "home-4",
+        "services-style-01",
+        "services__residential-services",
+        "projects-style"
+      ],
+      "widths": [
+        1440,
+        390
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/?wc-ajax=woosw_get_data",
+      "file": "captured/demo2.pavothemes.com/cetro/index@q6bf7f641",
+      "type": "xhr",
+      "contentType": "application/json; charset=UTF-8",
+      "size": 266,
+      "status": 200,
+      "sha256": "6804d6e8ad0a3f77a6d861130636a66d18287c372e8537744bf4daadfd513582",
+      "pages": [
+        "home-4",
+        "services-style-01",
+        "services__residential-services",
+        "projects-style"
+      ],
+      "widths": [
+        1440,
         390
       ]
     },
@@ -2426,6 +2496,101 @@
       "widths": [
         1440,
         768,
+        390
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/woo-smart-compare/assets/images/add.svg",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/plugins/woo-smart-compare/assets/images/add.svg",
+      "type": "image",
+      "contentType": "image/svg+xml",
+      "size": 545,
+      "status": 200,
+      "sha256": "96b621009ab4988f873e50742a62da8df0d53fac9dcaaad1fc707d477118e1ca",
+      "pages": [
+        "home-4",
+        "services-style-01",
+        "services__residential-services",
+        "projects-style"
+      ],
+      "widths": [
+        1440,
+        390
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/woo-smart-compare/assets/images/close.svg",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/plugins/woo-smart-compare/assets/images/close.svg",
+      "type": "image",
+      "contentType": "image/svg+xml",
+      "size": 563,
+      "status": 200,
+      "sha256": "0cf0043e0634621d1a391e9c1e3beb7f2d0c9d6d21e053411d8fbb450c378a9c",
+      "pages": [
+        "home-4",
+        "services-style-01",
+        "services__residential-services",
+        "projects-style"
+      ],
+      "widths": [
+        1440,
+        390
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/woo-smart-compare/assets/images/curve.svg",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/plugins/woo-smart-compare/assets/images/curve.svg",
+      "type": "image",
+      "contentType": "image/svg+xml",
+      "size": 804,
+      "status": 200,
+      "sha256": "b5154169140f0207cc0069a0b9046d702e4e0ffdd68fea50ab984c420c45b0c2",
+      "pages": [
+        "home-4",
+        "services-style-01",
+        "services__residential-services",
+        "projects-style"
+      ],
+      "widths": [
+        1440,
+        390
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/woo-smart-compare/assets/images/remove-dark.svg",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/plugins/woo-smart-compare/assets/images/remove-dark.svg",
+      "type": "image",
+      "contentType": "image/svg+xml",
+      "size": 563,
+      "status": 200,
+      "sha256": "ec7242d8516eef918c33558228f1dc815c681c03385d8942a29b412e0fb04778",
+      "pages": [
+        "home-4",
+        "services-style-01",
+        "services__residential-services",
+        "projects-style"
+      ],
+      "widths": [
+        1440,
+        390
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/plugins/woo-smart-compare/assets/images/share.svg",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/plugins/woo-smart-compare/assets/images/share.svg",
+      "type": "image",
+      "contentType": "image/svg+xml",
+      "size": 728,
+      "status": 200,
+      "sha256": "3da63ac1448ea8b6f817e476f2895a38758729ab69c2b913aa0a5235ad6e6c04",
+      "pages": [
+        "home-4",
+        "services-style-01",
+        "services__residential-services",
+        "projects-style"
+      ],
+      "widths": [
+        1440,
         390
       ]
     },
@@ -4794,6 +4959,82 @@
       ]
     },
     {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/themes/cetro/assets/images/language-switcher/de.jpg",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/themes/cetro/assets/images/language-switcher/de.jpg",
+      "type": "image",
+      "contentType": "image/jpeg",
+      "size": 1765,
+      "status": 200,
+      "sha256": "1756e94ba5c5c904adb0edef207b4676b1909ca9b3452ec3d8b0e2201391af6a",
+      "pages": [
+        "home-4",
+        "services-style-01",
+        "services__residential-services",
+        "projects-style"
+      ],
+      "widths": [
+        1440,
+        390
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/themes/cetro/assets/images/language-switcher/en.jpg",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/themes/cetro/assets/images/language-switcher/en.jpg",
+      "type": "image",
+      "contentType": "image/jpeg",
+      "size": 2289,
+      "status": 200,
+      "sha256": "8057945b3e50c4930897c746595cb6ffee2414fdd5072ff6efdea837aeb4a81d",
+      "pages": [
+        "home-4",
+        "services-style-01",
+        "services__residential-services",
+        "projects-style"
+      ],
+      "widths": [
+        1440,
+        390
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/themes/cetro/assets/images/language-switcher/hi.jpg",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/themes/cetro/assets/images/language-switcher/hi.jpg",
+      "type": "image",
+      "contentType": "image/jpeg",
+      "size": 2571,
+      "status": 200,
+      "sha256": "9223e6fd00e17770c15547fa2246ea8ee14291f942fd7d091e2fd351f3934104",
+      "pages": [
+        "home-4",
+        "services-style-01",
+        "services__residential-services",
+        "projects-style"
+      ],
+      "widths": [
+        1440,
+        390
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/themes/cetro/assets/images/language-switcher/it.jpg",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/themes/cetro/assets/images/language-switcher/it.jpg",
+      "type": "image",
+      "contentType": "image/jpeg",
+      "size": 1544,
+      "status": 200,
+      "sha256": "e4fcde9ae3bc7f33a3195bf91e81f5e83788a98ea7ffef644b6987bccbf2974e",
+      "pages": [
+        "home-4",
+        "services-style-01",
+        "services__residential-services",
+        "projects-style"
+      ],
+      "widths": [
+        1440,
+        390
+      ]
+    },
+    {
       "url": "https://demo2.pavothemes.com/cetro/wp-content/themes/cetro/assets/js/elementor-frontend.min.js?ver=1.1.1",
       "file": "captured/demo2.pavothemes.com/cetro/wp-content/themes/cetro/assets/js/elementor-frontend.min.js",
       "type": "script",
@@ -7092,6 +7333,1086 @@
       "widths": [
         1440,
         768,
+        390
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/00_logo_80x80-50x50.jpg",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/00_logo_80x80-50x50.jpg",
+      "type": "other",
+      "contentType": "image/jpeg",
+      "size": 1273,
+      "status": 200,
+      "sha256": "3a9def0f82d7f50d565f44c9c35c12864166dc7a74d9b0d1312ce6c5bc2fd6e2",
+      "pages": [
+        "home-4"
+      ],
+      "widths": [
+        1440
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/blog-12.jpg",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/blog-12.jpg",
+      "type": "image",
+      "contentType": "image/jpeg",
+      "size": 816299,
+      "status": 200,
+      "sha256": "a1ac254613a64836bbd3917b1fc8ba36c8ed5d18e7e50889b646d211e094d982",
+      "pages": [
+        "home-4"
+      ],
+      "widths": [
+        1440
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/blog-2-450x320.jpg",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/blog-2-450x320.jpg",
+      "type": "image",
+      "contentType": "image/jpeg",
+      "size": 28727,
+      "status": 200,
+      "sha256": "53a3a63e6caf196f9f6c440e513a318535ebdf7930ff1c57ef24ac21437aa877",
+      "pages": [
+        "home-4"
+      ],
+      "widths": [
+        390
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/blog-2.jpg",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/blog-2.jpg",
+      "type": "image",
+      "contentType": "image/jpeg",
+      "size": 1016120,
+      "status": 200,
+      "sha256": "b617e2671ae3ae5f704a59d615e1aebda7e0a515c79874ec9d6d422594ae06fc",
+      "pages": [
+        "home-4"
+      ],
+      "widths": [
+        1440
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/blog-5-450x320.jpg",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/blog-5-450x320.jpg",
+      "type": "image",
+      "contentType": "image/jpeg",
+      "size": 38827,
+      "status": 200,
+      "sha256": "43755b842a48a5aeaf42497c181845b992095f07cd722930b43ebcc497b5740b",
+      "pages": [
+        "home-4"
+      ],
+      "widths": [
+        390
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/blog-5.jpg",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/blog-5.jpg",
+      "type": "image",
+      "contentType": "image/jpeg",
+      "size": 542483,
+      "status": 200,
+      "sha256": "2f5977d7d3dc625bea54f0eb19c2070ed278975d205eb4dde002068065b5611e",
+      "pages": [
+        "home-4"
+      ],
+      "widths": [
+        1440
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/blog-8-450x320.jpg",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/blog-8-450x320.jpg",
+      "type": "image",
+      "contentType": "image/jpeg",
+      "size": 23871,
+      "status": 200,
+      "sha256": "7a584b7c9344d344c58b697a3b990e72a83fd989315a5e7cf2379f11aff6ef91",
+      "pages": [
+        "home-4"
+      ],
+      "widths": [
+        390
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/blog-8.jpg",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/blog-8.jpg",
+      "type": "image",
+      "contentType": "image/jpeg",
+      "size": 596561,
+      "status": 200,
+      "sha256": "b5ec85d10542f6f3ca82f59cdda911532d2972b31195a5beb099d80db1f75ee0",
+      "pages": [
+        "home-4"
+      ],
+      "widths": [
+        1440
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/br-sv1.jpg",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/br-sv1.jpg",
+      "type": "image",
+      "contentType": "image/jpeg",
+      "size": 924581,
+      "status": 200,
+      "sha256": "8cee7675f310e680e42ea7c492e39311f42f015fc5899b25da57e8b83cb643c7",
+      "pages": [
+        "services-style-01"
+      ],
+      "widths": [
+        1440,
+        390
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/breadcrumb-default.jpg",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/breadcrumb-default.jpg",
+      "type": "image",
+      "contentType": "image/jpeg",
+      "size": 1011983,
+      "status": 200,
+      "sha256": "38301876d82bd2f77820839eeb3a95afbab06aeffcc615cfdb416694d0621011",
+      "pages": [
+        "services__residential-services",
+        "projects-style"
+      ],
+      "widths": [
+        1440,
+        390
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/footer-background.jpg",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/footer-background.jpg",
+      "type": "image",
+      "contentType": "image/jpeg",
+      "size": 1283067,
+      "status": 200,
+      "sha256": "a34c3de4fe53e6fcd7a126b730c0e43e2238165cd8b3aea7571795b4667b003e",
+      "pages": [
+        "home-4",
+        "services-style-01",
+        "services__residential-services",
+        "projects-style"
+      ],
+      "widths": [
+        1440,
+        390
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/h1-asked.png",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/h1-asked.png",
+      "type": "image",
+      "contentType": "image/png",
+      "size": 164957,
+      "status": 200,
+      "sha256": "8f438b50e24a5b5dcc4a3955f3ba9223d9d91f258889afe26e18dcd7d744333d",
+      "pages": [
+        "home-4"
+      ],
+      "widths": [
+        1440
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/h2-ratings.png",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/h2-ratings.png",
+      "type": "image",
+      "contentType": "image/png",
+      "size": 19412,
+      "status": 200,
+      "sha256": "64e2ba3b9bce7b9247270092657f52b7e5f1d57743c9375e95816c03c13211cc",
+      "pages": [
+        "home-4"
+      ],
+      "widths": [
+        1440
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/h2-testi01.jpg",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/h2-testi01.jpg",
+      "type": "image",
+      "contentType": "image/jpeg",
+      "size": 8830,
+      "status": 200,
+      "sha256": "1a29a546e06a7bcd540c111826058575d4bee291cab2b875c4017ef333cc15b5",
+      "pages": [
+        "home-4"
+      ],
+      "widths": [
+        1440,
+        390
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/h2-worker03.png",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/h2-worker03.png",
+      "type": "image",
+      "contentType": "image/png",
+      "size": 4302,
+      "status": 200,
+      "sha256": "b89d473c3ade43b8748c306bdb8c6ef311d3c40102ed13b18af711062d2ef785",
+      "pages": [
+        "home-4"
+      ],
+      "widths": [
+        1440
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/h3-cleaning01.jpg",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/h3-cleaning01.jpg",
+      "type": "image",
+      "contentType": "image/jpeg",
+      "size": 165119,
+      "status": 200,
+      "sha256": "8de4a0f9e42cc61ef46f0944a48753b5718f457f7551d19918ee442ff72e963a",
+      "pages": [
+        "home-4"
+      ],
+      "widths": [
+        1440
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/h3-cleaning02.png",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/h3-cleaning02.png",
+      "type": "image",
+      "contentType": "image/png",
+      "size": 207632,
+      "status": 200,
+      "sha256": "35cbaa5074ad5206791e54717565591ac87a31d53d4f23fd387e089e9ff8b489",
+      "pages": [
+        "home-4"
+      ],
+      "widths": [
+        1440
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/h4-banner01-1536x760.jpg",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/h4-banner01-1536x760.jpg",
+      "type": "image",
+      "contentType": "image/jpeg",
+      "size": 126775,
+      "status": 200,
+      "sha256": "1721717945220c8166b8fbc1ae436f623d15415a13690b36fd9f9e3624e9ae23",
+      "pages": [
+        "home-4"
+      ],
+      "widths": [
+        1440
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/h4-banner01-450x223.jpg",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/h4-banner01-450x223.jpg",
+      "type": "image",
+      "contentType": "image/jpeg",
+      "size": 21796,
+      "status": 200,
+      "sha256": "c934e8fb1ec6ac4a68608815d088b6ac47c7abef2c13d6f452dbf070ce751b19",
+      "pages": [
+        "home-4"
+      ],
+      "widths": [
+        390
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/h4-banner02-1536x760.jpg",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/h4-banner02-1536x760.jpg",
+      "type": "image",
+      "contentType": "image/jpeg",
+      "size": 120442,
+      "status": 200,
+      "sha256": "e5a259061c387ab7eaeb391cd39a2d1b75ecf2bd98639678c4c6e7698d37a67a",
+      "pages": [
+        "home-4"
+      ],
+      "widths": [
+        1440
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/h4-banner02-450x223.jpg",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/h4-banner02-450x223.jpg",
+      "type": "image",
+      "contentType": "image/jpeg",
+      "size": 20604,
+      "status": 200,
+      "sha256": "5567d105ee2b9b312b2697819c22bb70ff3554f0f48bf590ad9a53b0b1dc6635",
+      "pages": [
+        "home-4"
+      ],
+      "widths": [
+        390
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/h4-banner03-1536x760.jpg",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/h4-banner03-1536x760.jpg",
+      "type": "image",
+      "contentType": "image/jpeg",
+      "size": 81869,
+      "status": 200,
+      "sha256": "ab05054604abf2d586e050ba9f162949a4770e6fe4301913d88e5a7e756e6957",
+      "pages": [
+        "home-4"
+      ],
+      "widths": [
+        1440
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/h4-banner03-450x223.jpg",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/h4-banner03-450x223.jpg",
+      "type": "image",
+      "contentType": "image/jpeg",
+      "size": 14787,
+      "status": 200,
+      "sha256": "d4394c143bfbfc9f594b4856bf73c693024c1992b95cfd9b3eee38a4075b3185",
+      "pages": [
+        "home-4"
+      ],
+      "widths": [
+        390
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/h4-banner04-1536x760.jpg",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/h4-banner04-1536x760.jpg",
+      "type": "image",
+      "contentType": "image/jpeg",
+      "size": 105500,
+      "status": 200,
+      "sha256": "80a917989dfec9bbc961653ac9957d50acfe083fc1a9a6b48a5ab52dbad4894e",
+      "pages": [
+        "home-4"
+      ],
+      "widths": [
+        1440
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/h4-banner04-450x223.jpg",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/h4-banner04-450x223.jpg",
+      "type": "image",
+      "contentType": "image/jpeg",
+      "size": 15302,
+      "status": 200,
+      "sha256": "8f835eb2d2b25200d9077f944030472519a5073fd6e03d793f55296f96e45ebf",
+      "pages": [
+        "home-4"
+      ],
+      "widths": [
+        390
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/h4-we01.jpg",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/h4-we01.jpg",
+      "type": "image",
+      "contentType": "image/jpeg",
+      "size": 27842,
+      "status": 200,
+      "sha256": "aa022806c0ff48047b61d586710e23adfeb3125eb491cec5eb407cd15931ee59",
+      "pages": [
+        "home-4"
+      ],
+      "widths": [
+        1440,
+        390
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/h4-we02.jpg",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/h4-we02.jpg",
+      "type": "image",
+      "contentType": "image/jpeg",
+      "size": 23559,
+      "status": 200,
+      "sha256": "c0b801de5327f360f1c500a11f5a6ef58f2a6add402a6319406af61e12cfda87",
+      "pages": [
+        "home-4"
+      ],
+      "widths": [
+        1440,
+        390
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/home-4-banner-1-1536x800.jpg",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/home-4-banner-1-1536x800.jpg",
+      "type": "image",
+      "contentType": "image/jpeg",
+      "size": 118048,
+      "status": 200,
+      "sha256": "584d5a79cea4f335dd94cf4d9ba75476f835eab146803ce70bfc198f7e8b5e25",
+      "pages": [
+        "home-4"
+      ],
+      "widths": [
+        1440
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/home-4-banner-1-450x234.jpg",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/home-4-banner-1-450x234.jpg",
+      "type": "image",
+      "contentType": "image/jpeg",
+      "size": 19339,
+      "status": 200,
+      "sha256": "10a3ac8c98fb73a220b422f7fea5fd118fa55f685285d609daf74cbaa3e4d705",
+      "pages": [
+        "home-4"
+      ],
+      "widths": [
+        390
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/logo.png",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/logo.png",
+      "type": "image",
+      "contentType": "image/png",
+      "size": 2023,
+      "status": 200,
+      "sha256": "d2db908f8115f73704ac9f79e6a945e55cd3898f0247682e1574a32f5d2068b5",
+      "pages": [
+        "home-4",
+        "services-style-01",
+        "services__residential-services",
+        "projects-style"
+      ],
+      "widths": [
+        1440,
+        390
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/mask.png",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/mask.png",
+      "type": "image",
+      "contentType": "image/png",
+      "size": 72986,
+      "status": 200,
+      "sha256": "3ae6ce5cb153ab62e092ccfb7d38a1ca6a725f3c2cb74a7d65e6b3c9a80b3d8b",
+      "pages": [
+        "home-4"
+      ],
+      "widths": [
+        1440,
+        390
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/megamenu-1.jpg",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/megamenu-1.jpg",
+      "type": "image",
+      "contentType": "image/jpeg",
+      "size": 144517,
+      "status": 200,
+      "sha256": "945d9b6f00f2c0bac5b8dc48942b763321bb1937bc4582980114bc6b0bcc3e35",
+      "pages": [
+        "home-4",
+        "services-style-01",
+        "services__residential-services",
+        "projects-style"
+      ],
+      "widths": [
+        1440,
+        390
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/megamenu-2.jpg",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/megamenu-2.jpg",
+      "type": "image",
+      "contentType": "image/jpeg",
+      "size": 139401,
+      "status": 200,
+      "sha256": "65a669c9903839c27974e10a441e6c1e24158094bf1ffaa3aa183bd638a81b78",
+      "pages": [
+        "home-4",
+        "services-style-01",
+        "services__residential-services",
+        "projects-style"
+      ],
+      "widths": [
+        1440,
+        390
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/megamenu-3.jpg",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/megamenu-3.jpg",
+      "type": "image",
+      "contentType": "image/jpeg",
+      "size": 150616,
+      "status": 200,
+      "sha256": "229c761b568cbb182f75cd432d1c8d58ccd668b4e5d8abbf118eff3cfaeca38d",
+      "pages": [
+        "home-4",
+        "services-style-01",
+        "services__residential-services",
+        "projects-style"
+      ],
+      "widths": [
+        1440,
+        390
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/megamenu-4.jpg",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/megamenu-4.jpg",
+      "type": "image",
+      "contentType": "image/jpeg",
+      "size": 132758,
+      "status": 200,
+      "sha256": "f10da17b909e5158a0ef0d3ac911ed7a9c7bf27e1c9abefeaf0fa8c74f0d8a5f",
+      "pages": [
+        "home-4",
+        "services-style-01",
+        "services__residential-services",
+        "projects-style"
+      ],
+      "widths": [
+        1440
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/project-10-450x300.jpg",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/project-10-450x300.jpg",
+      "type": "image",
+      "contentType": "image/jpeg",
+      "size": 31173,
+      "status": 200,
+      "sha256": "391596c93828ff930ea9012d26b17f10c872eb7371b7fdd157471d82da4dc745",
+      "pages": [
+        "home-4",
+        "projects-style"
+      ],
+      "widths": [
+        390
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/project-10.jpg",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/project-10.jpg",
+      "type": "image",
+      "contentType": "image/jpeg",
+      "size": 802383,
+      "status": 200,
+      "sha256": "1ccb14fb1eaeb22072b56d29514c7354925a77e52e03bc043dadfd82b1875321",
+      "pages": [
+        "home-4",
+        "projects-style"
+      ],
+      "widths": [
+        1440
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/project-11-450x300.jpg",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/project-11-450x300.jpg",
+      "type": "image",
+      "contentType": "image/jpeg",
+      "size": 33187,
+      "status": 200,
+      "sha256": "19dd2f9384faec9fc673b8b25104343c9831431a04478689f23c2fc379b94beb",
+      "pages": [
+        "home-4",
+        "projects-style"
+      ],
+      "widths": [
+        390
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/project-11.jpg",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/project-11.jpg",
+      "type": "image",
+      "contentType": "image/jpeg",
+      "size": 671886,
+      "status": 200,
+      "sha256": "2280fc9751761e2d71ac4c8161de928cbf1574fa494b116173386ef7b42e53c4",
+      "pages": [
+        "home-4",
+        "projects-style"
+      ],
+      "widths": [
+        1440
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/project-12-450x300.jpg",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/project-12-450x300.jpg",
+      "type": "image",
+      "contentType": "image/jpeg",
+      "size": 24188,
+      "status": 200,
+      "sha256": "65decfd36da2a42bdbe3013b4a1335af35f36464d32c4e9e0f886a01e4bb88fa",
+      "pages": [
+        "home-4",
+        "projects-style"
+      ],
+      "widths": [
+        390
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/project-12.jpg",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/project-12.jpg",
+      "type": "image",
+      "contentType": "image/jpeg",
+      "size": 648394,
+      "status": 200,
+      "sha256": "973012f3bb2f044d15b1abab491045d9fbd55098a583f480b84e79312b291c9c",
+      "pages": [
+        "home-4",
+        "projects-style"
+      ],
+      "widths": [
+        1440
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/project-4-450x300.jpg",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/project-4-450x300.jpg",
+      "type": "image",
+      "contentType": "image/jpeg",
+      "size": 24891,
+      "status": 200,
+      "sha256": "750c978d422bb5940e28221ecf9ba891f532bbffa5c8142f93320b384336740a",
+      "pages": [
+        "projects-style"
+      ],
+      "widths": [
+        390
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/project-4.jpg",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/project-4.jpg",
+      "type": "image",
+      "contentType": "image/jpeg",
+      "size": 665069,
+      "status": 200,
+      "sha256": "8c9864e9eed1cc3b0e93fa1926f07f4e8885cd888d0cde9796f6a05c409f0803",
+      "pages": [
+        "projects-style"
+      ],
+      "widths": [
+        1440
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/project-5-450x300.jpg",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/project-5-450x300.jpg",
+      "type": "image",
+      "contentType": "image/jpeg",
+      "size": 24111,
+      "status": 200,
+      "sha256": "0b2354c7ea9d75bc88425408f486e09296e903f184027eb96290a861f68a348c",
+      "pages": [
+        "projects-style"
+      ],
+      "widths": [
+        390
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/project-5.jpg",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/project-5.jpg",
+      "type": "image",
+      "contentType": "image/jpeg",
+      "size": 720702,
+      "status": 200,
+      "sha256": "b097a83389c8258cfb3e9677012fdc01736db1769c9caacbf8177e724093ea38",
+      "pages": [
+        "projects-style"
+      ],
+      "widths": [
+        1440
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/project-6-460x460.jpg",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/project-6-460x460.jpg",
+      "type": "image",
+      "contentType": "image/jpeg",
+      "size": 37476,
+      "status": 200,
+      "sha256": "7f6b0906362b10626573cbe2e58fdbfd17732ffdf0bf8bbeb7bdc28fc8db27d0",
+      "pages": [
+        "projects-style"
+      ],
+      "widths": [
+        390
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/project-6.jpg",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/project-6.jpg",
+      "type": "image",
+      "contentType": "image/jpeg",
+      "size": 950077,
+      "status": 200,
+      "sha256": "4481dbe4211b9d4788675d0505513c209c4fe898428c9e6b6b0245e435c6351d",
+      "pages": [
+        "projects-style"
+      ],
+      "widths": [
+        1440
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/project-7-450x300.jpg",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/project-7-450x300.jpg",
+      "type": "image",
+      "contentType": "image/jpeg",
+      "size": 25078,
+      "status": 200,
+      "sha256": "b79c42354eb5c053cdcab91b6e3cc994d3277a12be03cdd1922a0f3c843c6359",
+      "pages": [
+        "home-4",
+        "projects-style"
+      ],
+      "widths": [
+        390
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/project-7.jpg",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/project-7.jpg",
+      "type": "image",
+      "contentType": "image/jpeg",
+      "size": 797072,
+      "status": 200,
+      "sha256": "6ed13d157f39e3daa0c6ab905bfe10cbd6d5ce857b196a1c38e6a169d17a1439",
+      "pages": [
+        "home-4",
+        "projects-style"
+      ],
+      "widths": [
+        1440
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/project-8-450x300.jpg",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/project-8-450x300.jpg",
+      "type": "image",
+      "contentType": "image/jpeg",
+      "size": 32013,
+      "status": 200,
+      "sha256": "acdf2f39a7a4d7a64a942a2182b55850640bd49b3b0fb975e2d21faf9918a81e",
+      "pages": [
+        "home-4",
+        "projects-style"
+      ],
+      "widths": [
+        390
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/project-8.jpg",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/project-8.jpg",
+      "type": "image",
+      "contentType": "image/jpeg",
+      "size": 713659,
+      "status": 200,
+      "sha256": "339327af008ef09fec68aa9d28f40fd1b816e2369843727715069fc94ab65fd0",
+      "pages": [
+        "home-4",
+        "projects-style"
+      ],
+      "widths": [
+        1440
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/project-9-450x300.jpg",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/project-9-450x300.jpg",
+      "type": "image",
+      "contentType": "image/jpeg",
+      "size": 31943,
+      "status": 200,
+      "sha256": "3015503a0fb57c0d57f750e6af0b2ba22d55655960d6ed4b57334efa9d8a4a7e",
+      "pages": [
+        "home-4",
+        "projects-style"
+      ],
+      "widths": [
+        390
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/project-9.jpg",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/project-9.jpg",
+      "type": "image",
+      "contentType": "image/jpeg",
+      "size": 913784,
+      "status": 200,
+      "sha256": "8500e8ce3d5f6b597440d1c8c69b32b9a0a1cf45ab0efb69d84660ed88173066",
+      "pages": [
+        "home-4",
+        "projects-style"
+      ],
+      "widths": [
+        1440
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/service-1-450x293.jpg",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/service-1-450x293.jpg",
+      "type": "image",
+      "contentType": "image/jpeg",
+      "size": 24596,
+      "status": 200,
+      "sha256": "19976cde892e30fa9580874a16b8c68faada86c302c9a053e62ce6fa2a9e3cbc",
+      "pages": [
+        "home-4",
+        "services-style-01",
+        "services__residential-services"
+      ],
+      "widths": [
+        390
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/service-1.jpg",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/service-1.jpg",
+      "type": "image",
+      "contentType": "image/jpeg",
+      "size": 317419,
+      "status": 200,
+      "sha256": "63bb463d2b9d897dfb96be68669e76447fa19e3c44d016e896d285db671c99bb",
+      "pages": [
+        "home-4",
+        "services-style-01",
+        "services__residential-services"
+      ],
+      "widths": [
+        1440
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/service-2-450x293.jpg",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/service-2-450x293.jpg",
+      "type": "image",
+      "contentType": "image/jpeg",
+      "size": 24965,
+      "status": 200,
+      "sha256": "e666f4fa459a9dcef9e4cc8a8d2bbb71ce3d87239a6567b61387f84baec9da1d",
+      "pages": [
+        "home-4",
+        "services-style-01"
+      ],
+      "widths": [
+        390
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/service-2.jpg",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/service-2.jpg",
+      "type": "image",
+      "contentType": "image/jpeg",
+      "size": 256781,
+      "status": 200,
+      "sha256": "09b8ba210974c25468b929624ec0b30d37b1de9ec57f332fef342cc1d4d588f5",
+      "pages": [
+        "home-4",
+        "services-style-01"
+      ],
+      "widths": [
+        1440
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/service-3-450x293.jpg",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/service-3-450x293.jpg",
+      "type": "image",
+      "contentType": "image/jpeg",
+      "size": 22238,
+      "status": 200,
+      "sha256": "dc570a3fa389540f53c48d93d9e53c2a943f8fe0f3ef1f3545de3c2e0c861415",
+      "pages": [
+        "home-4",
+        "services-style-01"
+      ],
+      "widths": [
+        390
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/service-3.jpg",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/service-3.jpg",
+      "type": "image",
+      "contentType": "image/jpeg",
+      "size": 270335,
+      "status": 200,
+      "sha256": "28c5c236f51c21cb6a3037d59a93ecd57f60c0f9ccde51c9360bdc867156db66",
+      "pages": [
+        "home-4",
+        "services-style-01"
+      ],
+      "widths": [
+        1440
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/service-4-450x293.jpg",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/service-4-450x293.jpg",
+      "type": "image",
+      "contentType": "image/jpeg",
+      "size": 22646,
+      "status": 200,
+      "sha256": "30fdf522f96b599ea1022fd3f22b1a823f62634cc5fad26945b2532a6831456f",
+      "pages": [
+        "home-4",
+        "services-style-01"
+      ],
+      "widths": [
+        390
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/service-4.jpg",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/service-4.jpg",
+      "type": "image",
+      "contentType": "image/jpeg",
+      "size": 243208,
+      "status": 200,
+      "sha256": "01ab8151824162aa33618c8224eb193feb7e4f3e1b192961dea351010bfdc724",
+      "pages": [
+        "home-4",
+        "services-style-01"
+      ],
+      "widths": [
+        1440
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/service-5-450x293.jpg",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/service-5-450x293.jpg",
+      "type": "image",
+      "contentType": "image/jpeg",
+      "size": 29394,
+      "status": 200,
+      "sha256": "69eb84e287c42579b5b0eae9ccac44d0bff30bc402c09885979b09faead2903d",
+      "pages": [
+        "home-4",
+        "services-style-01"
+      ],
+      "widths": [
+        390
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/service-5.jpg",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/service-5.jpg",
+      "type": "image",
+      "contentType": "image/jpeg",
+      "size": 184853,
+      "status": 200,
+      "sha256": "8f9fed1e812ad9737e494ff1134d9272668c8cf3ebdd7897ed5c9aaf645df54c",
+      "pages": [
+        "home-4",
+        "services-style-01"
+      ],
+      "widths": [
+        1440
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/service-6-450x293.jpg",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/service-6-450x293.jpg",
+      "type": "image",
+      "contentType": "image/jpeg",
+      "size": 31811,
+      "status": 200,
+      "sha256": "87f5ca8f8c296e48b5112277691622203bd04b7fb56e42c8f088e5b53d0b6e8a",
+      "pages": [
+        "home-4",
+        "services-style-01"
+      ],
+      "widths": [
+        390
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/service-6.jpg",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/service-6.jpg",
+      "type": "image",
+      "contentType": "image/jpeg",
+      "size": 543029,
+      "status": 200,
+      "sha256": "1e3b0d348c36f6e616e38724b78c2fcfb672eded6dd27c2745c6333fb6f93a3b",
+      "pages": [
+        "home-4",
+        "services-style-01"
+      ],
+      "widths": [
+        1440
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/service-single-1.jpg",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/service-single-1.jpg",
+      "type": "image",
+      "contentType": "image/jpeg",
+      "size": 188328,
+      "status": 200,
+      "sha256": "8611905e36ac43fe0ce1d19ca366a2a299abfbb4e4c64a872dd2f8cd972b1e33",
+      "pages": [
+        "services__residential-services"
+      ],
+      "widths": [
+        1440,
+        390
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/service-single-2.jpg",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/service-single-2.jpg",
+      "type": "image",
+      "contentType": "image/jpeg",
+      "size": 166659,
+      "status": 200,
+      "sha256": "fca96dafe3364614e99c9e8430d311cf56ced46f8c40f779b7745810d40117a9",
+      "pages": [
+        "services__residential-services"
+      ],
+      "widths": [
+        1440,
+        390
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/sidebar-service.png",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-content/uploads/2025/07/sidebar-service.png",
+      "type": "image",
+      "contentType": "image/png",
+      "size": 177168,
+      "status": 200,
+      "sha256": "d91aa7c5784f3e2df6abfda90cac80b95352742cea2c62a2d10db83097f10728",
+      "pages": [
+        "home-4",
+        "services__residential-services"
+      ],
+      "widths": [
+        1440,
         390
       ]
     },
@@ -9629,6 +10950,22 @@
       ]
     },
     {
+      "url": "https://demo2.pavothemes.com/cetro/wp-json/contact-form-7/v1/contact-forms/3394/feedback/schema",
+      "file": "captured/demo2.pavothemes.com/cetro/wp-json/contact-form-7/v1/contact-forms/3394/feedback/schema",
+      "type": "fetch",
+      "contentType": "application/json; charset=UTF-8",
+      "size": 1209,
+      "status": 200,
+      "sha256": "566fac6dd503bc7098ab2eb0b6cc9b79f4d096812f376eab82b8f1f80cf0ac62",
+      "pages": [
+        "home-4"
+      ],
+      "widths": [
+        1440,
+        390
+      ]
+    },
+    {
       "url": "https://fonts.googleapis.com/css?family=Google+Sans+Text:400&text=%E2%86%90%E2%86%92%E2%86%91%E2%86%93&lang=en",
       "file": "captured/fonts.googleapis.com/css@q0fe49c71",
       "type": "stylesheet",
@@ -10255,6 +11592,18 @@
       ],
       "widths": [
         1440
+      ]
+    },
+    {
+      "url": "https://demo2.pavothemes.com/cdn-cgi/challenge-platform/scripts/jsd/main.js?ray=a5373ca51a6450d0",
+      "type": "script",
+      "reason": "redirect 302 -> /cdn-cgi/challenge-platform/h/g/scripts/jsd/c787ce48cf6b/main.js?ray=a5373ca51a6450d0",
+      "pages": [
+        "home-4"
+      ],
+      "widths": [
+        1440,
+        390
       ]
     },
     {

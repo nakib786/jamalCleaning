@@ -6,8 +6,7 @@ excerpt: "Solar Panel Cleaning by the Jamal Cleaning Services team — a residen
 image: ../../assets/images/projects/solar-panel-cleaning.jpg
 imageAlt: "Cleaner in yellow gloves wiping a shopfront window while a colleague mops"
 completed: "October 30, 2025"
-client: "Themeforest, Evanto"
-location: "Main Address, USA"
+location: "Prince George, BC"
 factCategory: "Residential"
 overview:
   heading: "Project Overview"

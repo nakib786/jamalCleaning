@@ -33,7 +33,7 @@
 
   --animate-marquee: marquee var(--marquee-duration, 40s) linear infinite;
 
-  @keyframes pavo-move-up {
+  @keyframes reveal-up {
     from {
       opacity: 0;
       transform: translateY(100px);
@@ -43,7 +43,7 @@
       transform: translateY(0);
     }
   }
-  @keyframes pavo-move-right {
+  @keyframes reveal-right {
     from {
       opacity: 0;
       transform: translateX(-100px);
@@ -53,7 +53,7 @@
       transform: translateX(0);
     }
   }
-  @keyframes pavo-move-left {
+  @keyframes reveal-left {
     from {
       opacity: 0;
       transform: translateX(100px);
@@ -63,7 +63,7 @@
       transform: translateX(0);
     }
   }
-  @keyframes pavo-scale-up {
+  @keyframes reveal-scale {
     from {
       opacity: 0;
       transform: scale(0.7);
@@ -312,16 +312,16 @@
     animation-delay: var(--reveal-delay, 0ms);
   }
   html.js [data-reveal="up"].is-revealed {
-    animation-name: pavo-move-up;
+    animation-name: reveal-up;
   }
   html.js [data-reveal="right"].is-revealed {
-    animation-name: pavo-move-right;
+    animation-name: reveal-right;
   }
   html.js [data-reveal="left"].is-revealed {
-    animation-name: pavo-move-left;
+    animation-name: reveal-left;
   }
   html.js [data-reveal="scale"].is-revealed {
-    animation-name: pavo-scale-up;
+    animation-name: reveal-scale;
   }
   html.js [data-reveal].reveal-done {
     animation: none;

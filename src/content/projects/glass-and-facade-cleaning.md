@@ -6,8 +6,7 @@ excerpt: "Glass and Facade Cleaning by the Jamal Cleaning Services team — a co
 image: ../../assets/images/projects/glass-and-facade-cleaning.jpg
 imageAlt: "Cleaners in green uniforms mopping a school corridor lined with lockers"
 completed: "October 30, 2025"
-client: "Themeforest, Evanto"
-location: "Main Address, USA"
+location: "Prince George, BC"
 factCategory: "Residential"
 overview:
   heading: "Project Overview"

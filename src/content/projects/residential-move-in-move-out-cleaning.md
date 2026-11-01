@@ -6,8 +6,7 @@ excerpt: "Residential Move-In/Move-Out Cleaning by the Jamal Cleaning Services t
 image: ../../assets/images/projects/residential-move-in-move-out-cleaning.jpg
 imageAlt: "Vacuum cleaner running over a cream shag rug"
 completed: "October 30, 2025"
-client: "Themeforest, Evanto"
-location: "Main Address, USA"
+location: "Prince George, BC"
 factCategory: "Residential"
 overview:
   heading: "Project Overview"

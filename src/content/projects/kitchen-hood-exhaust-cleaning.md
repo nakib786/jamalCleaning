@@ -6,8 +6,7 @@ excerpt: "Kitchen Hood & Exhaust Cleaning by the Jamal Cleaning Services team â€
 image: ../../assets/images/projects/kitchen-hood-exhaust-cleaning.jpg
 imageAlt: "Cleaners in green uniforms mopping and vacuuming a bright office"
 completed: "October 30, 2025"
-client: "Themeforest, Evanto"
-location: "Main Address, USA"
+location: "Prince George, BC"
 factCategory: "Residential"
 overview:
   heading: "Project Overview"

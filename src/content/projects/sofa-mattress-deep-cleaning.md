@@ -6,8 +6,7 @@ excerpt: "Sofa & Mattress Deep Cleaning by the Jamal Cleaning Services team — 
 image: ../../assets/images/projects/sofa-mattress-deep-cleaning.jpg
 imageAlt: "Two cleaners vacuuming and wiping cabinets in a cosy apartment"
 completed: "October 30, 2025"
-client: "Themeforest, Evanto"
-location: "Main Address, USA"
+location: "Prince George, BC"
 factCategory: "Residential"
 overview:
   heading: "Project Overview"

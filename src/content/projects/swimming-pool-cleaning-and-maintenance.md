@@ -6,8 +6,7 @@ excerpt: "Swimming Pool Cleaning and Maintenance by the Jamal Cleaning Services 
 image: ../../assets/images/projects/swimming-pool-cleaning-and-maintenance.jpg
 imageAlt: "Cleaner in yellow gloves spraying and wiping a glass partition"
 completed: "October 30, 2025"
-client: "Themeforest, Evanto"
-location: "Main Address, USA"
+location: "Prince George, BC"
 factCategory: "Residential"
 overview:
   heading: "Project Overview"
