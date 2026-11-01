@@ -20,14 +20,14 @@
     "run_worker_first": ["/api/*"],
   },
 
-  // Form submissions are emailed through Cloudflare Email Service. The sender domain must be
-  // onboarded first: `npx wrangler email sending enable jmcleaningservice.ca` (see DEPLOY.md).
-  "send_email": [{ "name": "EMAIL" }],
+  // Form submissions are emailed through Email Routing: a Worker may send (free, any plan) to a
+  // verified destination address. The binding is locked to that address.
+  "send_email": [{ "name": "EMAIL", "destination_address": "manpreetjamal56@gmail.com" }],
 
   // Non-secret settings. Secrets (TURNSTILE_SECRET_KEY) are set with `wrangler secret put`.
   "vars": {
     "SITE_NAME": "Jamal Cleaning Services",
-    "EMAIL_TO": "info@jmcleaningservice.ca",
+    "EMAIL_TO": "manpreetjamal56@gmail.com",
     "EMAIL_FROM": "website@jmcleaningservice.ca",
   },
 
