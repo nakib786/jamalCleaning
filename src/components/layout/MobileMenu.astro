@@ -35,7 +35,7 @@ const path = Astro.url.pathname;
                 href={item.href}
                 class:list={[
                   "block flex-1 py-3 text-base font-bold transition-colors hover:text-primary",
-                  path === item.href ? "text-primary" : "text-secondary",
+                  path === item.href ? "text-primary-strong" : "text-secondary",
                 ]}
                 aria-current={path === item.href ? "page" : undefined}
               >
@@ -62,7 +62,7 @@ const path = Astro.url.pathname;
                         href={child.href}
                         class:list={[
                           "block py-2 pl-4 text-[15px] font-semibold transition-colors hover:text-primary",
-                          path === child.href ? "text-primary" : "text-body",
+                          path === child.href ? "text-primary-strong" : "text-body",
                         ]}
                       >
                         {child.label}

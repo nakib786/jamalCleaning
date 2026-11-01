@@ -177,7 +177,7 @@ const factRowPadding = [
         >
           {previous ? (
             <a href={`/projects/${previous.id}/`} class="group flex flex-col gap-1">
-              <span class="flex items-center gap-1.5 text-sm leading-[26px] font-bold text-lighter uppercase">
+              <span class="flex items-center gap-1.5 text-sm leading-[26px] font-bold text-body uppercase">
                 <Icon name="angle-left" class="text-base" /> Previous project
               </span>
               <span class="font-heading text-sm leading-[26px] text-secondary transition-colors group-hover:text-primary">
@@ -189,7 +189,7 @@ const factRowPadding = [
           )}
           {next && (
             <a href={`/projects/${next.id}/`} class="group flex flex-col items-end gap-1 text-right">
-              <span class="flex items-center gap-1.5 text-sm leading-[26px] font-bold text-lighter uppercase">
+              <span class="flex items-center gap-1.5 text-sm leading-[26px] font-bold text-body uppercase">
                 Next project <Icon name="angle-right" class="text-base" />
               </span>
               <span class="font-heading text-sm leading-[26px] text-secondary transition-colors group-hover:text-primary">

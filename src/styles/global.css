@@ -14,6 +14,11 @@
   --breakpoint-2xl: 1441px; /* above "laptop" */
 
   --color-primary: #00a650;
+  /* WCAG-AA companions of the brand green: --primary-strong carries small white text
+     (4.6:1 on white) and is used for small green text on light backgrounds;
+     --primary-heading is the display-headline accent on light backgrounds (large text, 3:1+). */
+  --color-primary-strong: #008744;
+  --color-primary-heading: #009b4a;
   --color-secondary: #212e3b;
   --color-body: #5c5e5e;
   --color-lighter: #9fa2a4;
@@ -204,7 +209,7 @@
     gap: 8px;
     padding: 13px 13px 13px 30px;
     border-radius: 100px;
-    background-color: var(--color-primary);
+    background-color: var(--color-primary-strong);
     color: #fff;
     font-family: var(--font-sans);
     font-size: 16px;
@@ -243,7 +248,7 @@
   }
   /* Dark variant ("Book a Service"). */
   .btn-dark {
-    --btn-hover-bg: var(--color-primary);
+    --btn-hover-bg: var(--color-primary-strong);
     --btn-icon-bg: var(--color-primary);
     --btn-icon-color: #fff;
     --btn-icon-hover-bg: #fff;
@@ -297,6 +302,10 @@
       line-height: 80px;
     }
     .accent {
+      color: var(--color-primary-heading);
+    }
+    /* On dark backgrounds the bright brand green already has plenty of contrast. */
+    &.text-white .accent {
       color: var(--color-primary);
     }
   }

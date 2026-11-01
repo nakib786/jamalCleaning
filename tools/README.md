@@ -35,6 +35,7 @@ All accept `--only=slug,slug`; `inspect`/`capture` accept `--widths=…`.
 | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `npm run verify`       | Loads each original and rebuilt page at 1440/768/390 px, takes viewport screenshots with REA `capture_web_screenshot` at matching scroll offsets, and diffs them with REA `compare_web_screenshots` → `verify-output/` |
 | `npm run verify:links` | Crawls the built site for broken internal links, missing assets, demo-host references and console errors                                                                                                               |
+| `npm run verify:a11y`  | axe-core (WCAG 2.0–2.2 A/AA) sweep of every built page at 1440 and 390 px against a served production build (`npm run preview`); `CHROME_PATH` uses an existing Chrome instead of Playwright's download                |
 
 ## REA
 

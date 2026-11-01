@@ -83,7 +83,7 @@ const isActive = (item: NavItem): boolean =>
                       href={child.href}
                       class:list={[
                         "block py-[7px] text-base leading-6 font-semibold transition-colors duration-300 hover:text-primary",
-                        path === child.href ? "text-primary" : "text-secondary",
+                        path === child.href ? "text-primary-strong" : "text-secondary",
                       ]}
                       aria-current={path === child.href ? "page" : undefined}
                     >

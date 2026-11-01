@@ -3,6 +3,7 @@
  * Endless right-to-left word ticker (theme `cetro-slider-scrolling`).
  * The word group is repeated so the track is always wider than the screen; the track
  * moves by half its width per cycle, at the theme's speed (one group per 50s).
+ * Purely decorative (faint watermark words), so it is hidden from assistive technology.
  */
 import Sparkle from "../../assets/icons/sparkle.svg";
 
@@ -15,14 +16,18 @@ const { words = ["Vacuum", "Cleaning", "Sweeping"], class: className } = Astro.p
 const COPIES = 4;
 ---
 
-<div class:list={["marquee flex overflow-hidden whitespace-nowrap", className]} data-reveal="up">
+<div
+  class:list={["marquee flex overflow-hidden whitespace-nowrap", className]}
+  data-reveal="up"
+  aria-hidden="true"
+>
   <div
     class="marquee-track flex shrink-0 motion-reduce:animate-none"
     style={`--marquee-duration:${(COPIES / 2) * 50}s`}
   >
-    {Array.from({ length: COPIES }, (_, copy) =>
+    {Array.from({ length: COPIES }, () =>
       words.map((word) => (
-        <span class="flex shrink-0 items-center" aria-hidden={copy > 0 ? "true" : undefined}>
+        <span class="flex shrink-0 items-center">
           <span class="mx-5 font-heading text-[30px] leading-[1.4286] tracking-[1.4px] text-[#9fa2a43d] uppercase transition-colors duration-[400ms] hover:text-primary sm:mx-20 sm:text-[70px]">
             {word}
           </span>

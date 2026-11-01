@@ -88,7 +88,7 @@ const cards: { icon: IconName; title: string; lines: Line[] }[] = [
                 {line.href ? (
                   <a
                     href={line.href}
-                    class="hover:text-primary"
+                    class="inline-block leading-6 hover:text-primary"
                     {...(line.href.startsWith("http") ? { target: "_blank", rel: "noopener" } : {})}
                   >
                     {line.text}

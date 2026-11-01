@@ -79,8 +79,8 @@ const halves = (items: string[]) => {
                   <a
                     href={`/services/${service.id}/`}
                     class:list={[
-                      "flex w-full items-center pt-4 pb-[15px] text-lg leading-6 font-semibold text-secondary capitalize transition-all duration-[400ms] hover:rounded-[9px] hover:bg-primary hover:px-5 hover:text-white",
-                      current && "rounded-[9px] bg-primary px-5 text-white",
+                      "flex w-full items-center pt-4 pb-[15px] text-lg leading-6 font-semibold text-secondary capitalize transition-all duration-[400ms] hover:rounded-[9px] hover:bg-primary-strong hover:px-5 hover:text-white",
+                      current && "rounded-[9px] bg-primary-strong px-5 text-white",
                     ]}
                     aria-current={current ? "page" : undefined}
                   >
@@ -100,7 +100,7 @@ const halves = (items: string[]) => {
             </a>
           </p>
           <p class="text-lg leading-6 font-semibold">
-            <a href={`mailto:${site.contact.email}`} class="break-all hover:text-highlight">
+            <a href={`mailto:${site.contact.email}`} class="inline-block break-all hover:text-highlight">
               {site.contact.email}
             </a>
           </p>
