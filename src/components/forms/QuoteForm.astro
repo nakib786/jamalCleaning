@@ -101,7 +101,7 @@ const field = tone === "dark" ? "quote-field quote-field--dark" : "quote-field";
     <label for={`${idPrefix}-company`}>Company</label>
     <input id={`${idPrefix}-company`} type="text" name="company" tabindex="-1" autocomplete="off" />
   </div>
-  <div class="empty:hidden" data-turnstile></div>
+  <div class="empty:hidden" data-turnstile data-theme={tone === "dark" ? "dark" : "light"}></div>
   <div>
     <button type="submit" class="btn btn-md btn-on-dark">
       <span>{buttonLabel}</span>

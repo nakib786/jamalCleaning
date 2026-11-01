@@ -205,7 +205,7 @@ function emailHtml(
     )
     .join("");
   const time = new Date().toLocaleString("en-CA", {
-    timeZone: "America/Vancouver",
+    timeZone: "Etc/GMT+7",
     dateStyle: "medium",
     timeStyle: "short",
   });
@@ -215,7 +215,7 @@ function emailHtml(
 <tr><td style="${font}background:#044340;padding:22px 28px;color:#ffffff">
 <div style="font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#96fe81">${escapeHtml(site)}</div>
 <div style="font-size:22px;font-weight:bold;margin-top:6px">${escapeHtml(title)}</div>
-<div style="font-size:13px;color:#cfe3dd;margin-top:6px">Received ${escapeHtml(time)} (Pacific time)</div>
+<div style="font-size:13px;color:#cfe3dd;margin-top:6px">Received ${escapeHtml(time)} (Pacific Time, UTC−7)</div>
 </td></tr>
 <tr><td style="padding:20px 28px 8px"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #e7e9f1;border-radius:8px;overflow:hidden">${rows}</table></td></tr>
 <tr><td style="${font}padding:12px 28px 24px;color:#5c5e5e;font-size:13px;line-height:1.5">

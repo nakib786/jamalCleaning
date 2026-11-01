@@ -47,8 +47,9 @@ async function ensureWidget(form: HTMLFormElement): Promise<string | undefined> 
     slot.dataset.widgetId = window.turnstile.render(slot, {
       sitekey: SITE_KEY,
       size: "flexible",
-      appearance: "interaction-only",
-      theme: "light",
+      // Always visible so visitors see the spam check on every form; dark style on dark sections.
+      appearance: "always",
+      theme: slot.dataset.theme === "dark" ? "dark" : "light",
     });
   }
   return slot.dataset.widgetId;
