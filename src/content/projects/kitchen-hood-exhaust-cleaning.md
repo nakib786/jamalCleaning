@@ -1,18 +1,16 @@
 ---
 title: "Kitchen Hood & Exhaust Cleaning"
 order: 5
-category: "Outdoor"
-excerpt: "Kitchen Hood & Exhaust Cleaning by the Jamal Cleaning Services team — a outdoor cleaning project completed to a spotless finish."
+category: "Sanitization"
+excerpt: "Degreasing of kitchen hoods, filters and exhaust surfaces to keep commercial kitchens clean and hygienic."
 image: ../../assets/images/projects/kitchen-hood-exhaust-cleaning.jpg
 imageAlt: "Cleaners in green uniforms mopping and vacuuming a bright office"
-completed: "October 30, 2025"
 location: "Prince George, BC"
-factCategory: "Residential"
 overview:
   heading: "Project Overview"
   paragraphs:
-    - "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus euismod quam nec nibh pharetra vehicula ut eu ante. In in molestie purus. Fusce feugiat vehicula nunc. Ut nibh ante, rhoncus eget vestibulum eu, ultrices id massa. Sed lorem dolor, auctor sed malesuada sit amet, dictum in diam. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam nec nulla ac purus dapibus interdum. Nunc non nulla sit amet velit dictum blandit at egestas augue. Suspendisse potenti. Curabitur mollis, ante eget porta luctus, purus leo mollis urna, efficitur blandit velit ligula sed lorem."
-    - "Fusce feugiat vehicula nunc. Ut nibh ante, rhoncus eget vestibulum eu, ultrices id massa. Sed lorem dolor, auctor sed malesuada sit amet, dictum in diam. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam nec nulla ac purus dapibus interdum. Nunc non nulla sit amet velit dictum blandit at egestas augue. Suspendisse potenti. Curabitur mollis, ante eget porta luctus, purus leo mollis urna, efficitur blandit velit ligula sed lorem."
+    - "Grease builds up quickly on kitchen hoods, filters and surrounding surfaces. Regular degreasing keeps a commercial kitchen cleaner, easier to maintain and more pleasant to work in."
+    - "Our service covers hoods, filters and accessible exhaust surfaces. We clean the filters, degrease the hood and wipe down the surrounding areas, outside service hours so your kitchen is ready when you open."
 gallery:
   - src: ../../assets/images/projects/detail-gallery-1.jpg
     alt: "Cleaners wiping windows and a desk in a modern office"
@@ -21,16 +19,10 @@ gallery:
 benefits:
   heading: "Project Benefits"
   paragraphs:
-    - "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus euismod quam nec nibh pharetra vehicula ut eu ante. In in molestie purus. Fusce feugiat vehicula nunc. Ut nibh ante, rhoncus eget vestibulum eu, ultrices id massa. Sed lorem dolor, auctor sed malesuada sit amet, dictum in diam."
+    - "A regularly cleaned hood system keeps your kitchen cleaner and gives your team a fresher place to work."
   list:
-    - "The housekeepers we hired are professionals who take pride in doing excellent work and in exceeding expectations."
-    - "Your time is precious, and we understand that cleaning is really just one more item on your to-do list."
-    - "We carefully screen all of our cleaners, so you can rest assured that your home would receive the absolute highest quality of service providing."
-    - "Lint roll everything and/or anything: curtains, cushions, lamp shades... especially satisfying if you've got hairy pets!"
-review:
-  heading: "Customer Reviews"
-  paragraphs:
-    - "Fusce feugiat vehicula nunc. Ut nibh ante, rhoncus eget vestibulum eu, ultrices id massa. Sed lorem dolor, auctor sed malesuada sit amet, dictum in diam. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam nec nulla ac purus dapibus interdum."
-  quote: "Our office has never looked better. The cleaning crew is punctual, thorough, and always goes above and beyond. Highly recommend their services!"
-  author: "dishes cleaning"
+    - "Degreased hoods, filters and accessible exhaust surfaces"
+    - "Scheduled outside service hours"
+    - "Cleaner surfaces that are easier to maintain"
+    - "A more hygienic kitchen for staff"
 ---

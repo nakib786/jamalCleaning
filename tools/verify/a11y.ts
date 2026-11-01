@@ -14,9 +14,8 @@
  */
 import fs from "node:fs/promises";
 import { createRequire } from "node:module";
-import path from "node:path";
 import { chromium, type Page } from "playwright";
-import { ROOT } from "../lib/site.ts";
+import { builtRoutes, NOT_FOUND_ROUTE } from "../lib/built-routes.ts";
 
 const require = createRequire(import.meta.url);
 
@@ -34,26 +33,6 @@ interface AxeResult {
 
 function arg(name: string): string | undefined {
   return process.argv.find((a) => a.startsWith(`--${name}=`))?.slice(name.length + 3);
-}
-
-/** Every built page as a route, e.g. dist/about-us/index.html → /about-us/. */
-async function builtRoutes(): Promise<string[]> {
-  const dist = path.join(ROOT, "dist");
-  const routes: string[] = [];
-  async function walk(dir: string): Promise<void> {
-    for (const entry of await fs.readdir(dir, { withFileTypes: true })) {
-      const full = path.join(dir, entry.name);
-      if (entry.isDirectory()) await walk(full);
-      else if (entry.name === "index.html") {
-        const rel = path.relative(dist, path.dirname(full)).split(path.sep).join("/");
-        routes.push(rel ? `/${rel}/` : "/");
-      }
-    }
-  }
-  await walk(dist);
-  routes.sort();
-  routes.push("/this-page-does-not-exist/"); // served as the 404 page
-  return routes;
 }
 
 /**
@@ -75,7 +54,7 @@ async function main(): Promise<void> {
   const base = (arg("base") ?? "http://127.0.0.1:8787").replace(/\/$/, "");
   const widths = (arg("widths") ?? "1440,390").split(",").map(Number);
   const only = arg("only")?.split(",");
-  const routes = (await builtRoutes()).filter((r) => !only || only.includes(r));
+  const routes = [...(await builtRoutes()), NOT_FOUND_ROUTE].filter((r) => !only || only.includes(r));
   const axeSource = await fs.readFile(require.resolve("axe-core/axe.min.js"), "utf8");
 
   // CHROME_PATH points at a Chrome/Chromium binary when Playwright's own download is not installed.
@@ -127,5 +106,5 @@ async function main(): Promise<void> {
 
 main().catch((error: unknown) => {
   console.error(error);
-  process.exitCode = 1;
+  process.exit(1); // also closes a still-open browser
 });

@@ -1,18 +1,16 @@
 ---
 title: "Office Deep Cleaning"
 order: 12
-category: "Residential"
-excerpt: "Office Deep Cleaning by the Jamal Cleaning Services team — a residential cleaning project completed to a spotless finish."
+category: "Commercial"
+excerpt: "A thorough clean of workspaces, meeting rooms, washrooms and shared areas for a healthier, more productive office."
 image: ../../assets/images/projects/office-deep-cleaning.jpg
 imageAlt: "Two cleaners in hi-vis vests with a broom and dustpan in a classroom"
-completed: "October 30, 2025"
 location: "Prince George, BC"
-factCategory: "Residential"
 overview:
   heading: "Project Overview"
   paragraphs:
-    - "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus euismod quam nec nibh pharetra vehicula ut eu ante. In in molestie purus. Fusce feugiat vehicula nunc. Ut nibh ante, rhoncus eget vestibulum eu, ultrices id massa. Sed lorem dolor, auctor sed malesuada sit amet, dictum in diam. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam nec nulla ac purus dapibus interdum. Nunc non nulla sit amet velit dictum blandit at egestas augue. Suspendisse potenti. Curabitur mollis, ante eget porta luctus, purus leo mollis urna, efficitur blandit velit ligula sed lorem."
-    - "Fusce feugiat vehicula nunc. Ut nibh ante, rhoncus eget vestibulum eu, ultrices id massa. Sed lorem dolor, auctor sed malesuada sit amet, dictum in diam. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam nec nulla ac purus dapibus interdum. Nunc non nulla sit amet velit dictum blandit at egestas augue. Suspendisse potenti. Curabitur mollis, ante eget porta luctus, purus leo mollis urna, efficitur blandit velit ligula sed lorem."
+    - "A clean office supports health, productivity and the impression you make on clients. Office deep cleaning goes beyond the daily tidy to reach desks, shared equipment, floors, washrooms and kitchenettes."
+    - "We work in the evening or overnight so your team can start the day in a fresh workspace. Scope and frequency are tailored to your office, from one-time deep cleans to regular schedules."
 gallery:
   - src: ../../assets/images/projects/detail-gallery-1.jpg
     alt: "Cleaners wiping windows and a desk in a modern office"
@@ -21,16 +19,10 @@ gallery:
 benefits:
   heading: "Project Benefits"
   paragraphs:
-    - "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus euismod quam nec nibh pharetra vehicula ut eu ante. In in molestie purus. Fusce feugiat vehicula nunc. Ut nibh ante, rhoncus eget vestibulum eu, ultrices id massa. Sed lorem dolor, auctor sed malesuada sit amet, dictum in diam."
+    - "A deep-cleaned office is a healthier place to work and a better place to welcome visitors."
   list:
-    - "The housekeepers we hired are professionals who take pride in doing excellent work and in exceeding expectations."
-    - "Your time is precious, and we understand that cleaning is really just one more item on your to-do list."
-    - "We carefully screen all of our cleaners, so you can rest assured that your home would receive the absolute highest quality of service providing."
-    - "Lint roll everything and/or anything: curtains, cushions, lamp shades... especially satisfying if you've got hairy pets!"
-review:
-  heading: "Customer Reviews"
-  paragraphs:
-    - "Fusce feugiat vehicula nunc. Ut nibh ante, rhoncus eget vestibulum eu, ultrices id massa. Sed lorem dolor, auctor sed malesuada sit amet, dictum in diam. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam nec nulla ac purus dapibus interdum."
-  quote: "Our office has never looked better. The cleaning crew is punctual, thorough, and always goes above and beyond. Highly recommend their services!"
-  author: "dishes cleaning"
+    - "Desks, shared surfaces and high-touch points cleaned and sanitized"
+    - "Floors vacuumed and mopped throughout"
+    - "Washrooms and kitchenettes scrubbed and sanitized"
+    - "Evening and overnight scheduling to avoid disruption"
 ---

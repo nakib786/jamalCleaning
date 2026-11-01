@@ -1,26 +1,27 @@
 ---
 title: "Move In Out Cleaning"
 order: 2
-excerpt: "The housekeepers we hired are professionals who take pride in doing excellent work and in exceeding expectations."
+excerpt: "A top-to-bottom clean of empty homes for tenants, owners and landlords, so you can hand over or settle into a spotless space."
 image: ../../assets/images/services/move-in-out-cleaning.jpg
 imageAlt: "Cleaner in a green apron mopping an apartment floor beside a bucket of supplies"
+seoDescription: "Move-in and move-out cleaning in Prince George, BC for tenants, owners and landlords. Request a quote from Jamal Cleaning Services."
 about:
   heading: "About the service"
   paragraphs:
-    - "A clean home is more than just a pleasure-it’s essential for your health, comfort, and overall well-being. Our residential cleaning services are designed to take the stress out of keeping your home spotless, giving you more time to enjoy your life. Whether you need a one-time deep clean or regular maintenance, our professional team is here to help."
-    - "Our residential cleaning services cover every corner of your home, ensuring that no detail is overlooked. From dusting and vacuuming to scrubbing and sanitizing, we provide a thorough cleaning that leaves your home looking and feeling fresh. Our services include:"
+    - "Moving is stressful enough without worrying about the cleaning. Our move-in and move-out cleaning leaves an empty home spotless, whether you are handing back the keys, preparing a property for new tenants or starting fresh in a new place."
+    - "With the rooms empty, we can reach every surface. Our move-in and move-out cleaning includes:"
 features:
-  - title: "Deep Cleaning Solutions"
-    text: "Choose a time that works for you, whether you need weekly upkeep or one-time deep clean."
+  - title: "Empty-Home Deep Clean"
+    text: "With nothing in the way, we clean every room, closet and corner from top to bottom."
     icon: deep-cleaning
-  - title: "Comprehensive Cleaning"
-    text: "We use safe, non-toxic products that protect your family, pets, and the environment."
+  - title: "Kitchens and Appliances"
+    text: "Cabinets, counters, sinks and appliances are cleaned inside and out."
     icon: comprehensive-cleaning
-  - title: "Eco-Friendly Products"
-    text: "We use safe, non-toxic products that protect your family, pets, and the environment."
-    icon: eco-friendly
+  - title: "Bathrooms and Fixtures"
+    text: "Tubs, showers, toilets, vanities and mirrors are scrubbed and sanitized."
+    icon: house-cleaning
   - title: "Flexible Scheduling"
-    text: "Choose a time that works for you, whether you need weekly upkeep or one-time deep clean."
+    text: "Book around your moving day, key hand-over or inspection date."
     icon: flexible-scheduling
 gallery:
   - src: ../../assets/images/services/detail-gallery-1.jpg
@@ -28,29 +29,29 @@ gallery:
   - src: ../../assets/images/services/detail-gallery-2.jpg
     alt: "Smiling cleaner holding a bucket of cleaning supplies"
 sections:
-  - heading: "Regular Housekeeping"
+  - heading: "Ready for Hand-Over"
     paragraphs:
-      - "In design, we bring characteristics of the natural world into built spaces, such as water, greenery, and natural light, or elements like wood and stone. Encouraging the use of natural systems and processes in design allows for exposure to nature, and in turn, these design approaches improve health and wellbeing. There are a number of possible benefits, including reduced heart rate variability and pulse rates, decreased blood pressure, and increased activity in our nervous systems, to name a few."
+      - "A thorough move-out clean helps you meet the cleaning requirements in your lease or sale agreement and makes a good impression on the next occupants. For a move-in clean, we remove the dust and residue left by previous occupants or movers before you unpack."
   - heading: "Why Choose Jamal Cleaning Services?"
     paragraphs:
-      - "Refresh your home with our seasonal cleaning services. Ideal for spring cleaning or preparing for the holidays, our seasonal deep cleaning ensures every corner of your home is immaculate. We handle all the heavy lifting, so you can enjoy a beautifully clean home."
+      - "We work from a detailed checklist so every room is left ready for the next chapter. It covers:"
     checklist:
-      - "Assess areas needing cleaning"
-      - "Gather all necessary cleaning supplies"
-      - "Dust surfaces and high points"
-      - "Vacuum carpets and rugs"
-      - "Clean and disinfect bathrooms"
-      - "Wipe down kitchen surfaces"
-      - "Mop floors and clean windows"
-      - "Organize clutter and items out of place"
-    note: "Commercial interior design is a dynamic and multifaceted field that plays a critical role in the success of businesses across a wide range of industries. By blending creativity with practicality, commercial interior design"
+      - "Clean inside cabinets and drawers"
+      - "Clean appliances inside and out"
+      - "Scrub sinks, tubs, showers and toilets"
+      - "Wipe baseboards, doors and window sills"
+      - "Clean mirrors and glass"
+      - "Vacuum all floors and carpets"
+      - "Mop hard floors"
+      - "Remove dust and debris from closets and corners"
+    note: "Tell us your key hand-over or move-in date when you request a quote and we will schedule the clean to fit."
 faqs:
-  - question: "What types of spaces do you clean?"
-    answer: "Our interior design services cover everything you need to create a stunning and functional space. From initial concept development and space planning to selecting color schemes, furniture, and custom designs, we bring your vision to life."
-  - question: "Are your cleaning products eco-friendly?"
-    answer: "We offer cleaning for homes, offices, retail spaces, and even post-renovation sites. Custom packages available based on your needs."
+  - question: "When should I book a move-out clean?"
+    answer: "Once the home is empty and before your final inspection or key hand-over. Contact us as early as you can so we can fit your date."
+  - question: "Do I need to supply cleaning products or equipment?"
+    answer: "No. Our team brings the supplies and equipment needed for the job."
+  - question: "Can you clean a home that still has furniture in it?"
+    answer: "Yes, although an empty home lets us reach every surface. Let us know what to expect when you request a quote."
   - question: "How do I book a cleaning session?"
-    answer: "We offer cleaning for homes, offices, retail spaces, and even post-renovation sites. Custom packages available based on your needs."
-  - question: "Do I need to be home during the service?"
-    answer: "We offer cleaning for homes, offices, retail spaces, and even post-renovation sites. Custom packages available based on your needs."
+    answer: "Request a quote on our Contact page or give us a call. We will confirm the details and agree on a time that suits you."
 ---

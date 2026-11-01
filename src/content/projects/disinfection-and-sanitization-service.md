@@ -2,17 +2,15 @@
 title: "Disinfection and Sanitization Service"
 order: 6
 category: "Sanitization"
-excerpt: "Disinfection and Sanitization Service by the Jamal Cleaning Services team — a sanitization cleaning project completed to a spotless finish."
+excerpt: "Targeted disinfection of high-touch surfaces and shared spaces to support a cleaner, healthier environment."
 image: ../../assets/images/projects/disinfection-and-sanitization-service.jpg
 imageAlt: "Cleaner in a blue shirt spraying disinfectant on shelves"
-completed: "October 30, 2025"
 location: "Prince George, BC"
-factCategory: "Residential"
 overview:
   heading: "Project Overview"
   paragraphs:
-    - "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus euismod quam nec nibh pharetra vehicula ut eu ante. In in molestie purus. Fusce feugiat vehicula nunc. Ut nibh ante, rhoncus eget vestibulum eu, ultrices id massa. Sed lorem dolor, auctor sed malesuada sit amet, dictum in diam. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam nec nulla ac purus dapibus interdum. Nunc non nulla sit amet velit dictum blandit at egestas augue. Suspendisse potenti. Curabitur mollis, ante eget porta luctus, purus leo mollis urna, efficitur blandit velit ligula sed lorem."
-    - "Fusce feugiat vehicula nunc. Ut nibh ante, rhoncus eget vestibulum eu, ultrices id massa. Sed lorem dolor, auctor sed malesuada sit amet, dictum in diam. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam nec nulla ac purus dapibus interdum. Nunc non nulla sit amet velit dictum blandit at egestas augue. Suspendisse potenti. Curabitur mollis, ante eget porta luctus, purus leo mollis urna, efficitur blandit velit ligula sed lorem."
+    - "Shared spaces see constant contact: door handles, switches, counters, railings and washrooms. Disinfection and sanitizing adds a step on top of regular cleaning, focused on the surfaces people touch most."
+    - "We clean visible soil first, because disinfectant works best on a clean surface, then apply suitable products to high-touch areas and allow the correct contact time before wiping. The scope and frequency are agreed with you in advance."
 gallery:
   - src: ../../assets/images/projects/detail-gallery-1.jpg
     alt: "Cleaners wiping windows and a desk in a modern office"
@@ -21,16 +19,10 @@ gallery:
 benefits:
   heading: "Project Benefits"
   paragraphs:
-    - "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus euismod quam nec nibh pharetra vehicula ut eu ante. In in molestie purus. Fusce feugiat vehicula nunc. Ut nibh ante, rhoncus eget vestibulum eu, ultrices id massa. Sed lorem dolor, auctor sed malesuada sit amet, dictum in diam."
+    - "A regular disinfection routine helps keep homes, offices and public areas hygienic for everyone who uses them."
   list:
-    - "The housekeepers we hired are professionals who take pride in doing excellent work and in exceeding expectations."
-    - "Your time is precious, and we understand that cleaning is really just one more item on your to-do list."
-    - "We carefully screen all of our cleaners, so you can rest assured that your home would receive the absolute highest quality of service providing."
-    - "Lint roll everything and/or anything: curtains, cushions, lamp shades... especially satisfying if you've got hairy pets!"
-review:
-  heading: "Customer Reviews"
-  paragraphs:
-    - "Fusce feugiat vehicula nunc. Ut nibh ante, rhoncus eget vestibulum eu, ultrices id massa. Sed lorem dolor, auctor sed malesuada sit amet, dictum in diam. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam nec nulla ac purus dapibus interdum."
-  quote: "Our office has never looked better. The cleaning crew is punctual, thorough, and always goes above and beyond. Highly recommend their services!"
-  author: "dishes cleaning"
+    - "Focuses on high-touch surfaces and washrooms"
+    - "Products and methods chosen to suit each surface"
+    - "One-time or recurring service"
+    - "Scheduled outside business hours on request"
 ---

@@ -2,70 +2,70 @@
   {
     "id": "general-1",
     "question": "What types of spaces do you clean?",
-    "answer": "We offer cleaning for homes, offices, retail spaces, and even post-renovation sites. Custom packages available based on your needs.",
+    "answer": "We clean homes, apartments and condos, offices, retail spaces and post-renovation sites. Custom packages are available based on your needs.",
     "group": "General",
     "order": 1
   },
   {
     "id": "general-2",
     "question": "Are your cleaning products eco-friendly?",
-    "answer": "We offer cleaning for homes, offices, retail spaces, and even post-renovation sites. Custom packages available based on your needs.",
+    "answer": "We use eco-friendly cleaning products where the job allows. If someone in your home or workplace has allergies or sensitivities, tell us when you book and we will work with you.",
     "group": "General",
     "order": 2
   },
   {
     "id": "general-3",
-    "question": "How do I book a cleaning session?",
-    "answer": "We offer cleaning for homes, offices, retail spaces, and even post-renovation sites. Custom packages available based on your needs.",
+    "question": "Do you offer overnight or weekend cleaning?",
+    "answer": "Yes. We are open 7 days a week and overnight cleaning is available, which suits offices and commercial sites that need to stay open during the day.",
     "group": "General",
     "order": 3
   },
   {
     "id": "general-4",
-    "question": "Do I need to be home during the service?",
-    "answer": "We offer cleaning for homes, offices, retail spaces, and even post-renovation sites. Custom packages available based on your needs.",
+    "question": "What if I’m not satisfied with the service?",
+    "answer": "Let us know as soon as you notice an issue and we will work with you to put it right.",
     "group": "General",
     "order": 4
   },
   {
     "id": "general-5",
-    "question": "What if I’m not satisfied with the service?",
-    "answer": "We offer cleaning for homes, offices, retail spaces, and even post-renovation sites. Custom packages available based on your needs.",
+    "question": "Where do you work?",
+    "answer": "We are based in Prince George, BC. Get in touch and we will confirm that we can cover your location.",
     "group": "General",
     "order": 5
   },
   {
     "id": "booking-1",
-    "question": "What types of spaces do you clean?",
-    "answer": "We offer cleaning for homes, offices, retail spaces, and even post-renovation sites. Custom packages available based on your needs.",
+    "question": "How do I book a cleaning session?",
+    "answer": "Request a quote on our Contact page or give us a call. We will confirm the details and agree on a time that suits you.",
     "group": "Booking & Service",
     "order": 6
   },
   {
     "id": "booking-2",
-    "question": "Are your cleaning products eco-friendly?",
-    "answer": "We offer cleaning for homes, offices, retail spaces, and even post-renovation sites. Custom packages available based on your needs.",
+    "question": "Do I need to be home during the service?",
+    "answer": "No. If you would rather not be home, we can agree on how to access the property when you book. If you prefer to be there, that works too.",
     "group": "Booking & Service",
     "order": 7
   },
   {
     "id": "booking-3",
-    "question": "How do I book a cleaning session?",
-    "answer": "We offer cleaning for homes, offices, retail spaces, and even post-renovation sites. Custom packages available based on your needs.",
+    "question": "Can I book a one-time clean, or do I need a regular plan?",
+    "answer": "Both are available. You can book a single visit or set up a weekly, bi-weekly or monthly schedule.",
     "group": "Booking & Service",
     "order": 8
   },
   {
     "id": "booking-4",
-    "question": "Do I need to be home during the service?",
-    "answer": "We offer cleaning for homes, offices, retail spaces, and even post-renovation sites. Custom packages available based on your needs.",
+    "question": "How do I get a quote?",
+    "answer": "Send a request on the Contact page with a few details about your space and the cleaning you need, and we will get back to you with a quote.",
     "group": "Booking & Service",
     "order": 9
   },
   {
     "id": "booking-5",
-    "question": "What if I’m not satisfied with the service?",
-    "answer": "We offer cleaning for homes, offices, retail spaces, and even post-renovation sites. Custom packages available based on your needs.",
+    "question": "Can I reschedule or cancel a booking?",
+    "answer": "Contact us as early as you can and we will do our best to find a new time that suits you.",
     "group": "Booking & Service",
     "order": 10
   }

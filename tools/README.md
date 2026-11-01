@@ -31,11 +31,12 @@ All accept `--only=slug,slug`; `inspect`/`capture` accept `--widths=…`.
 
 ## 3. Verify the rebuild
 
-| Script                 | What it does                                                                                                                                                                                                           |
-| ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `npm run verify`       | Loads each original and rebuilt page at 1440/768/390 px, takes viewport screenshots with REA `capture_web_screenshot` at matching scroll offsets, and diffs them with REA `compare_web_screenshots` → `verify-output/` |
-| `npm run verify:links` | Crawls the built site for broken internal links, missing assets, demo-host references and console errors                                                                                                               |
-| `npm run verify:a11y`  | axe-core (WCAG 2.0–2.2 A/AA) sweep of every built page at 1440 and 390 px against a served production build (`npm run preview`); `CHROME_PATH` uses an existing Chrome instead of Playwright's download                |
+| Script                      | What it does                                                                                                                                                                                                                                                                                                                     |
+| --------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `npm run verify`            | Loads each original (from `reference/discovery.json`) and rebuilt page at 1440/768/390 px in two Chromium pages, scrolls both with wheel events, diffs full-page screenshots in viewport-high bands and writes reference / rebuild / diff strips for flagged bands → `verify-output/compare/` (needs network access to the demo) |
+| `npm run verify:links`      | Checks every built page for broken internal links, missing assets, bad anchors, demo-host references and demo text, missing alt text, console errors; warns about demo-sourced facts that need real owner data                                                                                                                   |
+| `npm run verify:responsive` | Loads every built page at 390 and 768 px, reports sideways overflow, and saves full-page screenshots to `verify-output/screens/`                                                                                                                                                                                                 |
+| `npm run verify:a11y`       | axe-core (WCAG 2.0–2.2 A/AA) sweep of every built page at 1440 and 390 px against a served production build (`npm run preview`); `CHROME_PATH` uses an existing Chrome instead of Playwright's download                                                                                                                          |
 
 ## REA
 

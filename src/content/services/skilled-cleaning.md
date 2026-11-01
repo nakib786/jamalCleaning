@@ -1,26 +1,27 @@
 ---
 title: "Skilled Cleaning"
 order: 4
-excerpt: "For those times when your home needs more than just a surface clean, our deep cleaning service offers a thorough, detailed approach."
+excerpt: "A deep, detailed clean for the times when your space needs more than a surface clean."
 image: ../../assets/images/services/skilled-cleaning.jpg
 imageAlt: "Smiling cleaner in a green apron wiping a desk in a bright office"
+seoDescription: "Deep cleaning in Prince George, BC for homes and workspaces that need more than a surface clean. Request a quote from Jamal Cleaning Services."
 about:
   heading: "About the service"
   paragraphs:
-    - "A clean home is more than just a pleasure-it’s essential for your health, comfort, and overall well-being. Our residential cleaning services are designed to take the stress out of keeping your home spotless, giving you more time to enjoy your life. Whether you need a one-time deep clean or regular maintenance, our professional team is here to help."
-    - "Our residential cleaning services cover every corner of your home, ensuring that no detail is overlooked. From dusting and vacuuming to scrubbing and sanitizing, we provide a thorough cleaning that leaves your home looking and feeling fresh. Our services include:"
+    - "Some cleaning jobs need more than a quick wipe. Our skilled deep cleaning goes beyond the everyday to reach the places and build-up that regular visits miss, restoring the look and feel of your space."
+    - "It is ideal for spring cleaning, before or after an event, or when a home or workspace has not had a thorough clean in a while. Our deep cleaning includes:"
 features:
-  - title: "Deep Cleaning Solutions"
-    text: "Choose a time that works for you, whether you need weekly upkeep or one-time deep clean."
+  - title: "Detailed Deep Cleaning"
+    text: "Baseboards, door frames, switch plates and other detail areas get individual attention."
     icon: deep-cleaning
-  - title: "Comprehensive Cleaning"
-    text: "We use safe, non-toxic products that protect your family, pets, and the environment."
+  - title: "Built-Up Grime Removal"
+    text: "Soap scum, grease and limescale are tackled in kitchens and bathrooms."
     icon: comprehensive-cleaning
-  - title: "Eco-Friendly Products"
-    text: "We use safe, non-toxic products that protect your family, pets, and the environment."
-    icon: eco-friendly
+  - title: "Appliances and Fixtures"
+    text: "Ovens, refrigerators, range hoods and light fixtures are cleaned where requested."
+    icon: house-cleaning
   - title: "Flexible Scheduling"
-    text: "Choose a time that works for you, whether you need weekly upkeep or one-time deep clean."
+    text: "Book a one-time deep clean, then keep the results with a recurring plan."
     icon: flexible-scheduling
 gallery:
   - src: ../../assets/images/services/detail-gallery-1.jpg
@@ -28,29 +29,29 @@ gallery:
   - src: ../../assets/images/services/detail-gallery-2.jpg
     alt: "Smiling cleaner holding a bucket of cleaning supplies"
 sections:
-  - heading: "Regular Housekeeping"
+  - heading: "Beyond the Surface"
     paragraphs:
-      - "In design, we bring characteristics of the natural world into built spaces, such as water, greenery, and natural light, or elements like wood and stone. Encouraging the use of natural systems and processes in design allows for exposure to nature, and in turn, these design approaches improve health and wellbeing. There are a number of possible benefits, including reduced heart rate variability and pulse rates, decreased blood pressure, and increased activity in our nervous systems, to name a few."
+      - "A deep clean is a different job from routine upkeep. We take more time, use targeted techniques and work through each area methodically so the result lasts. It is also a good starting point before moving to regular visits that maintain the result."
   - heading: "Why Choose Jamal Cleaning Services?"
     paragraphs:
-      - "Refresh your home with our seasonal cleaning services. Ideal for spring cleaning or preparing for the holidays, our seasonal deep cleaning ensures every corner of your home is immaculate. We handle all the heavy lifting, so you can enjoy a beautifully clean home."
+      - "Our deep cleaning checklist covers the areas that are easy to overlook:"
     checklist:
-      - "Assess areas needing cleaning"
-      - "Gather all necessary cleaning supplies"
-      - "Dust surfaces and high points"
-      - "Vacuum carpets and rugs"
-      - "Clean and disinfect bathrooms"
-      - "Wipe down kitchen surfaces"
-      - "Mop floors and clean windows"
-      - "Organize clutter and items out of place"
-    note: "Commercial interior design is a dynamic and multifaceted field that plays a critical role in the success of businesses across a wide range of industries. By blending creativity with practicality, commercial interior design"
+      - "Dust ceilings, vents and light fixtures"
+      - "Wipe baseboards, door frames and trim"
+      - "Scrub tile, grout and shower screens"
+      - "Degrease stovetops, range hoods and backsplashes"
+      - "Clean inside the oven and refrigerator on request"
+      - "Clean windows, tracks and sills"
+      - "Vacuum under and behind movable furniture"
+      - "Mop hard floors"
+    note: "Not sure how much work your space needs? Describe it when you request a quote and we will recommend the right level of clean."
 faqs:
-  - question: "What types of spaces do you clean?"
-    answer: "Our interior design services cover everything you need to create a stunning and functional space. From initial concept development and space planning to selecting color schemes, furniture, and custom designs, we bring your vision to life."
-  - question: "Are your cleaning products eco-friendly?"
-    answer: "We offer cleaning for homes, offices, retail spaces, and even post-renovation sites. Custom packages available based on your needs."
+  - question: "What is the difference between deep cleaning and regular cleaning?"
+    answer: "Regular cleaning maintains a space that is already in good condition. Deep cleaning takes longer and covers detail areas and built-up grime that routine visits do not reach."
+  - question: "How long does a deep clean take?"
+    answer: "It depends on the size and condition of the space. We will give you an idea of the time needed when you request a quote."
+  - question: "Should I book a deep clean before regular service?"
+    answer: "Often it helps. A deep clean brings the space up to standard, and regular visits then keep it there."
   - question: "How do I book a cleaning session?"
-    answer: "We offer cleaning for homes, offices, retail spaces, and even post-renovation sites. Custom packages available based on your needs."
-  - question: "Do I need to be home during the service?"
-    answer: "We offer cleaning for homes, offices, retail spaces, and even post-renovation sites. Custom packages available based on your needs."
+    answer: "Request a quote on our Contact page or give us a call. We will confirm the details and agree on a time that suits you."
 ---

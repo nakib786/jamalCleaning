@@ -24,6 +24,7 @@ const href = `/services/${service.id}/`;
           alt={service.data.imageAlt}
           widths={[360, 480, 720, 1000]}
           sizes="(min-width: 1025px) 420px, (min-width: 768px) 50vw, 100vw"
+          fetchpriority="low"
           class="absolute inset-0 size-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
         />
       </div>

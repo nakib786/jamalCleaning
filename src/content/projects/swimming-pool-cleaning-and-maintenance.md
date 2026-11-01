@@ -1,18 +1,16 @@
 ---
 title: "Swimming Pool Cleaning and Maintenance"
 order: 1
-category: "Sanitization"
-excerpt: "Swimming Pool Cleaning and Maintenance by the Jamal Cleaning Services team — a sanitization cleaning project completed to a spotless finish."
+category: "Outdoor"
+excerpt: "Cleaning of pool surfaces, decks and surrounding areas to keep a pool looking clean and inviting."
 image: ../../assets/images/projects/swimming-pool-cleaning-and-maintenance.jpg
 imageAlt: "Cleaner in yellow gloves spraying and wiping a glass partition"
-completed: "October 30, 2025"
 location: "Prince George, BC"
-factCategory: "Residential"
 overview:
   heading: "Project Overview"
   paragraphs:
-    - "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus euismod quam nec nibh pharetra vehicula ut eu ante. In in molestie purus. Fusce feugiat vehicula nunc. Ut nibh ante, rhoncus eget vestibulum eu, ultrices id massa. Sed lorem dolor, auctor sed malesuada sit amet, dictum in diam. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam nec nulla ac purus dapibus interdum. Nunc non nulla sit amet velit dictum blandit at egestas augue. Suspendisse potenti. Curabitur mollis, ante eget porta luctus, purus leo mollis urna, efficitur blandit velit ligula sed lorem."
-    - "Fusce feugiat vehicula nunc. Ut nibh ante, rhoncus eget vestibulum eu, ultrices id massa. Sed lorem dolor, auctor sed malesuada sit amet, dictum in diam. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam nec nulla ac purus dapibus interdum. Nunc non nulla sit amet velit dictum blandit at egestas augue. Suspendisse potenti. Curabitur mollis, ante eget porta luctus, purus leo mollis urna, efficitur blandit velit ligula sed lorem."
+    - "A well-kept pool area is inviting and safer to use. This service covers cleaning and routine upkeep of the pool surfaces, tile lines, steps, decks and surrounding areas."
+    - "We scrub tile lines and steps, clear debris and wash the deck and surrounding surfaces, on a one-time or regular schedule."
 gallery:
   - src: ../../assets/images/projects/detail-gallery-1.jpg
     alt: "Cleaners wiping windows and a desk in a modern office"
@@ -21,16 +19,10 @@ gallery:
 benefits:
   heading: "Project Benefits"
   paragraphs:
-    - "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus euismod quam nec nibh pharetra vehicula ut eu ante. In in molestie purus. Fusce feugiat vehicula nunc. Ut nibh ante, rhoncus eget vestibulum eu, ultrices id massa. Sed lorem dolor, auctor sed malesuada sit amet, dictum in diam."
+    - "Regular upkeep keeps the pool area clean, safer underfoot and ready to enjoy."
   list:
-    - "The housekeepers we hired are professionals who take pride in doing excellent work and in exceeding expectations."
-    - "Your time is precious, and we understand that cleaning is really just one more item on your to-do list."
-    - "We carefully screen all of our cleaners, so you can rest assured that your home would receive the absolute highest quality of service providing."
-    - "Lint roll everything and/or anything: curtains, cushions, lamp shades... especially satisfying if you've got hairy pets!"
-review:
-  heading: "Customer Reviews"
-  paragraphs:
-    - "Fusce feugiat vehicula nunc. Ut nibh ante, rhoncus eget vestibulum eu, ultrices id massa. Sed lorem dolor, auctor sed malesuada sit amet, dictum in diam. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam nec nulla ac purus dapibus interdum."
-  quote: "Our office has never looked better. The cleaning crew is punctual, thorough, and always goes above and beyond. Highly recommend their services!"
-  author: "dishes cleaning"
+    - "Tile lines, steps and ladders scrubbed"
+    - "Decks and surrounding surfaces washed"
+    - "Debris cleared from the pool area"
+    - "One-time or regular upkeep schedules"
 ---

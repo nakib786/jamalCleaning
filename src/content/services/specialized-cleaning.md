@@ -1,26 +1,27 @@
 ---
 title: "Specialized Cleaning"
 order: 5
-excerpt: "The housekeepers we hired are professionals who take pride in doing excellent work and in exceeding expectations."
+excerpt: "Specialist cleaning for upholstery, sanitizing, pressure washing and other jobs that standard cleaning does not cover."
 image: ../../assets/images/services/specialized-cleaning.jpg
 imageAlt: "Team of three cleaners with a duster, mop and supply cart in a living room"
+seoDescription: "Specialized cleaning in Prince George, BC: upholstery and mattress cleaning, disinfection and pressure washing. Request a quote from Jamal Cleaning Services."
 about:
   heading: "About the service"
   paragraphs:
-    - "A clean home is more than just a pleasure-it’s essential for your health, comfort, and overall well-being. Our residential cleaning services are designed to take the stress out of keeping your home spotless, giving you more time to enjoy your life. Whether you need a one-time deep clean or regular maintenance, our professional team is here to help."
-    - "Our residential cleaning services cover every corner of your home, ensuring that no detail is overlooked. From dusting and vacuuming to scrubbing and sanitizing, we provide a thorough cleaning that leaves your home looking and feeling fresh. Our services include:"
+    - "Not every surface can be cleaned with a mop and a cloth. Our specialized cleaning services cover upholstery, sanitizing and exterior cleaning, using the right method for each job."
+    - "Whether it is a sofa, a shared workspace or an outdoor surface, we match the equipment and approach to the material and the level of soiling. Our specialized services include:"
 features:
-  - title: "Deep Cleaning Solutions"
-    text: "Choose a time that works for you, whether you need weekly upkeep or one-time deep clean."
+  - title: "Upholstery and Mattresses"
+    text: "Sofas, chairs and mattresses are deep cleaned to lift dirt, stains and odours."
     icon: deep-cleaning
-  - title: "Comprehensive Cleaning"
-    text: "We use safe, non-toxic products that protect your family, pets, and the environment."
+  - title: "Disinfection and Sanitizing"
+    text: "High-touch surfaces and shared spaces are disinfected to support a healthier environment."
     icon: comprehensive-cleaning
-  - title: "Eco-Friendly Products"
-    text: "We use safe, non-toxic products that protect your family, pets, and the environment."
-    icon: eco-friendly
+  - title: "Pressure Washing"
+    text: "Driveways, parking areas and exterior surfaces are washed to remove built-up dirt."
+    icon: store-cleaning
   - title: "Flexible Scheduling"
-    text: "Choose a time that works for you, whether you need weekly upkeep or one-time deep clean."
+    text: "Jobs are scheduled to suit you, including evenings and overnight for commercial sites."
     icon: flexible-scheduling
 gallery:
   - src: ../../assets/images/services/detail-gallery-1.jpg
@@ -28,29 +29,29 @@ gallery:
   - src: ../../assets/images/services/detail-gallery-2.jpg
     alt: "Smiling cleaner holding a bucket of cleaning supplies"
 sections:
-  - heading: "Regular Housekeeping"
+  - heading: "The Right Method for Every Surface"
     paragraphs:
-      - "In design, we bring characteristics of the natural world into built spaces, such as water, greenery, and natural light, or elements like wood and stone. Encouraging the use of natural systems and processes in design allows for exposure to nature, and in turn, these design approaches improve health and wellbeing. There are a number of possible benefits, including reduced heart rate variability and pulse rates, decreased blood pressure, and increased activity in our nervous systems, to name a few."
+      - "Using the wrong product or technique can damage materials or leave stains behind. We assess each job first, then choose the cleaning method, equipment and products that suit the surface and the soiling, so you get a good result without risking the item or space."
   - heading: "Why Choose Jamal Cleaning Services?"
     paragraphs:
-      - "Refresh your home with our seasonal cleaning services. Ideal for spring cleaning or preparing for the holidays, our seasonal deep cleaning ensures every corner of your home is immaculate. We handle all the heavy lifting, so you can enjoy a beautifully clean home."
+      - "Every specialized job starts with an assessment and a clear plan. Our process includes:"
     checklist:
-      - "Assess areas needing cleaning"
-      - "Gather all necessary cleaning supplies"
-      - "Dust surfaces and high points"
-      - "Vacuum carpets and rugs"
-      - "Clean and disinfect bathrooms"
-      - "Wipe down kitchen surfaces"
-      - "Mop floors and clean windows"
-      - "Organize clutter and items out of place"
-    note: "Commercial interior design is a dynamic and multifaceted field that plays a critical role in the success of businesses across a wide range of industries. By blending creativity with practicality, commercial interior design"
+      - "Inspect surfaces and materials"
+      - "Agree the scope and method with you"
+      - "Test products on a hidden area where needed"
+      - "Pre-treat stains and heavy soiling"
+      - "Clean with suitable equipment"
+      - "Disinfect high-touch areas on request"
+      - "Rinse and remove residue"
+      - "Final inspection with you"
+    note: "Describe the item or area when you request a quote. Photos help us recommend the best approach."
 faqs:
-  - question: "What types of spaces do you clean?"
-    answer: "Our interior design services cover everything you need to create a stunning and functional space. From initial concept development and space planning to selecting color schemes, furniture, and custom designs, we bring your vision to life."
-  - question: "Are your cleaning products eco-friendly?"
-    answer: "We offer cleaning for homes, offices, retail spaces, and even post-renovation sites. Custom packages available based on your needs."
+  - question: "What kinds of specialized cleaning do you offer?"
+    answer: "Upholstery and mattress cleaning, disinfection and sanitizing, pressure washing and other jobs that need more than standard cleaning. Ask us if you have something specific in mind."
+  - question: "Can you remove stains?"
+    answer: "We treat stains with methods suited to the material. Some stains cannot be removed completely, and we will tell you what to expect before we start."
+  - question: "Can you work around children and pets?"
+    answer: "Yes. We choose products to suit the space and follow label directions. Tell us about children, pets or sensitivities when you book."
   - question: "How do I book a cleaning session?"
-    answer: "We offer cleaning for homes, offices, retail spaces, and even post-renovation sites. Custom packages available based on your needs."
-  - question: "Do I need to be home during the service?"
-    answer: "We offer cleaning for homes, offices, retail spaces, and even post-renovation sites. Custom packages available based on your needs."
+    answer: "Request a quote on our Contact page or give us a call. We will confirm the details and agree on a time that suits you."
 ---

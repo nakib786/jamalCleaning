@@ -1,26 +1,27 @@
 ---
 title: "Residential Services"
 order: 6
-excerpt: "Our industrial cleaning services are tailored to meet the unique needs of warehouses, factories, and other large-scale facilities."
+excerpt: "Whole-home cleaning for houses, apartments and condos, as a one-time clean or on a regular schedule."
 image: ../../assets/images/services/residential-services.jpg
 imageAlt: "Smiling cleaner in yellow gloves wiping the floor while a colleague mops behind her"
+seoDescription: "Residential cleaning services in Prince George, BC for houses, apartments and condos, one-time or recurring. Request a quote from Jamal Cleaning Services."
 about:
   heading: "About the service"
   paragraphs:
-    - "A clean home is more than just a pleasure-it’s essential for your health, comfort, and overall well-being. Our residential cleaning services are designed to take the stress out of keeping your home spotless, giving you more time to enjoy your life. Whether you need a one-time deep clean or regular maintenance, our professional team is here to help."
-    - "Our residential cleaning services cover every corner of your home, ensuring that no detail is overlooked. From dusting and vacuuming to scrubbing and sanitizing, we provide a thorough cleaning that leaves your home looking and feeling fresh. Our services include:"
+    - "Your home should be a place to relax, not another to-do list. Our residential cleaning services cover houses, apartments and condos of every size, as a one-time clean or as part of a regular plan."
+    - "We clean room by room and give each space the same attention, from kitchens and bathrooms to bedrooms and living areas. Our residential services include:"
 features:
-  - title: "Deep Cleaning Solutions"
-    text: "Choose a time that works for you, whether you need weekly upkeep or one-time deep clean."
-    icon: deep-cleaning
-  - title: "Comprehensive Cleaning"
-    text: "We use safe, non-toxic products that protect your family, pets, and the environment."
+  - title: "Whole-Home Cleaning"
+    text: "Every room is cleaned from top to bottom, with attention to the details that are easy to miss."
+    icon: house-cleaning
+  - title: "Kitchens and Bathrooms"
+    text: "Heavily used rooms are scrubbed and sanitized so they stay fresh and hygienic."
     icon: comprehensive-cleaning
-  - title: "Eco-Friendly Products"
-    text: "We use safe, non-toxic products that protect your family, pets, and the environment."
-    icon: eco-friendly
+  - title: "Seasonal Refresh"
+    text: "Spring cleaning, holiday preparation or a fresh start after a busy season."
+    icon: deep-cleaning
   - title: "Flexible Scheduling"
-    text: "Choose a time that works for you, whether you need weekly upkeep or one-time deep clean."
+    text: "One-time, weekly, bi-weekly or monthly, booked at times that fit your life."
     icon: flexible-scheduling
 gallery:
   - src: ../../assets/images/services/detail-gallery-1.jpg
@@ -28,29 +29,29 @@ gallery:
   - src: ../../assets/images/services/detail-gallery-2.jpg
     alt: "Smiling cleaner holding a bucket of cleaning supplies"
 sections:
-  - heading: "Regular Housekeeping"
+  - heading: "Cleaning for Every Home"
     paragraphs:
-      - "In design, we bring characteristics of the natural world into built spaces, such as water, greenery, and natural light, or elements like wood and stone. Encouraging the use of natural systems and processes in design allows for exposure to nature, and in turn, these design approaches improve health and wellbeing. There are a number of possible benefits, including reduced heart rate variability and pulse rates, decreased blood pressure, and increased activity in our nervous systems, to name a few."
+      - "Every home is different, so we start by learning what matters most in yours: the rooms you use every day, surfaces that need special care, pets and any allergies. We then plan a visit that fits, so you get the result you want without having to explain it every time."
   - heading: "Why Choose Jamal Cleaning Services?"
     paragraphs:
-      - "Refresh your home with our seasonal cleaning services. Ideal for spring cleaning or preparing for the holidays, our seasonal deep cleaning ensures every corner of your home is immaculate. We handle all the heavy lifting, so you can enjoy a beautifully clean home."
+      - "Refresh your home with a thorough clean that covers every corner. Our checklist for a residential visit includes:"
     checklist:
       - "Assess areas needing cleaning"
-      - "Gather all necessary cleaning supplies"
-      - "Dust surfaces and high points"
+      - "Dust surfaces, shelves and high points"
       - "Vacuum carpets and rugs"
       - "Clean and disinfect bathrooms"
-      - "Wipe down kitchen surfaces"
-      - "Mop floors and clean windows"
-      - "Organize clutter and items out of place"
-    note: "Commercial interior design is a dynamic and multifaceted field that plays a critical role in the success of businesses across a wide range of industries. By blending creativity with practicality, commercial interior design"
+      - "Wipe down kitchen counters and appliance exteriors"
+      - "Mop floors"
+      - "Clean mirrors and interior windows"
+      - "Tidy clutter and items out of place"
+    note: "Planning a special occasion or a seasonal clean? Mention it when you request a quote and we will shape the visit around it."
 faqs:
-  - question: "What types of spaces do you clean?"
-    answer: "Our interior design services cover everything you need to create a stunning and functional space. From initial concept development and space planning to selecting color schemes, furniture, and custom designs, we bring your vision to life."
-  - question: "Are your cleaning products eco-friendly?"
-    answer: "We offer cleaning for homes, offices, retail spaces, and even post-renovation sites. Custom packages available based on your needs."
+  - question: "What types of homes do you clean?"
+    answer: "We clean houses, apartments and condos of all sizes, for one-time or recurring service."
+  - question: "Can I book a one-time clean?"
+    answer: "Yes. You can book a single visit or set up a regular schedule, whichever suits you."
   - question: "How do I book a cleaning session?"
-    answer: "We offer cleaning for homes, offices, retail spaces, and even post-renovation sites. Custom packages available based on your needs."
-  - question: "Do I need to be home during the service?"
-    answer: "We offer cleaning for homes, offices, retail spaces, and even post-renovation sites. Custom packages available based on your needs."
+    answer: "Request a quote on our Contact page or give us a call. We will confirm the details and agree on a time that suits you."
+  - question: "Can you focus on specific rooms?"
+    answer: "Yes. Tell us which rooms or tasks matter most and we will build the visit around them."
 ---

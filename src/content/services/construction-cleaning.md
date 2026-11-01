@@ -1,26 +1,27 @@
 ---
 title: "Construction Cleaning"
 order: 1
-excerpt: "We understand the importance of maintaining a clean and professional environment for your business. Our commercial cleaning services ensure your office."
+excerpt: "Post-construction and renovation clean-up, from debris removal to the final detail clean that leaves a space ready to use."
 image: ../../assets/images/services/construction-cleaning.jpg
 imageAlt: "Cleaning crew in protective suits sweeping a city street"
+seoDescription: "Post-construction and renovation cleaning in Prince George, BC: debris removal, dust removal and a final detail clean. Request a quote from Jamal Cleaning Services."
 about:
   heading: "About the service"
   paragraphs:
-    - "A clean home is more than just a pleasure-it’s essential for your health, comfort, and overall well-being. Our residential cleaning services are designed to take the stress out of keeping your home spotless, giving you more time to enjoy your life. Whether you need a one-time deep clean or regular maintenance, our professional team is here to help."
-    - "Our residential cleaning services cover every corner of your home, ensuring that no detail is overlooked. From dusting and vacuuming to scrubbing and sanitizing, we provide a thorough cleaning that leaves your home looking and feeling fresh. Our services include:"
+    - "When the builders leave, the dust stays. Our construction cleaning removes the debris, dust and residue left behind by building and renovation work so your new or updated space is ready to use."
+    - "We work in stages that match your project, from rough clean-ups while work is underway to a final detail clean before hand-over. Our construction cleaning services include:"
 features:
-  - title: "Deep Cleaning Solutions"
-    text: "Choose a time that works for you, whether you need weekly upkeep or one-time deep clean."
-    icon: deep-cleaning
-  - title: "Comprehensive Cleaning"
-    text: "We use safe, non-toxic products that protect your family, pets, and the environment."
+  - title: "Debris and Waste Removal"
+    text: "Offcuts, packaging and loose debris are cleared so floors and surfaces can be cleaned properly."
     icon: comprehensive-cleaning
-  - title: "Eco-Friendly Products"
-    text: "We use safe, non-toxic products that protect your family, pets, and the environment."
-    icon: eco-friendly
+  - title: "Dust Removal"
+    text: "Fine construction dust is removed from walls, ledges, vents, fixtures and floors."
+    icon: deep-cleaning
+  - title: "Windows and Glass"
+    text: "Paint, stickers and residue are removed from glass and frames."
+    icon: office-cleaning
   - title: "Flexible Scheduling"
-    text: "Choose a time that works for you, whether you need weekly upkeep or one-time deep clean."
+    text: "Cleaning stages are scheduled around your build, including overnight cleaning."
     icon: flexible-scheduling
 gallery:
   - src: ../../assets/images/services/detail-gallery-1.jpg
@@ -28,29 +29,29 @@ gallery:
   - src: ../../assets/images/services/detail-gallery-2.jpg
     alt: "Smiling cleaner holding a bucket of cleaning supplies"
 sections:
-  - heading: "Regular Housekeeping"
+  - heading: "Ready for Move-In"
     paragraphs:
-      - "In design, we bring characteristics of the natural world into built spaces, such as water, greenery, and natural light, or elements like wood and stone. Encouraging the use of natural systems and processes in design allows for exposure to nature, and in turn, these design approaches improve health and wellbeing. There are a number of possible benefits, including reduced heart rate variability and pulse rates, decreased blood pressure, and increased activity in our nervous systems, to name a few."
+      - "Construction dust settles on everything and can be difficult to remove with ordinary cleaning. A dedicated post-construction clean protects new finishes, helps you pass final walkthroughs and lets owners, tenants or customers step into a clean space on day one."
   - heading: "Why Choose Jamal Cleaning Services?"
     paragraphs:
-      - "Refresh your home with our seasonal cleaning services. Ideal for spring cleaning or preparing for the holidays, our seasonal deep cleaning ensures every corner of your home is immaculate. We handle all the heavy lifting, so you can enjoy a beautifully clean home."
+      - "We follow a structured process so nothing is missed between the last trade leaving and your opening day:"
     checklist:
-      - "Assess areas needing cleaning"
-      - "Gather all necessary cleaning supplies"
-      - "Dust surfaces and high points"
-      - "Vacuum carpets and rugs"
-      - "Clean and disinfect bathrooms"
-      - "Wipe down kitchen surfaces"
-      - "Mop floors and clean windows"
-      - "Organize clutter and items out of place"
-    note: "Commercial interior design is a dynamic and multifaceted field that plays a critical role in the success of businesses across a wide range of industries. By blending creativity with practicality, commercial interior design"
+      - "Walk the site and agree the scope"
+      - "Remove debris and packaging"
+      - "Dust high surfaces, vents and fixtures"
+      - "Wipe walls, doors and trim"
+      - "Clean windows, frames and tracks"
+      - "Scrub and sanitize kitchens and washrooms"
+      - "Vacuum and mop all floors"
+      - "Final inspection and touch-ups"
+    note: "Send us the project details and timeline and we will recommend the right number of cleaning stages."
 faqs:
-  - question: "What types of spaces do you clean?"
-    answer: "Our interior design services cover everything you need to create a stunning and functional space. From initial concept development and space planning to selecting color schemes, furniture, and custom designs, we bring your vision to life."
-  - question: "Are your cleaning products eco-friendly?"
-    answer: "We offer cleaning for homes, offices, retail spaces, and even post-renovation sites. Custom packages available based on your needs."
+  - question: "What is included in a post-construction clean?"
+    answer: "Debris removal, dust removal from surfaces and fixtures, window and glass cleaning, washroom and kitchen cleaning, and floor cleaning. We agree the exact scope with you first."
+  - question: "Can you clean while work is still underway?"
+    answer: "Yes. We can do rough clean-ups between trades as well as a final detail clean before hand-over."
+  - question: "Do you clean renovated homes as well as commercial sites?"
+    answer: "Yes, we clean renovated homes as well as offices, shops and other commercial spaces."
   - question: "How do I book a cleaning session?"
-    answer: "We offer cleaning for homes, offices, retail spaces, and even post-renovation sites. Custom packages available based on your needs."
-  - question: "Do I need to be home during the service?"
-    answer: "We offer cleaning for homes, offices, retail spaces, and even post-renovation sites. Custom packages available based on your needs."
+    answer: "Request a quote on our Contact page or give us a call. We will confirm the details and agree on a time that suits you."
 ---

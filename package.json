@@ -22,7 +22,8 @@
     "crawl:capture": "tsx tools/crawl/capture.ts",
     "verify": "tsx tools/verify/compare.ts",
     "verify:links": "tsx tools/verify/links.ts",
-    "verify:a11y": "tsx tools/verify/a11y.ts"
+    "verify:a11y": "tsx tools/verify/a11y.ts",
+    "verify:responsive": "tsx tools/verify/responsive.ts"
   },
   "dependencies": {
     "@astrojs/react": "^7.1.2",
@@ -44,6 +45,7 @@
     "@eslint/js": "^9.39.5",
     "@types/node": "^26.6.6",
     "axe-core": "^4.14.0",
+    "sharp": "^0.35.5",
     "eslint": "^9.39.5",
     "eslint-plugin-astro": "^1.7.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",
