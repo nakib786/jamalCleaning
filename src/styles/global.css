@@ -13,20 +13,23 @@
   --breakpoint-xl: 1201px; /* above "tablet extra" */
   --breakpoint-2xl: 1441px; /* above "laptop" */
 
-  --color-primary: #00a650;
-  /* WCAG-AA companions of the brand green: --primary-strong carries small white text
-     (4.6:1 on white) and is used for small green text on light backgrounds;
-     --primary-heading is the display-headline accent on light backgrounds (large text, 3:1+). */
-  --color-primary-strong: #008744;
-  --color-primary-heading: #009b4a;
+  /* Brand gold, sampled from the crest logo (2026-11-11; replaced the theme green). Previous
+     greens: primary #00a650, primary-strong #008744, primary-heading #009b4a, highlight #96fe81,
+     teal #044340, topbar #0d190a. */
+  --color-primary: #d4aa3c;
+  /* WCAG-AA companions of the brand gold: --primary-strong carries small white text
+     (4.8:1 on white); --primary-heading is the display-headline accent on light backgrounds
+     (large text, 3:1+). */
+  --color-primary-strong: #8f6d1e;
+  --color-primary-heading: #b08a2e;
   --color-secondary: #212e3b;
   --color-body: #5c5e5e;
   --color-lighter: #9fa2a4;
   --color-line: #5c5e5e2e;
   --color-dark: #1a1a1a;
-  --color-highlight: #96fe81;
-  --color-teal: #044340;
-  --color-topbar: #0d190a;
+  --color-highlight: #f6dc8a;
+  --color-teal: #1c2430;
+  --color-topbar: #12100b;
   --color-surface: #f5f5f5;
   --color-cream: #fbfaf2;
 
