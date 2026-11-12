@@ -36,7 +36,8 @@ const services = (await getCollection("services")).sort((a, b) => a.data.order -
 
 const business = {
   "@context": "https://schema.org",
-  "@type": "HomeAndConstructionBusiness",
+  // A commercial cleaning company; schema.org has no cleaning-specific type, so LocalBusiness plus knowsAbout.
+  "@type": "LocalBusiness",
   "@id": `${site.url}/#business`,
   name: site.name,
   legalName: site.legalName,
@@ -67,6 +68,7 @@ const business = {
   geo: { "@type": "GeoCoordinates", ...site.contact.address.geo },
   hasMap: site.contact.address.mapUrl,
   areaServed: { "@type": "City", name: site.contact.address.locality },
+  knowsAbout: [...services.map((service) => service.data.title), "Day porter services"],
   // The services listed on the site, so answer engines connect the business to what it offers.
   hasOfferCatalog: {
     "@type": "OfferCatalog",

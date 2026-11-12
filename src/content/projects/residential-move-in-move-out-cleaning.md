@@ -1,28 +1,28 @@
 ---
-title: "Residential Move-In/Move-Out Cleaning"
-order: 10
+title: "Rental Unit Move-Out Cleaning"
+order: 12
 category: "Residential"
-excerpt: "Top-to-bottom cleaning of empty homes for tenants, owners and landlords at move-out or move-in."
-image: ../../assets/images/projects/residential-move-in-move-out-cleaning.jpg
-imageAlt: "Vacuum cleaner running over a cream shag rug"
+excerpt: "Top-to-bottom cleaning of empty rental units between tenants, for landlords and property managers."
+image: ../../assets/images/photos/cleaners-living-room-table-floor.jpg
+imageAlt: "Two cleaners wiping a table and mopping a living-room floor"
 location: "Prince George, BC"
 overview:
   heading: "Project Overview"
   paragraphs:
-    - "Moving day is busy enough. This service cleans an empty home from top to bottom so you can hand over the keys with confidence, or settle into a space that already feels fresh."
-    - "With the rooms empty we reach inside cabinets and appliances, scrub kitchens and bathrooms, wipe baseboards and door frames, and vacuum and mop every floor."
+    - "Between tenants, a unit needs to be cleaned quickly and properly so it can be shown and rented again. This service cleans an empty home from top to bottom, ready for inspection and the next occupants."
+    - "With the rooms empty, the crew reaches inside cabinets and appliances, scrubs kitchens and bathrooms, wipes baseboards and door frames, and vacuums and mops every floor."
 gallery:
-  - src: ../../assets/images/projects/detail-gallery-1.jpg
-    alt: "Cleaners wiping windows and a desk in a modern office"
-  - src: ../../assets/images/projects/detail-gallery-2.jpg
-    alt: "Cleaner in yellow gloves wiping a leather armrest"
+  - src: ../../assets/images/photos/keys-and-floor-plan.jpg
+    alt: "House keys beside a folded floor plan"
+  - src: ../../assets/images/photos/cleaner-wiping-kitchen-sink.jpg
+    alt: "Cleaner in yellow gloves wiping down a kitchen sink"
 benefits:
   heading: "Project Benefits"
   paragraphs:
-    - "A thorough clean helps you meet the cleaning requirements in a lease or sale agreement and gives the next occupants a good start."
+    - "A thorough clean between tenants makes every turnover faster and gives the next occupants a good start."
   list:
     - "Kitchens, bathrooms and appliances cleaned inside and out"
     - "Baseboards, doors and window sills wiped down"
     - "All floors vacuumed and mopped"
-    - "Scheduled around your move date"
+    - "Scheduled around inspections and move dates"
 ---

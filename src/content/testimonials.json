@@ -1,13 +1,12 @@
 [
   {
-    "id": "busy-parent",
-    "name": "dishes cleaning",
-    "role": "Fresh Design",
+    "id": "store-overnight",
+    "name": "Jordan Mitchell",
+    "role": "Store Manager",
     "rating": 5,
     "order": 1,
-    "quote": "As a busy parent, this cleaning service is a lifesaver! Thorough, friendly, and trustworthy. Coming home to a spotless house is such a relief. Highly recommend!",
-    "avatar": "../assets/images/testimonials/avatar-1.jpg",
-    "placements": ["list"],
+    "quote": "Our store opens clean every morning. The overnight crew scrubs the floors, cleans the washrooms and the entrance, and works around our late deliveries. We never have to chase anything.",
+    "placements": ["list", "slider"],
     "placeholder": true
   },
   {
@@ -22,14 +21,54 @@
     "placeholder": true
   },
   {
+    "id": "multi-site-facilities",
+    "name": "Marc Bélanger",
+    "role": "Facilities Manager",
+    "rating": 5,
+    "order": 3,
+    "quote": "We manage several retail locations and wanted one cleaning standard across all of them. They set up a clear checklist for each store and answer straight away on WhatsApp.",
+    "placements": ["list", "cards"],
+    "placeholder": true
+  },
+  {
     "id": "true-partner",
     "name": "dishes cleaning",
     "role": "Manager",
     "rating": 5,
-    "order": 3,
+    "order": 4,
     "quote": "Working with Jamal Cleaning Services has been a real pleasure and a real experience. It doesn’t feel like an outside operation – the team work as one. It’s been comforting to know that when you have your back to the wall, as you do with a project this size, Jamal Cleaning Services are standing there beside us not walking away… they are a true partner.",
     "avatar": "../assets/images/testimonials/avatar-1.jpg",
     "placements": ["slider"],
+    "placeholder": true
+  },
+  {
+    "id": "office-mornings",
+    "name": "Daniel Okafor",
+    "role": "Office Manager",
+    "rating": 5,
+    "order": 5,
+    "quote": "Our team walks into a clean, fresh office every morning and never has to think about it. The crew is reliable and easy to work with. Highly recommend them to any business.",
+    "placements": ["cards"],
+    "placeholder": true
+  },
+  {
+    "id": "late-night-kitchen",
+    "name": "Carlos Mendoza",
+    "role": "Restaurant Owner",
+    "rating": 5,
+    "order": 6,
+    "quote": "Overnight cleaning is exactly what we needed. We open to a spotless kitchen and dining room, and the crew works around our schedule without any fuss.",
+    "placements": ["slider"],
+    "placeholder": true
+  },
+  {
+    "id": "clinic-standards",
+    "name": "Harpreet Gill",
+    "role": "Clinic Manager",
+    "rating": 5,
+    "order": 7,
+    "quote": "Cleanliness matters a great deal in our clinic. The team is detail-oriented, punctual and always leaves our rooms spotless and fresh.",
+    "placements": ["cards"],
     "placeholder": true
   },
   {
@@ -37,7 +76,7 @@
     "name": "Ariana Green",
     "role": "Manager",
     "rating": 5,
-    "order": 4,
+    "order": 8,
     "quote": "I always look forward to welcoming the Jamal Cleaning team into my home. I get to relax and enjoy the morning, and before I know it, my entire home is clean and sparkly from top to bottom. Thank you. Thank you. Thank you.",
     "avatar": "../assets/images/testimonials/avatar-1.jpg",
     "placements": ["slider", "cards"],
@@ -48,51 +87,10 @@
     "name": "Ariana Green",
     "role": "Manager",
     "rating": 5,
-    "order": 5,
+    "order": 9,
     "quote": "We recently moved to the area and are very happy that we chose Jamal Cleaning Services. They do an excellent job every time. They provide their arrival time and are always punctual. It is also important to us that they use environmentally friendly cleaning products.",
     "avatar": "../assets/images/testimonials/avatar-1.jpg",
     "placements": ["slider", "cards"],
-    "placeholder": true
-  },
-  {
-    "id": "monthly-clean",
-    "name": "dishes cleaning",
-    "role": "Manager",
-    "rating": 5,
-    "order": 6,
-    "quote": "If it wasn’t for Jamal Cleaning Services, I don’t think I could live in my home. Every month, the efficient, friendly crew shows up and does a thorough cleaning. When they are done, everything looks brand-new, beautiful, everything smells good, and I am so happy to have found this great service.",
-    "avatar": "../assets/images/testimonials/avatar-1.jpg",
-    "placements": ["cards"],
-    "placeholder": true
-  },
-  {
-    "id": "office-mornings",
-    "name": "Daniel Okafor",
-    "role": "Office Manager",
-    "rating": 5,
-    "order": 7,
-    "quote": "Our team walks into a clean, fresh office every morning and never has to think about it. The crew is reliable and easy to work with. Highly recommend them to any business.",
-    "placements": ["list"],
-    "placeholder": true
-  },
-  {
-    "id": "holiday-deep-clean",
-    "name": "Mei-Ling Chen",
-    "role": "Homeowner",
-    "rating": 5,
-    "order": 8,
-    "quote": "I booked a deep clean before hosting family for the holidays and the house looked better than the day we moved in. Friendly, careful and respectful of our home.",
-    "placements": ["slider", "cards"],
-    "placeholder": true
-  },
-  {
-    "id": "late-night-kitchen",
-    "name": "Carlos Mendoza",
-    "role": "Restaurant Owner",
-    "rating": 5,
-    "order": 9,
-    "quote": "Overnight cleaning is exactly what we needed. We open to a spotless kitchen and dining room, and the crew works around our schedule without any fuss.",
-    "placements": ["slider"],
     "placeholder": true
   },
   {
@@ -116,13 +114,13 @@
     "placeholder": true
   },
   {
-    "id": "clinic-standards",
-    "name": "Harpreet Gill",
-    "role": "Clinic Manager",
+    "id": "holiday-deep-clean",
+    "name": "Mei-Ling Chen",
+    "role": "Homeowner",
     "rating": 5,
     "order": 12,
-    "quote": "Cleanliness matters a great deal in our clinic. The team is detail-oriented, punctual and always leaves our rooms spotless and fresh.",
-    "placements": ["cards"],
+    "quote": "I booked a deep clean before hosting family for the holidays and the house looked better than the day we moved in. Friendly, careful and respectful of our home.",
+    "placements": ["slider", "cards"],
     "placeholder": true
   },
   {
@@ -133,6 +131,28 @@
     "order": 13,
     "quote": "The move-out clean was thorough, right down to the inside of the cabinets and appliances. I now book them whenever a unit becomes free.",
     "placements": ["slider", "cards"],
+    "placeholder": true
+  },
+  {
+    "id": "monthly-clean",
+    "name": "dishes cleaning",
+    "role": "Manager",
+    "rating": 5,
+    "order": 14,
+    "quote": "If it wasn’t for Jamal Cleaning Services, I don’t think I could live in my home. Every month, the efficient, friendly crew shows up and does a thorough cleaning. When they are done, everything looks brand-new, beautiful, everything smells good, and I am so happy to have found this great service.",
+    "avatar": "../assets/images/testimonials/avatar-1.jpg",
+    "placements": ["cards"],
+    "placeholder": true
+  },
+  {
+    "id": "busy-parent",
+    "name": "dishes cleaning",
+    "role": "Fresh Design",
+    "rating": 5,
+    "order": 15,
+    "quote": "As a busy parent, this cleaning service is a lifesaver! Thorough, friendly, and trustworthy. Coming home to a spotless house is such a relief. Highly recommend!",
+    "avatar": "../assets/images/testimonials/avatar-1.jpg",
+    "placements": ["cards"],
     "placeholder": true
   }
 ]

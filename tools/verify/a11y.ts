@@ -46,7 +46,8 @@ async function settle(page: Page): Promise<void> {
     content:
       "[data-reveal]{opacity:1!important;animation:none!important;transform:none!important}" +
       '[class*="animate-[reveal-"]{animation:none!important}' +
-      "[data-testimonial]{opacity:1!important}",
+      // No transition, or the 0.35s fade from 0.2 to 1 may still be running when axe reads the colours.
+      "[data-testimonial]{opacity:1!important;transition:none!important}",
   });
   await page.evaluate(() => document.fonts.ready);
   await page.waitForTimeout(250);

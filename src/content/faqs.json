@@ -2,71 +2,85 @@
   {
     "id": "general-1",
     "question": "What types of spaces do you clean?",
-    "answer": "We clean homes, apartments and condos, offices, retail spaces and post-renovation sites. Custom packages are available based on your needs.",
+    "answer": "Commercial janitorial is our main service. We clean retail stores, big-box and department stores, grocery and apparel stores, offices, clinics, warehouses and commercial buildings. We also clean homes, including move-in and move-out cleans.",
     "group": "General",
     "order": 1
   },
   {
-    "id": "general-2",
-    "question": "Are your cleaning products eco-friendly?",
-    "answer": "We use eco-friendly cleaning products where the job allows. If someone in your home or workplace has allergies or sensitivities, tell us when you book and we will work with you.",
+    "id": "general-6",
+    "question": "Do you offer commercial janitorial contracts?",
+    "answer": "Yes. Most of our commercial clients have a recurring schedule, such as nightly, several times a week or weekly, with floor care and other periodic work added monthly or quarterly. We agree the scope and frequency with you after a walkthrough.",
     "group": "General",
     "order": 2
   },
   {
     "id": "general-3",
     "question": "Do you offer overnight or weekend cleaning?",
-    "answer": "Yes. We are open 7 days a week and overnight cleaning is available, which suits offices and commercial sites that need to stay open during the day.",
+    "answer": "Yes. We are open 7 days a week and overnight cleaning is available, which suits stores, offices and commercial sites that need to stay open during the day.",
     "group": "General",
     "order": 3
+  },
+  {
+    "id": "general-7",
+    "question": "Can you clean several store or office locations?",
+    "answer": "Yes. Tell us which locations you need covered and we will confirm our service area and set up one cleaning standard and one point of contact across them.",
+    "group": "General",
+    "order": 4
+  },
+  {
+    "id": "general-2",
+    "question": "Are your cleaning products eco-friendly?",
+    "answer": "We use eco-friendly cleaning products where the job allows. If your business has product requirements, or someone at your site has allergies or sensitivities, tell us when you book and we will work with you.",
+    "group": "General",
+    "order": 5
   },
   {
     "id": "general-4",
     "question": "What if I’m not satisfied with the service?",
     "answer": "Let us know as soon as you notice an issue and we will work with you to put it right.",
     "group": "General",
-    "order": 4
+    "order": 6
   },
   {
     "id": "general-5",
     "question": "Where do you work?",
     "answer": "We are based in Prince George, BC. Get in touch and we will confirm that we can cover your location.",
     "group": "General",
-    "order": 5
+    "order": 7
   },
   {
     "id": "booking-1",
     "question": "How do I book a cleaning session?",
     "answer": "Message us on WhatsApp, request a quote on our Contact page or give us a call. We will confirm the details and agree on a time that suits you.",
     "group": "Booking & Service",
-    "order": 6
+    "order": 8
   },
   {
     "id": "booking-2",
-    "question": "Do I need to be home during the service?",
-    "answer": "No. If you would rather not be home, we can agree on how to access the property when you book. If you prefer to be there, that works too.",
+    "question": "Does someone need to be on site while you clean?",
+    "answer": "No. For after-hours cleaning we agree secure access, such as keys, fobs and alarm codes, before the first clean. If you prefer someone to be on site, that works too.",
     "group": "Booking & Service",
-    "order": 7
+    "order": 9
   },
   {
     "id": "booking-3",
-    "question": "Can I book a one-time clean, or do I need a regular plan?",
-    "answer": "Both are available. You can book a single visit or set up a weekly, bi-weekly or monthly schedule.",
+    "question": "Can I book a one-time clean, or do I need a contract?",
+    "answer": "Both are available. Businesses usually set up a recurring schedule, and we also do one-time jobs such as floor stripping and waxing, post-construction cleans, deep cleans and move-outs.",
     "group": "Booking & Service",
-    "order": 8
+    "order": 10
   },
   {
     "id": "booking-4",
     "question": "How do I get a quote?",
-    "answer": "Message us on WhatsApp or send a request on the Contact page with a few details about your space and the cleaning you need, and we will get back to you with a quote. On WhatsApp you can also send photos of the space.",
+    "answer": "Message us on WhatsApp or send a request on the Contact page with a few details about your space and the cleaning you need. For commercial sites we usually arrange a walkthrough before quoting. On WhatsApp you can also send photos of the space.",
     "group": "Booking & Service",
-    "order": 9
+    "order": 11
   },
   {
     "id": "booking-5",
     "question": "Can I reschedule or cancel a booking?",
     "answer": "Message us on WhatsApp or call as early as you can and we will do our best to find a new time that suits you.",
     "group": "Booking & Service",
-    "order": 10
+    "order": 12
   }
 ]

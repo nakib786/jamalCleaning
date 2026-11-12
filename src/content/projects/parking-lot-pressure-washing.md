@@ -1,28 +1,28 @@
 ---
-title: "Parking Lot Pressure Washing"
-order: 3
-category: "Outdoor"
-excerpt: "Pressure washing for parking lots, driveways and walkways to remove oil, grime and built-up dirt."
-image: ../../assets/images/projects/parking-lot-pressure-washing.jpg
-imageAlt: "Two cleaners in hi-vis vests using floor scrubbers by a large window"
+title: "Retail Plaza Pressure Washing"
+order: 10
+category: "Floor & Exterior"
+excerpt: "Pressure washing of a retail plaza's sidewalks, entrances and parking areas to remove oil, gum, grime and winter salt."
+image: ../../assets/images/photos/pressure-washing-paving.jpg
+imageAlt: "Worker in hi-vis clothing pressure washing paving stones"
 location: "Prince George, BC"
 overview:
   heading: "Project Overview"
   paragraphs:
-    - "Vehicles, weather and foot traffic leave parking areas stained and slippery. Pressure washing removes built-up dirt, oil marks and debris, giving the surface a fresh, well-kept appearance."
-    - "We sweep loose debris first, then wash the surface with equipment and pressure suited to the material, and rinse the area clean. Timing is planned with you to keep disruption to customers and tenants low."
+    - "Vehicles, weather and foot traffic leave sidewalks and parking areas stained and slippery, and after a northern BC winter they are covered in salt and grit. Pressure washing removes built-up dirt, oil marks, gum and debris."
+    - "The crew sweeps loose debris first, then washes the surface with equipment and pressure suited to the material, and rinses the area clean. Work is timed early in the morning or after closing to keep disruption to shoppers and tenants low."
 gallery:
-  - src: ../../assets/images/projects/detail-gallery-1.jpg
-    alt: "Cleaners wiping windows and a desk in a modern office"
-  - src: ../../assets/images/projects/detail-gallery-2.jpg
-    alt: "Cleaner in yellow gloves wiping a leather armrest"
+  - src: ../../assets/images/photos/hosing-down-walkway.jpg
+    alt: "Worker hosing down a paved walkway"
+  - src: ../../assets/images/photos/paved-lot-commercial-building.jpg
+    alt: "Large paved parking and loading area outside a commercial building"
 benefits:
   heading: "Project Benefits"
   paragraphs:
-    - "A clean lot improves first impressions and helps keep walkways safer for visitors."
+    - "A clean plaza improves first impressions and helps keep walkways safer for visitors."
   list:
-    - "Removes dirt, oil marks and built-up grime"
-    - "Fresher, more welcoming entrances and parking areas"
-    - "Scheduled outside peak hours"
-    - "Suitable for parking lots, driveways, sidewalks and loading areas"
+    - "Removes dirt, oil marks, gum and winter salt"
+    - "Fresher, more welcoming entrances and sidewalks"
+    - "Scheduled outside trading hours"
+    - "Suitable for parking lots, sidewalks, entrances and loading areas"
 ---

@@ -6,13 +6,13 @@
  */
 import { Image } from "astro:assets";
 import agency1 from "../assets/images/about/agency-1.jpg";
-import agency2 from "../assets/images/about/agency-2.jpg";
+import agency2 from "../assets/images/photos/janitor-vacuuming-office-carpet.jpg";
 import agencyDecor from "../assets/images/about/agency-decor.png";
 import cleaningTeam from "../assets/images/about/cleaning-team.png";
 import step1 from "../assets/images/about/step-1.jpg";
 import step2 from "../assets/images/about/step-2.jpg";
 import step3 from "../assets/images/about/step-3.jpg";
-import step4 from "../assets/images/about/step-4.jpg";
+import step4 from "../assets/images/photos/grocery-store-aisle-polished-floor.jpg";
 import bannerImage from "../assets/images/page-title/breadcrumb-about.jpg";
 import HouseCleaning from "../assets/images/misc/icons/house-cleaning.svg";
 import OfficeCleaning from "../assets/images/misc/icons/office-cleaning.svg";
@@ -36,46 +36,46 @@ const aboutLd = {
 
 const highlights = [
   {
-    icon: HouseCleaning,
-    title: "House Cleaning",
-    text: "Apartment, condos, and houses - busy people who want their home to feel fresh again.",
+    icon: StoreCleaning,
+    title: "Retail & Big-Box Stores",
+    text: "Big-box, department, grocery and apparel stores - sales floors, washrooms and entrances cleaned overnight.",
   },
   {
     icon: OfficeCleaning,
-    title: "Office Cleaning",
-    text: "Maintain a clean, healthy workspace that supports productivity and professionalism.",
+    title: "Offices & Commercial Buildings",
+    text: "Offices, clinics, warehouses and multi-tenant buildings - clean, healthy spaces for staff and visitors.",
   },
   {
-    icon: StoreCleaning,
-    title: "Store Cleaning",
-    text: "Retail shops, studios, and showrooms - spotless spaces that make a great impression.",
+    icon: HouseCleaning,
+    title: "Homes & Move-Outs",
+    text: "Regular, deep and move-out cleaning for homeowners, landlords and property managers.",
   },
 ];
 
 const steps = [
   {
-    title: "Provide the details",
-    text: "Fill out a quick form with details about your space, schedule, and preferences.",
+    title: "Tell us about your site",
+    text: "Share your store, office or building, your opening hours and what needs cleaning.",
     image: step1,
     alt: "Hand ticking a checklist on a clipboard",
   },
   {
-    title: "Pick a suitable plan",
-    text: "We’ll send you a personalized estimate, no hidden fees, no upselling.",
+    title: "Walkthrough and quote",
+    text: "We walk the site with you and send a clear cleaning plan and quote, with no hidden fees.",
     image: step2,
-    alt: "Cleaning team planning a job together",
+    alt: "Smiling cleaner in a green uniform in a bright commercial building",
   },
   {
-    title: "We house cleaned",
-    text: "Our team arrives on time, equipped, and ready to clean thoroughly.",
+    title: "We clean after hours",
+    text: "Trained crews arrive on schedule, equipped, and follow your site checklist every visit.",
     image: step3,
-    alt: "Cleaner wiping a kitchen surface",
+    alt: "Cleaner spraying and wiping glass",
   },
   {
-    title: "You enjoy & relax",
-    text: "Enjoy a spotless home or workspace that looks, feels, and smells truly clean.",
+    title: "You open to clean",
+    text: "Customers and staff walk into a clean, safe space every day, and you have one contact for it all.",
     image: step4,
-    alt: "Person relaxing on a sofa in a clean living room",
+    alt: "Long, clean store aisle with stocked shelves and a polished floor",
   },
 ];
 
@@ -103,7 +103,7 @@ const counters = [
 
 <BaseLayout
   title="About Us"
-  description="About Jamal Cleaning Services: trusted house, office and store cleaning in Prince George, BC — trained cleaners, eco-friendly products, open 7 days a week."
+  description="About Jamal Cleaning Services: commercial janitorial for retail stores, big-box stores, offices and commercial buildings in Prince George, BC, plus residential cleaning. Open 7 days."
   jsonLd={[aboutLd]}
 >
   <PageTitle title="About Us" image={bannerImage} />
@@ -127,9 +127,9 @@ const counters = [
         headingClass="pb-[30px] sm:pb-[39px] sm:text-[60px] sm:leading-[90px]"
       />
       <p class="w-[698px] max-w-full pb-[50px] text-center leading-6 sm:pb-[76px]" data-reveal="up">
-        We are committed to delivering exceptional cleaning services that leave your spaces sparkling clean
-        and hygienic. Our professional team uses eco-friendly products to ensure a safe and healthy
-        environment for you.
+        Jamal Cleaning Services is a commercial janitorial company in Prince George. Our crews clean retail
+        stores, big-box and department stores, offices and commercial buildings after hours, seven days a
+        week, and we still look after homes and move-outs for our residential clients.
       </p>
 
       <div class="flex w-full flex-col gap-[50px] lg:flex-row lg:items-center xl:gap-[81px]">
@@ -165,7 +165,7 @@ const counters = [
           />
           <Image
             src={agency2}
-            alt="Two cleaners with a mop and supply cart in an office"
+            alt="Janitor in yellow gloves vacuuming the carpet in a modern office"
             widths={[378, 756]}
             sizes="(min-width: 1025px) 378px, 50vw"
             class="hidden h-[397px] w-1/2 rounded-[24px] object-cover sm:max-md:block lg:block"
@@ -236,8 +236,8 @@ const counters = [
           reveal="up"
         />
         <p class="max-w-[480px] pb-[30px] leading-6 text-white" data-reveal="up">
-          Behind our commitment to providing a best cleaning service, we have strengths and differences that
-          create trust and love from customers.
+          Overnight janitorial, day porters and floor care under one plan, seven days a week, with one point
+          of contact who answers when you message.
         </p>
         <div class="flex flex-wrap items-center gap-[30px] max-lg:justify-center" data-reveal="up">
           <a href="/services/" class="btn btn-md btn-on-dark">

@@ -14,6 +14,20 @@
 /appointment             /contact-us/      301
 /appointment/            /contact-us/      301
 
+# Services and projects merged or retired in the move to commercial janitorial (2026-11)
+/services/regular-home-cleaning/                    /services/residential-services/               301
+/services/move-in-out-cleaning/                     /services/residential-services/               301
+/services/skilled-cleaning/                         /services/janitorial-services/                 301
+/services/specialized-cleaning/                     /services/commercial-floor-care/              301
+/projects/office-deep-cleaning/                     /projects/office-building-janitorial/         301
+/projects/glass-and-facade-cleaning/                /projects/storefront-glass-and-entrance-cleaning/ 301
+/projects/industrial-equipment-cleaning/            /projects/warehouse-and-industrial-cleaning/  301
+/projects/disinfection-and-sanitization-service/    /projects/clinic-cleaning-and-disinfection/   301
+/projects/carpet-and-upholstery-cleaning/           /projects/                                    301
+/projects/sofa-mattress-deep-cleaning/              /projects/                                    301
+/projects/solar-panel-cleaning/                     /projects/                                    301
+/projects/swimming-pool-cleaning-and-maintenance/   /projects/                                    301
+
 # Demo-theme URL patterns, in case they were ever shared or indexed
 /portfolios/*            /projects/:splat  301
 /portfolios              /projects/        301

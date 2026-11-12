@@ -23,8 +23,8 @@ export async function getStaticPaths() {
 const { entry, all } = Astro.props;
 const { data } = entry;
 const { about } = data;
-// The sidebar lists services in reverse display order, like the theme.
-const others = [...all].sort((a, b) => b.data.order - a.data.order);
+// The sidebar lists services in display order, so commercial janitorial leads (the theme reversed it).
+const others = [...all].sort((a, b) => a.data.order - b.data.order);
 
 const featureIcons = import.meta.glob<{ default: (props: Record<string, unknown>) => unknown }>(
   "../../assets/images/misc/icons/*.svg",

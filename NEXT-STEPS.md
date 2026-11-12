@@ -44,8 +44,8 @@ checker, mobile and tablet pass over all 26 pages, `tools/verify/compare.ts`, re
 Left to do, in order:
 
 1. **Owner content** (cannot be invented; `npm run verify:links` lists these as warnings): testimonials (names, roles, photos,
-   quotes), the "Ratings 4.5" / "586k Clients globally" card, the Home and About counters and their captions, real project photos
-   (the 12 project photos are template stock and some do not match their titles), street address / postal code / social links in
+   quotes), the "Ratings 4.5" / "586k Clients globally" card, the Home and About counters and their captions, real photos of the
+   owner's work (service/project photos now match their titles but are still stock, see "Photos" below), street address / postal code / social links in
    `src/config/site.ts`. The owner should also read the drafted service, project and FAQ wording (details in `FINAL-REPORT.md`).
 2. **Run `npm run verify` against the demo** on a machine that can reach <https://demo2.pavothemes.com/cetro/> (the cloud sandbox
    gets 403 from its proxy) and fix flagged bands. Known Home gaps: at 768 px the why-choose photo cards are ~10 px taller than the
@@ -68,6 +68,53 @@ Left to do, in order:
 - **Google Maps (owner-supplied):** the Contact page map is now the business's own listing ("Jamal Cleaning Services Ltd.", embed code in `site.contact.address.mapEmbedUrl`), "Get directions" uses the owner's short link (`mapUrl`), the coordinates in `site.contact.address.geo` come from the embed's map centre (approximate, not a street-level pin), and `legalName` is in the business JSON-LD. Still missing: **street address and postal code** (the embed does not contain them). The listing name has "Ltd." while the site says "Jamal Cleaning Services": keep name, address and phone identical everywhere (Google Business Profile, Bing, Facebook) for local search.
 
 - **Footer newsletter:** the Turnstile check now has space above it and is centred under the email field.
+
+### Photos (2026-11-11)
+
+Service and project photos were mismatched (e.g. "Solar Panel Cleaning" showed a shopfront window, and every project/service page
+shared the same two gallery photos). Now:
+
+- All service/project photos live in `src/assets/images/photos/`, named after what they show; `CREDITS.md` there lists the sources.
+- Each card photo matches its title, and each detail page has its own gallery pair (some reuse between related pages). Theme photos
+  were re-assigned where they fit; 17 FreeStockMCP library photos (free commercial use, AI-generated) cover solar, factory, clinic,
+  construction site, office and keys/house; 8 Unsplash photos (via the Unsplash MCP) cover what that library lacks: pool cleaning,
+  pressure washing, a kitchen extraction hood and a mattress.
+- To add a photo: put it in `photos/` with a descriptive name, list it in `CREDITS.md` (with the photographer for Unsplash), and
+  point the page's `image` / `gallery` at it.
+
+### Commercial janitorial focus (2026-11-11, owner request)
+
+The owner wants the site to lead with **commercial janitorial** for retail chains, big-box stores (Staples, Winners, Walmart-type
+stores), offices and commercial buildings, with residential as a smaller line. Real retailer names are **not** used anywhere on the
+site: naming them would imply they are clients. Done:
+
+- **Services (still 6, new order):** Commercial Janitorial (`/services/janitorial-services/`, new, leads everywhere), Retail &
+  Big-Box Store Cleaning (`retail-store-cleaning`, new), Office & Commercial Building Cleaning (`office-cleaning`, new), Commercial
+  Floor Care (`commercial-floor-care`, new: strip and wax, burnishing, scrubbing, carpet extraction), Post-Construction Cleaning
+  (`construction-cleaning`, re-angled to store fit-outs), Residential & Move-Out (`residential-services`, merges the old home, regular,
+  move-in/out and deep-clean pages). Regular Home, Move In Out, Skilled and Specialized were removed; `public/_redirects` 301s them
+  (and the renamed/removed projects) to the closest new page. The service-page sidebar now lists services in display order.
+- **Projects (12):** big-box overnight cleaning, shopping-centre day porter, apparel/off-price store, office building janitorial,
+  retail floor strip & wax, storefront glass, warehouse, clinic, store fit-out cleanup, retail plaza pressure washing, restaurant hood
+  degreasing, rental unit move-out. Solar, pool, sofa/mattress and carpet/upholstery projects were removed. Filter categories: Retail,
+  Commercial, Floor & Exterior, Construction, Residential.
+- **Copy:** Home hero ("Commercial janitorial done right"), why-choose, experience features ("Book a Site Walkthrough"), steps
+  (site walkthrough → after-hours cleaning), marquee words, About highlights/intro/steps, Contact intro, FAQs (contracts, multiple
+  locations, site access), services/projects/testimonials page headings and meta descriptions, `site.ts` tagline, description,
+  keywords, nav and default title. Business JSON-LD is now `LocalBusiness` with `knowsAbout`.
+- **Photos:** 15 new Unsplash photos (janitor, store aisles, apparel store, mall, lobby, floor machine, warehouse, clinic); the home
+  hero is now a mop bucket and wet-floor sign at a commercial entrance. Home step 3/4 and About photo/step 4 no longer show sofas.
+  Unused residential/solar/pool photos are kept and marked "Not currently used" in `CREDITS.md` (unused images are not shipped).
+- **Testimonials:** two commercial placeholders added (store manager, facilities manager; `placeholder: true`); the home list now
+  shows commercial quotes. The demo/residential ones stay on the testimonials page and carousels as the owner asked.
+- **Checks:** `astro check`, ESLint, build, `verify:links` (0 problems), `verify:responsive` (0) and `verify:a11y` (0) all clean.
+  `verify:a11y` now also disables the testimonial fade transition (it was racing the 250 ms settle and reading the dimmed state).
+  On Windows, `prettier --check .` warns about files with CRLF line endings that were not touched here (pre-existing).
+
+**Owner must confirm before launch** (claims a retail or facilities manager will check): insured / WorkSafeBC coverage ("trained,
+insured cleaners" on Home), owning floor scrubbers and burnishers, doing strip and wax / carpet extraction in-house, offering day
+porters, site walkthroughs before quoting, and serving several locations. Big-box and chain retailers usually ask for a WorkSafeBC
+clearance letter and a certificate of liability insurance; if the business has them, saying so on the site is a strong selling point.
 
 ### WhatsApp-first (2026-11-01)
 

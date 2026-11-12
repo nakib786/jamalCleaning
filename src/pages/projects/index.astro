@@ -18,7 +18,7 @@ const categories = [...new Set(projects.map((p) => p.data.category))].sort();
 
 <BaseLayout
   title="Projects"
-  description="Recent cleaning projects by Jamal Cleaning Services: commercial, residential, outdoor and sanitization work in Prince George, BC."
+  description="Commercial cleaning projects by Jamal Cleaning Services: big-box and retail stores, offices, floor care, warehouses, clinics and post-construction in Prince George, BC."
 >
   <PageTitle title="Projects" image={bannerImage} />
   <section class="section-gutter py-[60px] sm:py-20 md:py-[100px] lg:py-[130px]" data-project-filter>
@@ -53,7 +53,6 @@ const categories = [...new Set(projects.map((p) => p.data.category))].sort();
           <li data-category={categorySlug(project.data.category)}>
             <ProjectCard
               project={project}
-              hoverCaption
               sizes="(min-width: 1025px) 440px, (min-width: 768px) 50vw, 100vw"
             />
           </li>

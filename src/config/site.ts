@@ -24,12 +24,12 @@ export const site = {
   shortName: "Jamal Cleaning",
   /** Canonical origin, no trailing slash. Keep in sync with `site` in astro.config.mjs. */
   url: "https://jmcleaningservice.ca",
-  tagline: "Clean space starts here",
+  tagline: "Commercial janitorial done right",
   description:
-    "Professional residential, commercial, office, window and deep cleaning services across Prince George, BC. Open 7 days a week — get a free quote today.",
+    "Commercial janitorial services in Prince George, BC for retail stores, big-box stores, offices and commercial buildings: nightly cleaning, floor care and day porters. Free quotes.",
   /** Short "about" blurb used in the footer. */
   about:
-    "Professional cleaning for homes, offices and commercial spaces across Prince George — done right, every time.",
+    "Commercial janitorial and floor care for retail stores, offices and commercial buildings across Prince George, plus residential cleaning.",
 
   /**
    * Logos are generated from src/assets/brand/logo.png by `npx tsx tools/assets/brand.ts`
@@ -108,12 +108,12 @@ export const site = {
       href: "/services/",
       children: [
         { label: "All Services", href: "/services/" },
-        { label: "Residential Services", href: "/services/residential-services/" },
-        { label: "Regular Home Cleaning", href: "/services/regular-home-cleaning/" },
-        { label: "Move In Out Cleaning", href: "/services/move-in-out-cleaning/" },
-        { label: "Construction Cleaning", href: "/services/construction-cleaning/" },
-        { label: "Specialized Cleaning", href: "/services/specialized-cleaning/" },
-        { label: "Skilled Cleaning", href: "/services/skilled-cleaning/" },
+        { label: "Commercial Janitorial", href: "/services/janitorial-services/" },
+        { label: "Retail & Big-Box Stores", href: "/services/retail-store-cleaning/" },
+        { label: "Office & Building Cleaning", href: "/services/office-cleaning/" },
+        { label: "Commercial Floor Care", href: "/services/commercial-floor-care/" },
+        { label: "Post-Construction Cleaning", href: "/services/construction-cleaning/" },
+        { label: "Residential & Move-Out", href: "/services/residential-services/" },
       ],
     },
     { label: "Projects", href: "/projects/" },
@@ -139,18 +139,20 @@ export const site = {
 
   seo: {
     titleTemplate: "%s | Jamal Cleaning Services",
-    defaultTitle: "Jamal Cleaning Services | Cleaning Company in Prince George, BC",
+    defaultTitle: "Jamal Cleaning Services | Commercial Janitorial in Prince George, BC",
     /** Default social share image (1200×630). */
     ogImage: ogImage satisfies ImageMetadata,
-    ogImageAlt: "Jamal Cleaning Services — professional cleaning in Prince George, BC",
+    ogImageAlt: "Jamal Cleaning Services — commercial janitorial in Prince George, BC",
     locale: "en_CA",
     twitterHandle: "[@TWITTER HANDLE]",
     keywords: [
-      "cleaning services Prince George",
+      "janitorial services Prince George",
       "commercial cleaning Prince George",
-      "house cleaning Prince George BC",
+      "retail store cleaning Prince George",
+      "office cleaning Prince George BC",
+      "commercial floor care strip and wax",
+      "post-construction cleaning Prince George",
       "move out cleaning Prince George",
-      "post-construction cleaning",
     ],
   },
 

@@ -1,7 +1,7 @@
 ---
 /** Home hero: full-bleed photo with dark overlay and curved bottom edge (theme mask.png as SVG). */
 import { Image } from "astro:assets";
-import hero from "../../../assets/images/home/hero.jpg";
+import hero from "../../../assets/images/photos/mop-bucket-wet-floor-sign-entrance.jpg";
 import { whatsappLink } from "../../../config/site";
 import Icon from "../../ui/Icon.astro";
 import WhatsAppIcon from "../../ui/WhatsAppIcon.astro";
@@ -34,10 +34,11 @@ const mask = `url("data:image/svg+xml,${encodeURIComponent(
   <div class="site-container relative z-[1] mb-20 sm:mb-[150px] lg:mt-[60px] lg:mb-0">
     <div class="animate-[reveal-right_1.25s_both] motion-reduce:animate-none sm:w-[650px]">
       <h1 class="mb-6 font-heading text-[30px] leading-[1.5] tracking-[-0.8px] text-white capitalize sm:text-[70px] lg:text-[80px]">
-        Clean space starts here
+        Commercial janitorial done right
       </h1>
       <p class="leading-6 text-white sm:w-[85%]">
-        Professional cleaning services for offices, homes, and commercial spaces – done right, every time.
+        After-hours janitorial and floor care for retail chains, big-box stores, offices and commercial
+        buildings in Prince George.
       </p>
       <div class="mt-[30px] flex flex-wrap items-center gap-x-[30px] gap-y-4 sm:mt-14">
         <a href={whatsappLink()} target="_blank" rel="noopener" class="btn btn-lg btn-on-dark">
