@@ -1,14 +1,16 @@
 /**
- * Generates brand assets from the source logo (src/assets/brand/logo.png): a house
- * emblem above a dark-navy "JAMAL / CLEANING SERVICES" wordmark.
+ * Generates brand assets from the source logo (src/assets/brand/logo-source.svg): a gold crest —
+ * wings, crown and a shield holding a "J". The SVG is exported with a solid white background
+ * rectangle; it is dropped here so every output is transparent. The crest has no wordmark: the
+ * site sets the business name next to it in HTML (src/components/layout/Logo.astro).
  *
  * Outputs:
- *   src/assets/brand/logo-mark.png     emblem only (header/footer lockup, favicons)
- *   src/assets/brand/logo-full.png     full logo, trimmed (light backgrounds)
- *   src/assets/brand/logo-on-dark.png  full logo with the wordmark turned white
- *   src/assets/brand/og-image.jpg      1200×630 social share image
- *   public/logo.png                    600px full logo for structured data
- *   public/favicon.ico, favicon-32.png, apple-touch-icon.png, icon-192.png, icon-512.png
+ *   src/assets/brand/logo-mark.png     crest, trimmed (header, footer, mobile menu)
+ *   src/assets/brand/og-image.jpg      1200×630 social share image (crest on the brand teal)
+ *   public/logo.png                    600px crest for structured data
+ *   public/favicon.ico, favicon-32.png shield + "J" only (the full crest is unreadable at 16–32px)
+ *   public/apple-touch-icon.png        crest on teal (iOS needs an opaque icon)
+ *   public/icon-192.png, icon-512.png  crest, transparent (web app manifest)
  *
  * Re-run after replacing the logo: `npx tsx tools/assets/brand.ts`.
  */
@@ -19,8 +21,17 @@ import { ROOT } from "../lib/site.ts";
 
 const BRAND = path.join(ROOT, "src/assets/brand");
 const PUBLIC = path.join(ROOT, "public");
-const TEAL = { r: 4, g: 67, b: 64 };
-const SOLID = 128;
+const TEAL = { r: 4, g: 67, b: 64, alpha: 1 };
+const CLEAR = { r: 0, g: 0, b: 0, alpha: 0 };
+/** Render size of the master bitmap (the SVG's viewBox is 1500 × 1500). */
+const MASTER = 1500;
+/**
+ * Outer outline of the shield, in viewBox units (copied from the SVG's shield clip path). Used to
+ * cut the favicon mark out cleanly, without the wing tips that reach into its bounding box.
+ */
+const SHIELD_OUTLINE =
+  "M 748.6 1431 L 591.2 1324 C 481.5 1249.4 416 1125.7 416 993.1 L 416 474.1 L 505.2 474.1 L 748.6 373 " +
+  "L 751.5 374.2 L 992 474.1 L 1081.2 474.1 L 1081.2 993.1 C 1081.2 1125.7 1015.7 1249.4 906 1324 Z";
 
 /** Minimal ICO container holding PNG images (supported by all modern browsers). */
 function ico(pngs: { size: number; data: Buffer }[]): Buffer {
@@ -42,111 +53,74 @@ function ico(pngs: { size: number; data: Buffer }[]): Buffer {
   return Buffer.concat([header, ...pngs.map((p) => p.data)]);
 }
 
+/** Drop the full-canvas white background rectangle that the SVG export puts behind the artwork. */
+function withoutBackground(svg: string): string {
+  const background = /<rect\b[^>]*\bfill="(?:#fff|#ffffff|white)"[^>]*\/>/i;
+  const match = background.exec(svg);
+  if (!match || !/\bwidth="(\d{4,})/.test(match[0])) {
+    throw new Error("Expected a full-canvas white background <rect> in the logo SVG; check the export.");
+  }
+  return svg.replace(match[0], "");
+}
+
 async function main(): Promise<void> {
-  const source = path.join(BRAND, "logo.png");
-  const { data, info } = await sharp(source).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
-  const alpha = (x: number, y: number) => data[(y * info.width + x) * 4 + 3] ?? 0;
-  const solidInRow = (y: number) => {
-    let n = 0;
-    for (let x = 0; x < info.width; x++) if (alpha(x, y) >= SOLID) n++;
-    return n;
-  };
-  const bounds = (y0: number, y1: number, pad: number) => {
-    let top = y1;
-    let bottom = y0;
-    let left = info.width;
-    let right = 0;
-    for (let y = y0; y < y1; y++) {
-      for (let x = 0; x < info.width; x++) {
-        if (alpha(x, y) >= SOLID) {
-          top = Math.min(top, y);
-          bottom = Math.max(bottom, y);
-          left = Math.min(left, x);
-          right = Math.max(right, x);
-        }
-      }
-    }
-    const l = Math.max(0, left - pad);
-    const t = Math.max(0, top - pad);
-    return {
-      left: l,
-      top: t,
-      width: Math.min(info.width, right + pad) - l,
-      height: Math.min(info.height, bottom + pad) - t,
-    };
-  };
-
-  // The emblem and the wordmark are separated by the emptiest row in the middle band.
-  let split = Math.round(info.height * 0.5);
-  let fewest = Number.POSITIVE_INFINITY;
-  for (let y = Math.round(info.height * 0.45); y < Math.round(info.height * 0.7); y++) {
-    const n = solidInRow(y);
-    if (n < fewest) {
-      fewest = n;
-      split = y;
-    }
-  }
-
-  const full = bounds(0, info.height, 12);
-  const emblem = bounds(0, split, 8);
-  const markBuffer = await sharp(source).extract(emblem).png({ compressionLevel: 9 }).toBuffer();
-  await fs.writeFile(path.join(BRAND, "logo-mark.png"), markBuffer);
-  await sharp(source).extract(full).png({ compressionLevel: 9 }).toFile(path.join(BRAND, "logo-full.png"));
-
-  // On-dark variant: below the split, the wordmark is dark navy/grey; turn every dark
-  // pixel white except the green leaf accent.
-  const recoloured = Buffer.from(data);
-  for (let y = split; y < info.height; y++) {
-    for (let x = 0; x < info.width; x++) {
-      const i = (y * info.width + x) * 4;
-      const r = recoloured[i] ?? 0;
-      const g = recoloured[i + 1] ?? 0;
-      const b = recoloured[i + 2] ?? 0;
-      const green = g > r + 12 && g > b + 12;
-      const luminance = (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
-      if (luminance < 0.45 && !green) {
-        recoloured[i] = 255;
-        recoloured[i + 1] = 255;
-        recoloured[i + 2] = 255;
-      }
-    }
-  }
-  const onDark = await sharp(recoloured, { raw: { width: info.width, height: info.height, channels: 4 } })
-    .extract(full)
-    .png({ compressionLevel: 9 })
+  const svg = withoutBackground(await fs.readFile(path.join(BRAND, "logo-source.svg"), "utf8"));
+  // The artwork embeds large bitmaps, so lift sharp's pixel limit for this trusted local file.
+  const master = await sharp(Buffer.from(svg), { limitInputPixels: false })
+    .resize(MASTER, MASTER)
+    .png()
     .toBuffer();
-  await fs.writeFile(path.join(BRAND, "logo-on-dark.png"), onDark);
+  const crest = await sharp(master).trim({ threshold: 1 }).png().toBuffer();
+  const contain = (input: Buffer, size: number, background = CLEAR) =>
+    sharp(input).resize(size, size, { fit: "contain", background }).png({ compressionLevel: 9 }).toBuffer();
 
-  // Share image: on-dark logo centred on the brand teal.
-  const ogLogo = await sharp(onDark).resize({ width: 980, height: 540, fit: "inside" }).toBuffer();
+  // Crest for the site header/footer (Astro resizes it per use).
+  await sharp(crest)
+    .resize({ height: 600 })
+    .png({ compressionLevel: 9 })
+    .toFile(path.join(BRAND, "logo-mark.png"));
+
+  // Share image: crest centred on the brand teal.
+  const ogCrest = await sharp(crest).resize({ height: 500 }).toBuffer();
   await sharp({ create: { width: 1200, height: 630, channels: 3, background: TEAL } })
-    .composite([{ input: ogLogo, gravity: "centre" }])
+    .composite([{ input: ogCrest, gravity: "centre" }])
     .jpeg({ quality: 86, mozjpeg: true })
     .toFile(path.join(BRAND, "og-image.jpg"));
 
-  // Structured-data logo and favicons.
+  // Structured-data logo and app icons.
   await fs.mkdir(PUBLIC, { recursive: true });
-  await sharp(source)
-    .extract(full)
+  await sharp(crest)
     .resize({ width: 600 })
     .png({ compressionLevel: 9 })
     .toFile(path.join(PUBLIC, "logo.png"));
-  const square = async (size: number, background = { r: 255, g: 255, b: 255, alpha: 0 }) =>
-    sharp(markBuffer)
-      .resize(size, size, { fit: "contain", background })
-      .png({ compressionLevel: 9 })
-      .toBuffer();
-  const icoImages = await Promise.all([16, 32, 48].map(async (size) => ({ size, data: await square(size) })));
+  await fs.writeFile(path.join(PUBLIC, "icon-192.png"), await contain(crest, 192));
+  await fs.writeFile(path.join(PUBLIC, "icon-512.png"), await contain(crest, 512));
+  // Apple touch icon: opaque teal square with a little breathing room (iOS rounds the corners).
+  const touchCrest = await contain(crest, 148);
+  await sharp({ create: { width: 180, height: 180, channels: 4, background: TEAL } })
+    .composite([{ input: touchCrest, gravity: "centre" }])
+    .png({ compressionLevel: 9 })
+    .toFile(path.join(PUBLIC, "apple-touch-icon.png"));
+
+  // Favicons: the shield and "J" only, cut out along the shield outline.
+  const mask = Buffer.from(
+    `<svg xmlns="http://www.w3.org/2000/svg" width="${MASTER}" height="${MASTER}" viewBox="0 0 1500 1500">` +
+      `<path d="${SHIELD_OUTLINE}" fill="#000"/></svg>`,
+  );
+  const shield = await sharp(master)
+    .composite([{ input: mask, blend: "dest-in" }])
+    .png()
+    .toBuffer()
+    .then((b) => sharp(b).trim({ threshold: 1 }).png().toBuffer());
+  const icoImages = await Promise.all(
+    [16, 32, 48].map(async (size) => ({ size, data: await contain(shield, size) })),
+  );
   await fs.writeFile(path.join(PUBLIC, "favicon.ico"), ico(icoImages));
-  await fs.writeFile(path.join(PUBLIC, "favicon-32.png"), await square(32));
-  await fs.writeFile(path.join(PUBLIC, "icon-192.png"), await square(192));
-  await fs.writeFile(path.join(PUBLIC, "icon-512.png"), await square(512));
-  await fs.writeFile(path.join(PUBLIC, "apple-touch-icon.png"), await square(180, { ...TEAL, alpha: 1 }));
+  await fs.writeFile(path.join(PUBLIC, "favicon-32.png"), await contain(shield, 32));
   await fs.rm(path.join(PUBLIC, "favicon.svg"), { force: true });
 
-  console.log(
-    `split at y=${split}; emblem ${emblem.width}x${emblem.height}; full ${full.width}x${full.height}; og-image, logo.png and favicons written`,
-  );
+  const { width, height } = await sharp(crest).metadata();
+  console.log(`crest ${width}x${height}; logo-mark, og-image, logo.png and favicons written`);
 }
 
 main().catch((error: unknown) => {

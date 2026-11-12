@@ -33,15 +33,15 @@ Node 22+ is required. For local form testing copy `.dev.vars.example` to `.dev.v
 
 ## Edit the content
 
-| What                                                                                   | Where                                                                      |
-| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| Business name, phone, WhatsApp, email, address, hours, social links, nav, SEO defaults | `src/config/site.ts` (one file; `[PLACEHOLDERS]` stay hidden until filled) |
-| Logo, favicons, share image                                                            | replace `src/assets/brand/logo.png`, run `npx tsx tools/assets/brand.ts`   |
-| Services (cards, detail pages)                                                         | `src/content/services/*.md`                                                |
-| Projects (portfolio)                                                                   | `src/content/projects/*.md`                                                |
-| Testimonials (and where each appears)                                                  | `src/content/testimonials.json`                                            |
-| FAQs                                                                                   | `src/content/faqs.json`                                                    |
-| Page sections                                                                          | `src/components/sections/`, `src/pages/`                                   |
+| What                                                                                   | Where                                                                           |
+| -------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| Business name, phone, WhatsApp, email, address, hours, social links, nav, SEO defaults | `src/config/site.ts` (one file; `[PLACEHOLDERS]` stay hidden until filled)      |
+| Logo, favicons, share image                                                            | replace `src/assets/brand/logo-source.svg`, run `npx tsx tools/assets/brand.ts` |
+| Services (cards, detail pages)                                                         | `src/content/services/*.md`                                                     |
+| Projects (portfolio)                                                                   | `src/content/projects/*.md`                                                     |
+| Testimonials (and where each appears)                                                  | `src/content/testimonials.json`                                                 |
+| FAQs                                                                                   | `src/content/faqs.json`                                                         |
+| Page sections                                                                          | `src/components/sections/`, `src/pages/`                                        |
 
 The content schemas (with comments on every field) are in `src/content.config.ts`. Much of the copy, the
 counters and the testimonials are still the theme's demo text: replace them with real figures and reviews

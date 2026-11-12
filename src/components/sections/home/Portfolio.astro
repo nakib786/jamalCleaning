@@ -1,19 +1,23 @@
 ---
 /**
- * "You can check portfolio to check quality": looping project carousel (theme `cetro-portfolio`,
- * style 1). 3 / 2 / 1 cards per view, 30px gap, autoplay every 5s (pauses on hover and after
- * interaction). Above 1366px cards alternate 60px up / down. On desktop the caption shows on hover.
+ * "You can check portfolio to check quality": project carousel (theme `cetro-portfolio`, style 1).
+ * The card row runs edge to edge across the screen (no blank margins at the sides) while the cards
+ * keep their in-column size: 3 / 2 / 1 per column width, 30px gap, looping. The row drifts slowly
+ * and keeps moving under the pointer (off with reduced motion); visitors can also swipe or use the
+ * arrows / dots below it, after which the drift picks up again. Above 1366px cards alternate 60px
+ * up / down.
  */
 import { getCollection } from "astro:content";
 import ProjectCard from "../../cards/ProjectCard.astro";
+import Icon from "../../ui/Icon.astro";
 import SectionHeading from "../../ui/SectionHeading.astro";
 
 const projects = (await getCollection("projects")).sort((a, b) => a.data.order - b.data.order).slice(0, 6);
 ---
 
-<section class="section-gutter pb-[60px] sm:pb-20 md:pb-[100px] lg:pb-[130px]">
-  <div class="site-container">
-    <div class="flex flex-col pb-[30px] xl:items-end">
+<section class="pb-[60px] sm:pb-20 md:pb-[100px] lg:pb-[130px]">
+  <div class="section-gutter">
+    <div class="site-container flex flex-col pb-[30px] xl:items-end">
       <div class="xl:mr-[120px] xl:w-[810px]" data-reveal="up">
         <SectionHeading
           label="Our projects"
@@ -24,14 +28,10 @@ const projects = (await getCollection("projects")).sort((a, b) => a.data.order -
         />
       </div>
     </div>
+  </div>
 
-    <div
-      class="embla overflow-hidden"
-      data-portfolio-carousel
-      data-reveal="up"
-      aria-roledescription="carousel"
-      aria-label="Recent projects"
-    >
+  <div data-portfolio-carousel data-reveal="up" aria-roledescription="carousel" aria-label="Recent projects">
+    <div class="embla mx-auto max-w-[2200px] overflow-hidden" data-viewport>
       <div class="embla-container flex touch-pan-y">
         {projects.map((project, i) => (
           <div
@@ -40,26 +40,45 @@ const projects = (await getCollection("projects")).sort((a, b) => a.data.order -
             aria-roledescription="slide"
             aria-label={`${i + 1} of ${projects.length}`}
           >
-            <ProjectCard project={project} hoverCaption />
+            <ProjectCard project={project} />
           </div>
         ))}
       </div>
+    </div>
+
+    <div class="section-gutter mt-[30px] flex items-center justify-center gap-6 sm:mt-10">
+      <button type="button" class="carousel-arrow" data-prev aria-label="Previous projects">
+        <Icon name="left-arrow" />
+      </button>
+      <div class="carousel-dots" data-dots></div>
+      <button type="button" class="carousel-arrow" data-next aria-label="Next projects">
+        <Icon name="right-arrow" />
+      </button>
     </div>
   </div>
 </section>
 
 <style>
-  .embla-container {
-    margin-left: -30px;
+  /* The viewport spans the screen (capped at 2200px so six cards still loop on very wide
+     monitors); card widths follow the page column, so wider screens just show more of the
+     neighbouring cards at the edges. */
+  .embla {
+    container-type: inline-size;
   }
   .embla-slide {
-    flex-basis: 100%;
+    /* Page column width: screen minus the section gutters, at most the site container. */
+    --gutter: 15px;
+    --column: min(100cqw - 2 * var(--gutter), var(--container-site));
+    --per-view: 1;
+    /* Each slide carries its 30px gap as left padding, as in the theme. */
+    flex-basis: calc((var(--column) + 30px) / var(--per-view));
     padding-left: 30px;
     @media (width >= 768px) {
-      flex-basis: 50%;
+      --gutter: 30px;
+      --per-view: 2;
     }
     @media (width >= 1201px) {
-      flex-basis: calc(100% / 3);
+      --per-view: 3;
     }
   }
   /* Staggered cards (theme "portfolio effect"), wide screens only: odd cards sit 60px
@@ -76,13 +95,50 @@ const projects = (await getCollection("projects")).sort((a, b) => a.data.order -
 
 <script>
   import EmblaCarousel from "embla-carousel";
-  import Autoplay from "embla-carousel-autoplay";
+  import AutoScroll from "embla-carousel-auto-scroll";
 
-  document.querySelectorAll<HTMLElement>("[data-portfolio-carousel]").forEach((viewport) => {
+  document.querySelectorAll<HTMLElement>("[data-portfolio-carousel]").forEach((root) => {
+    const viewport = root.querySelector<HTMLElement>("[data-viewport]");
+    const dots = root.querySelector<HTMLElement>("[data-dots]");
+    if (!viewport || !dots) return;
+
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    // Slow continuous drift (px per frame) that keeps going under the pointer; it resumes
+    // `startDelay` after a swipe, arrow or dot click.
     const plugins = reducedMotion
       ? []
-      : [Autoplay({ delay: 5000, stopOnMouseEnter: true, stopOnInteraction: true })];
-    EmblaCarousel(viewport, { loop: true, align: "start", duration: 25 }, plugins);
+      : [AutoScroll({ speed: 0.6, startDelay: 2000, stopOnInteraction: false, stopOnMouseEnter: false })];
+    // Centre-aligned so an arrow or dot click lands a card in the middle with neighbours on both sides.
+    const carousel = EmblaCarousel(viewport, { loop: true, align: "center", duration: 25 }, plugins);
+
+    // Arrows and dots: stop the drift so the slide animation runs, then let it resume.
+    const navigate = (move: () => void) => {
+      carousel.plugins().autoScroll?.reset();
+      move();
+    };
+    root.querySelector("[data-prev]")?.addEventListener("click", () => navigate(() => carousel.scrollPrev()));
+    root.querySelector("[data-next]")?.addEventListener("click", () => navigate(() => carousel.scrollNext()));
+
+    // One dot per card; rebuilt if Embla re-initialises (e.g. after a resize).
+    let buttons: HTMLButtonElement[] = [];
+    const sync = () => {
+      const current = carousel.selectedScrollSnap();
+      buttons.forEach((b, i) => b.setAttribute("aria-current", String(i === current)));
+    };
+    const buildDots = () => {
+      buttons = carousel.scrollSnapList().map((_, i) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.setAttribute("aria-label", `Show project ${i + 1}`);
+        button.addEventListener("click", () => navigate(() => carousel.scrollTo(i)));
+        return button;
+      });
+      dots.replaceChildren(...buttons);
+      sync();
+    };
+
+    carousel.on("select", sync);
+    carousel.on("reInit", buildDots);
+    buildDots();
   });
 </script>

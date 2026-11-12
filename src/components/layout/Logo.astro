@@ -1,30 +1,79 @@
 ---
+/**
+ * Home link with the gold crest and the business name set beside it (the crest artwork has no
+ * wordmark). Text sizes follow `height`, so the lockup keeps its proportions wherever it is used.
+ */
 import { Image } from "astro:assets";
 import { site } from "../../config/site";
 
 interface Props {
-  /** "onDark" for dark/photo backgrounds, "default" for light ones. */
+  /** "onDark" for dark/photo backgrounds, "default" for light ones (changes the text colours). */
   variant?: "onDark" | "default";
-  /** Rendered height in px; width follows the logo's aspect ratio. */
+  /** Crest height in px; its width follows the crest's aspect ratio. */
   height?: number;
   class?: string;
   loading?: "eager" | "lazy";
 }
 
 const { variant = "onDark", height = 64, class: className, loading = "eager" } = Astro.props;
-const src = variant === "onDark" ? site.logo.onDark : site.logo.src;
+const { src, alt, wordmark } = site.logo;
 const width = Math.round((src.width / src.height) * height);
 ---
 
-<a href="/" class:list={["inline-flex shrink-0 items-center", className]} aria-label={`${site.name} — home`}>
+<a
+  href="/"
+  class:list={[
+    "logo inline-flex shrink-0 items-center",
+    variant === "onDark" ? "on-dark" : "on-light",
+    className,
+  ]}
+  style={`--logo-h:${height}px`}
+  aria-label={`${site.name} — home`}
+>
   <Image
     src={src}
-    alt={site.logo.alt}
+    alt={alt}
     width={width}
     height={height}
     layout="fixed"
     loading={loading}
     fetchpriority={loading === "eager" ? "high" : "auto"}
-    class="h-auto max-w-full"
+    class="h-auto max-w-none"
   />
+  <span class="wordmark flex flex-col whitespace-nowrap" aria-hidden="true">
+    <span class="name font-heading">{wordmark.name}</span>
+    <span class="descriptor font-sans font-bold uppercase">{wordmark.descriptor}</span>
+  </span>
 </a>
+
+<style>
+  .logo {
+    gap: calc(var(--logo-h) * 0.2);
+  }
+  .name {
+    font-size: calc(var(--logo-h) * 0.36);
+    line-height: 1.25;
+  }
+  .descriptor {
+    font-size: calc(var(--logo-h) * 0.19);
+    line-height: 1.3;
+    letter-spacing: 0.18em;
+  }
+  /* Gold descriptor to match the crest: brighter on dark backgrounds, deeper on white for contrast. */
+  .on-dark {
+    .name {
+      color: #fff;
+    }
+    .descriptor {
+      color: #e3bf5f;
+    }
+  }
+  .on-light {
+    .name {
+      color: var(--color-secondary);
+    }
+    .descriptor {
+      color: #8a6a1c;
+    }
+  }
+</style>

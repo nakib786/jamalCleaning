@@ -1,8 +1,7 @@
 ---
 /**
- * Project card (theme portfolio style 1): photo with a frosted caption bar — title,
- * category and an arrow button. The caption is always visible (as on /projects/); with
- * `hoverCaption` it only appears on hover from 1024px up, as in the home page carousel.
+ * Project card (theme portfolio style 1): photo with an always-visible frosted caption bar —
+ * title, category and an arrow button (home page carousel and /projects/).
  */
 import type { CollectionEntry } from "astro:content";
 import { Image } from "astro:assets";
@@ -10,7 +9,6 @@ import Icon from "../ui/Icon.astro";
 
 interface Props {
   project: CollectionEntry<"projects">;
-  hoverCaption?: boolean;
   /** Photo aspect (height / width, %). The theme uses 115.558% for style 1. */
   ratio?: number;
   sizes?: string;
@@ -19,7 +17,6 @@ interface Props {
 
 const {
   project,
-  hoverCaption = false,
   ratio = 115.558,
   sizes = "(min-width: 1201px) 440px, (min-width: 768px) 50vw, 100vw",
   class: className,
@@ -27,13 +24,7 @@ const {
 const href = `/projects/${project.id}/`;
 ---
 
-<article
-  class:list={[
-    "project-card group relative overflow-hidden rounded-[24px]",
-    hoverCaption && "hover-caption",
-    className,
-  ]}
->
+<article class:list={["project-card group relative overflow-hidden rounded-[24px]", className]}>
   <a href={href} class="block">
     <div class="relative bg-[#d9d9d9]" style={`padding-top:${ratio}%`}>
       <Image
@@ -73,17 +64,5 @@ const href = `/projects/${project.id}/`;
       rgba(93, 92, 87, 0.909469) 40.25%,
       #53524e 62.71%
     );
-    transition: all 0.3s ease;
-  }
-  @media (width >= 1024px) {
-    .hover-caption .caption {
-      opacity: 0;
-      visibility: hidden;
-    }
-    .hover-caption:hover .caption,
-    .hover-caption:focus-within .caption {
-      opacity: 1;
-      visibility: visible;
-    }
   }
 </style>

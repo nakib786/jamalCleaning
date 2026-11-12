@@ -7,8 +7,7 @@
  * broken link while you fill them in.
  */
 import type { ImageMetadata } from "astro";
-import logoFull from "../assets/brand/logo-full.png";
-import logoOnDark from "../assets/brand/logo-on-dark.png";
+import logoMark from "../assets/brand/logo-mark.png";
 import ogImage from "../assets/brand/og-image.jpg";
 
 export interface NavItem {
@@ -32,16 +31,17 @@ export const site = {
     "Commercial janitorial and floor care for retail stores, offices and commercial buildings across Prince George, plus residential cleaning.",
 
   /**
-   * Logos are generated from src/assets/brand/logo.png by `npx tsx tools/assets/brand.ts`
-   * (trimmed full logo, a white-wordmark version for dark backgrounds, favicons, share image).
-   * To change the logo, replace logo.png and re-run that script.
+   * The logo is a gold crest with no wordmark; the Logo component sets the business name beside it.
+   * The crest, favicons, structured-data logo and share image are generated from
+   * src/assets/brand/logo-source.svg by `npx tsx tools/assets/brand.ts`. To change the logo,
+   * replace logo-source.svg and re-run that script.
    */
   logo: {
-    /** Full logo for light backgrounds. */
-    src: logoFull satisfies ImageMetadata,
-    /** Full logo with a white wordmark for dark backgrounds (header over photos, footer). */
-    onDark: logoOnDark satisfies ImageMetadata,
+    /** Crest (transparent; works on light and dark backgrounds). */
+    src: logoMark satisfies ImageMetadata,
     alt: "Jamal Cleaning Services",
+    /** Wordmark set next to the crest: name on the first line, descriptor below. */
+    wordmark: { name: "Jamal", descriptor: "Cleaning Services" },
   },
 
   contact: {
