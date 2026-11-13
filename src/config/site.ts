@@ -116,6 +116,7 @@ export const site = {
       ],
     },
     { label: "Projects", href: "/projects/" },
+    { label: "Showcase", href: "/showcase/" },
     {
       label: "Company",
       href: "/about-us/",
@@ -132,6 +133,7 @@ export const site = {
     { label: "About Us", href: "/about-us/" },
     { label: "Services", href: "/services/" },
     { label: "Projects", href: "/projects/" },
+    { label: "Showcase", href: "/showcase/" },
     { label: "FAQs", href: "/faqs/" },
     { label: "Contact Us", href: "/contact-us/" },
   ] satisfies NavItem[],

@@ -39,6 +39,7 @@ export const GET: APIRoute = async () => {
     "## Key pages",
     "",
     `- [About us](${url("/about-us/")}): who we are and how we work`,
+    `- [Showcase](${url("/showcase/")}): photos of recent retail and residential cleaning jobs, grouped by project`,
     `- [FAQs](${url("/faqs/")}): answers about booking, products and what to expect`,
     `- [Contact](${url("/contact-us/")}): WhatsApp, phone, email, address and quote request form`,
     "",

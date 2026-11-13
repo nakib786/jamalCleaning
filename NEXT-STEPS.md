@@ -85,6 +85,37 @@ Left to do, in order:
   `--color-primary-strong` `#8f6d1e` (4.8:1, small white text on it). `verify:a11y` is clean (26 pages + 404, 1440/390).
   Photos with green in them (e.g. the aprons in the testimonial panel) are unchanged.
 
+### Home "How it works" redesign (2026-11-12, owner request)
+
+`Steps.astro` replaced the hover cross-fade / phone swipe carousel with expanding photo panels on a navy band.
+≥881px: four panels side by side; hover (90 ms intent delay), click or Enter opens one to 5/8 of the row, the
+others fold into strips with a sideways title. Autoplays every 6 s while on screen until the first hover/click/focus
+(none with reduced motion). <881px: the same panels as rows in a sticky frame; page scroll opens the steps in turn,
+tapping a row scrolls to it. The frame leaves 110px at the bottom for the floating WhatsApp/back-to-top buttons.
+Owner will send new step photos: swap the four imports at the top of `Steps.astro`. About page steps are unchanged.
+
+### Showcase page (2026-11-12, owner's photos from Gmail)
+
+Manpreet's three emails of 2026-11-12 (house cleaning, Winners-type store, Staples-type store + a new suite; 26 unique photos) are on a
+new **`/showcase/`** page, split into 6 projects (Retail: big-box aisles, fitting rooms, washrooms; Residential: townhouse kitchen,
+townhouse bathrooms and floors, basement suite). Filter chips by category, full-screen photo viewer with arrows and keyboard.
+
+- Content: `src/lib/showcase.ts` (titles, descriptions, scope bullets, alt text); photos in `src/assets/images/showcase/<project>/`
+  (resized to 1600px, about 3 MB total). Page: `src/pages/showcase.astro`. "Showcase" added to the header nav, footer, `/llms.txt`
+  and (through the nav) site search.
+- Retailer names are not used in any text or alt text, even though signs for them are visible in some photos (see the "no real
+  retailer names" rule above). Owner to decide whether to keep photos where a store sign or a face in a mirror is readable.
+- The descriptions and "what we did" bullets are drafted from the photos; owner should confirm them. One photo was left out (sideways
+  bedroom-closet shot).
+- Later the same day: client's window-cleaning zip (`public/Windoiw Cleaning photos.zip`, 11 photos) added as two more Retail
+  projects (Storefront Window & Door Cleaning, Entrance Glass & Vestibule); 37 photos / 8 projects in total. Owner said to keep the
+  photos with a person in a reflection. The zip was deleted from `public/` after import.
+- Owner follow-up: the page intro stays vague (no photo or job counts); wording was toned down to what the photos show (no
+  equipment, overnight or move-out claims). Photos carry no EXIF/GPS metadata (sharp strips it); the page has `ImageGallery`
+  JSON-LD and uses the first photo as its share image. The bottom "Get a Quote!" button now matches the header button (arrow icon).
+- Not done: the new jobs are not in the `/projects/` collection (the showcase is separate), and the home carousel is unchanged.
+- `verify:links` and `verify:a11y` are clean for `/showcase/` (use `MSYS_NO_PATHCONV=1` in Git Bash so `--only=/showcase/` is not rewritten to a Windows path).
+
 ### Photos (2026-11-11)
 
 Service and project photos were mismatched (e.g. "Solar Panel Cleaning" showed a shopfront window, and every project/service page

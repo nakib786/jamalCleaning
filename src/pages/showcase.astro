@@ -1,0 +1,391 @@
+---
+/**
+ * Showcase: real photos of the crew's work, grouped into projects, with a category filter and a
+ * full-screen photo viewer. Content lives in src/lib/showcase.ts.
+ * `/showcase/#retail` pre-selects a category.
+ */
+import { getImage } from "astro:assets";
+import { Image } from "astro:assets";
+import bannerImage from "../assets/images/page-title/breadcrumb-project.jpg";
+import PageTitle from "../components/layout/PageTitle.astro";
+import Icon from "../components/ui/Icon.astro";
+import SectionHeading from "../components/ui/SectionHeading.astro";
+import { site } from "../config/site";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { categorySlug } from "../lib/projects";
+import { showcaseCategories, showcaseProjects } from "../lib/showcase";
+
+// Full-size version of every photo for the viewer (the grid uses small responsive sizes).
+const projects = await Promise.all(
+  showcaseProjects.map(async (project) => ({
+    ...project,
+    photos: await Promise.all(
+      project.photos.map(async (photo) => ({
+        ...photo,
+        full: (await getImage({ src: photo.src, width: 1400, format: "jpg", quality: 80 })).src,
+      })),
+    ),
+  })),
+);
+/**
+ * Grid columns by photo count so the last row is never left with a gap:
+ * 3 or 6 photos -> 3 columns, 4 -> 2 then 4 columns, 5 -> one large photo plus four small ones.
+ */
+const gridClass = (count: number) =>
+  count === 4
+    ? "grid-cols-2 lg:grid-cols-4"
+    : count === 5
+      ? "grid-cols-2 lg:grid-cols-4"
+      : "grid-cols-2 md:grid-cols-3";
+const isFeatured = (count: number, index: number) => count === 5 && index === 0;
+
+/** Structured data: the page as an image gallery, each photo with its caption. */
+const galleryLd = {
+  "@context": "https://schema.org",
+  "@type": "ImageGallery",
+  name: "Showcase",
+  url: new URL("/showcase/", site.url).href,
+  description: "Photos of recent commercial and residential cleaning work by " + site.name + ".",
+  provider: { "@id": `${site.url}/#business` },
+  hasPart: projects.map((project) => ({
+    "@type": "CollectionPage",
+    name: project.title,
+    description: project.description,
+    associatedMedia: project.photos.map((photo) => ({
+      "@type": "ImageObject",
+      contentUrl: new URL(photo.full, site.url).href,
+      caption: photo.alt,
+    })),
+  })),
+};
+---
+
+<BaseLayout
+  title="Showcase"
+  description="Photos of our recent cleaning work in Prince George, BC: retail store floors, windows, fitting rooms and washrooms, plus residential kitchens, bathrooms and suites."
+  image={projects[0].photos[0].src}
+  imageAlt={projects[0].photos[0].alt}
+  jsonLd={[galleryLd]}
+>
+  <PageTitle title="Showcase" image={bannerImage} />
+  <section class="section-gutter py-[60px] sm:py-20 md:py-[100px] lg:py-[130px]" data-showcase>
+    <div class="site-container flex flex-col gap-[60px]">
+      <div class="flex flex-col gap-[30px]">
+        <SectionHeading
+          label="Our work"
+          parts={["See the", { accent: "results for" }, "yourself."]}
+          align="center"
+          class="mx-auto w-full xl:max-w-[810px]"
+          labelClass="pb-[30px]"
+        />
+        <p class="mx-auto max-w-[680px] text-center text-lg leading-8 text-body">
+          A look at some of our recent work, from retail store floors, glass and washrooms to homes. Tap any
+          photo to see it full size.
+        </p>
+        <div
+          class="flex flex-wrap justify-center gap-2.5"
+          role="group"
+          aria-label="Filter the showcase by category"
+        >
+          {["All", ...showcaseCategories].map((category) => (
+            <button
+              type="button"
+              class="filter-button rounded-full border border-line px-6 py-2.5 text-base leading-6 font-bold text-secondary capitalize transition-colors duration-300 hover:border-primary hover:text-primary"
+              data-filter={category === "All" ? "all" : categorySlug(category)}
+              aria-pressed={category === "All" ? "true" : "false"}
+            >
+              {category}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {projects.map((project) => (
+        <section
+          class="flex flex-col gap-[30px]"
+          data-category={categorySlug(project.category)}
+          aria-labelledby={`showcase-${project.slug}`}
+        >
+          <div class="grid gap-[30px] lg:grid-cols-[1fr_1fr] lg:items-end">
+            <div>
+              <p class="pb-2.5 text-base leading-6 font-bold text-primary-strong uppercase">
+                {project.category}
+              </p>
+              <h2
+                id={`showcase-${project.slug}`}
+                class="font-heading text-[28px] leading-[1.5] tracking-[-1px] text-secondary sm:text-4xl"
+              >
+                {project.title}
+              </h2>
+              <p class="pt-4 text-base leading-7 text-body">{project.description}</p>
+            </div>
+            <ul class="grid gap-x-6 gap-y-2 text-base leading-6 text-body sm:grid-cols-2">
+              {project.scope.map((item) => (
+                <li class="flex gap-2.5">
+                  <span class="mt-2 size-2 shrink-0 rounded-full bg-primary" aria-hidden="true"></span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <ul class:list={["grid gap-3 sm:gap-[20px]", gridClass(project.photos.length)]} data-reveal="up">
+            {project.photos.map((photo, index) => (
+              <li class:list={[isFeatured(project.photos.length, index) && "lg:col-span-2 lg:row-span-2"]}>
+                <button
+                  type="button"
+                  class="group relative block size-full overflow-hidden rounded-[18px] bg-[#d9d9d9] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-strong"
+                  data-photo
+                  data-full={photo.full}
+                  data-alt={photo.alt}
+                  data-project={project.title}
+                  aria-label={`View photo full size: ${photo.alt}`}
+                >
+                  <Image
+                    src={photo.src}
+                    alt=""
+                    widths={[320, 480, 720, 960]}
+                    sizes={
+                      isFeatured(project.photos.length, index)
+                        ? "(min-width: 1025px) 50vw, 50vw"
+                        : "(min-width: 1025px) 33vw, 50vw"
+                    }
+                    class:list={[
+                      "size-full object-cover transition-transform duration-500 ease-out group-hover:scale-105",
+                      isFeatured(project.photos.length, index)
+                        ? "aspect-[4/5] lg:aspect-auto"
+                        : "aspect-[4/5]",
+                    ]}
+                  />
+                </button>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))}
+
+      <p class="hidden text-center" data-empty>
+        No projects in this category yet.
+      </p>
+
+      <div class="flex flex-col items-center gap-5 rounded-[24px] bg-[#1c2430] px-6 py-12 text-center text-white sm:px-12">
+        <h2 class="font-heading text-[26px] leading-[1.5] tracking-[-1px] text-white sm:text-4xl">
+          Want your space to look like this?
+        </h2>
+        <p class="max-w-[560px] text-base leading-7 text-white/85">
+          Tell us about your store, office or home and we will send a free quote.
+        </p>
+        <a href={site.quote.href} class="btn btn-on-dark">
+          <span>{site.quote.label}</span>
+          <span class="btn-icon">
+            <Icon name="right-arrow" class="text-base" />
+          </span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <dialog class="lightbox" aria-label="Photo viewer" data-lightbox>
+    <div class="lightbox-inner">
+      <button type="button" class="lightbox-btn lightbox-close" aria-label="Close photo" data-lb-close>
+        <svg
+          viewBox="0 0 24 24"
+          width="22"
+          height="22"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          aria-hidden="true"
+        >
+          <path d="M5 5l14 14M19 5L5 19" />
+        </svg>
+      </button>
+      <button type="button" class="lightbox-btn lightbox-prev" aria-label="Previous photo" data-lb-prev>
+        <svg
+          viewBox="0 0 24 24"
+          width="22"
+          height="22"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M15 4l-8 8 8 8" />
+        </svg>
+      </button>
+      <button type="button" class="lightbox-btn lightbox-next" aria-label="Next photo" data-lb-next>
+        <svg
+          viewBox="0 0 24 24"
+          width="22"
+          height="22"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M9 4l8 8-8 8" />
+        </svg>
+      </button>
+      <img alt="" class="lightbox-img" data-lb-img />
+      <p class="lightbox-caption" data-lb-caption></p>
+    </div>
+  </dialog>
+</BaseLayout>
+
+<style>
+  .filter-button[aria-pressed="true"] {
+    border-color: var(--color-primary-strong);
+    background-color: var(--color-primary-strong);
+    color: #fff;
+  }
+  .lightbox {
+    width: 100vw;
+    max-width: 100vw;
+    height: 100dvh;
+    max-height: 100dvh;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: rgb(10 14 20 / 0.94);
+    color: #fff;
+  }
+  .lightbox::backdrop {
+    background: rgb(10 14 20 / 0.94);
+  }
+  .lightbox-inner {
+    position: relative;
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    padding: 64px 16px 24px;
+  }
+  .lightbox-img {
+    max-width: min(100%, 1200px);
+    max-height: calc(100dvh - 150px);
+    border-radius: 12px;
+    object-fit: contain;
+  }
+  .lightbox-caption {
+    max-width: 720px;
+    text-align: center;
+    font-size: 15px;
+    line-height: 22px;
+    color: rgb(255 255 255 / 0.85);
+  }
+  .lightbox-btn {
+    position: absolute;
+    display: flex;
+    width: 48px;
+    height: 48px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    background: rgb(255 255 255 / 0.14);
+    color: #fff;
+    transition: background-color 0.2s;
+  }
+  .lightbox-btn:hover,
+  .lightbox-btn:focus-visible {
+    background: var(--color-primary-strong);
+  }
+  .lightbox-close {
+    top: 12px;
+    right: 12px;
+  }
+  .lightbox-prev {
+    left: 12px;
+    top: 50%;
+  }
+  .lightbox-next {
+    right: 12px;
+    top: 50%;
+  }
+  @media (max-width: 640px) {
+    .lightbox-prev,
+    .lightbox-next {
+      top: auto;
+      bottom: 12px;
+    }
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>("[data-showcase]").forEach((root) => {
+    // ---- Category filter (same pattern as /projects/) ----
+    const buttons = [...root.querySelectorAll<HTMLButtonElement>("[data-filter]")];
+    const groups = [...root.querySelectorAll<HTMLElement>("[data-category]")];
+    const empty = root.querySelector<HTMLElement>("[data-empty]");
+
+    const apply = (filter: string, updateHash: boolean) => {
+      const known = buttons.some((b) => b.dataset.filter === filter);
+      const active = known ? filter : "all";
+      buttons.forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.filter === active)));
+      let shown = 0;
+      groups.forEach((group) => {
+        const match = active === "all" || group.dataset.category === active;
+        group.hidden = !match;
+        if (match) shown++;
+      });
+      empty?.classList.toggle("hidden", shown > 0);
+      if (updateHash) history.replaceState(null, "", active === "all" ? location.pathname : `#${active}`);
+    };
+
+    buttons.forEach((b) => b.addEventListener("click", () => apply(b.dataset.filter ?? "all", true)));
+    window.addEventListener("hashchange", () => apply(location.hash.slice(1), false));
+    if (location.hash) apply(location.hash.slice(1), false);
+
+    // ---- Photo viewer: steps through the photos of the project that was opened ----
+    const dialog = document.querySelector<HTMLDialogElement>("[data-lightbox]");
+    const img = dialog?.querySelector<HTMLImageElement>("[data-lb-img]");
+    const caption = dialog?.querySelector<HTMLElement>("[data-lb-caption]");
+    if (!dialog || !img || !caption) return;
+
+    let set: HTMLButtonElement[] = [];
+    let index = 0;
+    let opener: HTMLElement | null = null;
+
+    const show = (i: number) => {
+      index = (i + set.length) % set.length;
+      const item = set[index];
+      img.src = item.dataset.full ?? "";
+      img.alt = item.dataset.alt ?? "";
+      caption.textContent = `${item.dataset.project} · ${index + 1} of ${set.length}`;
+    };
+
+    root.querySelectorAll<HTMLButtonElement>("[data-photo]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const section = button.closest("section");
+        set = [...(section?.querySelectorAll<HTMLButtonElement>("[data-photo]") ?? [])];
+        opener = button;
+        show(set.indexOf(button));
+        dialog.showModal();
+        document.documentElement.style.overflow = "hidden";
+      });
+    });
+
+    dialog.addEventListener("close", () => {
+      document.documentElement.style.overflow = "";
+      opener?.focus();
+    });
+    dialog.querySelector("[data-lb-close]")?.addEventListener("click", () => dialog.close());
+    dialog.querySelector("[data-lb-prev]")?.addEventListener("click", () => show(index - 1));
+    dialog.querySelector("[data-lb-next]")?.addEventListener("click", () => show(index + 1));
+    // Click on the dark area (not the photo or buttons) closes the viewer.
+    dialog.addEventListener("click", (event) => {
+      const target = event.target as HTMLElement;
+      if (target === dialog || target.classList.contains("lightbox-inner")) dialog.close();
+    });
+    dialog.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowLeft") show(index - 1);
+      if (event.key === "ArrowRight") show(index + 1);
+    });
+  });
+</script>
