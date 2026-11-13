@@ -138,6 +138,13 @@ export const site = {
     { label: "Contact Us", href: "/contact-us/" },
   ] satisfies NavItem[],
 
+  /** Legal pages (footer bottom bar). Wording lives in src/pages/*.md. */
+  legalNav: [
+    { label: "Privacy Policy", href: "/privacy-policy/" },
+    { label: "Terms of Use", href: "/terms-of-use/" },
+    { label: "Service Terms", href: "/service-terms/" },
+  ] satisfies NavItem[],
+
   seo: {
     titleTemplate: "%s | Jamal Cleaning Services",
     defaultTitle: "Jamal Cleaning Services | Commercial Janitorial in Prince George, BC",

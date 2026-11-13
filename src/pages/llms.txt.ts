@@ -42,6 +42,8 @@ export const GET: APIRoute = async () => {
     `- [Showcase](${url("/showcase/")}): photos of recent retail and residential cleaning jobs, grouped by project`,
     `- [FAQs](${url("/faqs/")}): answers about booking, products and what to expect`,
     `- [Contact](${url("/contact-us/")}): WhatsApp, phone, email, address and quote request form`,
+    `- [Service terms](${url("/service-terms/")}): quotes, scheduling, access, payment, re-cleans and damage claims`,
+    `- [Privacy policy](${url("/privacy-policy/")}): what personal information we collect and how we use it`,
     "",
     "## Frequently asked questions",
     "",

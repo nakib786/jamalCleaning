@@ -45,8 +45,16 @@ Contact details, hours, address and social links are all set in one file (`src/c
   (check it arrives by email **and** appears under Contacts in Wix, then delete the test contact).
 - Email marketing: quote requesters are subscribed under Canada's anti-spam law (CASL) "implied consent" for an enquiry, which
   lasts **6 months** from the request. Email them within that window, or ask them to opt in for good. Before your first Wix
-  campaign, verify your sender address in Wix Email Marketing. The site also has no privacy policy page yet. Canadian privacy
-  law expects one when you collect names, emails and phone numbers.
+  campaign, verify your sender address in Wix Email Marketing.
+- **Legal pages (please read and approve):** the site now has a [Privacy Policy](/privacy-policy/), [Terms of Use](/terms-of-use/)
+  and [Service Terms](/service-terms/), linked at the bottom of every page. They are plain-language drafts written for a BC
+  cleaning business (BC's PIPA, PIPEDA and CASL), not legal advice: have a lawyer or your insurer look at them, especially
+  the Service Terms (re-cleans, damage claims, and the clause asking customers not to hire your cleaners directly). Cancellation
+  fees, payment terms and quote validity are left to each quote, because the site doesn't know your policies. The Privacy
+  Policy names info@jmcleaningservice.ca as the Privacy Officer contact and promises replies within 30 days (PIPA's limit).
+- **Business paperwork the website can't replace:** a Prince George business licence, WorkSafeBC registration (and a
+  clearance letter for commercial clients), commercial general liability insurance, GST registration once revenue passes
+  $30,000 a year, and a written service agreement template for commercial contracts.
 - Nothing has been deployed without your go-ahead.
 
 ## Search and AI visibility (AEO)

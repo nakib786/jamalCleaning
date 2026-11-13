@@ -131,7 +131,22 @@ site itself stays on Cloudflare.
 - `WIX_CLIENT_ID` is in `wrangler.jsonc` `vars`, not in `previews`, and blank in `.dev.vars.example`, so previews and local tests never create real contacts.
 - Tested end to end through `wrangler dev` (all three forms; contacts, names, phone and subscription checked in Wix; test data deleted). Not yet tested on the deployed Worker.
 - To add a form field later: add it to the Wix form (PATCH, never rename a `target`), then to `WIX_FORMS.targets` and `saveToWix`.
-- Not done: no privacy policy page and no note on the quote form that requesters may get emails (owner to decide wording).
+- No note on the quote form that requesters may get emails (owner said no notice); the Privacy Policy's "Email marketing" section covers it.
+
+### Legal pages and carpet project (2026-11-12, owner request)
+
+- **Legal pages:** `/privacy-policy/`, `/terms-of-use/`, `/service-terms/`, written in Markdown (`src/pages/*.md`, edit the
+  wording there) on `src/layouts/LegalLayout.astro` (page title banner, links between the three pages, "Last updated" line;
+  bump `updated` in the frontmatter when the text changes). Linked from the footer bottom bar (`site.legalNav`), in the
+  sitemap automatically, and the privacy/service terms in `/llms.txt`. Drafted for BC (PIPA, PIPEDA, CASL); they name the real
+  processors (Cloudflare incl. Turnstile, Wix, WhatsApp, Google Maps). No invented policy numbers: cancellation fees, payment
+  terms and quote validity defer to the quote. Owner/lawyer review needed (see FINAL-REPORT.md).
+- **Kitchen hood project replaced:** the owner doesn't clean commercial kitchens, so "Restaurant Kitchen Hood Degreasing" is
+  now **Commercial Carpet Cleaning** (`/projects/commercial-carpet-cleaning/`, Floor & Exterior). The old URL and the old
+  carpet/upholstery URL 301 to it. Three new Unsplash photos (in `CREDITS.md`); the kitchen photos are kept but unused.
+  Residential and office kitchen cleaning (counters, kitchenettes, the showcase's townhouse kitchen) was left as is, and so
+  was the placeholder testimonial "late-night-kitchen" (a restaurant owner). Ask the owner whether those should go too.
+- Checks: build 0 errors, `verify:links` 0 problems (29 pages), `verify:a11y` clean on the new pages at 1440/390 (system Chrome via `CHROME_PATH`; Playwright's own browser isn't installed).
 - Not done (needs the owner): sending campaigns to subscribers needs Wix Email Marketing sender verification (and possibly a paid Wix plan). The subscribers are already stored with the right status. Nothing is published on the Wix project (no Wix website); it only holds contacts and forms.
 
 ### Photos (2026-11-11)
@@ -160,8 +175,8 @@ site: naming them would imply they are clients. Done:
   move-in/out and deep-clean pages). Regular Home, Move In Out, Skilled and Specialized were removed; `public/_redirects` 301s them
   (and the renamed/removed projects) to the closest new page. The service-page sidebar now lists services in display order.
 - **Projects (12):** big-box overnight cleaning, shopping-centre day porter, apparel/off-price store, office building janitorial,
-  retail floor strip & wax, storefront glass, warehouse, clinic, store fit-out cleanup, retail plaza pressure washing, restaurant hood
-  degreasing, rental unit move-out. Solar, pool, sofa/mattress and carpet/upholstery projects were removed. Filter categories: Retail,
+  retail floor strip & wax, storefront glass, warehouse, clinic, store fit-out cleanup, retail plaza pressure washing, commercial
+  carpet cleaning (was restaurant hood degreasing until 2026-11-12), rental unit move-out. Solar, pool, sofa/mattress and carpet/upholstery projects were removed. Filter categories: Retail,
   Commercial, Floor & Exterior, Construction, Residential.
 - **Copy:** Home hero ("Commercial janitorial done right"), why-choose, experience features ("Book a Site Walkthrough"), steps
   (site walkthrough → after-hours cleaning), marquee words, About highlights/intro/steps, Contact intro, FAQs (contracts, multiple

@@ -112,5 +112,16 @@ const { contact } = site;
         {site.developer.name}
       </a>
     </p>
+    <nav aria-label="Legal" class="mt-4">
+      <ul class="flex flex-wrap justify-center gap-x-6 gap-y-2 text-base">
+        {site.legalNav.map((item) => (
+          <li>
+            <a href={item.href} class="text-white/80 underline underline-offset-2 hover:text-primary">
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
   </div>
 </footer>
