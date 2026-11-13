@@ -6,10 +6,10 @@
  *
  * Outputs:
  *   src/assets/brand/logo-mark.png     crest, trimmed (header, footer, mobile menu)
- *   src/assets/brand/og-image.jpg      1200×630 social share image (crest on the brand teal)
+ *   src/assets/brand/og-image.jpg      1200×630 social share image (crest on the brand navy)
  *   public/logo.png                    600px crest for structured data
  *   public/favicon.ico, favicon-32.png shield + "J" only (the full crest is unreadable at 16–32px)
- *   public/apple-touch-icon.png        crest on teal (iOS needs an opaque icon)
+ *   public/apple-touch-icon.png        crest on navy (iOS needs an opaque icon)
  *   public/icon-192.png, icon-512.png  crest, transparent (web app manifest)
  *
  * Re-run after replacing the logo: `npx tsx tools/assets/brand.ts`.
@@ -21,7 +21,8 @@ import { ROOT } from "../lib/site.ts";
 
 const BRAND = path.join(ROOT, "src/assets/brand");
 const PUBLIC = path.join(ROOT, "public");
-const TEAL = { r: 4, g: 67, b: 64, alpha: 1 };
+/** Dark navy (`--color-teal` in global.css) behind the crest on the share image and iOS icon. */
+const NAVY = { r: 28, g: 36, b: 48, alpha: 1 };
 const CLEAR = { r: 0, g: 0, b: 0, alpha: 0 };
 /** Render size of the master bitmap (the SVG's viewBox is 1500 × 1500). */
 const MASTER = 1500;
@@ -80,9 +81,9 @@ async function main(): Promise<void> {
     .png({ compressionLevel: 9 })
     .toFile(path.join(BRAND, "logo-mark.png"));
 
-  // Share image: crest centred on the brand teal.
+  // Share image: crest centred on the brand navy.
   const ogCrest = await sharp(crest).resize({ height: 500 }).toBuffer();
-  await sharp({ create: { width: 1200, height: 630, channels: 3, background: TEAL } })
+  await sharp({ create: { width: 1200, height: 630, channels: 3, background: NAVY } })
     .composite([{ input: ogCrest, gravity: "centre" }])
     .jpeg({ quality: 86, mozjpeg: true })
     .toFile(path.join(BRAND, "og-image.jpg"));
@@ -95,9 +96,9 @@ async function main(): Promise<void> {
     .toFile(path.join(PUBLIC, "logo.png"));
   await fs.writeFile(path.join(PUBLIC, "icon-192.png"), await contain(crest, 192));
   await fs.writeFile(path.join(PUBLIC, "icon-512.png"), await contain(crest, 512));
-  // Apple touch icon: opaque teal square with a little breathing room (iOS rounds the corners).
+  // Apple touch icon: opaque navy square with a little breathing room (iOS rounds the corners).
   const touchCrest = await contain(crest, 148);
-  await sharp({ create: { width: 180, height: 180, channels: 4, background: TEAL } })
+  await sharp({ create: { width: 180, height: 180, channels: 4, background: NAVY } })
     .composite([{ input: touchCrest, gravity: "centre" }])
     .png({ compressionLevel: 9 })
     .toFile(path.join(PUBLIC, "apple-touch-icon.png"));

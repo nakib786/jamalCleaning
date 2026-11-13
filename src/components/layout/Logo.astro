@@ -16,7 +16,7 @@ interface Props {
 }
 
 const { variant = "onDark", height = 64, class: className, loading = "eager" } = Astro.props;
-const { src, alt, wordmark } = site.logo;
+const { src, wordmark } = site.logo;
 const width = Math.round((src.width / src.height) * height);
 ---
 
@@ -28,11 +28,12 @@ const width = Math.round((src.width / src.height) * height);
     className,
   ]}
   style={`--logo-h:${height}px`}
-  aria-label={`${site.name} — home`}
 >
+  <!-- The visible wordmark names the link ("Jamal Cleaning Services — home"), so the crest is
+       decorative; an aria-label here would hide the visible text from voice-control users. -->
   <Image
     src={src}
-    alt={alt}
+    alt=""
     width={width}
     height={height}
     layout="fixed"
@@ -40,10 +41,11 @@ const width = Math.round((src.width / src.height) * height);
     fetchpriority={loading === "eager" ? "high" : "auto"}
     class="h-auto max-w-none"
   />
-  <span class="wordmark flex flex-col whitespace-nowrap" aria-hidden="true">
-    <span class="name font-heading">{wordmark.name}</span>
+  <span class="wordmark flex flex-col whitespace-nowrap">
+    <span class="name font-heading">{wordmark.name}</span>{" "}
     <span class="descriptor font-sans font-bold uppercase">{wordmark.descriptor}</span>
   </span>
+  <span class="sr-only"> — home</span>
 </a>
 
 <style>

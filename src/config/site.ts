@@ -39,7 +39,6 @@ export const site = {
   logo: {
     /** Crest (transparent; works on light and dark backgrounds). */
     src: logoMark satisfies ImageMetadata,
-    alt: "Jamal Cleaning Services",
     /** Wordmark set next to the crest: name on the first line, descriptor below. */
     wordmark: { name: "Jamal", descriptor: "Cleaning Services" },
   },

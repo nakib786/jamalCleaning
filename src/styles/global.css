@@ -21,7 +21,7 @@
      (4.8:1 on white); --primary-heading is the display-headline accent on light backgrounds
      (large text, 3:1+). */
   --color-primary-strong: #8f6d1e;
-  --color-primary-heading: #b08a2e;
+  --color-primary-heading: #a9842c;
   --color-secondary: #212e3b;
   --color-body: #5c5e5e;
   --color-lighter: #9fa2a4;
@@ -284,7 +284,8 @@
   }
 
   /* Carousel controls: round prev / next arrows and a row of dots (Embla carousels; the
-     script fills `.carousel-dots` with one button per slide and sets aria-current). */
+     script fills `.carousel-dots` with one button per slide and sets aria-current). They use
+     the deeper heading gold: controls need 3:1 against white, which the bright gold misses. */
   .carousel-arrow {
     display: flex;
     width: 50px;
@@ -292,14 +293,14 @@
     flex: none;
     align-items: center;
     justify-content: center;
-    border: 1px solid var(--color-primary);
+    border: 1px solid var(--color-primary-heading);
     border-radius: 50%;
-    color: var(--color-primary);
+    color: var(--color-primary-heading);
     font-size: 16px;
     transition: all 0.3s ease;
     &:hover,
     &:focus-visible {
-      background-color: var(--color-primary);
+      background-color: var(--color-primary-heading);
       color: #fff;
     }
   }
@@ -317,14 +318,14 @@
         content: "";
         position: absolute;
         inset: -4px;
-        border: 1px solid var(--color-primary);
+        border: 1px solid var(--color-primary-heading);
         border-radius: 50%;
         opacity: 0;
         transition: opacity 0.3s ease;
       }
       &[aria-current="true"],
       &:hover {
-        background-color: var(--color-primary);
+        background-color: var(--color-primary-heading);
         &::before {
           opacity: 1;
         }

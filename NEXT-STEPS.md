@@ -77,8 +77,13 @@ Left to do, in order:
   visible now (the hover-only caption mode was removed from `ProjectCard`).
 - **Testimonials:** every author renamed (mix of Punjabi/Indian and Canadian names) with a role that matches the quote; the
   reused stock avatar was dropped, so initials show. Still `placeholder: true`: replace with real reviews before launch.
-- **Logo:** see "Notes / gotchas". The owner also added a 9 MB PNG of the same crest to `public/`
-  (`Cleaning Services Logo final.png`). It is not committed or used; delete it, or it ships with the site.
+- **Logo:** see "Notes / gotchas". The link's accessible name comes from the visible wordmark (the crest has `alt=""`).
+- **Gold palette (2026-11-12, client approved):** the theme green is replaced by golds from the crest (tokens at the top of
+  `global.css`; the old greens are listed in a comment there). Dark "teal" sections, the share image, iOS icon and
+  `theme-color` are a dark navy `#1c2430`. Contrast: bright gold `#d4aa3c` is only 2.2:1 on white, so text and controls on
+  light backgrounds use `--color-primary-heading` `#a9842c` (3.2:1 on the cream band, 3.5:1 on white) or
+  `--color-primary-strong` `#8f6d1e` (4.8:1, small white text on it). `verify:a11y` is clean (26 pages + 404, 1440/390).
+  Photos with green in them (e.g. the aprons in the testimonial panel) are unchanged.
 
 ### Photos (2026-11-11)
 
