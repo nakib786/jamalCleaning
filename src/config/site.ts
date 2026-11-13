@@ -73,6 +73,11 @@ export const site = {
         "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d178348.94930258516!2d-122.7524185!3d53.92689845!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4dcf780bb922733b%3A0xfdade72db216d3ee!2sJamal%20Cleaning%20Services%20Ltd.!5e1!3m2!1sen!2sca!4v1793506937301!5m2!1sen!2sca",
     },
     hours: {
+      /**
+       * Office hours: when the office answers calls, messages and quote requests. Cleaning itself runs around the
+       * clock (the rows and schema below are the working time, not the office).
+       */
+      office: "9 AM – 6 PM",
       /** Top bar line. */
       short: "Open 7 days a week · overnight cleaning available",
       /** Footer "Working Time" rows. */

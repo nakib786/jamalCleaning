@@ -57,7 +57,10 @@ const cards: { icon: IconName | "whatsapp"; title: string; lines: Line[] }[] = [
   {
     icon: "schedule",
     title: "Working Days",
-    lines: contact.hours.short.split(" · ").map((text) => ({ text })),
+    lines: [
+      ...contact.hours.short.split(" · ").map((text) => ({ text })),
+      { text: `Office hours: ${contact.hours.office}` },
+    ],
   },
 ];
 ---
