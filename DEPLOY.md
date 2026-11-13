@@ -105,12 +105,21 @@ npm run deploy:preview   # build + `wrangler versions upload`
 | `TURNSTILE_SECRET_KEY`      | `wrangler secret put` (prod), `.dev.vars` (local) | Secret                     |
 | `PUBLIC_TURNSTILE_SITE_KEY` | `.env` / GitHub variable                          | Public, read at build time |
 | `EMAIL_TO`, `EMAIL_FROM`    | `wrangler.jsonc` → `vars`                         | Not secret                 |
+| `WIX_CLIENT_ID`             | `wrangler.jsonc` → `vars`                         | Public id, not a secret    |
 | `CLOUDFLARE_API_TOKEN`      | GitHub secret                                     | Only for the workflow      |
 | `CLOUDFLARE_ACCOUNT_ID`     | GitHub secret                                     | Only for the workflow      |
 
 ```sh
 npx wrangler secret list        # names of the secrets set on the Worker (values are never shown)
 ```
+
+### Wix CRM (contacts and form submissions)
+
+Every form is also saved to a Wix Headless project ("Jamal Cleaning Services CRM", site id `8f5da4c3-3c27-477e-9c65-15ddd1c6ff10`),
+used only as a back office: quote and contact messages become Wix **contacts** plus **form submissions**, and newsletter signups
+and quote requesters become contacts with email status **Subscribed**. Nothing extra to set up on deploy (the client id is in `wrangler.jsonc`, and
+no secret is needed because the Worker acts as an anonymous visitor). Previews and the blank `WIX_CLIENT_ID` in `.dev.vars` skip it.
+View everything at <https://manage.wix.com/dashboard/8f5da4c3-3c27-477e-9c65-15ddd1c6ff10> (Contacts, and Forms & Submissions).
 
 ## 8. Roll back
 

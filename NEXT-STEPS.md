@@ -116,6 +116,24 @@ townhouse bathrooms and floors, basement suite). Filter chips by category, full-
 - Not done: the new jobs are not in the `/projects/` collection (the showcase is separate), and the home carousel is unchanged.
 - `verify:links` and `verify:a11y` are clean for `/showcase/` (use `MSYS_NO_PATHCONV=1` in Git Bash so `--only=/showcase/` is not rewritten to a Windows path).
 
+### Wix CRM for leads (2026-11-12, owner request)
+
+The site had no customer capture: forms only emailed `EMAIL_TO`, nothing was stored. Now `worker/index.ts` also saves every submission to a
+new **Wix Headless project** ("Jamal Cleaning Services CRM", site id `8f5da4c3-3c27-477e-9c65-15ddd1c6ff10`, OAuth client id
+`73a65d85-7e38-4734-a981-91af64a28fca`, dashboard <https://manage.wix.com/dashboard/8f5da4c3-3c27-477e-9c65-15ddd1c6ff10>). Wix is only the back office; the
+site itself stays on Cloudflare.
+
+- Three Wix forms (Wix Forms New app): Quote Request, Contact Message, Newsletter Signup. Their ids and field keys are in `WIX_FORMS` in the Worker.
+  Each submission creates/updates a Wix **contact**. The newsletter and quote forms have a `CONTACTS_SUBSCRIBE` field that the Worker always sends as `true`, so those emails are **SUBSCRIBED**
+  (quote requesters at the owner's request, under CASL implied consent for an inquiry, valid 6 months). Contact-form messages stay NOT_SET.
+- The Worker gets a fresh anonymous visitor token per submission from the public client id (no secret; one token per customer so Wix doesn't see every lead as one visitor), then POSTs the Wix form submission. Email and Wix run in parallel; the visitor sees "sent" if either worked (failures go to the Worker logs).
+- Wix only accepts international phones, so the Worker converts (e.g. `(250) 555-0100` becomes `+12505550100`; 10 digits assume +1). A number it can't convert is appended to the message as "Phone (as typed)". Wix's quote-form phone is optional for that reason (the website still requires it).
+- `WIX_CLIENT_ID` is in `wrangler.jsonc` `vars`, not in `previews`, and blank in `.dev.vars.example`, so previews and local tests never create real contacts.
+- Tested end to end through `wrangler dev` (all three forms; contacts, names, phone and subscription checked in Wix; test data deleted). Not yet tested on the deployed Worker.
+- To add a form field later: add it to the Wix form (PATCH, never rename a `target`), then to `WIX_FORMS.targets` and `saveToWix`.
+- Not done: no privacy policy page and no note on the quote form that requesters may get emails (owner to decide wording).
+- Not done (needs the owner): sending campaigns to subscribers needs Wix Email Marketing sender verification (and possibly a paid Wix plan). The subscribers are already stored with the right status. Nothing is published on the Wix project (no Wix website); it only holds contacts and forms.
+
 ### Photos (2026-11-11)
 
 Service and project photos were mismatched (e.g. "Solar Panel Cleaning" showed a shopfront window, and every project/service page

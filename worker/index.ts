@@ -8,8 +8,10 @@
  *   POST /api/contact    contact page form
  *   POST /api/subscribe  footer newsletter form
  *
- * Each submission is checked (honeypot, field limits, Cloudflare Turnstile siteverify) and
- * emailed to EMAIL_TO through the Email Service `send_email` binding. Responses are JSON
+ * Each submission is checked (honeypot, field limits, Cloudflare Turnstile siteverify), then
+ * emailed to EMAIL_TO through the Email Service `send_email` binding AND saved to the Wix CRM
+ * (contact + form submission; newsletter and quote requesters are subscribed) when WIX_CLIENT_ID is set.
+ * Either destination succeeding counts as sent. Responses are JSON
  * ({ ok, error? }) for the site's fetch() calls; plain form posts (no JavaScript) get a small
  * HTML page, because Turnstile cannot run without JavaScript.
  */
@@ -25,6 +27,11 @@ interface Env {
   /** Sender on a domain onboarded to Email Service, e.g. "website@jmcleaningservice.ca". */
   EMAIL_FROM?: string;
   SITE_NAME?: string;
+  /**
+   * Public client id of the Wix Headless project that stores contacts and form submissions.
+   * Leave unset to skip Wix (previews and local tests do, so they never add test contacts).
+   */
+  WIX_CLIENT_ID?: string;
 }
 
 /** Minimal shape of the Email Service binding used here. */
@@ -154,11 +161,37 @@ async function handleSubmission(kind: FormKind, data: Record<string, string>, re
 
   await verifyTurnstile(data.turnstileToken ?? "", request, env);
 
-  if (!env.EMAIL || !env.EMAIL_TO || !env.EMAIL_FROM) {
+  // Two destinations: the notification email and the Wix CRM (contacts + form submissions). The
+  // customer is told "sent" if at least one of them worked, so a lead is not lost when one is down.
+  const { EMAIL, EMAIL_TO, EMAIL_FROM, WIX_CLIENT_ID } = env;
+  if (!EMAIL || !EMAIL_TO || !EMAIL_FROM) {
     console.error("Email is not configured: set the send_email binding, EMAIL_TO and EMAIL_FROM.");
+  }
+  if ((!EMAIL || !EMAIL_TO || !EMAIL_FROM) && !WIX_CLIENT_ID) {
     throw new HttpError(503, "Our form is temporarily unavailable. Please call or email us instead.");
   }
 
+  const jobs: Promise<unknown>[] = [];
+  if (EMAIL && EMAIL_TO && EMAIL_FROM) {
+    jobs.push(sendNotificationEmail(EMAIL, EMAIL_TO, EMAIL_FROM, form, values, data, request, env));
+  }
+  if (WIX_CLIENT_ID) jobs.push(saveToWix(kind, data, WIX_CLIENT_ID));
+  const results = await Promise.allSettled(jobs);
+  const failed = results.filter((r): r is PromiseRejectedResult => r.status === "rejected");
+  for (const r of failed) console.error("form delivery failed", r.reason);
+  if (failed.length === jobs.length) throw failed[0].reason;
+}
+
+async function sendNotificationEmail(
+  emailBinding: EmailBinding,
+  emailTo: string,
+  emailFrom: string,
+  form: { subject: string },
+  values: { label: string; value: string }[],
+  data: Record<string, string>,
+  request: Request,
+  env: Env,
+): Promise<void> {
   const site = env.SITE_NAME || "Website";
   const page = request.headers.get("referer") ?? "";
   const credit = "Website by Aurora N&N Business Solution Inc. — https://aurorabusiness.ca";
@@ -177,16 +210,125 @@ async function handleSubmission(kind: FormKind, data: Record<string, string>, re
     .join("\n");
   const html = emailHtml(site, form.subject, values, page, data.email);
 
-  await env.EMAIL.send({
-    to: env.EMAIL_TO.split(",")
+  await emailBinding.send({
+    to: emailTo
+      .split(",")
       .map((a) => a.trim())
       .filter(Boolean),
-    from: { email: env.EMAIL_FROM, name: site },
+    from: { email: emailFrom, name: site },
     replyTo: data.email,
     subject: `${form.subject}${data.name ? ` from ${data.name}` : ""} — ${site}`,
     html,
     text,
   });
+}
+
+/**
+ * Wix CRM (a Wix Headless project used only as a back office). Each website form has a matching
+ * Wix form; a submission creates or updates the Wix contact. Newsletter signups and quote requests
+ * also mark the contact's email as SUBSCRIBED (quote requesters under Canada's CASL implied consent
+ * for an inquiry, which lasts 6 months; Wix adds an unsubscribe link to every campaign).
+ * `targets` maps our field names to the Wix form's field keys.
+ * Dashboard: https://manage.wix.com/dashboard/8f5da4c3-3c27-477e-9c65-15ddd1c6ff10
+ */
+const WIX_FORMS: Record<FormKind, { formId: string; targets: Record<string, string> }> = {
+  quote: {
+    formId: "b138a7a0-3716-4ea9-8924-dcfdc98438c3",
+    targets: {
+      firstName: "first_name_eb6a",
+      lastName: "last_name_0c14",
+      email: "email_d573",
+      phone: "phone_e23d",
+      service: "service_fc0a",
+      message: "message_be68",
+      subscribe: "subscribe_9c31",
+    },
+  },
+  contact: {
+    formId: "494fe9b5-8097-4c72-b824-cf805761eaaa",
+    targets: {
+      firstName: "first_name_3052",
+      lastName: "last_name_520d",
+      email: "email_748c",
+      phone: "phone_62ce",
+      service: "service_26ec",
+      message: "message_cf2e",
+      consent: "consent_d390",
+    },
+  },
+  subscribe: {
+    formId: "4faa49e0-736b-49ad-ab6f-5bc822a91871",
+    targets: { email: "email_aef4", subscribe: "subscribe_2c85" },
+  },
+};
+
+const WIX_TIMEOUT_MS = 8000;
+
+/**
+ * Anonymous visitor token for the Wix Headless client (the client id is public, not a secret).
+ * A fresh one per submission, so each customer is their own Wix visitor (a shared token would make
+ * every lead look like one visitor to Wix's spam filter).
+ */
+async function getWixToken(clientId: string): Promise<string> {
+  const res = await fetch("https://www.wixapis.com/oauth2/token", {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({ clientId, grantType: "anonymous" }),
+    signal: AbortSignal.timeout(WIX_TIMEOUT_MS),
+  });
+  if (!res.ok) throw new Error(`Wix token request failed (${res.status})`);
+  const body = await res.json<{ access_token: string }>();
+  return body.access_token;
+}
+
+/** Wix accepts phone numbers only in international form (+12505550100); null when it can't be made. */
+function toE164(raw: string): string | null {
+  const digits = raw.replace(/\D/g, "");
+  if (raw.trim().startsWith("+")) return digits.length >= 8 && digits.length <= 15 ? `+${digits}` : null;
+  if (digits.length === 10) return `+1${digits}`;
+  if (digits.length === 11 && digits.startsWith("1")) return `+${digits}`;
+  return null;
+}
+
+async function saveToWix(kind: FormKind, data: Record<string, string>, clientId: string): Promise<void> {
+  const { formId, targets } = WIX_FORMS[kind];
+  const submission: Record<string, string | boolean> = {};
+  const put = (field: string, value: string | boolean | undefined) => {
+    if (value === undefined || value === "") return;
+    const target = targets[field];
+    if (target) submission[target] = value;
+  };
+
+  put("email", data.email);
+  if (kind === "subscribe") {
+    put("subscribe", true);
+  } else {
+    // The website has one "Name" box; Wix keeps first and last name separately.
+    const [firstName, ...rest] = (data.name ?? "").split(/\s+/).filter(Boolean);
+    put("firstName", firstName);
+    put("lastName", rest.join(" "));
+    put("service", data.service);
+    let message = data.message ?? "";
+    if (data.phone) {
+      const phone = toE164(data.phone);
+      if (phone) put("phone", phone);
+      else message = `${message}${message ? "\n\n" : ""}Phone (as typed): ${data.phone}`;
+    }
+    put("message", message);
+    if (kind === "contact") put("consent", Boolean(data.consent));
+    if (kind === "quote") put("subscribe", true);
+  }
+
+  const res = await fetch("https://www.wixapis.com/form-submission-service/v4/submissions", {
+    method: "POST",
+    headers: { "content-type": "application/json", authorization: await getWixToken(clientId) },
+    body: JSON.stringify({ submission: { formId, submissions: submission } }),
+    signal: AbortSignal.timeout(WIX_TIMEOUT_MS),
+  });
+  if (!res.ok) {
+    const detail = (await res.text().catch(() => "")).slice(0, 300);
+    throw new Error(`Wix submission failed (${res.status}) for ${kind}: ${detail}`);
+  }
 }
 
 /** Branded notification email (inline styles and tables for email-client compatibility). */

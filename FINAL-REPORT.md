@@ -9,7 +9,10 @@ A fast, mobile-friendly 26-page website for Jamal Cleaning Services, hosted on C
 - **Home**, **About Us**, **Contact Us**, **FAQs**, **Testimonials**, and a friendly **404** page
 - **Services**: an overview page plus 6 service pages, led by commercial work: Commercial Janitorial, Retail & Big-Box Store Cleaning, Office & Commercial Building Cleaning, Commercial Floor Care, Post-Construction Cleaning, and Residential & Move-Out
 - **Projects**: a filterable gallery plus 12 project pages, mostly retail and commercial (big-box stores, shopping centre, apparel store, offices, floor care, warehouse, clinic)
-- **Forms** (quote request, contact, newsletter) that email you, protected against spam by Cloudflare Turnstile
+- **Forms** (quote request, contact, newsletter) that email you, protected against spam by Cloudflare Turnstile. Every
+  submission is also saved in your Wix dashboard (<https://manage.wix.com/dashboard/8f5da4c3-3c27-477e-9c65-15ddd1c6ff10>)
+  as a contact and a form submission. Newsletter signups and quote requesters are marked as email subscribers, so you can
+  send them Wix email campaigns
 - **WhatsApp first**: a floating "Chat with us" WhatsApp button on every page, plus WhatsApp in the header, menu, home hero, service pages, Contact page and footer. Chats open with a ready-made first message (naming the service on service pages)
 - Search-engine basics (page titles, descriptions, sitemap, robots.txt). On phones the top bar shows WhatsApp and the phone number, and the menu has WhatsApp, call, email and Get a Quote buttons
 
@@ -38,7 +41,12 @@ Contact details, hours, address and social links are all set in one file (`src/c
 **3. Going live** (steps are in `DEPLOY.md`):
 
 - Form emails currently go to **n@aurorabusiness.ca**, the testing address (left as is for now, by your choice). Before launch, change `EMAIL_TO` and the `send_email` address in `wrangler.jsonc` to the address where you want enquiries (it must be verified in Cloudflare Email Routing).
-- Set the Turnstile secret key, connect `jmcleaningservice.ca`, set up the www-to-main-site redirect, then send a test of each form.
+- Set the Turnstile secret key, connect `jmcleaningservice.ca`, set up the www-to-main-site redirect, then send a test of each form
+  (check it arrives by email **and** appears under Contacts in Wix, then delete the test contact).
+- Email marketing: quote requesters are subscribed under Canada's anti-spam law (CASL) "implied consent" for an enquiry, which
+  lasts **6 months** from the request. Email them within that window, or ask them to opt in for good. Before your first Wix
+  campaign, verify your sender address in Wix Email Marketing. The site also has no privacy policy page yet. Canadian privacy
+  law expects one when you collect names, emails and phone numbers.
 - Nothing has been deployed without your go-ahead.
 
 ## Search and AI visibility (AEO)

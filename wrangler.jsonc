@@ -29,6 +29,10 @@
     "SITE_NAME": "Jamal Cleaning Services",
     "EMAIL_TO": "n@aurorabusiness.ca",
     "EMAIL_FROM": "website@jmcleaningservice.ca",
+    // Wix Headless project that stores contacts, quote/contact submissions and newsletter subscribers.
+    // Public client id (not a secret). Dashboard: https://manage.wix.com/dashboard/8f5da4c3-3c27-477e-9c65-15ddd1c6ff10
+    // Previews below leave it out on purpose, so test submissions never reach the real CRM.
+    "WIX_CLIENT_ID": "73a65d85-7e38-4734-a981-91af64a28fca",
   },
 
   // Used by `wrangler preview` (Cloudflare Workers Builds for non-production branches and pull requests).

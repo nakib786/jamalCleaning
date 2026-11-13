@@ -4,6 +4,10 @@
 # Cloudflare's Turnstile test secret (always passes). Use the real secret only in production.
 TURNSTILE_SECRET_KEY=1x0000000000000000000000000000000AA
 
+# wrangler.jsonc sets WIX_CLIENT_ID, so local form tests would add real contacts to the Wix CRM.
+# Blank it here to skip Wix while testing (remove the line to test the Wix connection on purpose):
+WIX_CLIENT_ID=
+
 # Optional overrides of the vars in wrangler.jsonc while testing:
 # EMAIL_TO=you@example.com
 # EMAIL_FROM=website@jmcleaningservice.ca
