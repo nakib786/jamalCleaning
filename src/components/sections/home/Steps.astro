@@ -1,15 +1,30 @@
 ---
 /**
- * "Get cleaner space in four steps" (theme `cetro-banner-service`): full-width photo with four
- * step captions along the bottom. Hovering or tapping a step cross-fades to its photo (0.6s).
- * 4 columns on desktop; a swipeable carousel with 2 (≤880px) or 1 (≤767px) per view.
+ * "How it works": the four steps as expanding photo panels.
+ *
+ * Wide screens (≥881px): four panels side by side. Hovering a panel (or clicking it, or Enter on
+ * its focused button) opens it to most of the row; the others fold into slim strips with the step
+ * number and a sideways title. While the section is on screen and nobody has touched it, the steps
+ * play through on their own (gold line under the text shows the time left); any hover, click or
+ * keyboard focus stops that for good. No autoplay with reduced motion.
+ *
+ * Phones and narrow tablets (<881px): the same panels stacked as rows in a frame that sticks to the
+ * screen while the page scrolls past; plain scrolling opens the steps one after another and the gold
+ * line shows how far through the current step you are. Tapping a row scrolls to its step.
+ *
+ * Markup is an accordion (heading > button[aria-expanded] + region), one panel always open.
+ *
+ * To change a photo, swap its import below (any size or shape; it is cropped to fit).
  */
 import { Image } from "astro:assets";
 import step1 from "../../../assets/images/home/step-1.jpg";
 import step2 from "../../../assets/images/home/step-2.jpg";
 import step3 from "../../../assets/images/photos/janitor-pulling-cleaning-cart.jpg";
 import step4 from "../../../assets/images/photos/shopping-mall-escalators.jpg";
+import { whatsappLink } from "../../../config/site";
+import Icon from "../../ui/Icon.astro";
 import SectionHeading from "../../ui/SectionHeading.astro";
+import WhatsAppIcon from "../../ui/WhatsAppIcon.astro";
 
 const steps = [
   {
@@ -33,135 +48,553 @@ const steps = [
     image: step4,
   },
 ];
+const pad = (i: number) => String(i + 1).padStart(2, "0");
 ---
 
-<section class="steps section-gutter relative overflow-hidden" data-steps>
-  <div class="absolute inset-0" aria-hidden="true">
-    {steps.map((step, i) => (
-      <div class:list={["step-image absolute inset-0", i === 0 && "is-shown"]} data-step-image>
-        <Image
-          src={step.image}
-          alt=""
-          widths={[768, 1280, 1920]}
-          sizes="100vw"
-          class="size-full object-cover"
-        />
-        <div class="absolute inset-0 bg-[#011210a3]" />
-        <div class="step-gradient absolute inset-x-0 bottom-0 h-[688px] max-h-full" />
-      </div>
-    ))}
-  </div>
-
-  <div class="absolute inset-0 z-10 flex flex-col items-center px-[15px] sm:px-[30px]">
-    <div
-      class="mt-[60px] w-full sm:mt-20 md:mt-[120px] md:w-[678px] lg:mt-[100px] xl:mt-[180px] 2xl:mt-[414px]"
-      data-reveal="scale"
-    >
+<section
+  class="steps section-gutter is-paused bg-teal py-[60px] sm:py-20 md:py-[100px] lg:py-[120px]"
+  style={`--n:${steps.length}`}
+  data-steps
+>
+  <div class="site-container">
+    <div class="flex flex-col items-center gap-6 pb-10 text-center md:flex-row md:items-end md:justify-between md:gap-12 md:pb-[60px] md:text-left">
       <SectionHeading
         label="How it works"
         parts={["Get cleaner", { accent: "space in four" }, "steps"]}
-        align="center"
         dark
-        labelClass="pb-2.5 sm:pb-[30px]"
+        class="max-md:items-center md:max-w-[680px]"
+        labelClass="pb-2.5 sm:pb-5"
+        reveal="up"
       />
+      <div
+        class="flex flex-col items-center gap-6 md:max-w-[380px] md:items-start md:pb-3"
+        data-reveal="up"
+        data-reveal-delay="150"
+      >
+        <p class="leading-7 text-white/80">
+          From your first message to opening the doors on a clean store, this is how we take on your site.
+        </p>
+        <a href={whatsappLink()} target="_blank" rel="noopener" class="btn btn-md btn-on-dark">
+          <span>Start on WhatsApp</span>
+          <span class="btn-icon">
+            <WhatsAppIcon class="text-base" />
+          </span>
+        </a>
+      </div>
     </div>
-  </div>
 
-  <div class="site-container relative z-[11]">
-    <div class="pt-[100%] sm:pt-[50.93%]" aria-hidden="true"></div>
-    <div class="overflow-hidden" data-steps-carousel>
-      <ol class="steps-track flex touch-pan-y">
-        {steps.map((step, i) => (
-          <li class:list={["step min-w-0 shrink-0", i === 0 && "is-active"]} data-step={i}>
-            <div class="step-caption border-t border-white/[0.18] pt-7 pb-[75px] text-white transition-all duration-500 ease-in-out">
-              <h3 class="flex flex-wrap items-baseline gap-x-1.5 pb-[15px] font-heading">
-                <span class="step-accent text-lg leading-10 text-white transition-colors duration-500">
-                  {String(i + 1).padStart(2, "0")}.
-                </span>
-                <span class="step-accent text-xl leading-10 text-white capitalize transition-colors duration-500">
-                  {step.title}
-                </span>
+    <div class="steps-scroller" data-steps-scroller>
+      <div class="steps-frame" data-steps-frame>
+        <ol class="steps-panels" data-steps-list data-reveal="up">
+          {steps.map((step, i) => (
+            <li class:list={["step-panel", i === 0 && "is-active"]} data-step>
+              <div class="step-media" aria-hidden="true">
+                <Image
+                  src={step.image}
+                  alt=""
+                  widths={[480, 800, 1200, 1600]}
+                  sizes="(min-width: 881px) 62vw, 100vw"
+                />
+                <span class="step-shade" />
+                <span class="step-fade" />
+              </div>
+              <h3>
+                <button
+                  type="button"
+                  class="step-toggle"
+                  id={`step-toggle-${i}`}
+                  aria-expanded={i === 0 ? "true" : "false"}
+                  aria-controls={`step-body-${i}`}
+                  data-step-toggle
+                >
+                  <span class="step-num">
+                    <span class="sr-only">Step </span>
+                    {pad(i)}
+                  </span>
+                  <span class="step-strip-title">{step.title}</span>
+                  <span class="step-plus" aria-hidden="true">
+                    <Icon name="plus" />
+                  </span>
+                </button>
               </h3>
-              <p class="leading-6 text-white lg:w-[260px]">{step.text}</p>
-            </div>
-          </li>
-        ))}
-      </ol>
+              <div class="step-body" id={`step-body-${i}`} role="region" aria-labelledby={`step-toggle-${i}`}>
+                <span class="step-bignum" aria-hidden="true">
+                  {pad(i)}
+                </span>
+                <div class="step-copy">
+                  <p class="step-title" aria-hidden="true">
+                    {step.title}
+                  </p>
+                  <p class="step-text">{step.text}</p>
+                  <span class="step-progress" aria-hidden="true">
+                    <span class="step-progress-fill" data-step-progress />
+                  </span>
+                </div>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
     </div>
   </div>
 </section>
 
 <style>
-  .step-image {
-    opacity: 0;
-    visibility: hidden;
-    transform: scale(1.1);
-    transition: all 0.6s ease;
-    &.is-shown {
-      opacity: 1;
-      visibility: visible;
-      transform: scale(1);
-      z-index: 3;
+  .steps {
+    --gap: 8px;
+    /* The open panel gets this many shares of the space; each folded one gets 1. */
+    --grow: 5;
+    --ease: cubic-bezier(0.77, 0, 0.18, 1);
+    --autoplay: 6s;
+  }
+
+  /* Phones: rows in a frame that sticks while the page scrolls past ------------------------ */
+  .steps-scroller {
+    /* Leaves room at the bottom for the floating WhatsApp and back-to-top buttons. */
+    --float-room: 110px;
+    --frame-h: clamp(420px, calc(100svh - var(--float-room) - 60px), 620px);
+    /* Scrolling this far moves on one step. */
+    --step-scroll: 40svh;
+    height: calc(var(--frame-h) + var(--n) * var(--step-scroll));
+    /* Portrait tablets: a taller frame, so the open photo is not a letterbox. */
+    @media (width >= 768px) {
+      --frame-h: clamp(420px, calc(100svh - var(--float-room) - 60px), 860px);
     }
   }
-  .step-gradient {
-    display: none;
-    background: linear-gradient(360deg, #100f0b 32.93%, rgba(25, 20, 6, 0) 100%);
-    opacity: 0.5;
-    .is-shown & {
-      display: block;
+  .steps-frame {
+    position: sticky;
+    top: max(16px, calc((100svh - var(--float-room) - var(--frame-h)) / 2));
+    height: var(--frame-h);
+  }
+  .steps-panels {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    gap: var(--gap);
+    container-type: inline-size;
+    /* Size of the open panel along the row/column, so photos keep one size and are revealed
+       (not re-cropped) while panels open and close. */
+    --open: calc((var(--frame-h) - (var(--n) - 1) * var(--gap)) * var(--grow) / (var(--grow) + var(--n) - 1));
+  }
+  .step-panel {
+    position: relative;
+    isolation: isolate;
+    min-width: 0;
+    min-height: 0;
+    flex: 1 1 0;
+    overflow: hidden;
+    border-radius: 20px;
+    background-color: var(--color-secondary);
+    transition: flex-grow 0.8s var(--ease);
+    &.is-active {
+      flex-grow: var(--grow);
     }
   }
 
-  .steps-track {
-    margin-left: -30px;
+  /* Photo, darkening and gradient */
+  .step-media {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
   }
-  .step {
-    flex-basis: 100%;
-    padding-left: 30px;
-    @media (width >= 768px) {
-      flex-basis: 50%;
+  .step-media :global(img) {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    max-width: none;
+    height: var(--open);
+    object-fit: cover;
+    transform: translateY(-50%) scale(1.12);
+    transition: transform 1.2s var(--ease);
+  }
+  .is-active .step-media :global(img) {
+    transform: translateY(-50%) scale(1);
+  }
+  .step-shade {
+    position: absolute;
+    inset: 0;
+    background-color: var(--color-teal);
+    opacity: 0.74;
+    transition: opacity 0.8s var(--ease);
+    .is-active & {
+      opacity: 0;
     }
-    @media (width >= 881px) {
-      flex-basis: 25%;
+  }
+  .step-fade {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgb(12 16 24 / 0.5) 0%,
+      rgb(12 16 24 / 0) 30%,
+      rgb(12 16 24 / 0) 42%,
+      rgb(12 16 24 / 0.92) 100%
+    );
+  }
+
+  /* Folded state: the whole panel is the button; number, title and plus sign show */
+  .step-toggle {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    gap: 14px;
+    padding: 0 16px 0 20px;
+    color: #fff;
+    text-align: left;
+    cursor: pointer;
+    &:focus-visible {
+      outline: 2px solid var(--color-primary);
+      outline-offset: -5px;
+      border-radius: inherit;
+    }
+    > * {
+      transition: opacity 0.35s ease 0.35s;
+    }
+    .is-active & {
+      cursor: default;
+      > * {
+        opacity: 0;
+        transition-duration: 0.2s;
+        transition-delay: 0s;
+      }
     }
   }
-  .step.is-active .step-caption,
-  .step:hover .step-caption {
-    border-color: var(--color-primary);
-  }
-  .step.is-active .step-accent,
-  .step:hover .step-accent {
+  .step-num {
+    flex: none;
+    font-family: var(--font-heading);
+    font-size: 15px;
+    line-height: 1.6;
     color: var(--color-primary);
+  }
+  .step-strip-title {
+    min-width: 0;
+    flex: 1;
+    overflow: hidden;
+    font-family: var(--font-heading);
+    font-size: 14px;
+    line-height: 1.7;
+    text-overflow: ellipsis;
+    text-transform: capitalize;
+    white-space: nowrap;
+  }
+  .step-plus {
+    display: flex;
+    width: 34px;
+    height: 34px;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgb(255 255 255 / 0.4);
+    border-radius: 50%;
+    font-size: 11px;
+    transition:
+      opacity 0.35s ease 0.35s,
+      background-color 0.3s ease,
+      border-color 0.3s ease,
+      color 0.3s ease;
+    .step-toggle:hover &,
+    .step-toggle:focus-visible & {
+      border-color: var(--color-primary);
+      background-color: var(--color-primary);
+      color: var(--color-secondary);
+    }
+  }
+
+  /* Open state: big outlined number, title, text and the gold progress line */
+  .step-body {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 18px 20px 22px;
+    color: #fff;
+    pointer-events: none;
+    visibility: hidden;
+    opacity: 0;
+    transition:
+      opacity 0.25s ease,
+      visibility 0s linear 0.25s;
+    .is-active & {
+      visibility: visible;
+      opacity: 1;
+      transition:
+        opacity 0.6s ease 0.35s,
+        visibility 0s;
+    }
+  }
+  .step-bignum {
+    font-family: var(--font-heading);
+    font-size: 56px;
+    line-height: 1.3;
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--color-primary);
+    transform: translateY(-14px);
+    transition: transform 0.9s var(--ease) 0.3s;
+  }
+  .step-copy {
+    transform: translateY(18px);
+    transition: transform 0.9s var(--ease) 0.3s;
+  }
+  .is-active .step-bignum,
+  .is-active .step-copy {
+    transform: none;
+  }
+  .step-title {
+    margin-bottom: 6px;
+    font-family: var(--font-heading);
+    font-size: 19px;
+    line-height: 1.6;
+    text-transform: capitalize;
+  }
+  .step-text {
+    font-size: 16px;
+    line-height: 1.55;
+    color: rgb(255 255 255 / 0.86);
+  }
+  .step-progress {
+    display: block;
+    height: 2px;
+    margin-top: 16px;
+    overflow: hidden;
+    border-radius: 2px;
+    background-color: rgb(255 255 255 / 0.2);
+  }
+  .step-progress-fill {
+    display: block;
+    height: 100%;
+    background-color: var(--color-primary);
+    transform: scaleX(var(--step-p, 1));
+    transform-origin: left;
+  }
+
+  /* Wide screens: panels side by side, the open one takes most of the row ------------------- */
+  @media (width >= 881px) {
+    .steps {
+      --gap: 12px;
+    }
+    .steps-scroller {
+      height: auto;
+    }
+    .steps-frame {
+      position: static;
+      height: clamp(520px, 72vh, 760px);
+    }
+    .steps-panels {
+      flex-direction: row;
+      --open: calc((100cqi - (var(--n) - 1) * var(--gap)) * var(--grow) / (var(--grow) + var(--n) - 1));
+    }
+    .step-panel {
+      border-radius: 24px;
+    }
+    .step-media :global(img) {
+      top: 0;
+      left: 50%;
+      width: var(--open);
+      height: 100%;
+      transform: translateX(-50%) scale(1.12);
+    }
+    .is-active .step-media :global(img) {
+      transform: translateX(-50%) scale(1);
+    }
+    .step-toggle {
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 30px 0 28px;
+    }
+    .step-num {
+      font-size: 20px;
+    }
+    .step-strip-title {
+      flex: 0 1 auto;
+      max-height: 100%;
+      font-size: 16px;
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+    }
+    .step-plus {
+      width: 46px;
+      height: 46px;
+      font-size: 13px;
+    }
+    .step-body {
+      padding: 34px 40px 40px;
+    }
+    .step-bignum {
+      font-size: clamp(96px, 10vw, 150px);
+      line-height: 1.25;
+      -webkit-text-stroke-width: 2px;
+    }
+    .step-copy {
+      /* Fixed width, so the text never re-wraps while the panel is opening. */
+      width: min(500px, calc(var(--open) - 80px));
+    }
+    .step-title {
+      margin-bottom: 10px;
+      font-size: clamp(22px, 2.1vw, 30px);
+    }
+    .step-text {
+      font-size: 17px;
+    }
+    .step-progress {
+      margin-top: 24px;
+    }
+
+    /* Autoplay: the open panel's line fills, then the next step opens (script listens for
+       animationend). Paused while the section is off screen. */
+    .steps.is-autoplay .is-active .step-progress-fill {
+      animation: steps-progress var(--autoplay) linear 0.4s both;
+    }
+    .steps.is-paused .step-progress-fill {
+      animation-play-state: paused;
+    }
+  }
+
+  @keyframes steps-progress {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .step-panel,
+    .step-media :global(img),
+    .step-shade,
+    .step-toggle > *,
+    .step-body,
+    .step-bignum,
+    .step-copy {
+      transition-duration: 0.01ms !important;
+      transition-delay: 0s !important;
+    }
   }
 </style>
 
 <script>
-  import EmblaCarousel from "embla-carousel";
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const rowLayout = window.matchMedia("(min-width: 881px)");
 
   document.querySelectorAll<HTMLElement>("[data-steps]").forEach((section) => {
-    const steps = [...section.querySelectorAll<HTMLElement>("[data-step]")];
-    const images = [...section.querySelectorAll<HTMLElement>("[data-step-image]")];
+    const panels = [...section.querySelectorAll<HTMLElement>("[data-step]")];
+    const toggles = panels
+      .map((panel) => panel.querySelector<HTMLButtonElement>("[data-step-toggle]"))
+      .filter((toggle): toggle is HTMLButtonElement => toggle !== null);
+    const list = section.querySelector<HTMLElement>("[data-steps-list]");
+    const scroller = section.querySelector<HTMLElement>("[data-steps-scroller]");
+    const frame = section.querySelector<HTMLElement>("[data-steps-frame]");
+    if (!list || !scroller || !frame || toggles.length !== panels.length) return;
+    let active = 0;
 
     const activate = (index: number) => {
-      if (images[index]?.classList.contains("is-shown")) return;
-      steps.forEach((step, i) => step.classList.toggle("is-active", i === index));
-      images.forEach((image, i) => image.classList.toggle("is-shown", i === index));
+      if (index === active) return;
+      active = index;
+      panels.forEach((panel, i) => {
+        panel.classList.toggle("is-active", i === index);
+        toggles[i].setAttribute("aria-expanded", String(i === index));
+      });
     };
-    steps.forEach((step, i) => {
-      step.addEventListener("mouseenter", () => activate(i));
-      step.addEventListener("click", () => activate(i));
+
+    /* Wide screens: autoplay until the visitor takes over --------------------------------- */
+    let autoplay = !reducedMotion;
+    const syncAutoplay = () => section.classList.toggle("is-autoplay", autoplay && rowLayout.matches);
+    const stopAutoplay = () => {
+      autoplay = false;
+      syncAutoplay();
+    };
+    section.addEventListener("animationend", (event) => {
+      if (!(event.target as Element).matches("[data-step-progress]")) return;
+      if (section.classList.contains("is-autoplay")) activate((active + 1) % panels.length);
+    });
+    new IntersectionObserver(([entry]) => section.classList.toggle("is-paused", !entry.isIntersecting), {
+      threshold: 0.4,
+    }).observe(list);
+    section.addEventListener("focusin", stopAutoplay);
+
+    // Hover opens a panel after a short pause, so sweeping the mouse across does not flick
+    // through every step.
+    let hoverTimer = 0;
+    panels.forEach((panel, i) => {
+      panel.addEventListener("pointerenter", (event) => {
+        if (event.pointerType !== "mouse" || !rowLayout.matches) return;
+        window.clearTimeout(hoverTimer);
+        hoverTimer = window.setTimeout(() => {
+          stopAutoplay();
+          activate(i);
+        }, 90);
+      });
+      panel.addEventListener("pointerleave", () => window.clearTimeout(hoverTimer));
+      toggles[i].addEventListener("click", () => {
+        stopAutoplay();
+        if (rowLayout.matches) activate(i);
+        else scrollToStep(i);
+      });
     });
 
-    // Carousel only on small screens; on desktop the four steps sit side by side.
-    const viewport = section.querySelector<HTMLElement>("[data-steps-carousel]");
-    if (viewport) {
-      EmblaCarousel(viewport, {
-        align: "start",
-        containScroll: "trimSnaps",
-        active: false,
-        breakpoints: { "(max-width: 880px)": { active: true } },
-      });
-    }
+    /* Phones: the scroll position inside the tall scroller picks the open step ------------ */
+    let stickyTop = 0;
+    let range = 0;
+    let lockUntil = 0;
+    const measure = () => {
+      stickyTop = parseFloat(getComputedStyle(frame).top) || 0;
+      range = scroller.offsetHeight - frame.offsetHeight;
+    };
+    const progress = () =>
+      range > 0 ? Math.min(1, Math.max(0, (stickyTop - scroller.getBoundingClientRect().top) / range)) : 0;
+
+    const update = () => {
+      if (rowLayout.matches) return;
+      const position = progress() * panels.length;
+      if (performance.now() >= lockUntil) activate(Math.min(panels.length - 1, Math.floor(position)));
+      panels.forEach((panel, i) =>
+        panel.style.setProperty("--step-p", String(Math.min(1, Math.max(0, position - i)))),
+      );
+    };
+    let ticking = false;
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => {
+          ticking = false;
+          update();
+        });
+      },
+      { passive: true },
+    );
+    window.addEventListener("scrollend", () => {
+      lockUntil = 0;
+      update();
+    });
+
+    // Tapping a row scrolls to the middle of that step's stretch. The open step is set at
+    // once, and scroll updates wait until the scroll is done (no flicking through the steps
+    // in between).
+    const scrollToStep = (index: number) => {
+      measure();
+      const scrollerTop = window.scrollY + scroller.getBoundingClientRect().top;
+      const top = scrollerTop - stickyTop + ((index + 0.5) / panels.length) * range;
+      lockUntil = performance.now() + 1200;
+      activate(index);
+      window.scrollTo({ top, behavior: reducedMotion ? "instant" : "smooth" });
+    };
+
+    const syncLayout = () => {
+      measure();
+      syncAutoplay();
+      if (rowLayout.matches) panels.forEach((panel) => panel.style.removeProperty("--step-p"));
+      else update();
+    };
+    rowLayout.addEventListener("change", syncLayout);
+    window.addEventListener("resize", measure, { passive: true });
+    syncLayout();
   });
 </script>
