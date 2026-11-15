@@ -23,6 +23,7 @@
     "verify": "tsx tools/verify/compare.ts",
     "verify:links": "tsx tools/verify/links.ts",
     "verify:a11y": "tsx tools/verify/a11y.ts",
+    "verify:forms": "tsx tools/verify/forms.ts",
     "verify:responsive": "tsx tools/verify/responsive.ts"
   },
   "dependencies": {
