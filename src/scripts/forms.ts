@@ -2,8 +2,11 @@
  * Progressive enhancement for every `form[data-api-form]`:
  *   - loads Cloudflare Turnstile on first interaction (nothing is downloaded on page load)
  *   - submits the fields as JSON to the form's `action` (the Worker in worker/index.ts)
- *   - shows the result in the form's `.form-status` element
- * Without JavaScript the form still posts normally and the Worker redirects back.
+ *   - shows each problem next to the field it belongs to (`[data-error-for="<field name>"]`),
+ *     for the browser's own checks and for the Worker's replies
+ *   - shows the result as text in the form's `.form-status` element (role="status")
+ * Without JavaScript the form posts normally, but Turnstile cannot run, so the Worker answers with a
+ * page that says so and points to the other ways to get in touch.
  */
 
 declare global {
@@ -39,6 +42,48 @@ function setStatus(form: HTMLFormElement, message: string, kind: "ok" | "error" 
   status.dataset.kind = kind;
 }
 
+type Control = HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
+
+function controls(form: HTMLFormElement): Control[] {
+  return [...form.elements].filter(
+    (el): el is Control =>
+      el instanceof HTMLInputElement || el instanceof HTMLSelectElement || el instanceof HTMLTextAreaElement,
+  );
+}
+
+/** Writes (or clears, with "") the message under a field. False when the form has no place for it. */
+function setFieldError(form: HTMLFormElement, control: Control, message: string): boolean {
+  const slot = form.querySelector<HTMLElement>(`[data-error-for="${CSS.escape(control.name)}"]`);
+  if (!slot) return false;
+  slot.textContent = message;
+  if (message) control.setAttribute("aria-invalid", "true");
+  else control.removeAttribute("aria-invalid");
+  return true;
+}
+
+/**
+ * Checks every field and puts each problem next to its field, then moves focus to the first one.
+ * Forms without message slots (the newsletter) keep the browser's own bubbles.
+ */
+function validate(form: HTMLFormElement): boolean {
+  if (!form.noValidate) return form.reportValidity();
+  let firstInvalid: Control | undefined;
+  for (const control of controls(form)) {
+    if (!control.willValidate) continue;
+    const { valid, valueMissing } = control.validity;
+    const message = valid
+      ? ""
+      : ((valueMissing ? control.dataset.errorMissing : control.dataset.errorInvalid) ??
+        control.validationMessage);
+    setFieldError(form, control, message);
+    if (!valid) firstInvalid ??= control;
+  }
+  if (!firstInvalid) return true;
+  firstInvalid.focus();
+  setStatus(form, "Please check the fields marked above.", "error");
+  return false;
+}
+
 async function ensureWidget(form: HTMLFormElement): Promise<string | undefined> {
   const slot = form.querySelector<HTMLElement>("[data-turnstile]");
   if (!slot) return undefined;
@@ -60,9 +105,18 @@ function enhance(form: HTMLFormElement): void {
   form.addEventListener("focusin", warmUp, { once: true });
   form.addEventListener("pointerenter", warmUp, { once: true });
 
+  // With message slots in the form, problems are shown next to the fields instead of in browser bubbles.
+  form.noValidate = form.querySelector("[data-error-for]") !== null;
+  const clearWhenFixed = (event: Event) => {
+    const control = event.target as Control;
+    if (control.getAttribute?.("aria-invalid") && control.validity.valid) setFieldError(form, control, "");
+  };
+  form.addEventListener("input", clearWhenFixed);
+  form.addEventListener("change", clearWhenFixed);
+
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
-    if (!form.reportValidity()) return;
+    if (!validate(form)) return;
     const button = form.querySelector<HTMLButtonElement>('button[type="submit"]');
     button?.setAttribute("disabled", "");
     setStatus(form, "Sending…", "busy");
@@ -79,9 +133,21 @@ function enhance(form: HTMLFormElement): void {
         headers: { "content-type": "application/json", accept: "application/json" },
         body: JSON.stringify({ ...body, turnstileToken: token ?? "" }),
       });
-      const result = (await response.json().catch(() => ({}))) as { ok?: boolean; error?: string };
-      if (!response.ok || !result.ok)
-        throw new Error(result.error ?? "Something went wrong. Please call us instead.");
+      const result = (await response.json().catch(() => ({}))) as {
+        ok?: boolean;
+        error?: string;
+        field?: string;
+      };
+      if (!response.ok || !result.ok) {
+        const message = result.error ?? "Something went wrong. Please call us instead.";
+        // The Worker names the field a problem belongs to: show it there and move focus to it.
+        const control = controls(form).find((c) => c.name === result.field);
+        if (control && setFieldError(form, control, message)) {
+          control.focus();
+          throw new Error("Please check the fields marked above.");
+        }
+        throw new Error(message);
+      }
       form.reset();
       setStatus(form, form.dataset.success ?? "Thank you! We'll get back to you shortly.", "ok");
     } catch (error) {

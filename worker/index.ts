@@ -7,16 +7,20 @@
  *
  *   Pages for AI agents   a request that prefers `Accept: text/markdown`, or `<page>/index.md`, gets
  *                         the Markdown copy written at build time (src/integrations/agent-markdown.ts)
- *   POST /api/quote      home page "Request a Quote" form
- *   POST /api/contact    contact page form
+ *   POST /api/quote      quote form in the home page card
+ *   POST /api/contact    the same form on the contact page
  *   POST /api/subscribe  footer newsletter form
  *
- * Each submission is checked (honeypot, field limits, Cloudflare Turnstile siteverify), then
+ * The quote and contact forms are one component (src/components/forms/QuoteForm.astro) with the same
+ * fields; the two endpoints only differ in the email subject and the Wix CRM form they fill.
+ *
+ * Each submission is checked (spam trap, field limits, Cloudflare Turnstile siteverify), then
  * emailed to EMAIL_TO through the Email Service `send_email` binding AND saved to the Wix CRM
  * (contact + form submission; newsletter and quote requesters are subscribed) when WIX_CLIENT_ID is set.
  * Either destination succeeding counts as sent. Responses are JSON
- * ({ ok, error? }) for the site's fetch() calls; plain form posts (no JavaScript) get a small
- * HTML page, because Turnstile cannot run without JavaScript.
+ * ({ ok, error?, field? }; `field` names the form field an error belongs to, so the page can show
+ * it next to that field) for the site's fetch() calls. Plain form posts (no JavaScript) get a small
+ * HTML page that explains the form needs JavaScript, because Turnstile cannot run without it.
  */
 
 interface Env {
@@ -53,37 +57,40 @@ type FormKind = "quote" | "contact" | "subscribe";
 
 interface FieldRule {
   label: string;
-  required?: boolean;
+  /** Set when the field is required: the message shown if it is empty. */
+  missing?: string;
   max: number;
   email?: boolean;
 }
 
+/**
+ * Hidden spam-trap field of the quote form. It was called "company" until 2026-11: browser autofill
+ * and AI agents fill a field with that name, and real requests were dropped. Keep in sync with
+ * QuoteForm.astro.
+ */
+const HONEYPOT = "hp_field";
+
+/** Quote and contact forms have the same fields (keep in sync with QuoteForm.astro). */
+const ENQUIRY_FIELDS: Record<string, FieldRule> = {
+  name: { label: "Name", missing: "Please enter your name.", max: 120 },
+  email: { label: "Email", missing: "Please enter your email address.", max: 160, email: true },
+  phone: { label: "Phone", max: 40 },
+  service: { label: "Service", missing: "Please choose a service.", max: 120 },
+  message: { label: "Message", max: 3000 },
+  consent: {
+    label: "Agreed to be contacted",
+    missing: "Please tick the box so we can reply to you.",
+    max: 10,
+  },
+};
+
 const FORMS: Record<FormKind, { subject: string; fields: Record<string, FieldRule> }> = {
-  quote: {
-    subject: "New quote request",
-    fields: {
-      name: { label: "Name", required: true, max: 120 },
-      email: { label: "Email", required: true, max: 160, email: true },
-      phone: { label: "Phone", required: true, max: 40 },
-      service: { label: "Service", required: true, max: 120 },
-      message: { label: "Message", max: 3000 },
-    },
-  },
-  contact: {
-    subject: "New contact message",
-    fields: {
-      name: { label: "Name", required: true, max: 120 },
-      email: { label: "Email", required: true, max: 160, email: true },
-      phone: { label: "Phone", max: 40 },
-      service: { label: "Service", required: true, max: 120 },
-      message: { label: "Message", max: 3000 },
-      consent: { label: "Agreed to be contacted", required: true, max: 10 },
-    },
-  },
+  quote: { subject: "New quote request", fields: ENQUIRY_FIELDS },
+  contact: { subject: "New contact message", fields: ENQUIRY_FIELDS },
   subscribe: {
     subject: "New newsletter subscriber",
     fields: {
-      email: { label: "Email", required: true, max: 160, email: true },
+      email: { label: "Email", missing: "Please enter your email address.", max: 160, email: true },
     },
   },
 };
@@ -95,6 +102,10 @@ class HttpError extends Error {
   constructor(
     readonly status: number,
     message: string,
+    /** Name of the form field the message belongs to, when there is one. */
+    readonly field?: string,
+    /** Stable reason code for the no-JavaScript fallback page. */
+    readonly code?: "no-token",
   ) {
     super(message);
   }
@@ -127,7 +138,19 @@ export default {
           ? error.message
           : "Sorry, we couldn't send your message. Please call us instead.";
       if (!(error instanceof HttpError)) console.error("form submission failed", error);
-      return wantsJson ? json({ ok: false, error: message }, status) : htmlPage(env, false, message);
+      if (wantsJson) {
+        const field = error instanceof HttpError ? error.field : undefined;
+        return json({ ok: false, error: message, ...(field ? { field } : {}) }, status);
+      }
+      // A plain form post has no Turnstile token: the visitor's browser is not running JavaScript.
+      const noScript = error instanceof HttpError && error.code === "no-token";
+      return htmlPage(
+        env,
+        false,
+        noScript
+          ? "This form needs JavaScript for its spam check, so your request was not sent. Please turn JavaScript on and try again, or reach us by WhatsApp, phone or email."
+          : message,
+      );
     }
   },
 } satisfies ExportedHandler<Env>;
@@ -216,17 +239,25 @@ async function readBody(request: Request, isJson: boolean): Promise<Record<strin
 }
 
 async function handleSubmission(kind: FormKind, data: Record<string, string>, request: Request, env: Env) {
-  // Honeypot: real visitors never see or fill the "company" field. Pretend success to bots.
-  if (data.company) return;
+  // Spam trap: a hidden field that people never see. It used to be dropped silently, which also threw
+  // away real requests when autofill or an AI agent filled it; now the sender is told, so a genuine
+  // one can clear it and try again. Turnstile below is the real spam check.
+  if (data[HONEYPOT]) {
+    throw new HttpError(
+      400,
+      "Your request was not sent: a hidden field that must stay empty was filled in. Please clear it and try again, or call or email us.",
+      HONEYPOT,
+    );
+  }
 
   const form = FORMS[kind];
   const values: { label: string; value: string }[] = [];
   for (const [name, rule] of Object.entries(form.fields)) {
     const value = data[name] ?? "";
-    if (rule.required && !value) throw new HttpError(400, `Please fill in ${rule.label.toLowerCase()}.`);
-    if (value.length > rule.max) throw new HttpError(400, `${rule.label} is too long.`);
+    if (rule.missing && !value) throw new HttpError(400, rule.missing, name);
+    if (value.length > rule.max) throw new HttpError(400, `${rule.label} is too long.`, name);
     if (value && rule.email && !EMAIL_PATTERN.test(value))
-      throw new HttpError(400, "Please enter a valid email address.");
+      throw new HttpError(400, "Please enter a valid email address.", name);
     if (value) values.push({ label: rule.label, value });
   }
 
@@ -447,7 +478,8 @@ async function verifyTurnstile(token: string, request: Request, env: Env): Promi
     console.error("TURNSTILE_SECRET_KEY is not set.");
     throw new HttpError(503, "Our form is temporarily unavailable. Please call or email us instead.");
   }
-  if (!token) throw new HttpError(400, "Please complete the spam check and try again.");
+  if (!token)
+    throw new HttpError(400, "Please complete the spam check and try again.", undefined, "no-token");
 
   const body = new FormData();
   body.append("secret", env.TURNSTILE_SECRET_KEY);
@@ -481,9 +513,9 @@ function htmlPage(env: Env, ok: boolean, message = ""): Response {
   const heading = ok ? "Thank you!" : "Message not sent";
   const text = ok
     ? "We'll get back to you shortly."
-    : escapeHtml(message || "Please enable JavaScript and try again, or call us.");
+    : escapeHtml(message || "Please turn JavaScript on and try again, or call us.");
   return new Response(
-    `<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex"><title>${heading} | ${site}</title><body style="font-family:Arial,sans-serif;max-width:560px;margin:15vh auto;padding:0 20px;text-align:center"><h1>${heading}</h1><p>${text}</p><p><a href="/">Back to ${site}</a></p></body></html>`,
+    `<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex"><title>${heading} | ${site}</title><body style="font-family:Arial,sans-serif;max-width:560px;margin:15vh auto;padding:0 20px;text-align:center"><h1>${heading}</h1><p>${text}</p><p><a href="/contact-us/">Contact details</a> · <a href="/">Back to ${site}</a></p></body></html>`,
     {
       status: ok ? 200 : 400,
       headers: { "content-type": "text/html; charset=utf-8", "cache-control": "no-store" },

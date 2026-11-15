@@ -5,12 +5,12 @@
  */
 import { Image } from "astro:assets";
 import worldMap from "../assets/images/contact/contact.png";
-import ContactForm from "../components/forms/ContactForm.astro";
+import QuoteForm from "../components/forms/QuoteForm.astro";
 import PageTitle from "../components/layout/PageTitle.astro";
 import Icon from "../components/ui/Icon.astro";
 import SectionHeading from "../components/ui/SectionHeading.astro";
 import WhatsAppIcon from "../components/ui/WhatsAppIcon.astro";
-import { isSet, site, whatsappLink } from "../config/site";
+import { isSet, quoteEmailLink, site, whatsappLink } from "../config/site";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import type { IconName } from "../components/ui/icons.generated";
 
@@ -40,7 +40,7 @@ const cards: { icon: IconName | "whatsapp"; title: string; lines: Line[] }[] = [
   {
     icon: "email",
     title: "Support Email",
-    lines: [{ text: contact.email, href: `mailto:${contact.email}` }],
+    lines: [{ text: contact.email, href: quoteEmailLink() }],
   },
   {
     icon: "map-alt",
@@ -157,7 +157,7 @@ const cards: { icon: IconName | "whatsapp"; title: string; lines: Line[] }[] = [
         </div>
       </div>
       <div class="relative z-[1] w-full lg:w-[600px] lg:pt-[47px] xl:w-[810px]" data-reveal="left">
-        <ContactForm />
+        <QuoteForm kind="contact" variant="page" idPrefix="contact" />
       </div>
     </div>
   </section>

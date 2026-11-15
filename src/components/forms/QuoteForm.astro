@@ -1,152 +1,224 @@
 ---
 /**
- * "Request a Quote" form (Contact Form 7 in the theme). Posts JSON to the Worker at
- * /api/quote with a Turnstile token; works as a plain POST without JavaScript.
+ * The site's one quote / contact form, used in the home hero card and on the contact page.
+ * Same fields, labels and field names in both places, so people, browser autofill and AI agents
+ * meet one form: name, email, phone (optional), service, message (optional), consent.
+ *
+ *   kind     which Worker endpoint and CRM form receives it: "quote" (/api/quote) or "contact"
+ *            (/api/contact). The fields are identical; see FORMS in worker/index.ts.
+ *   variant  the look only: "card" = translucent fields stacked on the dark hero card,
+ *            "page" = white fields in two columns on the contact page.
+ *
+ * src/scripts/forms.ts adds Turnstile, the fetch() submit and the messages next to each field.
+ * Labels are visually hidden (the placeholder is the visible label, as in the theme) but every
+ * field has one, so the form can be filled by label. Required fields carry `required` and a "*".
  */
 import { getCollection } from "astro:content";
-import { site } from "../../config/site";
+import { quoteDetails, site } from "../../config/site";
 import { webmcpHoneypot, webmcpParam, webmcpTool } from "../../lib/webmcp";
 import Icon from "../ui/Icon.astro";
 
 interface Props {
-  /** "dark" = translucent fields on a dark card (home hero). */
-  tone?: "dark" | "light";
+  kind?: "quote" | "contact";
+  variant?: "card" | "page";
   idPrefix?: string;
-  buttonLabel?: string;
 }
 
-const { tone = "dark", idPrefix = "quote", buttonLabel = "Request a Service" } = Astro.props;
+const { kind = "quote", variant = "page", idPrefix = kind } = Astro.props;
+const card = variant === "card";
+const id = (name: string) => `${idPrefix}-${name}`;
+
 const services = (await getCollection("services"))
   .sort((a, b) => a.data.order - b.data.order)
   .map((s) => s.data.title);
-const serviceOptions =
-  services.length > 0
-    ? services
-    : (site.nav.find((n) => n.href === "/services/")?.children ?? [])
-        .filter((c) => c.href !== "/services/")
-        .map((c) => c.label);
 
-const field = tone === "dark" ? "quote-field quote-field--dark" : "quote-field";
+const where = `${site.name} in ${site.contact.address.locality}, ${site.contact.address.region}`;
+const rules =
+  "Name, email, service and consent are required; phone and message are optional. A human check runs before it is sent.";
+const tool =
+  kind === "quote"
+    ? webmcpTool("request_cleaning_quote", `Request a free cleaning quote from ${where}. ${rules}`)
+    : webmcpTool("contact_jamal_cleaning", `Send a quote request or a question to ${where}. ${rules}`);
+
+/** Card fields are translucent on the dark hero card; page fields use the site's default field style. */
+const field = card ? "quote-field quote-field--dark" : undefined;
+const wide = !card && "sm:col-span-2";
 ---
 
 <form
-  class="api-form flex flex-col gap-5"
-  action="/api/quote"
+  class:list={[
+    "quote-form api-form",
+    card
+      ? "quote-form--card flex flex-col gap-5"
+      : "quote-form--page grid gap-5 sm:grid-cols-2 sm:gap-x-[30px] sm:gap-y-7",
+  ]}
+  action={`/api/${kind}`}
   method="post"
   data-api-form
-  {...webmcpTool(
-    "request_cleaning_quote",
-    `Request a free cleaning quote from ${site.name} in ${site.contact.address.locality}, BC. Name, email, phone and service are required. A human check runs before the request is sent.`,
-  )}
+  data-success="Thank you! Your request has been sent. We'll get back to you shortly."
+  {...tool}
 >
+  <p id={id("hint")} class:list={["text-sm leading-6", card && "text-white/85", wide]}>
+    <strong class="font-semibold">What to include:</strong> {quoteDetails.join(", ")}.
+  </p>
   <div>
-    <label class="sr-only" for={`${idPrefix}-name`}>
-      Your name
+    <label class="sr-only" for={id("name")}>
+      Name
     </label>
     <input
-      id={`${idPrefix}-name`}
+      id={id("name")}
       class={field}
       type="text"
       name="name"
       autocomplete="name"
-      placeholder="Your Name *"
+      placeholder="Name *"
       required
       maxlength="120"
-      {...webmcpParam("Full name of the person asking for the quote")}
+      aria-describedby={id("name-error")}
+      data-error-missing="Please enter your name."
+      {...webmcpParam("Full name of the person asking")}
     />
+    <p class="field-error" id={id("name-error")} data-error-for="name"></p>
   </div>
   <div>
-    <label class="sr-only" for={`${idPrefix}-email`}>
-      Your email
+    <label class="sr-only" for={id("email")}>
+      Email address
     </label>
     <input
-      id={`${idPrefix}-email`}
+      id={id("email")}
       class={field}
       type="email"
       name="email"
       autocomplete="email"
-      placeholder="Your Email *"
+      placeholder="Email address *"
       required
       maxlength="160"
+      aria-describedby={id("email-error")}
+      data-error-missing="Please enter your email address."
+      data-error-invalid="Please enter a valid email address, for example name@example.com."
       {...webmcpParam("Email address for the reply")}
     />
+    <p class="field-error" id={id("email-error")} data-error-for="email"></p>
   </div>
   <div>
-    <label class="sr-only" for={`${idPrefix}-phone`}>
-      Your phone
+    <label class="sr-only" for={id("phone")}>
+      Phone number (optional)
     </label>
     <input
-      id={`${idPrefix}-phone`}
+      id={id("phone")}
       class={field}
       type="tel"
       name="phone"
       autocomplete="tel"
-      placeholder="Your Phone *"
-      required
+      placeholder="Phone number (optional)"
       maxlength="40"
-      {...webmcpParam("Phone number, for example (250) 555-0100")}
+      aria-describedby={id("phone-error")}
+      {...webmcpParam("Phone number (optional), for example (250) 555-0100")}
     />
+    <p class="field-error" id={id("phone-error")} data-error-for="phone"></p>
   </div>
   <div>
-    <label class="sr-only" for={`${idPrefix}-service`}>
+    <label class="sr-only" for={id("service")}>
       Service
     </label>
     <select
-      id={`${idPrefix}-service`}
-      class={field}
+      id={id("service")}
+      class:list={[field, !card && "text-black"]}
       name="service"
       required
-      {...webmcpParam("The cleaning service wanted")}
+      aria-describedby={id("service-error")}
+      data-error-missing="Please choose a service."
+      {...webmcpParam("The cleaning service wanted, or Other")}
     >
-      <option value="">Select Service *</option>
-      {serviceOptions.map((s) => (
+      <option value="" disabled selected>
+        Select a service *
+      </option>
+      {services.map((s) => (
         <option value={s}>{s}</option>
       ))}
+      <option value="Other">Other</option>
     </select>
+    <p class="field-error" id={id("service-error")} data-error-for="service"></p>
   </div>
-  <div>
-    <label class="sr-only" for={`${idPrefix}-message`}>
-      Message
+  <div class:list={[wide]}>
+    <label class="sr-only" for={id("message")}>
+      Message (optional)
     </label>
     <textarea
-      id={`${idPrefix}-message`}
+      id={id("message")}
       class={field}
       name="message"
-      placeholder="Message..."
+      placeholder="Message (optional)"
+      rows="4"
       maxlength="3000"
+      aria-describedby={`${id("hint")} ${id("message-error")}`}
       {...webmcpParam(
-        "Details: type and size of the space, address or area, how often, preferred days and times",
+        "Details (optional): property type and location, approximate size, what needs cleaning, one-time or recurring, preferred days and times",
       )}
     ></textarea>
+    <p class="field-error" id={id("message-error")} data-error-for="message"></p>
   </div>
+  {/*
+   * Spam trap: hidden from everyone (display: none, so it is not in the accessibility tree or the
+   * tab order). Its name and label are ones that autofill and AI agents have no reason to fill in.
+   */}
   <div class="hidden" aria-hidden="true">
-    <label for={`${idPrefix}-company`}>Company</label>
-    <input
-      id={`${idPrefix}-company`}
-      type="text"
-      name="company"
-      tabindex="-1"
-      autocomplete="off"
-      {...webmcpHoneypot}
-    />
+    <label for={id("hp")}>Leave this field empty</label>
+    <input id={id("hp")} type="text" name="hp_field" tabindex="-1" autocomplete="off" {...webmcpHoneypot} />
   </div>
-  <div class="empty:hidden" data-turnstile data-theme={tone === "dark" ? "dark" : "light"}></div>
-  <div>
-    <button type="submit" class="btn btn-md btn-on-dark">
-      <span>{buttonLabel}</span>
+  <div class:list={[wide]}>
+    <label class:list={["flex items-start gap-2.5 leading-6", card && "text-white"]} for={id("consent")}>
+      <input
+        id={id("consent")}
+        type="checkbox"
+        name="consent"
+        value="yes"
+        required
+        class="mt-1 size-4 shrink-0 accent-primary"
+        aria-describedby={id("consent-error")}
+        data-error-missing="Please tick this box so we can reply to you."
+        {...webmcpParam(
+          "The person agrees to be contacted about this enquiry. Only check it if they said so.",
+        )}
+      />
+      <span>
+        I agree to be contacted by email or phone about my enquiry. <span aria-hidden="true">*</span>
+      </span>
+    </label>
+    <p class="field-error" id={id("consent-error")} data-error-for="consent"></p>
+  </div>
+  <div class:list={["empty:hidden", wide]} data-turnstile data-theme={card ? "dark" : "light"}></div>
+  <div class:list={[wide]}>
+    <noscript>
+      <p class:list={["mb-4 text-sm leading-6", card && "text-white"]}>
+        This form needs JavaScript for its spam check. Without it, please call {site.contact.phone.display}
+        or email {site.contact.email}.
+      </p>
+    </noscript>
+    <button type="submit" class:list={["btn btn-md", card ? "btn-on-dark" : "btn-dark"]}>
+      <span>Request a free quote</span>
       <span class="btn-icon">
         <Icon name="right-arrow" class="text-base" />
       </span>
     </button>
   </div>
   <p
-    class:list={["form-status text-sm empty:hidden", tone === "dark" ? "text-white" : "text-secondary"]}
+    class:list={["form-status text-sm empty:hidden", card ? "text-white" : "text-secondary", wide]}
     role="status"
     aria-live="polite"
   ></p>
 </form>
 
 <style>
+  /* Contact page: the site's default white fields. */
+  .quote-form--page :is(input:not([type="checkbox"]), select) {
+    height: 60px;
+  }
+  .quote-form--page textarea {
+    height: 126px;
+  }
+
+  /* Home hero card: translucent fields on the dark glass card. */
   .quote-field {
     height: 60px;
     padding: 0 24px;
@@ -171,5 +243,27 @@ const field = tone === "dark" ? "quote-field quote-field--dark" : "quote-field";
   }
   select.quote-field--dark option {
     color: #000;
+  }
+
+  /* Message next to the field it belongs to (filled in by src/scripts/forms.ts). */
+  .field-error {
+    margin-top: 6px;
+    padding-left: 24px;
+    font-size: 14px;
+    line-height: 20px;
+    color: #b42318;
+    text-align: left;
+  }
+  .field-error:empty {
+    display: none;
+  }
+  .quote-form--card .field-error {
+    color: #ffc9c2;
+  }
+  .quote-form--page :is(input, select, textarea)[aria-invalid="true"] {
+    border-color: #b42318;
+  }
+  .quote-form--card :is(input, select, textarea)[aria-invalid="true"] {
+    box-shadow: inset 0 0 0 1px #ffc9c2;
   }
 </style>

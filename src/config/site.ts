@@ -18,7 +18,10 @@ export interface NavItem {
 
 export const site = {
   name: "Jamal Cleaning Services",
-  /** Registered name, as it appears on the Google Business listing; used in structured data. */
+  /**
+   * Registered name, as it appears on the Google Business listing; used in structured data.
+   * TODO(client): confirm this is the exact registered legal name.
+   */
   legalName: "Jamal Cleaning Services Ltd.",
   shortName: "Jamal Cleaning",
   /** Canonical origin, no trailing slash. Keep in sync with `site` in astro.config.mjs. */
@@ -84,6 +87,8 @@ export const site = {
       /**
        * Office hours: when the office answers calls, messages and quote requests. Cleaning itself runs around the
        * clock (the rows and schema below are the working time, not the office).
+       * TODO(client): which days do the office hours apply to? Until that is known the site shows them
+       * without days, and structured data lists only the 24-hour working time.
        */
       office: "9 AM – 6 PM",
       /** Top bar line. */
@@ -195,7 +200,38 @@ export function whatsappLink(message: string = site.contact.whatsapp.message): s
   return message ? `${base}?text=${encodeURIComponent(message)}` : base;
 }
 
-/** The city served, as structured data (shared by the business and service markup). */
+/**
+ * What a quote request should say. Shown above the quote form and used for the email template,
+ * /llms.txt and the agent skill, so people and AI agents are asked for the same things everywhere.
+ */
+export const quoteDetails = [
+  "property type and location",
+  "approximate size",
+  "what needs cleaning",
+  "one-time or recurring",
+  "preferred days and times",
+] as const;
+
+/** Email link that opens a ready-to-fill quote request (subject "Quote request", one line per detail). */
+export function quoteEmailLink(): string {
+  const body = [
+    `Hello ${site.name},`,
+    "",
+    "I would like a free quote. Here are the details:",
+    "",
+    ...quoteDetails.map((detail) => `- ${detail[0].toUpperCase()}${detail.slice(1)}: `),
+    "",
+    "Name: ",
+    "Phone: ",
+  ].join("\r\n");
+  return `mailto:${site.contact.email}?subject=${encodeURIComponent("Quote request")}&body=${encodeURIComponent(body)}`;
+}
+
+/**
+ * The city served, as structured data (shared by the business and service markup).
+ * TODO(client): which other towns are served? Only Prince George is confirmed, so it is the only
+ * place named on the site, in /llms.txt and here.
+ */
 export const areaServedLd = {
   "@type": "City",
   name: site.contact.address.locality,

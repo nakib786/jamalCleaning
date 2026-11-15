@@ -54,7 +54,7 @@ src/
   assets/            images, icons, fonts (optimised at build time)
   components/
     cards/           ServiceCard, ProjectCard
-    forms/           QuoteForm, ContactForm, NewsletterForm
+    forms/           QuoteForm (home card and contact page), NewsletterForm
     layout/          Header, TopBar, MobileMenu, SearchDialog, Footer, PageTitle, Logo
     sections/        home/*, testimonials/* (page sections)
     seo/             Seo (meta, Open Graph, JSON-LD)
