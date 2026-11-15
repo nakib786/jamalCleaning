@@ -141,7 +141,8 @@ bots get 200). Changes in code (committed and pushed as c60f29c):
 Cloudflare's Agent Readiness score (isitagentready.com, also the "Agent Readiness" tab in URL Scanner) rated the live site
 **Level 1/5** (robots.txt, sitemap and AI-bot rules pass). Levels: 2 = + Content Signals, 3 = + Markdown content negotiation,
 4 = + one of agent skills / MCP server card / A2A card / API catalog, 5 = + Web Bot Auth and OAuth/auth metadata. Level 4 is
-the ceiling that makes sense here (no API, logins or checkout). Built for Level 4, **not deployed or re-scanned yet**:
+the ceiling that makes sense here (no API, logins or checkout). **Deployed 2026-11-15 (91c433d); re-scan: Level 4/5**
+(passes robots.txt, sitemap, Link headers, Markdown negotiation, AI-bot rules, Content Signals, agent skills, WebMCP):
 
 - `public/robots.txt`: `Content-Signal: search=yes, ai-input=yes, ai-train=yes` in both groups (matches the old allow-all
   policy; change `ai-train` to `no` in both groups to opt out of training). The Worker sends the same `Content-Signal` header.
@@ -164,6 +165,48 @@ the ceiling that makes sense here (no API, logins or checkout). Built for Level 
 
 After deploying, re-scan: `curl -X POST https://isitagentready.com/api/scan -H "Content-Type: application/json" -d
 '{"url":"https://jmcleaningservice.ca"}'`.
+
+### Agent-ready quote form (2026-11-15, branch `agent-ready-forms`, **not merged or deployed**)
+
+From an outside review of the live site (how well AI agents and autofill can use it). Most of its list was already
+done (JSON-LD, robots.txt, sitemap, llms.txt, skill); what changed:
+
+- **One form.** `QuoteForm.astro` is now the only quote/contact form (`ContactForm.astro` is deleted). Home card:
+  `kind="quote" variant="card"`; Contact page: `kind="contact" variant="page"`. Same fields, labels and names in both:
+  Name, Email address, Phone number (optional), Service (6 services + Other, disabled placeholder), Message (optional),
+  consent checkbox. Button: "Request a free quote". The two endpoints stay (`/api/quote` subscribes the contact in Wix,
+  `/api/contact` records consent), with one shared rule set in the Worker (`ENQUIRY_FIELDS`).
+  **Changed for visitors:** phone is now optional on the Home form (was required), and the Home form has the consent
+  checkbox. To require phone again: add `required` + `data-error-missing` in `QuoteForm.astro` and `missing:` in the Worker.
+- **Spam trap renamed** from `company` (label "Company") to `hp_field` (label "Leave this field empty"). Autofill and AI
+  agents fill a field called Company, and the Worker used to answer "sent" and throw the request away. Now a filled trap
+  gets a clear 400 error instead of a fake success; Turnstile is the real spam check. Keep the name in sync in
+  `QuoteForm.astro`, `worker/index.ts` (`HONEYPOT`) and `tools/verify/forms.ts`.
+- **Errors next to fields.** `forms.ts` sets `novalidate` and writes each problem into the `[data-error-for]` line under
+  its field (`aria-invalid`, `aria-describedby`, focus on the first); the Worker's JSON errors carry `field`. Success is
+  text in the `role="status"` line. The newsletter form has no error lines and keeps the browser's bubbles.
+- **Labels stay visually hidden** (placeholder = visible label, as in the theme) so the design is unchanged; required
+  fields have `required` and "\*", optional ones say "(optional)" in label and placeholder.
+- **No JavaScript:** the form still posts, but Turnstile cannot run, so it cannot be sent. The form has a `<noscript>`
+  note with phone and email, and the Worker's fallback page says why and links to `/contact-us/`.
+- **Quote guidance:** `quoteDetails` in `site.ts` (property type and location, size, what needs cleaning, one-time or
+  recurring, days and times) is the "What to include" line above the form, the message hint, `/llms.txt` ("How to request
+  a quote") and the agent skill. Every email link is `quoteEmailLink()`: subject "Quote request" and a fill-in body.
+- **Home card position:** the card is 136–160px taller, so its negative top margins in `QuoteCard.astro` grew by the
+  same amount (the section below is at the same place as before). Change them together with the form's height.
+- **Stats in one file:** `src/config/stats.ts` holds the Home and About counters and the "Ratings 4.5 / 586k Clients
+  globally" card. All are theme placeholders and still shown; the owner must supply real figures.
+- **Agent skill** no longer says "do not submit the forms": an agent in the user's own browser may fill and send the
+  form after the user approves; agents without a browser are pointed to WhatsApp, phone or email.
+- **`npm run verify:forms`** (new, `tools/verify/forms.ts`): fills and sends the form on `/` and `/contact-us/` using
+  only labels and roles, with the endpoint and Turnstile stubbed (nothing is sent), checks the per-field errors, the
+  spam trap (not reachable by Tab, not in the accessibility tree), a submit with JavaScript off, and that all JSON-LD
+  parses with known schema.org types. Needs `npm run preview` running; use `--var WIX_CLIENT_ID:""` with `wrangler dev`
+  (`.dev.vars` here does not blank it, so a real local submit would create a Wix contact). `astro build` while
+  `wrangler dev` is running crashes wrangler: restart it after each build.
+- Not tested: a real submission through the deployed Worker (email + Wix) after this change. Do one after deploying.
+- TODOs for the client are marked `TODO(client)` in `site.ts` and `stats.ts`: other towns served, which days the office
+  hours apply to, the exact legal name, real stats, and whether AI training crawlers stay allowed (`ai-train=yes`).
 
 ### Wix CRM for leads (2026-11-12, owner request)
 
