@@ -1,9 +1,12 @@
 /**
  * Cloudflare Worker for the static site (Workers static assets).
  *
- * Only `/api/*` reaches this code (`assets.run_worker_first` in wrangler.jsonc); every other
- * request is served straight from `dist/` by the asset handler.
+ * Every request except the fingerprinted build files (`/_astro/*`) reaches this code
+ * (`assets.run_worker_first` in wrangler.jsonc). Pages and files are passed to the asset handler,
+ * which still applies `_redirects`, `_headers`, trailing slashes and the 404 page. On top of that:
  *
+ *   Pages for AI agents   a request that prefers `Accept: text/markdown`, or `<page>/index.md`, gets
+ *                         the Markdown copy written at build time (src/integrations/agent-markdown.ts)
  *   POST /api/quote      home page "Request a Quote" form
  *   POST /api/contact    contact page form
  *   POST /api/subscribe  footer newsletter form
@@ -103,10 +106,9 @@ export default {
     const match = /^\/api\/(quote|contact|subscribe)\/?$/.exec(url.pathname);
 
     if (!match) {
-      // Unknown API route: let the asset handler answer (it serves the custom 404 page).
       return url.pathname.startsWith("/api/")
         ? json({ ok: false, error: "Not found." }, 404)
-        : env.ASSETS.fetch(request);
+        : serveSite(request, url, env);
     }
     if (request.method !== "POST") {
       return json({ ok: false, error: "Method not allowed." }, 405, { allow: "POST" });
@@ -129,6 +131,75 @@ export default {
     }
   },
 } satisfies ExportedHandler<Env>;
+
+/** Matches the Content-Signal lines in public/robots.txt. */
+const CONTENT_SIGNAL = "search=yes, ai-input=yes, ai-train=yes";
+
+/** Pages and files from dist/, with Markdown copies of pages for AI agents. */
+async function serveSite(request: Request, url: URL, env: Env): Promise<Response> {
+  const readable = request.method === "GET" || request.method === "HEAD";
+
+  // <page>/index.md: the Markdown copy at its own URL, for agents that cannot send an Accept header.
+  if (readable && url.pathname.endsWith("/index.md")) {
+    const asset = await env.ASSETS.fetch(request);
+    if (!asset.ok && asset.status !== 304) return asset;
+    const page = new URL(url.pathname.slice(0, -"index.md".length), url);
+    const response = await markdownResponse(asset);
+    // The HTML page is the one to index and cite.
+    response.headers.set("Link", `<${page.href}>; rel="canonical"`);
+    response.headers.set("X-Robots-Tag", "noindex");
+    return response;
+  }
+
+  // Same URL, Markdown instead of HTML when the client asks for it (content negotiation).
+  if (readable && url.pathname.endsWith("/") && prefersMarkdown(request.headers.get("accept"))) {
+    const asset = await env.ASSETS.fetch(new Request(new URL(`${url.pathname}index.md`, url), request));
+    if (asset.ok || asset.status === 304) return markdownResponse(asset);
+  }
+
+  const asset = await env.ASSETS.fetch(request);
+  if (asset.status !== 200 || !(asset.headers.get("content-type") ?? "").startsWith("text/html")) {
+    return asset;
+  }
+  // HTML pages: caches must key on Accept now, and agents can find the Markdown copy from the headers.
+  const response = new Response(asset.body, asset);
+  response.headers.append("Vary", "Accept");
+  if (url.pathname.endsWith("/")) {
+    response.headers.append("Link", `<${url.pathname}index.md>; rel="alternate"; type="text/markdown"`);
+  }
+  return response;
+}
+
+async function markdownResponse(asset: Response): Promise<Response> {
+  // The Markdown copies are small (under ~15 KB), so reading them whole is cheap.
+  const text = asset.status === 304 ? null : await asset.text();
+  const response = new Response(text, asset);
+  response.headers.set("Content-Type", "text/markdown; charset=utf-8");
+  response.headers.append("Vary", "Accept");
+  response.headers.set("Content-Signal", CONTENT_SIGNAL);
+  // Rough token count (about 4 characters per token), so agents can budget their context.
+  if (text) response.headers.set("X-Markdown-Tokens", String(Math.ceil(text.length / 4)));
+  return response;
+}
+
+/**
+ * True when the Accept header ranks text/markdown above text/html (on a tie, the one listed first wins).
+ * Browsers never list text/markdown, so they always get HTML.
+ */
+function prefersMarkdown(accept: string | null): boolean {
+  if (!accept) return false;
+  let markdown = { q: 0, at: Infinity };
+  let html = { q: 0, at: Infinity };
+  accept.split(",").forEach((part, at) => {
+    const [type = "", ...params] = part.trim().toLowerCase().split(";");
+    const qParam = params.map((p) => p.trim()).find((p) => p.startsWith("q="));
+    const q = qParam ? Number(qParam.slice(2)) : 1;
+    if (!Number.isFinite(q)) return;
+    if (type.trim() === "text/markdown" && q > markdown.q) markdown = { q, at };
+    if (type.trim() === "text/html" && q > html.q) html = { q, at };
+  });
+  return markdown.q > 0 && (markdown.q > html.q || (markdown.q === html.q && markdown.at < html.at));
+}
 
 async function readBody(request: Request, isJson: boolean): Promise<Record<string, string>> {
   const length = Number(request.headers.get("content-length") ?? 0);

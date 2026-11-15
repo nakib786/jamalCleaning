@@ -65,7 +65,7 @@ src/
   pages/             one file per route (26 pages)
   scripts/           site-wide behaviour, form handling
   styles/global.css  design tokens and shared styles
-worker/              Cloudflare Worker for /api/* (forms)
+worker/              Cloudflare Worker: forms (/api/*) and Markdown pages for AI agents
 public/              _headers, _redirects, robots.txt, favicons
 tools/               crawl/inspect/verify scripts used to rebuild the theme (not deployed)
 ```

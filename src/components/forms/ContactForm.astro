@@ -4,6 +4,8 @@
  * submit. Posts to the Worker at /api/contact; src/scripts/forms.ts adds Turnstile and AJAX.
  */
 import { getCollection } from "astro:content";
+import { site } from "../../config/site";
+import { webmcpHoneypot, webmcpParam, webmcpTool } from "../../lib/webmcp";
 import Icon from "../ui/Icon.astro";
 
 interface Props {
@@ -22,6 +24,10 @@ const services = (await getCollection("services"))
   method="post"
   data-api-form
   data-success="Thank you! Your message has been sent — we'll get back to you shortly."
+  {...webmcpTool(
+    "contact_jamal_cleaning",
+    `Send a message or quote request to ${site.name} in ${site.contact.address.locality}, BC. Name, email, service and consent are required. A human check runs before the message is sent.`,
+  )}
 >
   <div>
     <label class="sr-only" for={`${idPrefix}-name`}>
@@ -35,6 +41,7 @@ const services = (await getCollection("services"))
       placeholder="Name *"
       required
       maxlength="120"
+      {...webmcpParam("Full name")}
     />
   </div>
   <div>
@@ -48,6 +55,7 @@ const services = (await getCollection("services"))
       autocomplete="tel"
       placeholder="Phone number"
       maxlength="40"
+      {...webmcpParam("Phone number (optional)")}
     />
   </div>
   <div>
@@ -62,13 +70,20 @@ const services = (await getCollection("services"))
       placeholder="Your email address *"
       required
       maxlength="160"
+      {...webmcpParam("Email address for the reply")}
     />
   </div>
   <div>
     <label class="sr-only" for={`${idPrefix}-service`}>
       Service
     </label>
-    <select id={`${idPrefix}-service`} name="service" required class="text-black">
+    <select
+      id={`${idPrefix}-service`}
+      name="service"
+      required
+      class="text-black"
+      {...webmcpParam("The cleaning service the message is about, or Other")}
+    >
       <option value="">Our Services *</option>
       {services.map((s) => (
         <option value={s}>{s}</option>
@@ -86,14 +101,29 @@ const services = (await getCollection("services"))
       placeholder="Message Here..."
       rows="4"
       maxlength="3000"
+      {...webmcpParam("The message: type and size of the space, address or area, how often, questions")}
     ></textarea>
   </div>
   <div class="hidden" aria-hidden="true">
     <label for={`${idPrefix}-company`}>Company</label>
-    <input id={`${idPrefix}-company`} type="text" name="company" tabindex="-1" autocomplete="off" />
+    <input
+      id={`${idPrefix}-company`}
+      type="text"
+      name="company"
+      tabindex="-1"
+      autocomplete="off"
+      {...webmcpHoneypot}
+    />
   </div>
   <label class="flex items-start gap-2.5 leading-6 sm:col-span-2">
-    <input type="checkbox" name="consent" value="yes" required class="mt-1 size-4 shrink-0 accent-primary" />
+    <input
+      type="checkbox"
+      name="consent"
+      value="yes"
+      required
+      class="mt-1 size-4 shrink-0 accent-primary"
+      {...webmcpParam("The person agrees to be contacted about this enquiry. Only check it if they said so.")}
+    />
     <span>I agree to be contacted by email or phone about my enquiry.</span>
   </label>
   <div class="empty:hidden sm:col-span-2" data-turnstile></div>

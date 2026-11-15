@@ -120,6 +120,8 @@ const schemas = [business, ...(Astro.url.pathname === "/" ? [website] : []), ...
 <meta name="description" content={description} />
 <link rel="canonical" href={canonical} />
 {noindex && <meta name="robots" content="noindex, follow" />}
+{/* Markdown copy of this page for AI agents (written at build time, served by the Worker). */}
+{!noindex && <link rel="alternate" type="text/markdown" href={`${Astro.url.pathname}index.md`} />}
 <meta name="keywords" content={site.seo.keywords.join(", ")} />
 <meta name="geo.region" content={`${site.contact.address.country}-${site.contact.address.region}`} />
 <meta name="geo.placename" content={site.contact.address.locality} />

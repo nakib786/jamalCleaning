@@ -5,6 +5,7 @@
  */
 import { getCollection } from "astro:content";
 import { site } from "../../config/site";
+import { webmcpHoneypot, webmcpParam, webmcpTool } from "../../lib/webmcp";
 import Icon from "../ui/Icon.astro";
 
 interface Props {
@@ -28,7 +29,16 @@ const serviceOptions =
 const field = tone === "dark" ? "quote-field quote-field--dark" : "quote-field";
 ---
 
-<form class="api-form flex flex-col gap-5" action="/api/quote" method="post" data-api-form>
+<form
+  class="api-form flex flex-col gap-5"
+  action="/api/quote"
+  method="post"
+  data-api-form
+  {...webmcpTool(
+    "request_cleaning_quote",
+    `Request a free cleaning quote from ${site.name} in ${site.contact.address.locality}, BC. Name, email, phone and service are required. A human check runs before the request is sent.`,
+  )}
+>
   <div>
     <label class="sr-only" for={`${idPrefix}-name`}>
       Your name
@@ -42,6 +52,7 @@ const field = tone === "dark" ? "quote-field quote-field--dark" : "quote-field";
       placeholder="Your Name *"
       required
       maxlength="120"
+      {...webmcpParam("Full name of the person asking for the quote")}
     />
   </div>
   <div>
@@ -57,6 +68,7 @@ const field = tone === "dark" ? "quote-field quote-field--dark" : "quote-field";
       placeholder="Your Email *"
       required
       maxlength="160"
+      {...webmcpParam("Email address for the reply")}
     />
   </div>
   <div>
@@ -72,13 +84,20 @@ const field = tone === "dark" ? "quote-field quote-field--dark" : "quote-field";
       placeholder="Your Phone *"
       required
       maxlength="40"
+      {...webmcpParam("Phone number, for example (250) 555-0100")}
     />
   </div>
   <div>
     <label class="sr-only" for={`${idPrefix}-service`}>
       Service
     </label>
-    <select id={`${idPrefix}-service`} class={field} name="service" required>
+    <select
+      id={`${idPrefix}-service`}
+      class={field}
+      name="service"
+      required
+      {...webmcpParam("The cleaning service wanted")}
+    >
       <option value="">Select Service *</option>
       {serviceOptions.map((s) => (
         <option value={s}>{s}</option>
@@ -95,11 +114,21 @@ const field = tone === "dark" ? "quote-field quote-field--dark" : "quote-field";
       name="message"
       placeholder="Message..."
       maxlength="3000"
+      {...webmcpParam(
+        "Details: type and size of the space, address or area, how often, preferred days and times",
+      )}
     ></textarea>
   </div>
   <div class="hidden" aria-hidden="true">
     <label for={`${idPrefix}-company`}>Company</label>
-    <input id={`${idPrefix}-company`} type="text" name="company" tabindex="-1" autocomplete="off" />
+    <input
+      id={`${idPrefix}-company`}
+      type="text"
+      name="company"
+      tabindex="-1"
+      autocomplete="off"
+      {...webmcpHoneypot}
+    />
   </div>
   <div class="empty:hidden" data-turnstile data-theme={tone === "dark" ? "dark" : "light"}></div>
   <div>

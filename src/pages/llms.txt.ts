@@ -6,6 +6,7 @@
 import { getCollection } from "astro:content";
 import type { APIRoute } from "astro";
 import { isSet, site, whatsappLink } from "../config/site";
+import { quoteSkill } from "../lib/agent-skill";
 
 export const GET: APIRoute = async () => {
   const url = (path: string) => new URL(path, site.url).href;
@@ -47,6 +48,11 @@ export const GET: APIRoute = async () => {
     `- [Contact](${url("/contact-us/")}): WhatsApp, phone, email, address and quote request form`,
     `- [Service terms](${url("/service-terms/")}): quotes, scheduling, access, payment, re-cleans and damage claims`,
     `- [Privacy policy](${url("/privacy-policy/")}): what personal information we collect and how we use it`,
+    "",
+    "## For AI agents",
+    "",
+    `- Every page is also available as Markdown: send \`Accept: text/markdown\`, or add \`index.md\` to the page URL (for example ${url("/services/index.md")}).`,
+    `- [Request a cleaning quote](${url(quoteSkill.path)}): agent skill describing what to ask the user and how to send a quote request.`,
     "",
     "## Frequently asked questions",
     "",

@@ -119,7 +119,7 @@ townhouse bathrooms and floors, basement suite). Filter chips by category, full-
 ### SEO / AEO pass (2026-11-15)
 
 The site is **live** on `jmcleaningservice.ca` (Cloudflare nameservers, serving the current build; robots.txt is ours, AI search
-bots get 200). Changes in code (not deployed yet):
+bots get 200). Changes in code (committed and pushed as c60f29c):
 
 - Titles lead with service + city: services have a `seoTitle` frontmatter field (default "<title> in Prince George"); Services
   and Projects index titles name Prince George. Every meta description is now 160 characters or less (Google cuts longer ones).
@@ -131,12 +131,39 @@ bots get 200). Changes in code (not deployed yet):
 - Showcase: the real job photos now have alt text on the `<img>` (they were `alt=""`; the button's aria-label still names them),
   each job links to its service page, and the gallery JSON-LD has `contentLocation`.
 
-**Live-site problems that need the Cloudflare dashboard** (no code fix): `http://` and `www.` both return 200 instead of a 301
-to `https://jmcleaningservice.ca/`. Turn on SSL/TLS → Edge Certificates → **Always Use HTTPS**, and add the Rules → Redirect
-Rules template **"Redirect from WWW to root"**. Also worth turning on: Caching → Configuration → **Crawler Hints** (IndexNow
-pings to Bing, which ChatGPT search uses). `wrangler.jsonc` still has the `routes` block commented out; the domains were
-added in the dashboard. If Cloudflare Web Analytics is enabled, `public/_headers` CSP must allow
+**Cloudflare dashboard (done by the owner, 2026-11-15, checked):** Always Use HTTPS, the "Redirect from WWW to root" rule
+(`http://`, `www.` and `http://www.` all 301 to `https://jmcleaningservice.ca/`, path and query kept) and Crawler Hints.
+`wrangler.jsonc` still has the `routes` block commented out; the domains were added in the dashboard. If Cloudflare Web Analytics is enabled, `public/_headers` CSP must allow
 `https://static.cloudflareinsights.com` (script-src) and `https://cloudflareinsights.com` (connect-src).
+
+### Agent readiness (2026-11-15)
+
+Cloudflare's Agent Readiness score (isitagentready.com, also the "Agent Readiness" tab in URL Scanner) rated the live site
+**Level 1/5** (robots.txt, sitemap and AI-bot rules pass). Levels: 2 = + Content Signals, 3 = + Markdown content negotiation,
+4 = + one of agent skills / MCP server card / A2A card / API catalog, 5 = + Web Bot Auth and OAuth/auth metadata. Level 4 is
+the ceiling that makes sense here (no API, logins or checkout). Built for Level 4, **not deployed or re-scanned yet**:
+
+- `public/robots.txt`: `Content-Signal: search=yes, ai-input=yes, ai-train=yes` in both groups (matches the old allow-all
+  policy; change `ai-train` to `no` in both groups to opt out of training). The Worker sends the same `Content-Signal` header.
+- **Markdown for agents** (Cloudflare's own feature needs Pro): `src/integrations/agent-markdown.ts` writes
+  `dist/<page>/index.md` for every page after `astro build` (main content only, absolute links, contact block from the
+  LocalBusiness JSON-LD). The Worker now runs first for everything except `/_astro/*` (`run_worker_first: ["/*", "!/_astro/*"]`)
+  and serves the copy when `Accept` prefers `text/markdown`, or at `<page>/index.md` (with `Link: rel=canonical` and
+  `X-Robots-Tag: noindex`). HTML pages get `Vary: Accept` and a `Link` to their Markdown copy; `<head>` has a
+  `rel="alternate" type="text/markdown"` link. Tested with `wrangler dev`: `_redirects`, `_headers`, trailing slashes, the
+  404 page and 304s still work through `env.ASSETS.fetch`. Every page view is now a Worker request (Free plan: 100k/day).
+- **Agent skill:** `/.well-known/agent-skills/index.json` (Agent Skills Discovery v0.2.0, sha256 digest computed at build)
+  lists `request-a-cleaning-quote/SKILL.md`, built in `src/lib/agent-skill.ts` from `site.ts` and the services collection.
+  It only states facts on the site (no prices or response times) and tells agents not to auto-submit the Turnstile forms.
+- **Link headers** on `/` (`public/_headers`): llms.txt and the skills index (`rel="describedby"`).
+- **WebMCP (declarative):** `toolname`/`tooldescription`/`toolparamdescription` on the quote and contact forms
+  (`src/lib/webmcp.ts`); the honeypot is described as "always leave empty". Turnstile still guards submission.
+- `/llms.txt` has a "For AI agents" section (Markdown URLs, the skill).
+- Not done on purpose: API catalog, OAuth/auth.md, MCP server card, A2A card, ARD, DNS-AID, Web Bot Auth, commerce (the site
+  has no API, logins or checkout; empty ones would mislead agents).
+
+After deploying, re-scan: `curl -X POST https://isitagentready.com/api/scan -H "Content-Type: application/json" -d
+'{"url":"https://jmcleaningservice.ca"}'`.
 
 ### Wix CRM for leads (2026-11-12, owner request)
 

@@ -1,11 +1,16 @@
 # Search engines and AI answer engines are welcome: the more places the business is described
 # accurately, the more often it is recommended. Only the form endpoints are off limits.
+#
+# Content-Signal (https://contentsignals.org) states how the content may be used: in search results
+# (search), as input to AI answers (ai-input) and for AI model training (ai-train). All three are
+# allowed. To opt out of training only, change ai-train=yes to ai-train=no in both groups.
 User-agent: *
+Content-Signal: search=yes, ai-input=yes, ai-train=yes
 Allow: /
 Disallow: /api/
 
 # AI search and answer-engine crawlers, allowed explicitly (a group of its own replaces the rules
-# above, so the form endpoints are repeated).
+# above, so the signals and the form endpoints are repeated).
 User-agent: OAI-SearchBot
 User-agent: ChatGPT-User
 User-agent: PerplexityBot
@@ -15,14 +20,8 @@ User-agent: Claude-User
 User-agent: Googlebot
 User-agent: Bingbot
 User-agent: Applebot
+Content-Signal: search=yes, ai-input=yes, ai-train=yes
 Allow: /
 Disallow: /api/
-
-# To keep content out of AI model training while staying in AI search results, add groups such as
-#   User-agent: GPTBot
-#   User-agent: ClaudeBot
-#   User-agent: Google-Extended
-#   User-agent: CCBot
-#   Disallow: /
 
 Sitemap: https://jmcleaningservice.ca/sitemap-index.xml

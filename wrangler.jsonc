@@ -16,8 +16,11 @@
     "html_handling": "force-trailing-slash",
     // Unknown URLs get dist/404.html with a 404 status.
     "not_found_handling": "404-page",
-    // Only form endpoints invoke the Worker; everything else is served directly from the asset cache.
-    "run_worker_first": ["/api/*"],
+    // The Worker runs first for pages and files, so it can answer AI agents that ask for Markdown
+    // (worker/index.ts); it passes everything else to the asset handler unchanged. The fingerprinted
+    // build files (JS, CSS, images, fonts) skip it. Every page view counts as a Worker request
+    // (Workers Free: 100,000 a day).
+    "run_worker_first": ["/*", "!/_astro/*"],
   },
 
   // Form submissions are emailed through Email Routing: a Worker may send (free, any plan) to a
