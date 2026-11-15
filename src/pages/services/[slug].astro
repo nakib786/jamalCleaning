@@ -12,7 +12,7 @@ import PageTitle from "../../components/layout/PageTitle.astro";
 import Accordion from "../../components/ui/Accordion.astro";
 import Icon from "../../components/ui/Icon.astro";
 import WhatsAppIcon from "../../components/ui/WhatsAppIcon.astro";
-import { areaServedLd, site, whatsappLink } from "../../config/site";
+import { areaServedLd, quoteEmailLink, site, whatsappLink } from "../../config/site";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
 export async function getStaticPaths() {
@@ -129,7 +129,7 @@ const halves = (items: string[]) => {
             </a>
           </p>
           <p class="text-lg leading-6 font-semibold">
-            <a href={`mailto:${site.contact.email}`} class="inline-block break-all hover:text-highlight">
+            <a href={quoteEmailLink()} class="inline-block break-all hover:text-highlight">
               {site.contact.email}
             </a>
           </p>

@@ -1,5 +1,5 @@
 ---
-import { site, socialLinks, whatsappLink } from "../../config/site";
+import { quoteEmailLink, site, socialLinks, whatsappLink } from "../../config/site";
 import Icon from "../ui/Icon.astro";
 import WhatsAppIcon from "../ui/WhatsAppIcon.astro";
 
@@ -9,7 +9,7 @@ const { contact } = site;
 <div class="flex items-center justify-between gap-5 bg-topbar px-[30px] py-[10px] text-sm leading-[23.33px] font-medium text-white">
   <ul class="hidden items-center gap-[13px] sm:flex">
     <li>
-      <a href={`mailto:${contact.email}`} class="flex items-center gap-2 hover:text-primary">
+      <a href={quoteEmailLink()} class="flex items-center gap-2 hover:text-primary">
         <Icon name="mail" class="text-base" />
         <span>{contact.email}</span>
       </a>
