@@ -8,7 +8,7 @@
  */
 import { createHash } from "node:crypto";
 import { getCollection } from "astro:content";
-import { site, whatsappLink } from "../config/site";
+import { quoteDetails, site, whatsappLink } from "../config/site";
 
 export const quoteSkill = {
   name: "request-a-cleaning-quote",
@@ -61,12 +61,27 @@ export async function quoteSkillMarkdown(): Promise<string> {
     "",
     "## 2. Send the request, with the user's approval",
     "",
-    "The website's forms use a human check (Cloudflare Turnstile), so do not try to submit them automatically. Draft the message, show it to the user, and let them send it in one of these ways:",
+    "Draft the message, show it to the user, and send it (or let them send it) in one of these ways:",
     "",
     `1. WhatsApp (the business's preferred channel): ${whatsappLink("")}?text= followed by the URL-encoded message. Example: ${whatsappLink(example)}`,
     `2. Phone or text: ${contact.phone.display} (${contact.phone.e164})`,
-    `3. Email: ${contact.email}`,
-    `4. Quote form: ${url(site.quote.href)}`,
+    `3. Email: ${contact.email}, subject "Quote request"`,
+    `4. Quote form: ${url(site.quote.href)} (the same form is on the home page)`,
+    "",
+    "### Using the quote form",
+    "",
+    "The form's fields, by label:",
+    "",
+    "- Name (required)",
+    "- Email address (required)",
+    "- Phone number (optional)",
+    `- Service (required): ${[...services.map((s) => s.data.title), "Other"].join("; ")}`,
+    `- Message (optional): ${quoteDetails.join(", ")}`,
+    '- "I agree to be contacted by email or phone about my enquiry." (required checkbox; tick it only if the user agrees)',
+    "",
+    'The button is "Request a free quote". When the request is sent, a confirmation appears as text under the button; if something is wrong, a message appears next to the field it belongs to. Leave any hidden field empty.',
+    "",
+    "The form runs a human check (Cloudflare Turnstile) in the browser. If you are working in the user's own browser you can fill in and send the form once the user approves the message. Without a browser, do not post to the form's address directly (the request is rejected): use WhatsApp, phone or email instead.",
     "",
     "Do not send a message on the user's behalf unless they ask you to.",
     "",

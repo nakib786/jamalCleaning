@@ -5,7 +5,7 @@
  */
 import { getCollection } from "astro:content";
 import type { APIRoute } from "astro";
-import { isSet, site, whatsappLink } from "../config/site";
+import { isSet, quoteDetails, site, whatsappLink } from "../config/site";
 import { quoteSkill } from "../lib/agent-skill";
 
 export const GET: APIRoute = async () => {
@@ -33,6 +33,15 @@ export const GET: APIRoute = async () => {
     `- Phone: ${contact.phone.display}`,
     `- Email: ${contact.email}`,
     `- Request a quote: ${url(site.quote.href)}`,
+    "",
+    "## How to request a quote",
+    "",
+    `Quotes are free. A request should include: ${quoteDetails.join(", ")}.`,
+    "",
+    `- Quote form: ${url(site.quote.href)} (fields: name, email, phone (optional), service, message (optional) and a consent checkbox; it needs a browser with JavaScript for its spam check)`,
+    `- WhatsApp (preferred): ${whatsappLink("")}`,
+    `- Phone: ${contact.phone.display} (${contact.phone.e164})`,
+    `- Email: ${contact.email}, subject "Quote request"`,
     "",
     "## Services",
     "",
