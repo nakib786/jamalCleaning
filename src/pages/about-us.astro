@@ -24,6 +24,7 @@ import Marquee from "../components/ui/Marquee.astro";
 import SectionHeading from "../components/ui/SectionHeading.astro";
 import WhatsAppIcon from "../components/ui/WhatsAppIcon.astro";
 import { site, whatsappLink } from "../config/site";
+import { aboutCounters } from "../config/stats";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
 const aboutLd = {
@@ -76,27 +77,6 @@ const steps = [
     text: "Customers and staff walk into a clean, safe space every day, and you have one contact for it all.",
     image: step4,
     alt: "Long, clean store aisle with stocked shelves and a polished floor",
-  },
-];
-
-const counters = [
-  {
-    value: 299,
-    suffix: "k",
-    title: "Successful Projects",
-    text: "Over 250 successful projects delivered with quality and care",
-  },
-  {
-    value: 364,
-    suffix: "+",
-    title: "Skilled Tradespeople",
-    text: "Our team of 30 experts ensures top-quality results",
-  },
-  {
-    value: 199,
-    suffix: "+",
-    title: "Happy Clients",
-    text: "All of our clients are satisfied with our work and service",
   },
 ];
 ---
@@ -264,7 +244,7 @@ const counters = [
       </div>
 
       <ul class="relative z-[3] grid gap-[30px] max-lg:text-center sm:grid-cols-3 lg:flex lg:w-[388px] lg:flex-col lg:gap-[60px]">
-        {counters.map((c, i) => (
+        {aboutCounters.map((c, i) => (
           <li class="lg:min-h-[188px]" data-reveal="up" data-reveal-delay={String(i * 100)}>
             <p class="font-heading text-[50px] leading-[80px] text-white">
               <span data-counter={c.value}>{c.value}</span>

@@ -8,6 +8,7 @@ import { Image } from "astro:assets";
 import cleaningBackground from "../../../assets/images/testimonials/cleaning-1.jpg";
 import cleaningTeam from "../../../assets/images/testimonials/cleaning-2.png";
 import ratingsAvatars from "../../../assets/images/testimonials/ratings.png";
+import { ratingsCard } from "../../../config/stats";
 
 interface Props {
   class?: string;
@@ -50,11 +51,11 @@ const { class: className, notchColor = "#fff" } = Astro.props;
   <div class="notch-corner absolute top-[50px] right-0 z-[3] size-6" aria-hidden="true"></div>
 
   <div class="absolute bottom-[30px] left-[30px] z-[4] flex min-h-[200px] w-[370px] max-w-[calc(100%-60px)] flex-col rounded-[24px] bg-[#fefdf4] pt-6 pr-[21px] pb-9 pl-[31px] md:bottom-[37px]">
-    <p class="pb-[3px] font-heading text-xl leading-10 text-secondary capitalize">Ratings 4.5</p>
-    <p class="pb-[15px] leading-6 font-medium text-[#5c6672]">Clients praise our exceptional work.</p>
+    <p class="pb-[3px] font-heading text-xl leading-10 text-secondary capitalize">{ratingsCard.heading}</p>
+    <p class="pb-[15px] leading-6 font-medium text-[#5c6672]">{ratingsCard.text}</p>
     <div class="flex items-center gap-2">
       <Image src={ratingsAvatars} alt="" width={187} class="h-[58px] w-[187px]" />
-      <p class="max-w-[123px] text-lg leading-5 font-semibold text-secondary">586k Clients globally</p>
+      <p class="max-w-[123px] text-lg leading-5 font-semibold text-secondary">{ratingsCard.clients}</p>
     </div>
   </div>
 </div>

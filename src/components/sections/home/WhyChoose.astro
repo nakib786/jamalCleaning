@@ -1,10 +1,11 @@
 ---
-/** "Why will you choose our services?" intro, three feature cards and the counters. */
+/** "Why will you choose our services?" intro, three feature cards and the counters (figures: src/config/stats.ts). */
 import { Image } from "astro:assets";
 import cardBenefits from "../../../assets/images/home/card-benefits.jpg";
 import cardProfessionalism from "../../../assets/images/home/card-professionalism.jpg";
 import satisfactionCleaner from "../../../assets/images/home/satisfaction-cleaner.png";
 import worldMap from "../../../assets/images/home/world-map.png";
+import { homeCounters } from "../../../config/stats";
 import Icon from "../../ui/Icon.astro";
 import SectionHeading from "../../ui/SectionHeading.astro";
 
@@ -22,33 +23,6 @@ const photoCards = [
     text: "Trained crews who arrive on time, follow your site checklist and safety rules, and secure your premises.",
     link: { label: "Discover more", href: "/about-us/" },
     image: cardProfessionalism,
-  },
-];
-
-const counters = [
-  {
-    value: 246,
-    suffix: "+",
-    title: "Cleaning Experts",
-    text: "Keeping stores, offices and commercial buildings clean",
-  },
-  {
-    value: 299,
-    suffix: "K",
-    title: "Satisfaction Rate",
-    text: "Over 250 successful projects delivered with quality and care",
-  },
-  {
-    value: 364,
-    suffix: "+",
-    title: "Skilled Tradespeople",
-    text: "Our team of 30 experts ensures top-quality results",
-  },
-  {
-    value: 199,
-    suffix: "+",
-    title: "Happy Clients",
-    text: "All of our clients are satisfied with our work and service",
   },
 ];
 ---
@@ -140,7 +114,7 @@ const counters = [
         class="pointer-events-none absolute bottom-[69px] left-0 z-0 hidden h-[629px] w-[1077px] max-w-none opacity-[0.13] lg:block xl:left-[389px]"
         aria-hidden="true"
       />
-      {counters.map((c, i) => (
+      {homeCounters.map((c, i) => (
         <div
           class="relative z-[1] text-center sm:text-left"
           data-reveal="up"
