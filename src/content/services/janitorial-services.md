@@ -4,7 +4,8 @@ order: 1
 excerpt: "Nightly, daily or weekly janitorial for stores, offices and commercial buildings, scheduled around your business hours and checked against your site checklist."
 image: ../../assets/images/photos/janitor-vacuuming-office-carpet.jpg
 imageAlt: "Janitor in yellow gloves vacuuming the carpet in a modern office"
-seoDescription: "Commercial janitorial services in Prince George, BC for retail stores, offices and commercial buildings: nightly, daily or weekly cleaning, day porters and washroom care. Request a quote."
+seoTitle: "Commercial Janitorial Services in Prince George, BC"
+seoDescription: "Commercial janitorial services in Prince George, BC for retail stores, offices and commercial buildings: nightly or weekly cleaning, day porters, washrooms."
 quickAnswer: "Commercial janitorial services are recurring cleaning contracts for businesses, covering floors, washrooms, garbage and recycling, break rooms and high-touch surfaces on a nightly, daily or weekly schedule. Jamal Cleaning Services provides janitorial services for retail stores, offices and commercial buildings in Prince George, BC."
 about:
   heading: "About the service"

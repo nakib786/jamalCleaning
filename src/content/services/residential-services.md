@@ -4,6 +4,7 @@ order: 6
 excerpt: "Regular, deep and move-in or move-out cleaning for houses, apartments and condos, for homeowners, tenants, landlords and property managers."
 image: ../../assets/images/photos/cleaners-wiping-mopping-home.jpg
 imageAlt: "Smiling cleaner in yellow gloves wiping the floor while a colleague mops behind her"
+seoTitle: "House & Move-Out Cleaning in Prince George, BC"
 seoDescription: "Residential and move-out cleaning in Prince George, BC: regular home cleaning, deep cleaning and move-in or move-out cleaning for houses, apartments and condos."
 quickAnswer: "Residential cleaning covers regular and deep cleaning of houses, apartments and condos, and move-in or move-out cleaning of empty homes for tenants, landlords and property managers. Jamal Cleaning Services provides it in Prince George, BC."
 about:

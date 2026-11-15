@@ -17,15 +17,15 @@ const categories = [...new Set(projects.map((p) => p.data.category))].sort();
 ---
 
 <BaseLayout
-  title="Projects"
-  description="Commercial cleaning projects by Jamal Cleaning Services: big-box and retail stores, offices, floor care, warehouses, clinics and post-construction in Prince George, BC."
+  title="Cleaning Projects in Prince George, BC"
+  description="Commercial cleaning projects in Prince George, BC: big-box and retail stores, offices, floor care, warehouses, clinics and post-construction cleanups."
 >
   <PageTitle title="Projects" image={bannerImage} />
   <section class="section-gutter py-[60px] sm:py-20 md:py-[100px] lg:py-[130px]" data-project-filter>
     <div class="site-container flex flex-col gap-[30px]">
       <SectionHeading
         label="Our projects"
-        parts={["You can check", { accent: "portfolio to check" }, "quality."]}
+        parts={["Recent cleaning", { accent: "projects in" }, "Prince George."]}
         align="center"
         class="mx-auto w-full xl:max-w-[810px]"
         labelClass="pb-[30px]"

@@ -4,7 +4,8 @@ order: 5
 excerpt: "Clean-up after construction, store fit-outs and tenant improvements, from debris and dust removal to the final detail clean before opening day."
 image: ../../assets/images/photos/hi-vis-crew-broom-dustpan.jpg
 imageAlt: "Two cleaners in hi-vis vests with a broom and dustpan"
-seoDescription: "Post-construction cleaning in Prince George, BC for new builds, store fit-outs, renovations and tenant improvements: debris and dust removal and a final detail clean."
+seoTitle: "Post-Construction Cleaning in Prince George, BC"
+seoDescription: "Post-construction cleaning in Prince George, BC for new builds, store fit-outs and renovations: debris and dust removal and a final detail clean."
 quickAnswer: "Post-construction cleaning removes debris, dust and residue after building work, store fit-outs, renovations and tenant improvements so a space is ready to open or occupy. Jamal Cleaning Services provides it for commercial and residential projects in Prince George, BC."
 about:
   heading: "About the service"

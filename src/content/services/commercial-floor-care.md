@@ -4,7 +4,8 @@ order: 4
 excerpt: "Strip and wax, scrub and recoat, burnishing, machine scrubbing and carpet extraction that keep high-traffic commercial floors clean, safe and shining."
 image: ../../assets/images/photos/floor-scrubbers-by-window.jpg
 imageAlt: "Two cleaners in hi-vis vests running floor scrubbers by a large window"
-seoDescription: "Commercial floor care in Prince George, BC: VCT strip and wax, scrub and recoat, burnishing, machine scrubbing and carpet extraction for stores, offices and warehouses."
+seoTitle: "Commercial Floor Care in Prince George, BC"
+seoDescription: "Commercial floor care in Prince George, BC: VCT strip and wax, scrub and recoat, burnishing, machine scrubbing and carpet extraction for stores and offices."
 quickAnswer: "Commercial floor care is the periodic maintenance that keeps hard floors and carpets in good condition, including stripping and waxing, scrubbing and recoating, burnishing, machine scrubbing and carpet extraction. Jamal Cleaning Services provides floor care for stores, offices and warehouses in Prince George, BC."
 about:
   heading: "About the service"

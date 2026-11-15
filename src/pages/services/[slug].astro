@@ -5,14 +5,14 @@
  * sections with a checklist, and a FAQ accordion. Content comes from src/content/services/.
  */
 import { getCollection } from "astro:content";
-import { Image } from "astro:assets";
+import { getImage, Image } from "astro:assets";
 import bannerImage from "../../assets/images/page-title/breadcrumb-services.jpg";
 import helpCleaner from "../../assets/images/services/help-cleaner.png";
 import PageTitle from "../../components/layout/PageTitle.astro";
 import Accordion from "../../components/ui/Accordion.astro";
 import Icon from "../../components/ui/Icon.astro";
 import WhatsAppIcon from "../../components/ui/WhatsAppIcon.astro";
-import { site, whatsappLink } from "../../config/site";
+import { areaServedLd, site, whatsappLink } from "../../config/site";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
 export async function getStaticPaths() {
@@ -39,8 +39,9 @@ const serviceLd = {
   description: data.quickAnswer ?? data.seoDescription ?? data.excerpt,
   serviceType: data.title,
   url: new URL(Astro.url.pathname, site.url).href,
+  image: new URL((await getImage({ src: data.image, width: 1200, format: "jpg" })).src, site.url).href,
   provider: { "@id": `${site.url}/#business` },
-  areaServed: { "@type": "City", name: site.contact.address.locality },
+  areaServed: areaServedLd,
 };
 // The accordion at the bottom of the page is visible, so the same questions are marked up as FAQPage.
 const faqLd =
@@ -66,7 +67,7 @@ const halves = (items: string[]) => {
 ---
 
 <BaseLayout
-  title={data.title}
+  title={data.seoTitle ?? `${data.title} in ${site.contact.address.locality}`}
   description={data.seoDescription ?? data.excerpt}
   image={data.image}
   imageAlt={data.imageAlt}

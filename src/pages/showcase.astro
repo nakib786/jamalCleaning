@@ -6,11 +6,12 @@
  */
 import { getImage } from "astro:assets";
 import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
 import bannerImage from "../assets/images/page-title/breadcrumb-project.jpg";
 import PageTitle from "../components/layout/PageTitle.astro";
 import Icon from "../components/ui/Icon.astro";
 import SectionHeading from "../components/ui/SectionHeading.astro";
-import { site } from "../config/site";
+import { areaServedLd, site } from "../config/site";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { categorySlug } from "../lib/projects";
 import { showcaseCategories, showcaseProjects } from "../lib/showcase";
@@ -39,6 +40,13 @@ const gridClass = (count: number) =>
       : "grid-cols-2 md:grid-cols-3";
 const isFeatured = (count: number, index: number) => count === 5 && index === 0;
 
+/** Each showcase category links to the service page it belongs to (internal links help search engines connect them). */
+const relatedService = {
+  Retail: "retail-store-cleaning",
+  Residential: "residential-services",
+} as const satisfies Record<(typeof showcaseCategories)[number], string>;
+const serviceTitles = new Map((await getCollection("services")).map((s) => [s.id, s.data.title]));
+
 /** Structured data: the page as an image gallery, each photo with its caption. */
 const galleryLd = {
   "@context": "https://schema.org",
@@ -47,6 +55,7 @@ const galleryLd = {
   url: new URL("/showcase/", site.url).href,
   description: "Photos of recent commercial and residential cleaning work by " + site.name + ".",
   provider: { "@id": `${site.url}/#business` },
+  contentLocation: areaServedLd,
   hasPart: projects.map((project) => ({
     "@type": "CollectionPage",
     name: project.title,
@@ -61,8 +70,8 @@ const galleryLd = {
 ---
 
 <BaseLayout
-  title="Showcase"
-  description="Photos of our recent cleaning work in Prince George, BC: retail store floors, windows, fitting rooms and washrooms, plus residential kitchens, bathrooms and suites."
+  title="Showcase: Our Recent Cleaning Work"
+  description="Photos of our recent cleaning work in Prince George, BC: retail floors, windows, fitting rooms and washrooms, plus residential kitchens and bathrooms."
   image={projects[0].photos[0].src}
   imageAlt={projects[0].photos[0].alt}
   jsonLd={[galleryLd]}
@@ -118,6 +127,14 @@ const galleryLd = {
                 {project.title}
               </h2>
               <p class="pt-4 text-base leading-7 text-body">{project.description}</p>
+              <p class="pt-3 text-base leading-6">
+                <a
+                  href={`/services/${relatedService[project.category]}/`}
+                  class="font-semibold text-primary-strong underline underline-offset-2 hover:text-secondary"
+                >
+                  About our {serviceTitles.get(relatedService[project.category])} service
+                </a>
+              </p>
             </div>
             <ul class="grid gap-x-6 gap-y-2 text-base leading-6 text-body sm:grid-cols-2">
               {project.scope.map((item) => (
@@ -141,9 +158,10 @@ const galleryLd = {
                   data-project={project.title}
                   aria-label={`View photo full size: ${photo.alt}`}
                 >
+                  {/* Real job photos: the alt text is kept for image search (the button's aria-label names it for screen readers). */}
                   <Image
                     src={photo.src}
-                    alt=""
+                    alt={photo.alt}
                     widths={[320, 480, 720, 960]}
                     sizes={
                       isFeatured(project.photos.length, index)

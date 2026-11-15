@@ -6,6 +6,7 @@ excerpt: "Deep cleaning of office and building carpets: spots treated, ground-in
 image: ../../assets/images/photos/office-carpet-tiles-chairs.jpg
 imageAlt: "Clean grey carpet tiles under meeting-room chairs in a bright office"
 location: "Prince George, BC"
+seoDescription: "Commercial carpet cleaning in Prince George, BC: spots treated, ground-in dirt extracted and traffic lanes refreshed after hours, ready by morning."
 overview:
   heading: "Project Overview"
   paragraphs:

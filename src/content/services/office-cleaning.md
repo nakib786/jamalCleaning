@@ -4,6 +4,7 @@ order: 3
 excerpt: "Evening and overnight cleaning for offices, lobbies, clinics and multi-tenant buildings, so your team and visitors start every day in a clean workspace."
 image: ../../assets/images/photos/cleaners-mopping-vacuuming-office.jpg
 imageAlt: "Cleaners in green uniforms mopping and vacuuming a bright office"
+seoTitle: "Office & Building Cleaning in Prince George, BC"
 seoDescription: "Office and commercial building cleaning in Prince George, BC: workstations, lobbies, washrooms, kitchens and common areas, cleaned after hours. Request a quote."
 quickAnswer: "Office cleaning is recurring cleaning of workstations, meeting rooms, lobbies, washrooms, kitchens and common areas, usually in the evening or overnight. Jamal Cleaning Services cleans offices and commercial buildings in Prince George, BC."
 about:

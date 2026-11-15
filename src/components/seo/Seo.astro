@@ -3,7 +3,7 @@
 import type { ImageMetadata } from "astro";
 import { getImage } from "astro:assets";
 import { getCollection } from "astro:content";
-import { isSet, site, socialLinks, whatsappLink } from "../../config/site";
+import { areaServedLd, isSet, site, socialLinks, whatsappLink } from "../../config/site";
 
 export interface SeoProps {
   /** Page title; the site name is appended via `site.seo.titleTemplate` (omit on the home page). */
@@ -31,6 +31,14 @@ const fullTitle = title ? site.seo.titleTemplate.replace("%s", title) : site.seo
 const canonical = new URL(Astro.url.pathname, site.url).href;
 const og = await getImage({ src: image, width: 1200, height: 630, format: "jpg", fit: "cover" });
 const ogUrl = new URL(og.src, site.url).href;
+// The business keeps one image on every page (the page's own share image changes from page to page).
+const brandImage = await getImage({
+  src: site.seo.ogImage,
+  width: 1200,
+  height: 630,
+  format: "jpg",
+  fit: "cover",
+});
 
 const services = (await getCollection("services")).sort((a, b) => a.data.order - b.data.order);
 
@@ -40,10 +48,11 @@ const business = {
   "@type": "LocalBusiness",
   "@id": `${site.url}/#business`,
   name: site.name,
+  alternateName: site.shortName,
   legalName: site.legalName,
   url: site.url,
   logo: `${site.url}/logo.png`,
-  image: ogUrl,
+  image: new URL(brandImage.src, site.url).href,
   description: site.description,
   telephone: site.contact.phone.e164,
   email: site.contact.email,
@@ -66,8 +75,8 @@ const business = {
     addressCountry: site.contact.address.country,
   },
   geo: { "@type": "GeoCoordinates", ...site.contact.address.geo },
-  hasMap: site.contact.address.mapUrl,
-  areaServed: { "@type": "City", name: site.contact.address.locality },
+  hasMap: site.contact.address.listingUrl,
+  areaServed: areaServedLd,
   knowsAbout: [...services.map((service) => service.data.title), "Day porter services"],
   // The services listed on the site, so answer engines connect the business to what it offers.
   hasOfferCatalog: {
@@ -90,7 +99,8 @@ const business = {
       closes: site.contact.hours.schema.closes,
     },
   ],
-  ...(socialLinks.length ? { sameAs: socialLinks.map((s) => s.href) } : {}),
+  // Profiles of the same business elsewhere: the Google Business listing, plus social pages once they are set.
+  sameAs: [site.contact.address.listingUrl, ...socialLinks.map((s) => s.href)],
 };
 // The home page also declares the website itself and links it to the business.
 const website = {
@@ -99,6 +109,7 @@ const website = {
   "@id": `${site.url}/#website`,
   url: site.url,
   name: site.name,
+  alternateName: site.shortName,
   inLanguage: "en-CA",
   publisher: { "@id": `${site.url}/#business` },
 };

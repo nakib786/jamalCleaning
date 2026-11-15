@@ -25,7 +25,7 @@ export const site = {
   url: "https://jmcleaningservice.ca",
   tagline: "Commercial janitorial done right",
   description:
-    "Commercial janitorial services in Prince George, BC for retail stores, big-box stores, offices and commercial buildings: nightly cleaning, floor care and day porters. Free quotes.",
+    "Commercial janitorial in Prince George, BC for retail and big-box stores, offices and commercial buildings: nightly cleaning, floor care and day porters.",
   /** Short "about" blurb used in the footer. */
   about:
     "Commercial janitorial and floor care for retail stores, offices and commercial buildings across Prince George, plus residential cleaning.",
@@ -60,7 +60,10 @@ export const site = {
     address: {
       street: "[STREET ADDRESS]",
       locality: "Prince George",
+      /** Wikipedia page for the city, so structured data is not read as Prince George, Virginia. */
+      localityUrl: "https://en.wikipedia.org/wiki/Prince_George,_British_Columbia",
       region: "BC",
+      regionName: "British Columbia",
       postalCode: "[POSTAL CODE]",
       country: "CA",
       /** One-line address for the top bar and footer. */
@@ -69,6 +72,11 @@ export const site = {
       geo: { latitude: 53.92689845, longitude: -122.7524185 },
       /** Link for "get directions" and the map embed on the contact page. */
       mapUrl: "https://maps.app.goo.gl/D7ibhfUKgzgssFM79",
+      /**
+       * Permanent link to the Google Business listing (its CID, read from the embed code below). Structured data
+       * uses it to tie the website to the listing that Google Maps and AI answers draw on.
+       */
+      listingUrl: "https://maps.google.com/?cid=18279520646014096366",
       mapEmbedUrl:
         "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d178348.94930258516!2d-122.7524185!3d53.92689845!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4dcf780bb922733b%3A0xfdade72db216d3ee!2sJamal%20Cleaning%20Services%20Ltd.!5e1!3m2!1sen!2sca!4v1793506937301!5m2!1sen!2sca",
     },
@@ -186,6 +194,14 @@ export function whatsappLink(message: string = site.contact.whatsapp.message): s
   const base = `https://wa.me/${site.contact.whatsapp.number}`;
   return message ? `${base}?text=${encodeURIComponent(message)}` : base;
 }
+
+/** The city served, as structured data (shared by the business and service markup). */
+export const areaServedLd = {
+  "@type": "City",
+  name: site.contact.address.locality,
+  sameAs: site.contact.address.localityUrl,
+  containedInPlace: { "@type": "AdministrativeArea", name: site.contact.address.regionName },
+};
 
 /** Social links that are filled in, in display order. */
 export const socialLinks = (

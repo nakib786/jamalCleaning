@@ -42,6 +42,11 @@ const services = defineCollection({
       /** Meta description override for the detail page. */
       seoDescription: z.string().optional(),
       /**
+       * Search-result title for the detail page, before " | Jamal Cleaning Services" (defaults to
+       * "<title> in Prince George"). Lead with the service and the city.
+       */
+      seoTitle: z.string().optional(),
+      /**
        * One or two plain sentences that answer "what is this service, and who provides it?" on their own.
        * Shown at the top of the detail page and used as the Service description in structured data, so
        * search and AI answer engines can quote it.

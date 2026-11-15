@@ -4,7 +4,8 @@ order: 2
 excerpt: "After-hours cleaning for big-box stores, department stores, grocery and apparel retailers, from sales floors and checkouts to washrooms, stockrooms and entrances."
 image: ../../assets/images/photos/grocery-store-aisle-polished-floor.jpg
 imageAlt: "Long aisle of a big retail store with stocked shelves and a polished floor"
-seoDescription: "Retail and big-box store cleaning in Prince George, BC: overnight sales-floor cleaning, floor scrubbing, washrooms, fitting rooms, stockrooms and entrances. Request a quote."
+seoTitle: "Retail & Big-Box Store Cleaning in Prince George"
+seoDescription: "Retail and big-box store cleaning in Prince George, BC: overnight sales-floor cleaning, floor scrubbing, washrooms, fitting rooms, stockrooms and entrances."
 quickAnswer: "Retail store cleaning keeps sales floors, checkouts, fitting rooms, washrooms, stockrooms and entrances clean, usually overnight or before opening so shoppers are never disrupted. Jamal Cleaning Services cleans big-box, department, grocery and apparel stores in Prince George, BC."
 about:
   heading: "About the service"

@@ -24,6 +24,8 @@ export const GET: APIRoute = async () => {
     "",
     `- Location: ${contact.address.locality}, ${contact.address.region}, ${contact.address.country === "CA" ? "Canada" : contact.address.country}`,
     ...(isSet(contact.address.street) ? [`- Address: ${contact.address.street}`] : []),
+    `- Service area: ${contact.address.locality}, ${contact.address.regionName}`,
+    `- Google Maps listing: ${contact.address.listingUrl}`,
     `- Cleaning hours: ${contact.hours.short}`,
     `- Office hours: ${contact.hours.office}`,
     `- WhatsApp (preferred contact): ${contact.whatsapp.display}, ${whatsappLink("")}`,

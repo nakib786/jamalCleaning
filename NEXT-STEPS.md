@@ -116,6 +116,28 @@ townhouse bathrooms and floors, basement suite). Filter chips by category, full-
 - Not done: the new jobs are not in the `/projects/` collection (the showcase is separate), and the home carousel is unchanged.
 - `verify:links` and `verify:a11y` are clean for `/showcase/` (use `MSYS_NO_PATHCONV=1` in Git Bash so `--only=/showcase/` is not rewritten to a Windows path).
 
+### SEO / AEO pass (2026-11-15)
+
+The site is **live** on `jmcleaningservice.ca` (Cloudflare nameservers, serving the current build; robots.txt is ours, AI search
+bots get 200). Changes in code (not deployed yet):
+
+- Titles lead with service + city: services have a `seoTitle` frontmatter field (default "<title> in Prince George"); Services
+  and Projects index titles name Prince George. Every meta description is now 160 characters or less (Google cuts longer ones).
+- Business JSON-LD: `alternateName`, one stable `image` (was the page's share image), `hasMap` + `sameAs` point at the Google
+  Business listing's permanent CID URL (`site.contact.address.listingUrl`, from the embed code), and `areaServed`
+  (`areaServedLd` in `site.ts`) is Prince George linked to Wikipedia and British Columbia, so it is not read as Prince George, VA.
+  Service JSON-LD has the same `areaServed` and an `image`. `/llms.txt` lists the service area and the Maps listing.
+- Projects heading "You can check portfolio to check quality." is now "Recent cleaning projects in Prince George."
+- Showcase: the real job photos now have alt text on the `<img>` (they were `alt=""`; the button's aria-label still names them),
+  each job links to its service page, and the gallery JSON-LD has `contentLocation`.
+
+**Live-site problems that need the Cloudflare dashboard** (no code fix): `http://` and `www.` both return 200 instead of a 301
+to `https://jmcleaningservice.ca/`. Turn on SSL/TLS → Edge Certificates → **Always Use HTTPS**, and add the Rules → Redirect
+Rules template **"Redirect from WWW to root"**. Also worth turning on: Caching → Configuration → **Crawler Hints** (IndexNow
+pings to Bing, which ChatGPT search uses). `wrangler.jsonc` still has the `routes` block commented out; the domains were
+added in the dashboard. If Cloudflare Web Analytics is enabled, `public/_headers` CSP must allow
+`https://static.cloudflareinsights.com` (script-src) and `https://cloudflareinsights.com` (connect-src).
+
 ### Wix CRM for leads (2026-11-12, owner request)
 
 The site had no customer capture: forms only emailed `EMAIL_TO`, nothing was stored. Now `worker/index.ts` also saves every submission to a
