@@ -209,7 +209,7 @@ done (JSON-LD, robots.txt, sitemap, llms.txt, skill); what changed:
 - TODOs for the client are marked `TODO(client)` in `site.ts` and `stats.ts`: other towns served, which days the office
   hours apply to, the exact legal name, real stats, and whether AI training crawlers stay allowed (`ai-train=yes`).
 
-### Dark mode (2026-11-16, branch `dark-mode`, **not merged or deployed**)
+### Dark mode (2026-11-16, merged into `main`, **not deployed**: goes live when `main` is pushed)
 
 The site has a light and a dark theme. A first-time visitor gets the one their phone or computer is set to
 (`site.defaultTheme` in `src/config/site.ts`: `"system"`, or `"light"` / `"dark"` to always start there); the
