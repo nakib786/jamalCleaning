@@ -5,6 +5,7 @@
  */
 import { site, whatsappLink, type NavItem } from "../../config/site";
 import Icon from "../ui/Icon.astro";
+import ThemeToggle from "../ui/ThemeToggle.astro";
 import WhatsAppIcon from "../ui/WhatsAppIcon.astro";
 import Logo from "./Logo.astro";
 import TopBar from "./TopBar.astro";
@@ -76,14 +77,14 @@ const isActive = (item: NavItem): boolean =>
               {item.children && <Icon name="angle-down" class="text-[10px]" />}
             </a>
             {item.children && (
-              <ul class="sub-menu pointer-events-none invisible absolute top-[calc(100%+21px)] left-0 w-[260px] translate-y-5 scale-[0.97] rounded-[24px] bg-white pt-8 pb-[34px] opacity-0 shadow-[0_3px_30px_#00000014] transition-[opacity,transform,visibility] duration-500 before:absolute before:-top-[21px] before:h-[21px] before:w-full group-focus-within/item:pointer-events-auto group-focus-within/item:visible group-focus-within/item:translate-y-0 group-focus-within/item:scale-100 group-focus-within/item:opacity-100 group-hover/item:pointer-events-auto group-hover/item:visible group-hover/item:translate-y-0 group-hover/item:scale-100 group-hover/item:opacity-100">
+              <ul class="sub-menu pointer-events-none invisible absolute top-[calc(100%+21px)] left-0 w-[260px] translate-y-5 scale-[0.97] rounded-[24px] bg-card pt-8 pb-[34px] opacity-0 shadow-[0_3px_30px_#00000014] transition-[opacity,transform,visibility] duration-500 before:absolute before:-top-[21px] before:h-[21px] before:w-full group-focus-within/item:pointer-events-auto group-focus-within/item:visible group-focus-within/item:translate-y-0 group-focus-within/item:scale-100 group-focus-within/item:opacity-100 group-hover/item:pointer-events-auto group-hover/item:visible group-hover/item:translate-y-0 group-hover/item:scale-100 group-hover/item:opacity-100">
                 {item.children.map((child) => (
                   <li class="px-[30px]">
                     <a
                       href={child.href}
                       class:list={[
                         "block py-[7px] text-base leading-6 font-semibold transition-colors duration-300 hover:text-primary",
-                        path === child.href ? "text-primary-strong" : "text-secondary",
+                        path === child.href ? "text-primary-ink" : "text-heading",
                       ]}
                       aria-current={path === child.href ? "page" : undefined}
                     >
@@ -123,6 +124,10 @@ const isActive = (item: NavItem): boolean =>
       >
         <Icon name="search-lg" class="text-xl" />
       </button>
+      {/* With the desktop menu (from 1201px); below that the switch is in the mobile menu. */}
+      <div class="hidden xl:block">
+        <ThemeToggle />
+      </div>
       <a href={site.quote.href} class="btn btn-on-dark py-[13px] text-[15px] leading-[22.5px]">
         <span>{site.quote.label}</span>
         <span class="btn-icon">

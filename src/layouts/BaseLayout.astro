@@ -7,6 +7,7 @@ import SearchDialog from "../components/layout/SearchDialog.astro";
 import WhatsAppFloat from "../components/layout/WhatsAppFloat.astro";
 import Seo, { type SeoProps } from "../components/seo/Seo.astro";
 import Icon from "../components/ui/Icon.astro";
+import { site } from "../config/site";
 import "../styles/global.css";
 
 interface Props extends SeoProps {
@@ -22,12 +23,29 @@ const { topBar = false, solidHeader = false, whatsappMessage, ...seo } = Astro.p
 ---
 
 <!doctype html>
-<html lang="en-CA" class="no-js">
+<html lang="en-CA" class="no-js" data-theme="light" data-theme-default={site.defaultTheme}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {/* Runs before anything is painted: marks JavaScript as available and picks the light or
+         dark theme (the visitor's saved choice, else the site default, else the device setting),
+         so the page never flashes the wrong theme. src/scripts/theme.ts takes over afterwards. */}
     <script is:inline>
-      document.documentElement.classList.replace("no-js", "js");
+      (function () {
+        const root = document.documentElement;
+        root.classList.replace("no-js", "js");
+        let theme;
+        try {
+          theme = localStorage.getItem("theme");
+        } catch {
+          /* storage blocked: fall through to the default */
+        }
+        if (theme !== "light" && theme !== "dark") theme = root.getAttribute("data-theme-default");
+        if (theme !== "light" && theme !== "dark") {
+          theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        }
+        root.setAttribute("data-theme", theme);
+      })();
     </script>
     <Font cssVariable="--font-boldonse" preload />
     <Font cssVariable="--font-roboto-flex" />
@@ -52,13 +70,14 @@ const { topBar = false, solidHeader = false, whatsappMessage, ...seo } = Astro.p
     <!-- Stacked above the floating WhatsApp button, centred on it. -->
     <button
       type="button"
-      class="scroll-top invisible fixed right-[19px] bottom-[83px] z-[996] sm:right-[36px] sm:bottom-[102px] flex size-12 translate-y-3 items-center justify-center rounded-[20px] bg-primary text-white opacity-0 transition-all duration-500 hover:bg-secondary"
+      class="scroll-top invisible fixed right-[19px] bottom-[83px] z-[996] sm:right-[36px] sm:bottom-[102px] flex size-12 translate-y-3 items-center justify-center rounded-[20px] bg-primary text-white opacity-0 transition-all duration-500 hover:bg-contrast hover:text-on-contrast"
       aria-label="Back to top"
       data-scroll-top
     >
       <Icon name="arrow-up" class="text-xs" />
     </button>
     <script>
+      import "../scripts/theme";
       import "../scripts/site";
       import "../scripts/forms";
     </script>

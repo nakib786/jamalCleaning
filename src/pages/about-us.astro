@@ -126,7 +126,7 @@ const steps = [
                 <item.icon class="size-[42px]" aria-hidden="true" />
               </span>
               <span>
-                <span class="block font-heading text-base leading-10 text-secondary capitalize">
+                <span class="block font-heading text-base leading-10 text-heading capitalize">
                   {item.title}
                 </span>
                 <span class="block leading-6 sm:pr-[52px]">{item.text}</span>
@@ -171,7 +171,7 @@ const steps = [
       <ol class="grid gap-[30px] sm:grid-cols-2 xl:grid-cols-4">
         {steps.map((step, i) => (
           <li
-            class="step-card group relative rounded-[24px] bg-white px-2.5 pt-2.5 pb-[43px]"
+            class="step-card group relative rounded-[24px] bg-card px-2.5 pt-2.5 pb-[43px]"
             style={`--step-offset:${i * 50}px`}
             data-reveal="up"
             data-reveal-delay={String(i * 100)}
@@ -192,7 +192,7 @@ const steps = [
               </span>
             </div>
             <div class="pt-10 pr-9 pl-[21px]">
-              <h3 class="mb-[15px] font-heading text-base leading-[30px] text-secondary capitalize">
+              <h3 class="mb-[15px] font-heading text-base leading-[30px] text-heading capitalize">
                 {step.title}
               </h3>
               <p class="leading-6">{step.text}</p>
@@ -284,7 +284,7 @@ const steps = [
       align-self: start;
     }
   }
-  /* White hump behind the step number (theme .decor-border). */
+  /* Hump in the card colour behind the step number (theme .decor-border). */
   .step-bump::after {
     content: "";
     position: absolute;
@@ -292,7 +292,7 @@ const steps = [
     bottom: -1px;
     width: 100px;
     height: 33px;
-    background-color: #fff;
+    background-color: var(--color-card);
     clip-path: path(
       "M 0 33 H 100 C 86 33 85 33 79 19 C 75 6 60.6183 0 51 0 C 37.3818 0 26.4011 6.9412 20.7412 19.1769 C 16.3213 33.1703 15 33 0 33 Z"
     );

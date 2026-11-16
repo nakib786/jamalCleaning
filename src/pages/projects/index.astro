@@ -39,7 +39,7 @@ const categories = [...new Set(projects.map((p) => p.data.category))].sort();
         {["All", ...categories].map((category) => (
           <button
             type="button"
-            class="filter-button rounded-full border border-line px-6 py-2.5 text-base leading-6 font-bold text-secondary capitalize transition-colors duration-300 hover:border-primary hover:text-primary"
+            class="filter-button rounded-full border border-line px-6 py-2.5 text-base leading-6 font-bold text-heading capitalize transition-colors duration-300 hover:border-primary hover:text-primary"
             data-filter={category === "All" ? "all" : categorySlug(category)}
             aria-pressed={category === "All" ? "true" : "false"}
           >

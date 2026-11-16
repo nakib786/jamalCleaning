@@ -1,6 +1,18 @@
 @import "tailwindcss";
 
 /*
+ * Dark theme. <html data-theme="light|dark"> is set before first paint by the inline script in
+ * BaseLayout and switched by src/scripts/theme.ts (button: ThemeToggle.astro).
+ *   - Colours that sit on the page background are theme tokens (--color-page, -card, -heading,
+ *     -body, -line, -surface …): they get their dark values in the html[data-theme="dark"] block
+ *     below, so most components need no dark-specific classes.
+ *   - Sections that are dark in both themes (hero, navy bands, footer, photo overlays) use the
+ *     fixed colours (white, secondary, teal …) and look the same in both.
+ *   - One-off differences use the `dark:` variant, e.g. `bg-[#f5f4ef] dark:bg-surface`.
+ */
+@custom-variant dark (&:where(html[data-theme="dark"], html[data-theme="dark"] *));
+
+/*
  * Design tokens, ported from the Cetro theme's Elementor kit and the computed
  * styles of the reference pages. Breakpoints mirror Elementor's max-width
  * breakpoints as min-width ones:
@@ -32,6 +44,16 @@
   --color-topbar: #12100b;
   --color-surface: #f5f5f5;
   --color-cream: #fbfaf2;
+
+  /* Theme tokens: light values here, dark values in html[data-theme="dark"] below (as are the
+     dark values of body, line, surface and primary-heading above). Use these for anything on
+     the page background; keep white / secondary for sections that are dark in both themes. */
+  --color-page: #fff; /* page background */
+  --color-card: #fff; /* raised surfaces: cards, menus, dropdowns */
+  --color-heading: #212e3b; /* headings and strong text (same as secondary in the light theme) */
+  --color-primary-ink: #8f6d1e; /* gold text and links (same as primary-strong in the light theme) */
+  --color-contrast: #212e3b; /* strong neutral fill: dark buttons, button hover */
+  --color-on-contrast: #fff; /* text on that fill */
 
   --font-heading: var(--font-boldonse), "Arial Black", sans-serif;
   --font-sans: var(--font-roboto-flex), Arial, sans-serif;
@@ -92,6 +114,39 @@
 }
 
 @layer base {
+  :root {
+    color-scheme: light;
+    /* Form fields, error text and the scrollbar track (not needed as utilities). */
+    --color-field: #fff;
+    --color-field-text: #000;
+    --color-danger: #b42318;
+    --color-scrollbar-track: #ccc;
+    --select-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 13.171l4.95-4.95 1.415 1.415L12 16 5.637 9.636 7.05 8.222l4.95 4.95z' fill='%23555555'/%3E%3C/svg%3E");
+  }
+
+  /* Dark theme values. Text contrast on the page / card / surface backgrounds: heading 14:1+,
+     body 8.4:1+, gold text 8.5:1+ (WCAG AA needs 4.5:1). */
+  html[data-theme="dark"] {
+    color-scheme: dark;
+    --color-page: #0e1319;
+    --color-card: #1a222d;
+    --color-surface: #141a23;
+    --color-heading: #f4f1e8;
+    --color-body: #b7bcc4;
+    --color-line: #ffffff26;
+    /* On dark backgrounds the bright brand gold has plenty of contrast, so the deeper
+       light-theme companions are not needed. */
+    --color-primary-heading: #d4aa3c;
+    --color-primary-ink: #e0b84e;
+    --color-contrast: #f4f1e8;
+    --color-on-contrast: #1c2430;
+    --color-field: #171e28;
+    --color-field-text: #f4f1e8;
+    --color-danger: #ff9f93;
+    --color-scrollbar-track: #2a323d;
+    --select-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 13.171l4.95-4.95 1.415 1.415L12 16 5.637 9.636 7.05 8.222l4.95 4.95z' fill='%23d0d4da'/%3E%3C/svg%3E");
+  }
+
   html {
     overflow-x: hidden;
     scroll-behavior: smooth;
@@ -107,7 +162,7 @@
 
   body {
     overflow-x: clip;
-    background-color: #fff;
+    background-color: var(--color-page);
     color: var(--color-body);
     font-family: var(--font-sans);
     font-size: 18px;
@@ -121,7 +176,7 @@
     width: 5px;
   }
   ::-webkit-scrollbar-track {
-    background-color: #ccc;
+    background-color: var(--color-scrollbar-track);
   }
   ::-webkit-scrollbar-thumb {
     background-color: var(--color-primary);
@@ -137,7 +192,7 @@
   h4,
   h5,
   h6 {
-    color: var(--color-secondary);
+    color: var(--color-heading);
     font-family: var(--font-heading);
     font-weight: 400;
     line-height: 1.6;
@@ -161,8 +216,8 @@
     padding: 12px 24px;
     border: 1px solid var(--color-line);
     border-radius: 100px;
-    background-color: #fff;
-    color: #000;
+    background-color: var(--color-field);
+    color: var(--color-field-text);
     font-size: 16px;
     outline: 0;
     appearance: none;
@@ -174,13 +229,19 @@
   }
   select {
     padding-right: 48px;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 13.171l4.95-4.95 1.415 1.415L12 16 5.637 9.636 7.05 8.222l4.95 4.95z' fill='%23555555'/%3E%3C/svg%3E");
+    background-image: var(--select-arrow);
     background-position: calc(100% - 22px) center;
     background-repeat: no-repeat;
     background-size: 20px;
   }
+  /* The drop-down list follows the field colours in both themes (the browser's own list is
+     light or dark by `color-scheme`, which would not match a field with its own colours). */
+  select option {
+    background-color: var(--color-field);
+    color: var(--color-field-text);
+  }
   ::placeholder {
-    color: #000;
+    color: var(--color-field-text);
     opacity: 1;
   }
   input:focus-visible,
@@ -222,8 +283,8 @@
     transition: all 0.3s ease;
     &:hover,
     &:focus-visible {
-      background-color: var(--btn-hover-bg, var(--color-secondary));
-      color: var(--btn-hover-color, #fff);
+      background-color: var(--btn-hover-bg, var(--color-contrast));
+      color: var(--btn-hover-color, var(--color-on-contrast));
     }
   }
   .btn-lg {
@@ -249,14 +310,17 @@
       color: var(--btn-icon-hover-color, #fff);
     }
   }
-  /* Dark variant ("Book a Service"). */
+  /* Dark variant ("Book a Service"): navy in the light theme, off-white in the dark theme, where
+     a navy button would disappear into the page. */
   .btn-dark {
     --btn-hover-bg: var(--color-primary-strong);
+    --btn-hover-color: #fff;
     --btn-icon-bg: var(--color-primary);
     --btn-icon-color: #fff;
     --btn-icon-hover-bg: #fff;
     --btn-icon-hover-color: var(--color-primary);
-    background-color: var(--color-secondary);
+    background-color: var(--color-contrast);
+    color: var(--color-on-contrast);
   }
   /* White hover variant used on dark/photo backgrounds. */
   .btn-on-dark {
@@ -301,7 +365,8 @@
     &:hover,
     &:focus-visible {
       background-color: var(--color-primary-heading);
-      color: #fff;
+      /* White on the deeper gold (light theme), navy on the bright gold (dark theme). */
+      color: var(--color-on-contrast);
     }
   }
   .carousel-dots {
@@ -349,7 +414,7 @@
     font-size: 30px;
     line-height: 50px;
     text-transform: capitalize;
-    color: var(--color-secondary);
+    color: var(--color-heading);
     @media (width >= theme(--breakpoint-sm)) {
       font-size: 50px;
       line-height: 80px;
@@ -397,4 +462,12 @@
       animation: none;
     }
   }
+}
+
+/* While the theme is being switched (src/scripts/theme.ts), nothing animates: otherwise links
+   and buttons (which have colour transitions) would fade while the rest changes at once. */
+html.theme-switching *,
+html.theme-switching *::before,
+html.theme-switching *::after {
+  transition: none !important;
 }

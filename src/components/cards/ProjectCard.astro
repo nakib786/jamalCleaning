@@ -26,7 +26,7 @@ const href = `/projects/${project.id}/`;
 
 <article class:list={["project-card group relative overflow-hidden rounded-[24px]", className]}>
   <a href={href} class="block">
-    <div class="relative bg-[#d9d9d9]" style={`padding-top:${ratio}%`}>
+    <div class="relative bg-[#d9d9d9] dark:bg-card" style={`padding-top:${ratio}%`}>
       <Image
         src={project.data.image}
         alt={project.data.imageAlt}

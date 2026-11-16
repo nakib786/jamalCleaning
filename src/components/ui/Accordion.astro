@@ -3,7 +3,7 @@
  * FAQ accordion (Elementor nested accordion as styled by the theme): rounded items, Boldonse
  * question, +/− icon. Native <details>; items sharing a `name` open one at a time.
  *   - "bordered" (service pages): 1px outline, 26/22px title padding
- *   - "filled" (FAQ page): white 95% fill, no outline, 20px title padding
+ *   - "filled" (FAQ page): card-colour 95% fill (white in the light theme), no outline, 20px title padding
  */
 interface Item {
   question: string;
@@ -26,10 +26,10 @@ const filled = variant === "filled";
 
 <div class:list={["flex flex-col gap-2.5", className]}>
   {items.map((item, i) => (
-    <details class:list={["faq group rounded-[24px]", filled && "bg-white/95"]} name={name} open={i === open}>
+    <details class:list={["faq group rounded-[24px]", filled && "bg-card/95"]} name={name} open={i === open}>
       <summary
         class:list={[
-          "flex cursor-pointer list-none items-center justify-between gap-2.5 rounded-[24px] px-[29px] font-heading text-base leading-[30px] text-[#1f2124] transition-colors hover:[&_.faq-icon]:text-primary [&::-webkit-details-marker]:hidden",
+          "flex cursor-pointer list-none items-center justify-between gap-2.5 rounded-[24px] px-[29px] font-heading text-base leading-[30px] text-[#1f2124] transition-colors dark:text-heading hover:[&_.faq-icon]:text-primary [&::-webkit-details-marker]:hidden",
           filled
             ? "py-5"
             : "border border-line pt-[26px] pb-[22px] group-open:rounded-b-none group-open:border-b-0",
@@ -37,7 +37,7 @@ const filled = variant === "filled";
       >
         <span>{item.question}</span>
         <span
-          class="faq-icon relative size-3.5 shrink-0 text-secondary transition-colors group-open:text-primary"
+          class="faq-icon relative size-3.5 shrink-0 text-heading transition-colors group-open:text-primary"
           aria-hidden="true"
         >
           <span class="absolute top-1/2 left-0 h-[1.5px] w-full -translate-y-1/2 bg-current" />

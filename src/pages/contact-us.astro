@@ -84,7 +84,7 @@ const cards: { icon: IconName | "whatsapp"; title: string; lines: Line[] }[] = [
       <ul class="mt-[50px] grid w-full gap-[15px] sm:mt-[60px] sm:grid-cols-2 sm:gap-[30px] xl:grid-cols-4">
         {cards.map((card, i) => (
           <li
-            class="flex flex-col items-center rounded-[24px] border border-line bg-white p-[30px] sm:px-[30px] sm:pt-10 sm:pb-[45px]"
+            class="flex flex-col items-center rounded-[24px] border border-line bg-card p-[30px] sm:px-[30px] sm:pt-10 sm:pb-[45px]"
             data-reveal="up"
             data-reveal-delay={String(i * 100)}
           >
@@ -98,7 +98,7 @@ const cards: { icon: IconName | "whatsapp"; title: string; lines: Line[] }[] = [
                 <Icon name={card.icon} class="text-[38px]" />
               )}
             </span>
-            <h3 class="mb-4 font-heading text-lg leading-[30px] text-secondary capitalize">{card.title}</h3>
+            <h3 class="mb-4 font-heading text-lg leading-[30px] text-heading capitalize">{card.title}</h3>
             {card.lines.map((line) => (
               <p class="text-base leading-[21.33px] font-medium break-words">
                 {line.href ? (
@@ -126,7 +126,7 @@ const cards: { icon: IconName | "whatsapp"; title: string; lines: Line[] }[] = [
         src={worldMap}
         alt=""
         width={991}
-        class="pointer-events-none absolute -top-[100px] right-0 hidden w-[991px] max-w-full opacity-[0.09] sm:block lg:-top-[170px] min-[1441px]:right-[100px]"
+        class="pointer-events-none absolute -top-[100px] right-0 hidden w-[991px] max-w-full opacity-[0.09] sm:block lg:-top-[170px] min-[1441px]:right-[100px] dark:invert"
         aria-hidden="true"
       />
       <div
@@ -144,7 +144,7 @@ const cards: { icon: IconName | "whatsapp"; title: string; lines: Line[] }[] = [
           We take pride in serving our community and building lasting relationships with our clients.
         </p>
         <div class="mt-[30px] flex flex-col gap-4 rounded-[24px] border border-line bg-surface p-6 max-lg:items-center sm:p-[30px]">
-          <p class="font-heading text-lg leading-[30px] text-secondary">Prefer to chat?</p>
+          <p class="font-heading text-lg leading-[30px] text-heading">Prefer to chat?</p>
           <p class="leading-6">
             Message us on WhatsApp. You can send photos of the space along with your request.
           </p>
@@ -163,6 +163,7 @@ const cards: { icon: IconName | "whatsapp"; title: string; lines: Line[] }[] = [
   </section>
 
   <section aria-label="Map" data-reveal="up">
+    {/* The map is a satellite view, dark enough for both themes, so it has no dark-theme styling. */}
     <iframe
       src={contact.address.mapEmbedUrl}
       title={`Map showing ${site.legalName} in ${contact.address.short}`}

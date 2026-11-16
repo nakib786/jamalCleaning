@@ -42,7 +42,7 @@ const projectLd = {
   creator: { "@id": `${site.url}/#business` },
   genre: data.category,
 };
-const h2 = "font-heading text-[30px] leading-[50px] text-secondary capitalize";
+const h2 = "font-heading text-[30px] leading-[50px] text-heading capitalize";
 const factRowPadding = [
   "pt-[25px] pb-[23px]",
   "pt-[21px] pb-[22px]",
@@ -91,7 +91,7 @@ const factRowPadding = [
                   i > 0 && "border-t border-line",
                 ]}
               >
-                <dt class="font-heading text-sm leading-[30px] text-secondary capitalize">{fact.label} :</dt>
+                <dt class="font-heading text-sm leading-[30px] text-heading capitalize">{fact.label} :</dt>
                 <dd class="text-base leading-6 font-medium capitalize">{fact.value}</dd>
               </div>
             ))}
@@ -133,7 +133,7 @@ const factRowPadding = [
               {benefits.list.length > 0 && (
                 <ul class="grid gap-x-[30px] gap-y-5 py-[30px] min-[1025px]:grid-cols-2 xl:gap-x-[62px] xl:pt-[27px] xl:pr-[31px] xl:pb-10">
                   {benefits.list.map((item) => (
-                    <li class="flex items-start gap-2 text-base leading-6 font-semibold text-secondary">
+                    <li class="flex items-start gap-2 text-base leading-6 font-semibold text-heading">
                       <Icon name="check-fill1" class="mt-[3px] text-lg text-primary" />
                       <span>{item}</span>
                     </li>
@@ -157,10 +157,10 @@ const factRowPadding = [
                   <Icon name="quotes" class="text-2xl" />
                 </span>
                 <div>
-                  <blockquote class="mb-[27px] text-[26px] leading-[30px] font-medium text-secondary">
+                  <blockquote class="mb-[27px] text-[26px] leading-[30px] font-medium text-heading">
                     <p>"{review.quote}"</p>
                   </blockquote>
-                  <figcaption class="font-heading text-xs leading-[30px] text-secondary capitalize">
+                  <figcaption class="font-heading text-xs leading-[30px] text-heading capitalize">
                     {review.author}
                   </figcaption>
                 </div>
@@ -180,7 +180,7 @@ const factRowPadding = [
               <span class="flex items-center gap-1.5 text-sm leading-[26px] font-bold text-body uppercase">
                 <Icon name="angle-left" class="text-base" /> Previous project
               </span>
-              <span class="font-heading text-sm leading-[26px] text-secondary transition-colors group-hover:text-primary">
+              <span class="font-heading text-sm leading-[26px] text-heading transition-colors group-hover:text-primary">
                 {previous.data.title}
               </span>
             </a>
@@ -192,7 +192,7 @@ const factRowPadding = [
               <span class="flex items-center gap-1.5 text-sm leading-[26px] font-bold text-body uppercase">
                 Next project <Icon name="angle-right" class="text-base" />
               </span>
-              <span class="font-heading text-sm leading-[26px] text-secondary transition-colors group-hover:text-primary">
+              <span class="font-heading text-sm leading-[26px] text-heading transition-colors group-hover:text-primary">
                 {next.data.title}
               </span>
             </a>

@@ -3,6 +3,7 @@
  * Photo panel beside testimonials: green fill + faded photo + cleaning team, a notch cut into the
  * top-right corner, and the card from `ratingsCard` (src/config/stats.ts). Hidden on phones, like the theme.
  * The notch is drawn with overlays in the section background colour (`notchColor`).
+ * The panel and its cream card look the same in the light and dark themes (fixed colours).
  */
 import { Image } from "astro:assets";
 import cleaningBackground from "../../../assets/images/testimonials/cleaning-1.jpg";
@@ -15,7 +16,8 @@ interface Props {
   notchColor?: string;
 }
 
-const { class: className, notchColor = "#fff" } = Astro.props;
+// The panel sits on the page background by default (white, or the dark page colour).
+const { class: className, notchColor = "var(--color-page)" } = Astro.props;
 ---
 
 <div

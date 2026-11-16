@@ -32,7 +32,7 @@ const notch = `url("data:image/svg+xml,${encodeURIComponent(
         <div class="stack-item group" data-stack-item>
           <div class="stack-card" data-stack-card>
             <div class="relative z-[1] w-full min-[569px]:w-[48.921%]">
-              <div class="relative overflow-hidden rounded-[18px] bg-[#d9d9d9] pt-[73.53%]">
+              <div class="relative overflow-hidden rounded-[18px] bg-[#d9d9d9] pt-[73.53%] dark:bg-card">
                 <Image
                   src={service.data.image}
                   alt={service.data.imageAlt}
@@ -43,7 +43,7 @@ const notch = `url("data:image/svg+xml,${encodeURIComponent(
               </div>
             </div>
             <div class="relative z-[1] flex-1 py-5 pr-[60px] pl-5 min-[569px]:pl-[30px] min-[1367px]:pl-[70px]">
-              <h3 class="font-heading text-xl leading-[30px] text-secondary capitalize min-[1367px]:mr-[100px] min-[1367px]:text-[40px] min-[1367px]:leading-[60px]">
+              <h3 class="font-heading text-xl leading-[30px] text-heading capitalize min-[1367px]:mr-[100px] min-[1367px]:text-[40px] min-[1367px]:leading-[60px]">
                 <a href={`/services/${service.id}/`} class="hover:text-primary">
                   {service.data.title}
                 </a>
@@ -79,6 +79,10 @@ const notch = `url("data:image/svg+xml,${encodeURIComponent(
   }
 
   .stack-card {
+    /* Card fill and its 1px edge. In the dark theme the card is a lighter navy than the band it
+       sits on (the usual card colour is almost the same as the band, so it would disappear). */
+    --stack-fill: #fff;
+    --stack-edge: #e7e9f1;
     position: relative;
     display: flex;
     align-items: center;
@@ -89,7 +93,7 @@ const notch = `url("data:image/svg+xml,${encodeURIComponent(
       align-items: flex-start;
     }
 
-    /* 1px light border (::before) under a white fill (::after), both cut by the notch mask. */
+    /* 1px light border (::before) under the card fill (::after), both cut by the notch mask. */
     &::before,
     &::after {
       content: "";
@@ -99,12 +103,16 @@ const notch = `url("data:image/svg+xml,${encodeURIComponent(
     }
     &::before {
       inset: 0;
-      background-color: #e7e9f1;
+      background-color: var(--stack-edge);
     }
     &::after {
       inset: 1px;
-      background-color: #fff;
+      background-color: var(--stack-fill);
     }
+  }
+  :global(html[data-theme="dark"]) .stack-card {
+    --stack-fill: #273142;
+    --stack-edge: #3b475a;
   }
 
   /* Even cards mirror: photo on the right, notch and button bottom-left. */

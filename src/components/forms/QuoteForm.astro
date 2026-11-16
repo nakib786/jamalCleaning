@@ -123,7 +123,7 @@ const wide = !card && "sm:col-span-2";
     </label>
     <select
       id={id("service")}
-      class:list={[field, !card && "text-black"]}
+      class={field}
       name="service"
       required
       aria-describedby={id("service-error")}
@@ -187,7 +187,9 @@ const wide = !card && "sm:col-span-2";
     </label>
     <p class="field-error" id={id("consent-error")} data-error-for="consent"></p>
   </div>
-  <div class:list={["empty:hidden", wide]} data-turnstile data-theme={card ? "dark" : "light"}></div>
+  {/* Spam check: dark on the hero card; on the contact page it follows the site theme ("auto").
+      Keep the div empty (no line break inside): `empty:hidden` hides it until the widget loads. */}
+  <div class:list={["empty:hidden", wide]} data-turnstile data-turnstile-theme={card ? "dark" : "auto"}></div>
   <div class:list={[wide]}>
     <noscript>
       <p class:list={["mb-4 text-sm leading-6", card && "text-white"]}>
@@ -203,14 +205,14 @@ const wide = !card && "sm:col-span-2";
     </button>
   </div>
   <p
-    class:list={["form-status text-sm empty:hidden", card ? "text-white" : "text-secondary", wide]}
+    class:list={["form-status text-sm empty:hidden", card ? "text-white" : "text-heading", wide]}
     role="status"
     aria-live="polite"
   ></p>
 </form>
 
 <style>
-  /* Contact page: the site's default white fields. */
+  /* Contact page: the site's default fields (white in the light theme, dark in the dark theme). */
   .quote-form--page :is(input:not([type="checkbox"]), select) {
     height: 60px;
   }
@@ -241,9 +243,8 @@ const wide = !card && "sm:col-span-2";
     color: #ffffffd9;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 13.171l4.95-4.95 1.415 1.415L12 16 5.637 9.636 7.05 8.222l4.95 4.95z' fill='%23ffffff'/%3E%3C/svg%3E");
   }
-  select.quote-field--dark option {
-    color: #000;
-  }
+  /* (The options of the drop-down list take the field colours of the theme: see `select option`
+     in global.css.) */
 
   /* Message next to the field it belongs to (filled in by src/scripts/forms.ts). */
   .field-error {
@@ -251,7 +252,7 @@ const wide = !card && "sm:col-span-2";
     padding-left: 24px;
     font-size: 14px;
     line-height: 20px;
-    color: #b42318;
+    color: var(--color-danger);
     text-align: left;
   }
   .field-error:empty {
@@ -261,7 +262,7 @@ const wide = !card && "sm:col-span-2";
     color: #ffc9c2;
   }
   .quote-form--page :is(input, select, textarea)[aria-invalid="true"] {
-    border-color: #b42318;
+    border-color: var(--color-danger);
   }
   .quote-form--card :is(input, select, textarea)[aria-invalid="true"] {
     box-shadow: inset 0 0 0 1px #ffc9c2;

@@ -72,10 +72,14 @@ const width = Math.round((src.width / src.height) * height);
   }
   .on-light {
     .name {
-      color: var(--color-secondary);
+      color: var(--color-heading);
     }
     .descriptor {
       color: #8a6a1c;
     }
+  }
+  /* In the dark theme a "light" background is dark, so the descriptor takes the brighter gold. */
+  :global(html[data-theme="dark"]) .on-light .descriptor {
+    color: #e3bf5f;
   }
 </style>

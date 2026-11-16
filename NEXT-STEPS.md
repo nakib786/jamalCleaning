@@ -209,6 +209,40 @@ done (JSON-LD, robots.txt, sitemap, llms.txt, skill); what changed:
 - TODOs for the client are marked `TODO(client)` in `site.ts` and `stats.ts`: other towns served, which days the office
   hours apply to, the exact legal name, real stats, and whether AI training crawlers stay allowed (`ai-train=yes`).
 
+### Dark mode (2026-11-16, branch `dark-mode`, **not merged or deployed**)
+
+The site has a light and a dark theme. A first-time visitor gets the one their phone or computer is set to
+(`site.defaultTheme` in `src/config/site.ts`: `"system"`, or `"light"` / `"dark"` to always start there); the
+sun / moon button switches it and the choice is remembered on that device (`localStorage` key `theme`).
+
+- **How it works:** `<html data-theme="light|dark">`. An inline script in `BaseLayout.astro` sets it before the
+  first paint (no flash of the wrong theme); `src/scripts/theme.ts` handles the button, follows the device
+  setting while nothing is saved, and picks up a change made in another tab. Without JavaScript the site is
+  light and the button is hidden.
+- **Button:** `src/components/ui/ThemeToggle.astro`. In the header from 1201px (next to search); below that it is
+  the "Dark mode" row in the mobile menu.
+- **Colours:** theme tokens in `src/styles/global.css` (`page`, `card`, `heading`, `primary-ink`, `contrast`,
+  `on-contrast`, plus `body`, `line`, `surface`, `primary-heading`) get dark values in the
+  `html[data-theme="dark"]` block. Use them for anything on the page background (`text-heading`, `bg-card` …).
+  Sections that are dark in both themes (hero, navy bands, footer, photo overlays, the cream ratings card, the
+  footer newsletter field) keep the fixed colours (`text-white`, `text-secondary`, `bg-teal` …) and look the
+  same in both. One-off differences use the `dark:` variant, e.g. `bg-[#f5f4ef] dark:bg-surface`.
+  **Rule for new components:** `text-secondary` / `bg-white` only on always-dark or always-light pieces;
+  on the page use `text-heading` / `bg-card`.
+- **Details:** `.btn-dark` is navy in light, off-white in dark; the Home service cards are a lighter navy than
+  their band; faint world maps and the 404 artwork are inverted in dark; the Turnstile widget on the contact
+  page follows the theme (`data-turnstile-theme="auto"`, redrawn on switch); the Google map is a satellite view
+  and is left as it is.
+- **Checked:** light theme pixel-compared with the previous commit on all 30 pages at 1440 and 390px: identical
+  except the new header button. Dark theme: `verify:a11y` (now runs every page in both themes,
+  `--themes=light,dark`) has 0 violations on 60 page loads; `verify:links`, `verify:forms`,
+  `verify:responsive`, `astro check` pass.
+- **Already there before this change:** `verify:a11y` reports the gold "24/7" counter on Home at 390px in the
+  light theme (2.18:1, needs 3:1; since the counters became real figures). Fix: `text-primary` to
+  `text-primary-heading` on the counters in `WhyChoose.astro` (a slightly deeper gold in the light theme).
+  Also: the word ticker keeps moving with "reduce motion" on (`motion-reduce:animate-none` in `Marquee.astro`
+  loses to the component's own `animation` rule). ESLint's parse error in `QuoteForm.astro` is older too.
+
 ### Wix CRM for leads (2026-11-12, owner request)
 
 The site had no customer capture: forms only emailed `EMAIL_TO`, nothing was stored. Now `worker/index.ts` also saves every submission to a
@@ -305,7 +339,7 @@ WhatsApp is now the main contact channel. Number and default first message: `sit
 
 | Script                      | Checks                                                                                                    |
 | --------------------------- | --------------------------------------------------------------------------------------------------------- |
-| `npm run verify:a11y`       | axe-core WCAG 2.0–2.2 A/AA on every page at 1440 and 390 px                                               |
+| `npm run verify:a11y`       | axe-core WCAG 2.0–2.2 A/AA on every page at 1440 and 390 px, in the light and the dark theme              |
 | `npm run verify:links`      | links, images, scripts, srcsets, anchors, demo hosts/text, console errors; warns about demo-sourced facts |
 | `npm run verify:responsive` | sideways overflow at 390 and 768 px; full-page screenshots in `verify-output/screens/` (git-ignored)      |
 | `npm run verify`            | pixel diff of rebuild vs. demo in viewport-high bands → `verify-output/compare/` (needs network to demo)  |

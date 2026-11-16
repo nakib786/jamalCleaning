@@ -124,6 +124,13 @@ export const site = {
   /** Primary call to action (header button, banners). */
   quote: { label: "Get a Quote!", href: "/contact-us/" },
 
+  /**
+   * Colour theme a first-time visitor sees: "system" follows the light / dark setting of their
+   * phone or computer, "light" or "dark" always starts there. Visitors can switch with the
+   * sun / moon button (header and mobile menu); their choice is remembered on that device.
+   */
+  defaultTheme: "system" as "system" | "light" | "dark",
+
   nav: [
     { label: "Home", href: "/" },
     {

@@ -1,5 +1,8 @@
 ---
-/** Newsletter signup (footer). Posts to the Worker at /api/subscribe with a Turnstile token. */
+/**
+ * Newsletter signup (footer). Posts to the Worker at /api/subscribe with a Turnstile token.
+ * The footer is dark in both themes, so the field keeps its white fill and fixed text colours.
+ */
 import Icon from "../ui/Icon.astro";
 ---
 
@@ -21,7 +24,7 @@ import Icon from "../ui/Icon.astro";
       required
       autocomplete="email"
       placeholder="Email address..."
-      class="h-[60px] flex-1 border-0 px-[25px] text-base text-secondary placeholder:text-body"
+      class="h-[60px] flex-1 border-0 bg-white px-[25px] text-base text-secondary placeholder:text-[#5c5e5e]"
     />
     <button type="submit" class="btn btn-on-dark h-[60px] justify-center whitespace-nowrap">
       <span>Subscribe Now</span>
@@ -30,6 +33,10 @@ import Icon from "../ui/Icon.astro";
       </span>
     </button>
   </div>
-  <div class="turnstile-slot mt-6 flex justify-center empty:hidden" data-turnstile data-theme="dark"></div>
+  <div
+    class="turnstile-slot mt-6 flex justify-center empty:hidden"
+    data-turnstile
+    data-turnstile-theme="dark"
+  ></div>
   <p class="form-status mt-3 text-center text-sm text-white" role="status" aria-live="polite"></p>
 </form>

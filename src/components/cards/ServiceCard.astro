@@ -18,7 +18,7 @@ const href = `/services/${service.id}/`;
 <article class="group relative h-full rounded-[26px] border border-line px-[9px] pt-[11px] pb-[15px] sm:pt-2.5 sm:pb-[43px]">
   <div class="flex flex-col gap-[35px]">
     <div class="relative">
-      <div class="relative overflow-hidden rounded-[24px] bg-[#d9d9d9] pt-[65.118%]">
+      <div class="relative overflow-hidden rounded-[24px] bg-[#d9d9d9] pt-[65.118%] dark:bg-card">
         <Image
           src={service.data.image}
           alt={service.data.imageAlt}
@@ -31,14 +31,14 @@ const href = `/services/${service.id}/`;
       <div class="bump absolute right-5 bottom-0 z-[3] h-[34px] w-[100px]" aria-hidden="true"></div>
       <a
         href={href}
-        class="absolute right-[45px] -bottom-[25px] z-[4] flex size-[50px] items-center justify-center rounded-full bg-primary text-white transition-colors duration-300 hover:bg-secondary"
+        class="absolute right-[45px] -bottom-[25px] z-[4] flex size-[50px] items-center justify-center rounded-full bg-primary text-white transition-colors duration-300 hover:bg-contrast hover:text-on-contrast"
         aria-label={`${service.data.title}: read more`}
       >
         <Icon name="right-arrow" class="text-lg" />
       </a>
     </div>
     <div class="relative z-[1] px-[30px]">
-      <h3 class="font-heading text-xl leading-10 text-secondary capitalize">
+      <h3 class="font-heading text-xl leading-10 text-heading capitalize">
         <a href={href} class="hover:text-primary">
           {service.data.title}
         </a>
@@ -49,7 +49,7 @@ const href = `/services/${service.id}/`;
 </article>
 
 <style>
-  /* White hump behind the button (theme .decor-border). */
+  /* Hump in the page colour behind the button (theme .decor-border). */
   .bump::after {
     content: "";
     position: absolute;
@@ -57,7 +57,7 @@ const href = `/services/${service.id}/`;
     bottom: -2px;
     width: 100px;
     height: 34px;
-    background-color: #fff;
+    background-color: var(--color-page);
     clip-path: path(
       "M 0 33 H 100 C 90.7952 33 83 31 79 21 C 73.5989 6.9412 62.6183 0 50 0 C 37.3818 0 26.4011 6.9412 21 21 C 17 31 9.2047 33 0 33 Z"
     );

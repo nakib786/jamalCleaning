@@ -2,6 +2,7 @@
 /** Off-canvas navigation for ≤1200px (theme's `.cetro-mobile-nav`): 330px panel from the left. */
 import { isSet, quoteEmailLink, site, socialLinks, whatsappLink } from "../../config/site";
 import Icon from "../ui/Icon.astro";
+import ThemeToggle from "../ui/ThemeToggle.astro";
 import WhatsAppIcon from "../ui/WhatsAppIcon.astro";
 import Logo from "./Logo.astro";
 
@@ -11,14 +12,14 @@ const path = Astro.url.pathname;
 <div class="mobile-overlay fixed inset-0 z-[997] bg-black/70" data-menu-close hidden></div>
 <aside
   id="mobile-menu"
-  class="mobile-menu fixed inset-y-0 left-0 z-[9999] flex w-[330px] max-w-[88vw] -translate-x-full flex-col justify-between overflow-y-auto bg-white transition-transform duration-[250ms] ease-out"
+  class="mobile-menu fixed inset-y-0 left-0 z-[9999] flex w-[330px] max-w-[88vw] -translate-x-full flex-col justify-between overflow-y-auto bg-card transition-transform duration-[250ms] ease-out"
   aria-label="Menu"
   inert
 >
   <div>
     <div class="flex items-center justify-between px-[30px] pt-[22px] pb-4">
       <Logo variant="default" height={52} loading="lazy" />
-      <button type="button" class="text-secondary hover:text-primary" aria-label="Close menu" data-menu-close>
+      <button type="button" class="text-heading hover:text-primary" aria-label="Close menu" data-menu-close>
         <svg width="20" height="20" viewBox="0 0 23.691 22.723" aria-hidden="true">
           <g transform="translate(-126.154 -143.139)" fill="none" stroke="currentColor" stroke-width="1.4">
             <line x2="23" y2="22" transform="translate(126.5 143.5)"></line>
@@ -36,7 +37,7 @@ const path = Astro.url.pathname;
                 href={item.href}
                 class:list={[
                   "block flex-1 py-3 text-base font-bold transition-colors hover:text-primary",
-                  path === item.href ? "text-primary-strong" : "text-secondary",
+                  path === item.href ? "text-primary-ink" : "text-heading",
                 ]}
                 aria-current={path === item.href ? "page" : undefined}
               >
@@ -45,7 +46,7 @@ const path = Astro.url.pathname;
               {item.children && (
                 <button
                   type="button"
-                  class="flex size-9 items-center justify-center text-secondary transition-transform aria-expanded:rotate-180"
+                  class="flex size-9 items-center justify-center text-heading transition-transform aria-expanded:rotate-180"
                   aria-expanded="false"
                   aria-label={`Show ${item.label} submenu`}
                   data-submenu-toggle
@@ -63,7 +64,7 @@ const path = Astro.url.pathname;
                         href={child.href}
                         class:list={[
                           "block py-2 pl-4 text-[15px] font-semibold transition-colors hover:text-primary",
-                          path === child.href ? "text-primary-strong" : "text-body",
+                          path === child.href ? "text-primary-ink" : "text-body",
                         ]}
                       >
                         {child.label}
@@ -77,8 +78,11 @@ const path = Astro.url.pathname;
         ))}
       </ul>
     </nav>
+    <div class="px-[30px]">
+      <ThemeToggle variant="row" class="border-b border-line" />
+    </div>
   </div>
-  <div class="space-y-3 px-[30px] py-8 text-secondary">
+  <div class="space-y-3 px-[30px] py-8 text-heading">
     <a href={whatsappLink()} target="_blank" rel="noopener" class="btn mb-3">
       <span>Chat on WhatsApp</span>
       <span class="btn-icon">
@@ -122,7 +126,7 @@ const path = Astro.url.pathname;
               target="_blank"
               rel="noopener"
               aria-label={`${site.name} on ${s.label}`}
-              class="flex size-11 items-center justify-center rounded-full border border-line text-secondary transition-colors hover:border-primary hover:bg-primary"
+              class="flex size-11 items-center justify-center rounded-full border border-line text-heading transition-colors hover:border-primary hover:bg-primary hover:text-secondary"
             >
               <Icon name={s.icon} class="text-lg" />
             </a>

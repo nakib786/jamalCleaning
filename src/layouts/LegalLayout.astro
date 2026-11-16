@@ -23,7 +23,7 @@ const current = Astro.url.pathname;
 
 <BaseLayout title={title} description={description}>
   <PageTitle title={title} />
-  <section class="section-gutter bg-white py-[70px] md:py-[100px]">
+  <section class="section-gutter bg-page py-[70px] md:py-[100px]">
     <div class="site-container">
       <div class="mx-auto max-w-[820px]">
         <nav aria-label="Legal pages" class="mb-10 flex flex-wrap gap-x-6 gap-y-2 border-b border-line pb-5">
@@ -34,8 +34,8 @@ const current = Astro.url.pathname;
               class:list={[
                 "font-semibold",
                 current === link.href
-                  ? "text-secondary"
-                  : "text-primary-strong underline underline-offset-2 hover:text-secondary",
+                  ? "text-heading"
+                  : "text-primary-ink underline underline-offset-2 hover:text-heading",
               ]}
             >
               {link.label}
@@ -61,7 +61,7 @@ const current = Astro.url.pathname;
   }
   .legal-prose :global(h2) {
     margin: 2.5rem 0 1rem;
-    color: var(--color-secondary);
+    color: var(--color-heading);
     font-family: var(--font-sans);
     font-size: 1.5rem;
     font-weight: 700;
@@ -69,7 +69,7 @@ const current = Astro.url.pathname;
   }
   .legal-prose :global(h3) {
     margin: 1.75rem 0 0.75rem;
-    color: var(--color-secondary);
+    color: var(--color-heading);
     font-size: 1.2rem;
     font-weight: 700;
   }
@@ -90,14 +90,14 @@ const current = Astro.url.pathname;
     margin-bottom: 0.4rem;
   }
   .legal-prose :global(strong) {
-    color: var(--color-secondary);
+    color: var(--color-heading);
   }
   .legal-prose :global(a) {
-    color: var(--color-primary-strong);
+    color: var(--color-primary-ink);
     text-decoration: underline;
     text-underline-offset: 2px;
   }
   .legal-prose :global(a:hover) {
-    color: var(--color-secondary);
+    color: var(--color-heading);
   }
 </style>

@@ -111,7 +111,7 @@ const photoCards = [
         src={worldMap}
         alt=""
         width={1077}
-        class="pointer-events-none absolute bottom-[69px] left-0 z-0 hidden h-[629px] w-[1077px] max-w-none opacity-[0.13] lg:block xl:left-[389px]"
+        class="pointer-events-none absolute bottom-[69px] left-0 z-0 hidden h-[629px] w-[1077px] max-w-none opacity-[0.13] lg:block xl:left-[389px] dark:invert"
         aria-hidden="true"
       />
       {homeCounters.map((c, i) => (
@@ -124,10 +124,10 @@ const photoCards = [
             <span data-counter={c.value}>{c.value}</span>
             {c.suffix}
           </p>
-          <h3 class="mb-5 border-b border-[#5b5d5d2e] pb-[18px] font-heading text-base leading-[34.29px] text-secondary capitalize">
+          <h3 class="mb-5 border-b border-[#5b5d5d2e] pb-[18px] font-heading text-base leading-[34.29px] text-heading capitalize dark:border-line">
             {c.title}
           </h3>
-          <p class="leading-6 text-secondary">{c.text}</p>
+          <p class="leading-6 text-heading">{c.text}</p>
         </div>
       ))}
     </div>

@@ -56,7 +56,7 @@ const faqLd =
         })),
       }
     : null;
-const h2 = "font-heading text-[30px] leading-[50px] text-secondary capitalize";
+const h2 = "font-heading text-[30px] leading-[50px] text-heading capitalize";
 /** WhatsApp chats opened from this page start with a message naming the service. */
 const whatsappMessage = `Hi Jamal Cleaning! I'd like a free quote for ${data.title}.`;
 /** Checklists fill column by column (two lists side by side), like the theme. */
@@ -88,7 +88,7 @@ const halves = (items: string[]) => {
           class="rounded-[24px] border border-line p-[30px] lg:px-[39px] lg:pt-[39px] lg:pb-[30px]"
           aria-label="Other services"
         >
-          <p class="pb-3.5 font-heading text-2xl leading-10 text-secondary">Other Services</p>
+          <p class="pb-3.5 font-heading text-2xl leading-10 text-heading">Other Services</p>
           <ul>
             {others.map((service) => {
               const current = service.id === entry.id;
@@ -97,8 +97,8 @@ const halves = (items: string[]) => {
                   <a
                     href={`/services/${service.id}/`}
                     class:list={[
-                      "flex w-full items-center pt-4 pb-[15px] text-lg leading-6 font-semibold text-secondary capitalize transition-all duration-[400ms] hover:rounded-[9px] hover:bg-primary-strong hover:px-5 hover:text-white",
-                      current && "rounded-[9px] bg-primary-strong px-5 text-white",
+                      "flex w-full items-center pt-4 pb-[15px] text-lg leading-6 font-semibold capitalize transition-all duration-[400ms] hover:rounded-[9px] hover:bg-primary-strong hover:px-5 hover:text-white",
+                      current ? "rounded-[9px] bg-primary-strong px-5 text-white" : "text-heading",
                     ]}
                     aria-current={current ? "page" : undefined}
                   >
@@ -154,28 +154,28 @@ const halves = (items: string[]) => {
 
         {data.quickAnswer && (
           <div class="mb-8 rounded-[24px] border border-line bg-surface p-6 sm:p-[30px]" data-quick-answer>
-            <p class="pb-2 font-heading text-base leading-[30px] text-secondary">Quick answer</p>
+            <p class="pb-2 font-heading text-base leading-[30px] text-heading">Quick answer</p>
             <p class="leading-6">
               {data.quickAnswer} To book,{" "}
               <a
                 href={whatsappLink(whatsappMessage)}
                 target="_blank"
                 rel="noopener"
-                class="font-semibold text-secondary underline underline-offset-2 hover:text-primary-strong"
+                class="font-semibold text-heading underline underline-offset-2 hover:text-primary-ink"
               >
                 message us on WhatsApp
               </a>
               ,{" "}
               <a
                 href={site.quote.href}
-                class="font-semibold text-secondary underline underline-offset-2 hover:text-primary-strong"
+                class="font-semibold text-heading underline underline-offset-2 hover:text-primary-ink"
               >
                 request a quote
               </a>{" "}
               or call{" "}
               <a
                 href={site.contact.phone.href}
-                class="font-semibold text-secondary underline underline-offset-2 hover:text-primary-strong"
+                class="font-semibold text-heading underline underline-offset-2 hover:text-primary-ink"
               >
                 {site.contact.phone.display}
               </a>
@@ -203,7 +203,7 @@ const halves = (items: string[]) => {
                     {FeatureIcon && <FeatureIcon class="size-[42px]" aria-hidden="true" />}
                   </span>
                   <span class="sm:pr-4">
-                    <span class="mb-[15px] block font-heading text-lg leading-[30px] text-secondary capitalize">
+                    <span class="mb-[15px] block font-heading text-lg leading-[30px] text-heading capitalize">
                       {feature.title}
                     </span>
                     <span class="block leading-6">{feature.text}</span>
@@ -239,7 +239,7 @@ const halves = (items: string[]) => {
                 {halves(section.checklist).map((half) => (
                   <ul class="flex flex-col gap-[15px]">
                     {half.map((item) => (
-                      <li class="flex items-start gap-2 text-lg leading-6 font-semibold text-secondary capitalize">
+                      <li class="flex items-start gap-2 text-lg leading-6 font-semibold text-heading capitalize">
                         <Icon name="check-fill1" class="mt-[3px] text-lg text-primary" />
                         <span>{item}</span>
                       </li>

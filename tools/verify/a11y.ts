@@ -10,7 +10,10 @@
  * Serve the production build first, e.g. `npm run preview` (wrangler dev on :8787).
  * Set CHROME_PATH to use an existing Chrome/Chromium instead of Playwright's download.
  *
- * Usage: tsx tools/verify/a11y.ts [--base=http://127.0.0.1:8787] [--widths=1440,390] [--only=/about-us/,/faqs/]
+ * Every page is checked in the light and in the dark theme (the theme is chosen the way a
+ * visitor's saved choice is: the "theme" key in localStorage, read by the script in BaseLayout).
+ *
+ * Usage: tsx tools/verify/a11y.ts [--base=http://127.0.0.1:8787] [--widths=1440,390] [--themes=light,dark] [--only=/about-us/,/faqs/]
  */
 import fs from "node:fs/promises";
 import { createRequire } from "node:module";
@@ -56,6 +59,7 @@ async function settle(page: Page): Promise<void> {
 async function main(): Promise<void> {
   const base = (arg("base") ?? "http://127.0.0.1:8787").replace(/\/$/, "");
   const widths = (arg("widths") ?? "1440,390").split(",").map(Number);
+  const themes = (arg("themes") ?? "light,dark").split(",");
   const only = arg("only")?.split(",");
   const routes = [...(await builtRoutes()), NOT_FOUND_ROUTE].filter((r) => !only || only.includes(r));
   const axeSource = await fs.readFile(require.resolve("axe-core/axe.min.js"), "utf8");
@@ -65,12 +69,20 @@ async function main(): Promise<void> {
   let violationCount = 0;
   let pageCount = 0;
 
-  for (const width of widths) {
-    const context = await browser.newContext({ viewport: { width, height: 900 } });
+  for (const [theme, width] of themes.flatMap((t) => widths.map((w) => [t, w] as const))) {
+    const context = await browser.newContext({
+      viewport: { width, height: 900 },
+      colorScheme: theme === "dark" ? "dark" : "light",
+    });
+    // The visitor's saved choice, set before any page script runs.
+    await context.addInitScript((value) => localStorage.setItem("theme", value), theme);
     const page = await context.newPage();
     for (const route of routes) {
       await page.goto(`${base}${route}`, { waitUntil: "load" });
       await page.waitForLoadState("networkidle", { timeout: 10_000 }).catch(() => undefined);
+      const shown = await page.evaluate(() => document.documentElement.dataset.theme);
+      if (shown !== theme)
+        throw new Error(`${route}: expected the ${theme} theme, the page shows "${shown}"`);
       await settle(page);
       await page.evaluate(axeSource);
       const { violations } = (await page.evaluate(() =>
@@ -86,13 +98,14 @@ async function main(): Promise<void> {
         ),
       )) as { violations: AxeResult[] };
       pageCount++;
+      const where = `${theme.padEnd(5)} ${String(width).padStart(4)}  ${route}`;
       if (violations.length === 0) {
-        console.log(`ok    ${String(width).padStart(4)}  ${route}`);
+        console.log(`ok    ${where}`);
         continue;
       }
       for (const v of violations) {
         violationCount += v.nodes.length;
-        console.log(`FAIL  ${String(width).padStart(4)}  ${route}  ${v.id} (${v.impact}) — ${v.help}`);
+        console.log(`FAIL  ${where}  ${v.id} (${v.impact}) — ${v.help}`);
         for (const node of v.nodes.slice(0, 5)) {
           const summary = (node.failureSummary ?? "").split("\n").slice(1, 3).join(" ").trim();
           console.log(`        ${node.target.join(" ")}\n        ${summary}`);

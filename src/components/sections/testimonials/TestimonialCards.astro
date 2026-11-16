@@ -1,6 +1,6 @@
 ---
 /**
- * "Hear what our global clients say" card carousel (theme testimonials layout 2): white cards with
+ * "Hear what our global clients say" card carousel (theme testimonials layout 2): cards with
  * the avatar overlapping the top edge, 3 / 2 / 1 per view, looping autoplay (5s, pauses on hover),
  * on a warm grey band with a faint world map. Shows testimonials whose placements include "cards".
  */
@@ -22,7 +22,7 @@ const testimonials = (await getCollection("testimonials"))
 
 <section
   class:list={[
-    "section-gutter relative overflow-hidden bg-[#f5f4ee] py-[60px] sm:py-20 md:py-[100px] lg:py-[130px] xl:pt-[100px] 2xl:pt-[130px]",
+    "section-gutter relative overflow-hidden bg-[#f5f4ee] py-[60px] sm:py-20 md:py-[100px] lg:py-[130px] xl:pt-[100px] 2xl:pt-[130px] dark:bg-surface",
     className,
   ]}
 >
@@ -30,7 +30,12 @@ const testimonials = (await getCollection("testimonials"))
     class="pointer-events-none absolute inset-x-0 bottom-0 hidden justify-center sm:flex"
     aria-hidden="true"
   >
-    <Image src={worldMap} alt="" width={1245} class="h-[727px] w-[1245px] max-w-none opacity-15" />
+    <Image
+      src={worldMap}
+      alt=""
+      width={1245}
+      class="h-[727px] w-[1245px] max-w-none opacity-15 dark:invert"
+    />
   </div>
   <div class="site-container relative z-[1] flex flex-col">
     <SectionHeading
@@ -45,18 +50,18 @@ const testimonials = (await getCollection("testimonials"))
       <ul class="cards-track flex touch-pan-y">
         {testimonials.map((t) => (
           <li class="card-slide min-w-0 shrink-0">
-            <figure class="relative flex h-full flex-col rounded-[24px] bg-white px-10 pt-[78px] pb-8 text-center sm:px-[50px] md:px-10 lg:px-[60px] min-[1441px]:px-[72px]">
+            <figure class="relative flex h-full flex-col rounded-[24px] bg-card px-10 pt-[78px] pb-8 text-center sm:px-[50px] md:px-10 lg:px-[60px] min-[1441px]:px-[72px]">
               <Avatar
                 name={t.data.name}
                 avatar={t.data.avatar}
                 size={89}
-                class="absolute top-0 left-1/2 -translate-1/2 border-4 border-white"
+                class="absolute top-0 left-1/2 -translate-1/2 border-4 border-card"
               />
-              <blockquote class="mb-[30px] border-b border-line pb-[30px] text-lg leading-6 font-medium text-secondary">
+              <blockquote class="mb-[30px] border-b border-line pb-[30px] text-lg leading-6 font-medium text-heading">
                 <p>“{t.data.quote}”</p>
               </blockquote>
               <figcaption class="mt-auto">
-                <span class="mb-1 block font-heading text-sm leading-[30px] text-secondary capitalize">
+                <span class="mb-1 block font-heading text-sm leading-[30px] text-heading capitalize">
                   {t.data.name}
                 </span>
                 <span class="block text-lg leading-none">{t.data.role}</span>

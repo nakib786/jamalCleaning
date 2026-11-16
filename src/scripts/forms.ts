@@ -14,6 +14,7 @@ declare global {
     turnstile?: {
       render: (el: HTMLElement, options: Record<string, unknown>) => string;
       reset: (id?: string) => void;
+      remove?: (id?: string) => void;
       getResponse: (id?: string) => string | undefined;
     };
   }
@@ -84,6 +85,16 @@ function validate(form: HTMLFormElement): boolean {
   return false;
 }
 
+/**
+ * Light or dark Turnstile widget, from the slot's `data-turnstile-theme`: "dark" or "light" for a
+ * form on a section that looks the same in both site themes, "auto" to follow the site theme.
+ */
+function widgetTheme(slot: HTMLElement): "light" | "dark" {
+  const wanted = slot.dataset.turnstileTheme;
+  if (wanted === "dark" || wanted === "light") return wanted;
+  return document.documentElement.dataset.theme === "dark" ? "dark" : "light";
+}
+
 async function ensureWidget(form: HTMLFormElement): Promise<string | undefined> {
   const slot = form.querySelector<HTMLElement>("[data-turnstile]");
   if (!slot) return undefined;
@@ -94,11 +105,25 @@ async function ensureWidget(form: HTMLFormElement): Promise<string | undefined> 
       size: "normal",
       // Always visible so visitors see the spam check on every form; dark style on dark sections.
       appearance: "always",
-      theme: slot.dataset.theme === "dark" ? "dark" : "light",
+      theme: widgetTheme(slot),
     });
   }
   return slot.dataset.widgetId;
 }
+
+// When the visitor switches the site theme (src/scripts/theme.ts), widgets that follow it are
+// drawn again in the new theme. A widget cannot change theme in place; the new one gets a fresh
+// token, which the submit handler waits for anyway.
+document.addEventListener("themechange", () => {
+  document.querySelectorAll<HTMLElement>('[data-turnstile][data-turnstile-theme="auto"]').forEach((slot) => {
+    const form = slot.closest("form");
+    if (!slot.dataset.widgetId || !form) return;
+    window.turnstile?.remove?.(slot.dataset.widgetId);
+    delete slot.dataset.widgetId;
+    slot.replaceChildren();
+    void ensureWidget(form).catch(() => undefined);
+  });
+});
 
 function enhance(form: HTMLFormElement): void {
   const warmUp = () => void ensureWidget(form).catch(() => undefined);
