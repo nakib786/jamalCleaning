@@ -40,23 +40,29 @@ const { contact } = site;
       <WhatsAppIcon class="text-base" />
       <span>WhatsApp us</span>
     </a>
-    {socialLinks.length > 0 ? (
-      socialLinks.map((s) => (
-        <a
-          href={s.href}
-          target="_blank"
-          rel="noopener"
-          aria-label={s.label}
-          class="leading-none hover:text-primary"
-        >
-          <Icon name={s.icon} class="text-base" />
-        </a>
-      ))
-    ) : (
-      <a href={site.contact.phone.href} class="flex items-center gap-2 hover:text-primary">
-        <Icon name="phone" class="text-[15px]" />
-        <span>{site.contact.phone.display}</span>
-      </a>
-    )}
+    <a href={site.contact.phone.href} class="flex items-center gap-2 hover:text-primary">
+      <Icon name="phone" class="text-[15px]" />
+      <span>{site.contact.phone.display}</span>
+    </a>
+    {
+      /* Social icons only where the bar has room; the footer shows them at every width. */
+      socialLinks.length > 0 && (
+        <ul class="-my-1 flex items-center gap-1.5 max-lg:hidden">
+          {socialLinks.map((s) => (
+            <li>
+              <a
+                href={s.href}
+                target="_blank"
+                rel="noopener"
+                aria-label={`${site.name} on ${s.label}`}
+                class="flex size-6 items-center justify-center hover:text-primary"
+              >
+                <Icon name={s.icon} class="text-base" />
+              </a>
+            </li>
+          ))}
+        </ul>
+      )
+    }
   </div>
 </div>

@@ -1,78 +1,60 @@
 /**
  * Every figure the site shows about the business, in one place: the counters on the Home and
- * About pages and the "Ratings" card beside the testimonials.
+ * About pages and the card beside the testimonials.
  *
- * TODO(client): NONE OF THESE ARE REAL. They came with the theme's demo content and contradict each
- * other ("299K Satisfaction Rate" above "Over 250 successful projects", "364+ Skilled Tradespeople"
- * above "Our team of 30 experts", "586k Clients globally" beside "199+ Happy Clients"). Replace each
- * `value`, `suffix`, `title` and `text` with figures the owner can stand behind, or delete an entry
- * to remove that counter. Do not publish rating markup (schema.org AggregateRating) for the rating
- * below unless it is the business's real review score.
+ * Owner's figures (2026-11-15, the business's first year): 20+ cleaners, 50+ clients served,
+ * 100+ jobs completed. Each is a floor ("+"), so raise them as the business grows; never round up
+ * past what is true. "24/7" repeats the working hours in src/config/site.ts.
  *
- * `npm run verify:links` keeps warning about these until the demo wording is gone.
+ * The card shows no star rating on purpose: add one only once it is the business's real Google
+ * score, and never publish rating markup (schema.org AggregateRating) for anything else.
  */
 export interface Counter {
   /** The number that counts up when it scrolls into view. */
   value: number;
-  /** Printed right after the number: "+", "K", "%" or "". */
+  /** Printed right after the number: "+", "/7", "%" or "". */
   suffix: string;
   title: string;
   text: string;
 }
 
+const cleaners: Counter = {
+  value: 20,
+  suffix: "+",
+  title: "Trained Cleaners",
+  text: "Our crew keeps stores, offices and commercial buildings clean",
+};
+
+const clients: Counter = {
+  value: 50,
+  suffix: "+",
+  title: "Clients Served",
+  text: "Businesses and homes across Prince George in our first year",
+};
+
+const jobs: Counter = {
+  value: 100,
+  suffix: "+",
+  title: "Jobs Completed",
+  text: "Every job done to a written checklist, with care",
+};
+
+const allHours: Counter = {
+  value: 24,
+  suffix: "/7",
+  title: "Cleaning Available",
+  text: "Overnight and after-hours cleaning, seven days a week",
+};
+
 /** Home page, under "Why will you choose our services?" (src/components/sections/home/WhyChoose.astro). */
-export const homeCounters: Counter[] = [
-  {
-    value: 246,
-    suffix: "+",
-    title: "Cleaning Experts",
-    text: "Keeping stores, offices and commercial buildings clean",
-  },
-  {
-    value: 299,
-    suffix: "K",
-    title: "Satisfaction Rate",
-    text: "Over 250 successful projects delivered with quality and care",
-  },
-  {
-    value: 364,
-    suffix: "+",
-    title: "Skilled Tradespeople",
-    text: "Our team of 30 experts ensures top-quality results",
-  },
-  {
-    value: 199,
-    suffix: "+",
-    title: "Happy Clients",
-    text: "All of our clients are satisfied with our work and service",
-  },
-];
+export const homeCounters: Counter[] = [cleaners, clients, jobs, allHours];
 
 /** About page, dark "Smart cleaning solution" band (src/pages/about-us.astro). */
-export const aboutCounters: Counter[] = [
-  {
-    value: 299,
-    suffix: "k",
-    title: "Successful Projects",
-    text: "Over 250 successful projects delivered with quality and care",
-  },
-  {
-    value: 364,
-    suffix: "+",
-    title: "Skilled Tradespeople",
-    text: "Our team of 30 experts ensures top-quality results",
-  },
-  {
-    value: 199,
-    suffix: "+",
-    title: "Happy Clients",
-    text: "All of our clients are satisfied with our work and service",
-  },
-];
+export const aboutCounters: Counter[] = [jobs, cleaners, clients];
 
 /** Card on the photo panel beside the testimonials (src/components/sections/testimonials/TestimonialPanel.astro). */
 export const ratingsCard = {
-  heading: "Ratings 4.5",
-  text: "Clients praise our exceptional work.",
-  clients: "586k Clients globally",
+  heading: "Proudly local",
+  text: "Trusted by Prince George businesses and homes.",
+  clients: "50+ local clients",
 };

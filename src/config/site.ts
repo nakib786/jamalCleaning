@@ -109,11 +109,17 @@ export const site = {
   },
 
   social: {
-    facebook: "[FACEBOOK URL]",
+    facebook: "https://www.facebook.com/jamalcleaningservices",
     x: "[X / TWITTER URL]",
-    instagram: "[INSTAGRAM URL]",
+    instagram: "https://www.instagram.com/jamalcleaningservices",
     linkedin: "[LINKEDIN URL]",
   },
+
+  /**
+   * "Write a review" link of the Google Business listing (same listing as `contact.address.listingUrl`).
+   * Shown under the testimonials and in the footer.
+   */
+  review: { label: "Review us on Google", href: "https://g.page/r/Ce7TFrIt5639EAI/review" },
 
   /** Primary call to action (header button, banners). */
   quote: { label: "Get a Quote!", href: "/contact-us/" },

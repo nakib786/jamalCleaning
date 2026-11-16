@@ -43,9 +43,9 @@ Node 22+ is required. For local form testing copy `.dev.vars.example` to `.dev.v
 | FAQs                                                                                   | `src/content/faqs.json`                                                         |
 | Page sections                                                                          | `src/components/sections/`, `src/pages/`                                        |
 
-The content schemas (with comments on every field) are in `src/content.config.ts`. Much of the copy, the
-counters and the testimonials are still the theme's demo text: replace them with real figures and reviews
-before launch.
+The content schemas (with comments on every field) are in `src/content.config.ts`. The testimonials
+are still the theme's demo text: replace them with real reviews. The counters (`src/config/stats.ts`) hold
+the owner's own figures.
 
 ## Project layout
 

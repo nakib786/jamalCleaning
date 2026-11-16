@@ -44,7 +44,7 @@ checker, mobile and tablet pass over all 26 pages, `tools/verify/compare.ts`, re
 Left to do, in order:
 
 1. **Owner content** (cannot be invented; `npm run verify:links` lists these as warnings): testimonials (names, roles, photos,
-   quotes), the "Ratings 4.5" / "586k Clients globally" card, the Home and About counters and their captions, real photos of the
+   quotes), real photos of the
    owner's work (service/project photos now match their titles but are still stock, see "Photos" below), street address / postal code / social links in
    `src/config/site.ts`. The owner should also read the drafted service, project and FAQ wording (details in `FINAL-REPORT.md`).
 2. **Run `npm run verify` against the demo** on a machine that can reach <https://demo2.pavothemes.com/cetro/> (the cloud sandbox
@@ -53,16 +53,16 @@ Left to do, in order:
 3. **Step 2 capture:** `npm run crawl:capture` was started and stopped part-way (manifest saved up to services pages, 5 failures so
    far). Re-run it to finish (~1 h, polite; needs the reference Chrome on port 9222, same network restriction as above). It only
    archives the reference and does not affect the site.
-4. **Deploy** when the owner gives the go-ahead (see DEPLOY.md). **First change the form recipient:** `EMAIL_TO` and the
-   `send_email` `destination_address` in `wrangler.jsonc` are still the test address `n@aurorabusiness.ca`; the new address must be
-   verified in Cloudflare Email Routing. Also needed: `TURNSTILE_SECRET_KEY` secret, custom-domain routes, www redirect.
+4. **Deploy** when the owner gives the go-ahead (see DEPLOY.md). The form recipient (`EMAIL_TO` and the `send_email`
+   `destination_address` in `wrangler.jsonc`) is `jamalcleaningservices@gmail.com` since 2026-11-15 (the owner says it is verified
+   in Cloudflare Email Routing); previews still email the test address `n@aurorabusiness.ca` on purpose. Also needed: `TURNSTILE_SECRET_KEY` secret, custom-domain routes, www redirect.
 
 ### Session 5 changes (2026-11-01)
 
 - **Nav:** "Pages" is now **"Company"** (About Us, Testimonials, FAQs; "F.A.Q." became "FAQs"). Chosen over "Resources" because About Us is not a resource.
 - **Mobile bottom bar removed** (`MobileBar.astro` deleted; the scroll-to-top button and footer padding that made room for it were reset). Phone stays in the top bar and the mobile menu. Side effect: the search icon was only in that bar, so search is no longer reachable on phones (still in the header from 881 px up).
 - **Testimonials:** the owner asked to keep the demo ones for now and add more. 7 were added with varied names and an **initials badge** (`src/components/ui/Avatar.astro`) instead of a photo. Every testimonial has `placeholder: true`; `verify:links` lists them as launch warnings and fails if Review/AggregateRating markup ever appears while they are on the site. Never add rating markup for placeholders.
-- **Form email left unchanged** (still the test address `n@aurorabusiness.ca`) at the owner's request; it must change before launch.
+- **Form email left unchanged** (still the test address `n@aurorabusiness.ca`) at the owner's request. _Changed 2026-11-15 to `jamalcleaningservices@gmail.com` (production only; previews keep the test address)._
 - **AEO:** `Service` + `FAQPage` JSON-LD per service page, `WebSite` on Home, `AboutPage`/`ContactPage`, offer catalog on the business entity (invented `priceRange` removed), visible "Quick answer" box (`quickAnswer` field in the services collection), generated `/llms.txt` (`src/pages/llms.txt.ts`), explicit AI-crawler rules in `public/robots.txt`. `verify:links` now also fails on JSON-LD that does not parse. The off-site checklist (Google Business Profile, reviews, Bing Places, Cloudflare AI-bot setting, etc.) is in `FINAL-REPORT.md`.
 
 - **Google Maps (owner-supplied):** the Contact page map is now the business's own listing ("Jamal Cleaning Services Ltd.", embed code in `site.contact.address.mapEmbedUrl`), "Get directions" uses the owner's short link (`mapUrl`), the coordinates in `site.contact.address.geo` come from the embed's map centre (approximate, not a street-level pin), and `legalName` is in the business JSON-LD. Still missing: **street address and postal code** (the embed does not contain them). The listing name has "Ltd." while the site says "Jamal Cleaning Services": keep name, address and phone identical everywhere (Google Business Profile, Bing, Facebook) for local search.
@@ -194,8 +194,9 @@ done (JSON-LD, robots.txt, sitemap, llms.txt, skill); what changed:
   a quote") and the agent skill. Every email link is `quoteEmailLink()`: subject "Quote request" and a fill-in body.
 - **Home card position:** the card is 136–160px taller, so its negative top margins in `QuoteCard.astro` grew by the
   same amount (the section below is at the same place as before). Change them together with the form's height.
-- **Stats in one file:** `src/config/stats.ts` holds the Home and About counters and the "Ratings 4.5 / 586k Clients
-  globally" card. All are theme placeholders and still shown; the owner must supply real figures.
+- **Stats in one file:** `src/config/stats.ts` holds the Home and About counters and the card beside the testimonials.
+  _Replaced 2026-11-15 with the owner's first-year figures: 20+ cleaners, 50+ clients, 100+ jobs, 24/7; the card says
+  "Proudly local" with no star rating until there is a real Google score._
 - **Agent skill** no longer says "do not submit the forms": an agent in the user's own browser may fill and send the
   form after the user approves; agents without a browser are pointed to WhatsApp, phone or email.
 - **`npm run verify:forms`** (new, `tools/verify/forms.ts`): fills and sends the form on `/` and `/contact-us/` using
@@ -374,7 +375,8 @@ That is intentional and the axe sweep treats it as lit; if the owner wants stric
 - Screenshots: `--hide-scrollbars` in the capture Chrome widens the layout by 5px versus the reference (1435px), which can change
   line wraps; launch it without that flag for verification. Scroll with wheel events (not rapid `scrollTo`) before full-page
   captures, otherwise Lenis fights the scripted scroll and some reveals never fire.
-- **Placeholder content to replace before launch** (copied from the demo): testimonial names/quotes, "Ratings 4.5" and
-  "586k Clients globally", the home counters, project fact sheets ("Themeforest, Evanto", "Main Address, USA") and the
+- **Placeholder content to replace before launch** (copied from the demo): testimonial names/quotes, ~~"Ratings 4.5" and
+  "586k Clients globally", the home counters~~ (real figures since 2026-11-15), project fact sheets ("Themeforest, Evanto", "Main Address, USA") and the
   lorem-ipsum project text, and the service detail text (it mentions interior design).
-- Social links are placeholders in `src/config/site.ts`, so the top bar shows the phone number instead until they are set.
+- Social links: **Facebook and Instagram set 2026-11-15** in `src/config/site.ts` (X and LinkedIn are still placeholders, so hidden). The icons show in the footer on every page and, from 1024 px up, in the Home top bar next to the phone number (the phone no longer gives way to them). They are also in the business JSON-LD `sameAs`.
+- Google review link (2026-11-15): `site.review` in `src/config/site.ts` (`https://g.page/r/Ce7TFrIt5639EAI/review`, same listing as `listingUrl`). Shown as a "Review us on Google" button under the scroll-lit testimonials (`Testimonials.astro`, so Home and Testimonials) and as a footer link. The on-site testimonials are still placeholders: keep Review/AggregateRating markup off until real ones replace them.
