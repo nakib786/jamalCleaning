@@ -24,7 +24,7 @@ const isActive = (item: NavItem): boolean =>
   Boolean(item.children?.some((c) => isActive(c)));
 ---
 
-<header id="masthead" class:list={["absolute inset-x-0 top-0 z-40", solid && "bg-[#364240]"]}>
+<header id="masthead" class:list={["absolute inset-x-0 top-0 z-40", solid && "bg-[#364240] dark:bg-surface"]}>
   {topBar && <TopBar />}
   <div class="flex items-center justify-between gap-5 px-[15px] py-[15px] sm:px-[30px] sm:py-[18px]">
     <div class="shrink-0">

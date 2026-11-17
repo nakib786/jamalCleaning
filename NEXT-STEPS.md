@@ -229,7 +229,17 @@ sun / moon button switches it and the choice is remembered on that device (`loca
   same in both. One-off differences use the `dark:` variant, e.g. `bg-[#f5f4ef] dark:bg-surface`.
   **Rule for new components:** `text-secondary` / `bg-white` only on always-dark or always-light pieces;
   on the page use `text-heading` / `bg-card`.
-- **Details:** `.btn-dark` is navy in light, off-white in dark; the Home service cards are a lighter navy than
+- **Darker, no navy (2026-11-16, owner request: "more darker", the navy dark theme "looks like AI slop";
+  pushed to `main` the same day):** the dark theme is now neutral near-black: page `#070707`, bands `#0d0d0d`–`#0f0f0f`, cards
+  `#141414`, warm grey text. In the dark theme only, the navy of the always-dark pieces (`secondary`, `teal`,
+  `topbar`: bands, footer, step panels, search overlay) is overridden to near-black, so there are no navy
+  patches on black; the green-black quote card on the hero, the step-panel gradient, the footer overlay, the
+  showcase call-to-action card and the 404 header are neutral black too. Buttons (`.btn`, not `.btn-dark`) are
+  the bright gold `#d4aa3c` with black text and a black icon circle in the dark theme (`--btn-bg` / `--btn-fg`
+  in `global.css`); the deeper gold with white text looked muddy on black. `theme.ts` sets the phone toolbar
+  colour (`theme-color`) to `#070707` in the dark theme. Light theme unchanged. `verify:a11y`: 0 violations in
+  the dark theme (the light-theme "24/7" counter below is still the only finding).
+- **Details:** `.btn-dark` is navy in light, off-white in dark; the Home service cards are a lighter grey than
   their band; faint world maps and the 404 artwork are inverted in dark; the Turnstile widget on the contact
   page follows the theme (`data-turnstile-theme="auto"`, redrawn on switch); the Google map is a satellite view
   and is left as it is.

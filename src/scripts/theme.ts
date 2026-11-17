@@ -43,8 +43,18 @@ function syncToggles(theme: Theme): void {
     .forEach((button) => button.setAttribute("aria-pressed", String(theme === "dark")));
 }
 
+/** Browser toolbar colour (phones): the navy from the page's meta tag, or the dark theme's black. */
+const themeColor = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]');
+const lightThemeColor = themeColor?.content ?? "";
+const DARK_THEME_COLOR = "#070707"; // --color-page of the dark theme in global.css
+
+function syncThemeColor(theme: Theme): void {
+  if (themeColor) themeColor.content = theme === "dark" ? DARK_THEME_COLOR : lightThemeColor;
+}
+
 function applyTheme(theme: Theme): void {
   syncToggles(theme);
+  syncThemeColor(theme);
   if (root.dataset.theme === theme) return;
   // Switch with transitions off, so the whole page changes at once (see `.theme-switching` in
   // global.css). They come back two frames later: the first frame paints the new colours.

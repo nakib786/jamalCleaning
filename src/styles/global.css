@@ -7,7 +7,8 @@
  *     -body, -line, -surface …): they get their dark values in the html[data-theme="dark"] block
  *     below, so most components need no dark-specific classes.
  *   - Sections that are dark in both themes (hero, navy bands, footer, photo overlays) use the
- *     fixed colours (white, secondary, teal …) and look the same in both.
+ *     fixed colours (white, secondary, teal …). Their text is the same in both themes; their
+ *     navy backgrounds (secondary, teal, topbar) turn near-black in the dark theme.
  *   - One-off differences use the `dark:` variant, e.g. `bg-[#f5f4ef] dark:bg-surface`.
  */
 @custom-variant dark (&:where(html[data-theme="dark"], html[data-theme="dark"] *));
@@ -124,26 +125,34 @@
     --select-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 13.171l4.95-4.95 1.415 1.415L12 16 5.637 9.636 7.05 8.222l4.95 4.95z' fill='%23555555'/%3E%3C/svg%3E");
   }
 
-  /* Dark theme values. Text contrast on the page / card / surface backgrounds: heading 14:1+,
-     body 8.4:1+, gold text 8.5:1+ (WCAG AA needs 4.5:1). */
+  /* Dark theme values: neutral near-black with the brand gold (no navy: a blue-grey dark theme
+     read as generic). Text contrast on the page / card / surface backgrounds: heading 16:1+,
+     body 7.5:1+, gold text 9:1+ (WCAG AA needs 4.5:1). */
   html[data-theme="dark"] {
     color-scheme: dark;
-    --color-page: #0e1319;
-    --color-card: #1a222d;
-    --color-surface: #141a23;
-    --color-heading: #f4f1e8;
-    --color-body: #b7bcc4;
-    --color-line: #ffffff26;
+    --color-page: #070707;
+    --color-card: #141414;
+    --color-surface: #0d0d0d;
+    --color-heading: #f5f2ea;
+    --color-body: #a9a7a1;
+    --color-line: #ffffff1f;
     /* On dark backgrounds the bright brand gold has plenty of contrast, so the deeper
        light-theme companions are not needed. */
     --color-primary-heading: #d4aa3c;
     --color-primary-ink: #e0b84e;
-    --color-contrast: #f4f1e8;
-    --color-on-contrast: #1c2430;
-    --color-field: #171e28;
-    --color-field-text: #f4f1e8;
+    --color-contrast: #f5f2ea;
+    --color-on-contrast: #0b0b0b;
+    --color-field: #101010;
+    --color-field-text: #f5f2ea;
     --color-danger: #ff9f93;
-    --color-scrollbar-track: #2a323d;
+    --color-scrollbar-track: #1c1c1c;
+    /* The navy of the always-dark pieces (bands, footer, step panels, search overlay) goes
+       black too, so the dark theme is one family of blacks instead of navy patches on black.
+       `secondary` is also the dark text on the few always-light pieces (cream card, white
+       buttons), where a near-black reads the same as the navy. */
+    --color-secondary: #121212;
+    --color-teal: #0f0f0f;
+    --color-topbar: #000;
     --select-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 13.171l4.95-4.95 1.415 1.415L12 16 5.637 9.636 7.05 8.222l4.95 4.95z' fill='%23d0d4da'/%3E%3C/svg%3E");
   }
 
@@ -273,8 +282,8 @@
     gap: 8px;
     padding: 13px 13px 13px 30px;
     border-radius: 100px;
-    background-color: var(--color-primary-strong);
-    color: #fff;
+    background-color: var(--btn-bg, var(--color-primary-strong));
+    color: var(--btn-fg, #fff);
     font-family: var(--font-sans);
     font-size: 16px;
     font-weight: 700;
@@ -310,8 +319,18 @@
       color: var(--btn-icon-hover-color, #fff);
     }
   }
+  /* Dark theme: the bright brand gold with black text and a black icon circle (the deeper gold
+     with white text looks muddy on black). Hover is the same off-white / white as before. */
+  html[data-theme="dark"] .btn:not(.btn-dark) {
+    --btn-bg: var(--color-primary);
+    --btn-fg: #0b0b0b;
+    --btn-icon-bg: #0b0b0b;
+    --btn-icon-color: var(--color-primary);
+    --btn-icon-hover-bg: #0b0b0b;
+    --btn-icon-hover-color: #fff;
+  }
   /* Dark variant ("Book a Service"): navy in the light theme, off-white in the dark theme, where
-     a navy button would disappear into the page. */
+     a dark button would disappear into the page. */
   .btn-dark {
     --btn-hover-bg: var(--color-primary-strong);
     --btn-hover-color: #fff;
@@ -365,7 +384,7 @@
     &:hover,
     &:focus-visible {
       background-color: var(--color-primary-heading);
-      /* White on the deeper gold (light theme), navy on the bright gold (dark theme). */
+      /* White on the deeper gold (light theme), black on the bright gold (dark theme). */
       color: var(--color-on-contrast);
     }
   }

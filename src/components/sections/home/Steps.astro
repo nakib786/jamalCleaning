@@ -224,13 +224,18 @@ const pad = (i: number) => String(i + 1).padStart(2, "0");
   .step-fade {
     position: absolute;
     inset: 0;
+    /* Navy in the light theme (the band is navy), black in the dark theme. */
+    --fade: 12 16 24;
     background: linear-gradient(
       180deg,
-      rgb(12 16 24 / 0.5) 0%,
-      rgb(12 16 24 / 0) 30%,
-      rgb(12 16 24 / 0) 42%,
-      rgb(12 16 24 / 0.92) 100%
+      rgb(var(--fade) / 0.5) 0%,
+      rgb(var(--fade) / 0) 30%,
+      rgb(var(--fade) / 0) 42%,
+      rgb(var(--fade) / 0.92) 100%
     );
+  }
+  :global(html[data-theme="dark"]) .step-fade {
+    --fade: 5 5 5;
   }
 
   /* Folded state: the whole panel is the button; number, title and plus sign show */
